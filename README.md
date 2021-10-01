@@ -4,7 +4,7 @@ A MC Plugin for modular server management (100+ task, easy to config, replaces m
 https://www.spigotmc.org/resources/servertoolscore.95853/
 
 # Plugins this replaces
- - Hographic Displays (Global PAPI Support ONLY such as %server_time%)
+ - Holographic Displays (Global PAPI Support ONLY such as %server_time%)
  - EssentialsSpawn + AntiVoid TP
  - EssentialsChat
  - BeastWithdraw (money / exp)
