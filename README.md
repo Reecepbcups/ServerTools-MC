@@ -23,4 +23,4 @@ A MC Plugin for modular server management (100+ task, easy to config, replaces m
  - Tags
  - Chat/NameColor
  - Any plugin to disable features
- - + More
+ - More
