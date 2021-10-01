@@ -1,0 +1,15 @@
+password: "somePasswordHereMakeSureToChangeThis___s"
+
+AllowedPlayers:
+- SopmePlayerIGN
+- 79da3753-1b9e-4340-8a0f-9ea975c17fe4 # Reecepbcups
+
+ProtectedCommands:
+- /pl
+- /op
+- /?
+- /ver
+- /about
+- /icanhasbukkit
+- '/lp'
+- '/luckperms'

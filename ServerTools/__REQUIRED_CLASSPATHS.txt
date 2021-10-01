@@ -1,0 +1,10 @@
+spigot-1.8.8
+spigot-1.16.4
+
+LuckPerms-Bukkit
+Vault
+PlaceholderAPI
+EssentialsX (>v2.5)
+TAB
+worldguard-bukkit
+SuperiorSkyblockAPI

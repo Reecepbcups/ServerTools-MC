@@ -1,0 +1,186 @@
+name: ServerTools
+version: 3.1.3
+author: Reecepbcups
+main: me.reecepbcups.tools.Main
+description: A lot of little tools which make management easier
+softdepend: [LuckPerms, Vault, PlaceHolderAPI, TAB, WorldGuard]
+
+commands:
+  tools:
+    description: Server tools plugin 
+    usage: Syntax error!
+    aliases: [reecetools]
+  ctag:
+    description: used for custom tag through luckperms
+    usage: "Usage: /<command> <set/clear> <TAG>"
+    aliases: [customtag]
+  staffafk:
+    description: Allow Staff to AFK
+    permission: staffafk.use
+    usage: Syntax error!
+  donation:
+    description: Donation Buycraft Command
+    permission: donation.use
+    usage: Syntax error!  
+  announce:
+    description: Announce preset messages
+    usage: Syntax error!   
+  mutechat:
+    description: mutes the chat
+    usage: Syntax error! 
+  giveall:
+    description: gives all items via essentials, replacing * to player names
+    usage: Syntax error! 
+  clearchat:
+    description: clears the chat
+    usage: Syntax error!
+  buy:
+    description: custom buycraft buy message
+    usage: Syntax error!  
+  freeze:
+    description: freeze players for screenshare
+    usage: /<command> <playername>
+  chatcooldown:
+    description: freeze players for screenshare
+    usage: /<command> [setcooldown, toggle]
+    aliases: [cooldown]    
+  changeslots:
+    description: change number of player slots
+    usage: Syntax error!  
+  AntiCraft:
+    description: Anti Crafting Items with a crafting table
+    aliases: [anticrafting]   
+  reward:
+    description: Daily Reward plugin
+    aliases: [rewards]      
+  spawn:
+    description: spawn teleport and void tp
+  setspawn:
+    description: admin set spawn cmd
+  chatcolor:        
+    description: ChatColor!
+    aliases: [color]  
+  namecolor:        
+    description: Namecolors!     
+  toggledeathmessages:
+    description: CToogle Death Messages
+    aliases: [toggledeath]  
+  # nickname:
+    # description: nickname for TAB, and chat
+    # aliases: [nick] 
+  tags:
+    description: tags for use with luckperms
+    aliases: [servertags, ctag] 
+  countdown:
+    description: countdown from number
+    aliases: [servertags]
+  tpall:
+    description: teleport all players in a runnable
+    aliases: [teleportall]  
+  withdraw:
+    description: Withdraws money into a money note.  
+  xpbottle:
+    description: Withdraws exp into a EXP bottle.    
+  combattag:
+    description: combat tag delay without losing inv. 
+    aliases: [ct]
+  rename:
+    description: rename and item which you are holding! 
+  reclaim:
+    description: reclaim rewards from your rank per season
+  visibility:
+    description: toggle view of other players
+  alt:
+    description: teleport players which alts you own
+    aliases: [alttp, altteleport]
+  poll:
+    description: In game chat polls
+    aliases: [chatpoll]
+  commandspy:
+    description: CommandSpyer
+    aliases: [cmdspy]
+  commandprotect:
+    description: CommandSpyer
+    aliases: [cmdprotect, cmdprot, cmdpass, cmdbypass]  
+  # stackbuckets:
+    # description: stack water and lava buckets   
+  clearlag:
+    description: clear entities
+  stafflist:
+    description: show all online staff and/or player ranks. (Requires luckperms)
+    aliases: [list, slist, staff] 
+  report:
+    description: Report an online player with cooldown
+    aliases: [reports]
+  hologram:
+    description: Simple holograms with placeholder support!
+    aliases: [holograms, holo, holos]
+  launchpad:
+    description: Simple launchpads for the server :D
+    aliases: [launchpads]
+  voucher:
+    description: Vouchers / Bundles Plugin
+    aliases: [vouchers, bundle, bundles]
+  speed:
+    description: change how fast / slow you are
+    aliases: [walkspeed, flyspeed]    
+  scheduledtask:
+    description: reload task which run every X seconds
+    
+  fly:
+    usage: /fly [player]
+    description: Toggles flight status
+  clearinv:
+    usage: /clearinv
+    aliases: [ci]
+    description: Clears your inventory
+  broadcast:
+    usage: /broadcast <message>
+    description: Broadcast a message to the entire server  
+  adminchat:
+    usage: /AdminChat <message>
+    aliases: [ac]
+    description: Shows a message to all who have the adminchat permissions  
+  gamemode:
+    usage: /gm, /gamemode, /gm(a/c/s/sp)
+    aliases: [gm, gms, gmc, gma, gmsp]
+    description: Change gamemode based on your liking   
+  heal:
+    usage: /heal, /healall, feed
+    aliases: [feed, healall]
+    description: Heal or feed players
+  teleport:
+    usage: /tp(o), /tpa, /tphere
+    aliases: [tp, tpo, tpa, tphere, tpaccept, tpdeny, tpyes, tpno]
+    description: Heal or feed players
+  workbench:
+    usage: /workbench
+    aliases: [craft]
+    description: Opens a workbench where you are
+  compass:
+    usage: /compass
+    description: Tells you your direction
+  enderchest:
+    usage: /enderchest [player]
+    aliases: [ec]
+    description: Opens an enderchest inv
+  top:
+    usage: /top 
+    description: Teleports you to the top block above your head
+  trash:
+    usage: /trash 
+    aliases: [disposal]
+    description: Throw away items you dont use
+  god:
+    usage: /god 
+    description: Gives god mod to a player
+  invsee:
+    usage: /invsee <player> [armour]
+    description: View another players inventory & armour
+  ping:
+    usage: /ping [player]
+    description: View yours or another players ping
+  reply:
+    usage: /<command> [player]
+    aliases: [m, msg, r, message, socialspy, disablemessaging, disablemessage, disablemsg, tpm, togglepms, togglemsg, togglemessaging]
+    description: Message or reply to a player 

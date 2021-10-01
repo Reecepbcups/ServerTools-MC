@@ -1,0 +1,752 @@
+# BUNDLES --------------------------------------------------
+IslandBundle:
+  Item: 'ENDER_CHEST'
+  Name: "&b&lIsland Bundle"
+  Lore:
+    - ''
+    - '&7&oThis bundle will give all the items listed below,'
+    - '&7&oits great for any new islands interested in playing.'
+    - ''
+    - '&c&lNOTE: &7You must have more than &f6 &7Members'
+    - ''
+    - ' &b&l* &7$750,000 &8- &bMoney'
+    - ' &b&l* &7x2 &8- &bGoblin Rank'              
+    - ' &b&l* &7x1 &8- &bSell Wand 1.00x'
+    - ' &b&l* &7x3 &8- &bCactus Collector'
+    - ' &b&l* &7x1 &8- &bIron Golem Spawner'
+    - ' &b&l* &7x5 &8- &bBlaze Spawner'
+    - ' &b&l* &7x3 &8- &bEpic Key'
+    - ' &b&l* &7x2 &8- &bFantasy Key'
+    - ''
+    - '&7(( &f&oClick &7to redeem the &bIsland Bundle &7&o))'
+  Commands:
+  - 'spawner give %player% blaze 5'
+  - 'spawner give %player% iron_golem 1'
+  - 'collector give %player% 3'
+  - 'crate key give %player% Fantasy 2'
+  - 'crate key give %player% Epic 3'
+  - 'eco give %player% 750000'
+  - 'sellwand give %player% 1-00 -1'
+  - 'voucher give %player% rankGoblin 2'
+BoosterBundle:
+  Item: 'ENDER_CHEST'
+  Name: "&d&lNitro &d&lBundle"
+  Lore:
+    - ''
+    - '&7&oThis bundle will give all the items listed below.'
+    - '&7&oYou can obtain &f&o1 &7&oof these maximum each season.'
+    - ''
+    - '&c&lNOTE: &7You must be boosting the discord server.'
+    - ''           
+    - ' &d&l* &7$250,000 &8- &dMoney'        
+    - ' &d&l* &7x1 &8- &dIron Golem Spawner'
+    - ' &d&l* &7x2 &8- &dCactus Collectors'
+    - ' &d&l* &7x3 &8- &dEpic Key'
+    - ' &d&l* &7x2 &8- &dFantasy Key'
+    - ''
+    - '&7&o(( &f&oClick &7to redeem the &d&nNitro &d&nBundle &7&o))'
+  Commands:
+  - 'spawner give %player% iron_golem 1'
+  - 'collector give %player% 2'
+  - 'crate key give %player% Fantasy 2'
+  - 'crate key give %player% Epic 3'
+  - 'eco give %player% 250000'
+
+DragonReclaim:
+  Item: 'INK_SACK:5'
+  Name: "&5&lDragon Reclaim"
+  Lore:
+    - ''
+    - '&7&oThis Reclaim Is Only For SOTW and Claimable Once A Map'
+    - ''
+    - '&c&lNOTE: &7You Must Be Rank Dragon For This Reclaim'
+    - ''
+    - ' &b&l* &7$250,000 &8- &5Money'
+    - ' &b&l* &7x4 &8- &5Fantasy Key'
+    - ' &b&l* &7x6 &8- &5Epic Key'
+    - ' &b&l* &7x8 &8- &5Rare Key'
+    - ' &b&l* &7300x300 Island Size'
+    - ''
+    - '&7(( &f&oClick &7to redeem the &5Dragon Reclaim &7&o))'
+  Commands:
+  - 'crate key give %player% Fantasy 4'
+  - 'crate key give %player% Epic 6'
+  - 'crate key give %player% Rare 8'
+  - 'eco give %player% 250000'
+  - 'voucher give %player% 300x300 1'
+KingReclaim:
+  Item: 'INK_SACK:14'
+  Name: "&6&lKing Reclaim"
+  Lore:
+    - ''
+    - '&7&oThis Reclaim Is Only For SOTW and Claimable Once A Map'
+    - ''
+    - '&c&lNOTE: &7You Must Be Rank King For This Reclaim'
+    - ''
+    - ' &b&l* &7$200,000 &8- &6Money'
+    - ' &b&l* &7x3 &8- &6Fantasy Key'
+    - ' &b&l* &7x4 &8- &6Epic Key'
+    - ' &b&l* &7x5 &8- &6Rare Key'
+    - ' &b&l* &7250x250 Island Size'      
+    - ''
+    - '&7(( &f&oClick &7to redeem the &6King Reclaim &7&o))'
+  Commands:
+  - 'crate key give %player% Fantasy 3'
+  - 'crate key give %player% Epic 4'
+  - 'crate key give %player% Rare 5'
+  - 'eco give %player% 200000'
+  #- 'is admin setislandsize %player% 125'
+  - 'voucher give %player% 250x250 1'
+  #- 'msg %player% &dIsland Size is now &f250x250'
+WizardReclaim:
+  Item: 'INK_SACK:12'
+  Name: "&b&lWizard Reclaim"
+  Lore:
+    - ''
+    - '&7&oThis Reclaim Is Only For SOTW and Claimable Once A Map'
+    - ''
+    - '&c&lNOTE: &7You Must Be Rank Wizard For This Reclaim'
+    - ''
+    - ' &b&l* &7$150,000 &8- &bMoney'
+    - ' &b&l* &7x2 &8- &bFantasy Key'
+    - ' &b&l* &7x3 &8- &bEpic Key'
+    - ' &b&l* &7x4 &8- &bRare Key'
+    - ' &b&l* &7200x200 Island Size'           
+    - ''
+    - '&7(( &f&oClick &7to redeem the &bWizard Reclaim &7&o))'
+  Commands:
+  - 'crate key give %player% Fantasy 2'
+  - 'crate key give %player% Epic 3'
+  - 'crate key give %player% Rare 4'
+  - 'eco give %player% 150000'
+  #- 'is admin setislandsize %player% 100'
+  - 'voucher give %player% 200x200 1'
+  #- 'msg %player% &dIsland Size is now &f200x200'
+GoblinReclaim:
+  Item: 'INK_SACK:10'
+  Name: "&2&lGoblin Reclaim"
+  Lore:
+    - ''
+    - '&7&oThis Reclaim Is Only For SOTW and Claimable Once A Map'
+    - ''
+    - '&c&lNOTE: &7You Must Be Rank Goblin For This Reclaim'
+    - ''
+    - ' &b&l* &7$100,000 &8- &2Money'
+    - ' &b&l* &7x1 &8- &2Fantasy Key'
+    - ' &b&l* &7x2 &8- &2Epic Key'
+    - ' &b&l* &7x3 &8- &2Rare Key'
+    - ' &b&l* &7150x150 Island Size'         
+    - ''
+    - '&7(( &f&oClick &7to redeem the &2Goblin Reclaim &7&o))'
+  Commands:
+  - 'crate key give %player% Fantasy 1'
+  - 'crate key give %player% Epic 2'
+  - 'crate key give %player% Rare 3'
+  - 'eco give %player% 100000'
+  #- 'is admin setislandsize %player% 75'
+  #- 'msg %player% &dIsland Size is now &f150x150'
+  - 'voucher give %player% 150x150 1'
+PartnerReclaim:
+  Item: 'INK_SACK:11'
+  Name: "&d&lPartner Reclaim"
+  Lore:
+    - ''
+    - '&7&oThis Reclaim Is Only For SOTW and Claimable Once A Map'
+    - ''
+    - '&c&lNOTE: &7You Must Be A Partner For This Reclaim'
+    - ''
+    - ' &b&l* &7$250,000 &8- &dMoney'
+    - ' &b&l* &7x5 &8- &dFantasy Key'
+    - ' &b&l* &7x5 &8- &dEpic Key'
+    - ' &b&l* &7x5 &8- &dRare Key'
+    - ' &b&l* &7x1 &8- &dMonthly Crate'
+    - ''
+    - '&7(( &f&oClick &7to redeem the &dPartner Reclaim &7&o))'
+  Commands:
+  - 'crate key give %player% Fantasy 5'
+  - 'crate key give %player% Epic 5'
+  - 'crate key give %player% Rare 5'
+  - 'eco give %player% 250000'
+  - 'crate give %player% MonthlyCrate 1'
+
+# RANKS --------------------------------------------------
+rankGoblin:
+  Item: '399'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lGOBLIN &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Rank'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% parent addtemp goblin 30d true server=skyblock'
+rankWizard:
+  Item: '399'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lWIZARD &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Rank'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% parent addtemp wizard 30d true server=skyblock'
+rankKing:
+  Item: '399'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lKING &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Rank'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% parent addtemp king 30d true server=skyblock'
+rankDragon:
+  Item: '399'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lDRAGON &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Rank'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% parent addtemp dragon 30d true server=skyblock'
+# KITS --------------------------------------------------
+kitMember:
+  Item: '351:5'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lMEMBER KIT&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Kit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'kit member %player%'
+kitGoblin:
+  Item: '351:5'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lGOBLIN KIT&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Kit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'kit goblin %player%'
+kitWizard:
+  Item: '351:5'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lWIZARD KIT&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Kit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'kit wizard %player%'
+kitKing:
+  Item: '351:5'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lKING KIT&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Kit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'kit king %player%'
+kitDragon:
+  Item: '351:5'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lDRAGON KIT&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Kit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'kit dragon %player%'
+# SKit One Time --------------------------------------------------
+skitCactus:
+  Item: '351:6'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lCACTUS SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'ae givegkit %player% cactus'
+skitGrinder:
+  Item: '351:6'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lGRINDER SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'ae givegkit %player% grinder'
+skitCyborg:
+  Item: '351:6'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lCYBORG SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'ae givegkit %player% cyborg'
+skitMonthly:
+  Item: '351:6'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lMONTHLY SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'ae givegkit %player% monthly'
+# Skit_Perm --------------------------------------------------
+permSkitCactus:
+  Item: '351:14'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lCACTUS SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set cactus.skit server=skyblock'
+permSkitGrinder:
+  Item: '351:14'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lGRINDER SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set grinder.skit server=skyblock'
+permSkitCyborg:
+  Item: '351:14'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lCYBORG SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set cyborg.skit server=skyblock'
+permSkitMonthly:
+  Item: '351:14'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lMONTHLY SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this SKit'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set monthly.skit server=skyblock'
+# Border --------------------------------------------------
+150x150:
+  Item: '166'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&l150x150 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Island Border'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'is admin setsize %player% 75'
+200x200:
+  Item: '166'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&l200x200 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Island Border'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'is admin setsize %player% 100'
+250x250:
+  Item: '166'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&l250x250 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Island Border'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'is admin setsize %player% 125'
+300x300:
+  Item: '166'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&l300x300 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Island Border'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'is admin setsize %player% 150'
+# KOTH STARTER --------------------------------------------------
+kothKoth1:
+  Item: '276'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lKOTH1 &f&lSTARTER&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Rank'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'koth start koth1 300 15m 2'
+kothKoth2:
+  Item: '276'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lKOTH2 &f&lSTARTER&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Rank'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'koth start koth2 300 15m 2'
+# BOOSTERS --------------------------------------------------
+boosterExperience:
+  Item: '138'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lEXPERIENCE &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Booster'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'booster give %player% Experience 1'
+boosterMobcoins:
+  Item: '138'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lMOBCOINS &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Booster'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'booster give %player% Mobcoins 1'
+#  boosterMoney:
+#    Item: '138'
+#    Name: '&d&l✧&5&l✧&d&l✧ &f&lMONEY &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
+#    Lore:
+#      - ''
+#      - '&d&lUSAGE: &7Click to claim this Booster'
+#      - ''
+#      - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+#    Commands:
+#      - 'booster give %player% Money 1'
+boosterPersonalexperience:
+  Item: '138'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lPERSONALEXPERIENCE &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Booster'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'booster give %player% PersonalExperience 1'
+boosterPersonalmobcoins:
+  Item: '138'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lPERSONALMOBCOINS &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Booster'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'booster give %player% PersonalMobcoins 1'
+#  boosterPersonalmoney:
+#    Item: '138'
+#    Name: '&d&l✧&5&l✧&d&l✧ &f&lPERSONALMONEY &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
+#    Lore:
+#      - ''
+#      - '&d&lUSAGE: &7Click to claim this Booster'
+#      - ''
+#      - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+#    Commands:
+#      - 'booster give %player% PersonalMoney 1'
+# Perks --------------------------------------------------
+perkFixAll:
+  Item: '145'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lFIX ALL PERK&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Perk'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set essentials.repair.all'
+perkFly:
+  Item: '288'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lFLY PERK&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Perk'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set superior.island.fly'
+# VOIDCHEST --------------------------------------------------
+voidChestdefault:
+  Item: '342'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d1.00x&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this VoidChest'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'voidchest give default %player% 1'
+voidChestone:
+  Item: '342'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d1.25x&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this VoidChest'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'voidchest give one %player% 1'
+voidChesttwo:
+  Item: '342'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d1.50x&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this VoidChest'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'voidchest give two %player% 1'
+voidChestthree:
+  Item: '342'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d2.00x&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this VoidChest'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'voidchest give three %player% 1'
+voidChestfour:
+  Item: '342'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d2.50x&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this VoidChest'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'voidchest give four %player% 1'
+# Bundle --------------------------------------------------
+ScrollBundle:
+  Item: '341'
+  Name: '&d&l✧&5&l✧&d&l✧ &f&lSCROLL BUNDLE VOUCHER &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d✧ &d&lINFORMATION: &fScroll Bundles are packages that can be'
+    - '&f redeemed to receive special scrolls on the server.'
+    - '&f These scrolls each have their own unique ability'
+    - '&f to help further you in your skyblock adventure'
+    - ''
+    - '&d&lUSAGE: &7Click to claim this item'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Player: ''
+  Commands:
+    - 'ae giveitem %player% blackscroll 1 1'
+    - 'ae giveitem %player% whitescroll 1 1'
+    - 'ae giveitem %player% blocktrak 1 1'
+    - 'ae giveitem %player% stattrak 1 1'
+    - 'ae giveitem %player% transmog 1'
+# TAGS -----------------------------------------------------------------
+TagBoss:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6BOSSTAG&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Boss'
+TagSpicy:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&C&LS&A&LP&C&LI&A&LC&C&LY&8> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Spicy'
+TagOg:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&B&LOG&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.OG'
+TagSimp:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&D&LSIMP&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Simp'
+TagPog:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6&LP&E&LO&6&LG&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Pog'
+TagTwitch:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&5&LT&D&LW&5&LI&D&LT&5&LC&D&LH&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Twitch'
+TagYoutube:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&C&LYOU&F&LTUBE&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.YouTube'
+TagKing:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6&LKING&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.King'
+TagAbuse:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&4&LABUSE&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Abuse'
+TagGrinder:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6&LGRINDER&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Grinder'
+TagPay2Win:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&2&LPAY&A&L2&2&LWIN&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Pay2Win'
+TagDumdum:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&7&ODUMDUM&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.DumDum'
+TagBeta:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&B&OBETA&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Beta'
+TagSalty:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&F&L&OSALTY&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Salty'
+TagFantasy:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&D&LFANTASY&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Fantasy'
+TagEgirl:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&D&LE-GIRL&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.EGirl'
+TagCaptain:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&B&LCAPTAIN&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Captain'
+TagCactusgod:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&2CACTUS&AGOD&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.CactusGod'
+TagTryhard:
+  Item: '421'
+  Name: '&d&l✧&5&l✧&d&l✧ &8&L<&4&LTRYHARD&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
+  Lore:
+    - ''
+    - '&d&lUSAGE: &7Click to claim this Tag'
+    - ''
+    - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
+  Commands:
+    - 'lp user %player% permission set Tags.Tryhard'

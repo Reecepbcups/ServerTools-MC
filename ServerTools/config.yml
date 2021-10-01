@@ -1,0 +1,743 @@
+# ServerTools - Reece#3370
+# -----------------------------------------------------------------
+# DEFAULT PERMISSIONS
+# hunger.bypass         nofalldamage.use        anticraft.bypass
+# chatcooldown.bypass   ctag.use                Chatcolor.COLOR (.*)
+#                                               Chatcolor.codes ((& color codes)
+
+# 
+
+# Staff Related
+# mutechat.use              mutechat.bypass         anticraft.admin
+# clearchat.use             chatcooldown.admin      announce.use
+# colon.use                 Freeze.use              
+# whitelist.bypass          staffafk.use            cmdalias.bypass
+# changeslots.use           guess.admin             donation.use
+# tools.tpall               countdown.use           tools.rename
+# visibility.bypass         poll.use                tools.rename.lore
+# visibility.staff
+# tools.clearlag            giveall.use             hologram.admin
+# report.notify             tools.speed.walk        tools.speed.fly       tools.scheduledtask.admin
+# -----------------------------------------------------------------
+# worlds are case sensitive
+
+# Can be used within servertools with %NAME%.
+PluginVariables:
+  STORE: "store.WEBSITE.co"
+  DISCORD: "discord.gg/INVITE"
+  RULES: "WEBSITE.co/rules"
+  WEBSITE: "WEBSITE.co"
+  SERVERNAME: "&b&lMINECRAFT&fNETWORK"
+  SERVER: "Skyblock"
+  SUPPORT: "discord.com/invite/SUPPORTSERVER"
+  ANYTHING_YOUWANT: some variable you want to replace
+
+
+FeaturesGUI: # Settings in the Features GUI.yml file  
+  Enabled: true 
+
+Disabled:
+  DisableCropTrample:
+    Enabled: true   
+  DisableGrassDecay: 
+    Enabled: true
+  DisableBookWriting:
+    Enabled: true     
+  DisableDragonEggTP: 
+    Enabled: true
+  DisableVillagerTrading: 
+    Enabled: true
+    Permission: "villagertrading.use"
+    Message: "&cVillager trading is disabled &7&o((%perm%))!"
+  DisableCactusDamage:
+    Enabled: true          
+  DisableCaneTowers: 
+    Enabled: true # No Placing sugarcane on itself
+  DisableJockeySpawning: 
+    Enabled: true
+  DisableBlazeDrowning: 
+    Enabled: true
+  DisableJoinLeaveMsg: 
+    Enabled: true  
+  DisableDisconnectSpamKick:
+    Enabled: true    
+  DisableHunger: 
+    Enabled: true
+    Permission: "hunger.bypass"
+  DisableFallDamage:
+    Enabled: true
+    Permission: "nofalldamage.use" 
+  DisableEndermanTP:
+    Enabled: true
+  WitherBlockBreak: # true means withers will not
+    Enabled: true
+  DisableGolemPoppies:
+    Enabled: true
+  DisableStackablePotions:
+    Enabled: true  
+  DisablePhantomSpawn:
+    Enabled: true   
+  
+  DisableItemBurn:
+    Enabled: true
+    reasons:
+    - lava
+    - fire
+    - fire_tick
+    - BLOCK_EXPLOSION
+    - ENTITY_EXPLOSION   
+  DisableLeaveDecay: 
+    Enabled: true
+    WorldsToDisable: 
+    - Warzone
+    - world
+  DisableWeather: 
+    Enabled: true
+    worlds: 
+    - Warzone
+    - world
+  DisableTimeChange: 
+    Enabled: true
+    DayInAllWorlds: false
+    SecondSync: 30
+    DayWorlds: 
+    - world
+    NightWorlds:
+    - Warzone
+  DisableEntityThrowing: 
+    Enabled: true
+    Items:
+    - EYE_OF_ENDER    
+    - EGG       
+  DisableWaterBreakingRedstone:
+    Enabled: true
+    items:
+    - REDSTONE
+    - DIODE
+    - DIODE_BLOCK_ON
+    - DIODE_BLOCK_OFF
+    - REDSTONE_WIRE
+    - REDSTONE_TORCH_ON
+    - REDSTONE_TORCH_OFF
+    - REDSTONE_COMPARATOR
+    - REDSTONE_COMPARATOR_OFF
+    - REDSTONE_COMPARATOR_ON
+
+  DisableMobAI:
+    Enabled: true
+    worldsToDisable:
+    - world
+    - world_nether
+
+  DisableWorldGuardGlitchBuilding:  # Mainly good for event servers    
+    # bypass perm: blockglitchplace.bypass
+    Enabled: false
+
+
+Core:
+  Ping:
+    Enabled: true
+  InvSee:
+    Enabled: true
+    Permission: essentials.invsee
+    ModifyOthers: essentials.invsee.modify
+  God:
+    Enabled: true
+    Permission: essentials.god
+  Trash:
+    Enabled: true
+  Top:
+    Enabled: true
+    Permission: essentials.top
+  Enderchest:
+    Enabled: true
+    Permission: essentials.enderchest
+    ViewOthers: essentials.enderchest.others
+    ModifyOthers: essentials.enderchest.modify
+  Compass:
+    Enabled: true
+    Permission: essentials.compass
+  Workbench:
+    Enabled: true
+    Permission: essentials.workbench
+  Fly:
+    Enabled: true
+    Permission: essentials.fly
+  ClearInv:
+    Enabled: true
+    Permission: essentials.clearinventory
+  Broadcast:
+    Enabled: true
+    Permission: essentials.broadcast
+  AdminChat:
+    Enabled: true
+    Permission: tools.adminchat
+  Messaging: # Not tested
+    Enabled: true
+    Permissions:
+      Message: essentials.message
+      Reply: essentials.reply
+      SocialSpy: essentials.socialspy
+      ToggleMSG: essentials.togglemsg
+      DisableMessaging: chat.disablemessaging
+    Formats:
+      Send: "&7(To &b%name%&7) &b%msg%"
+      From: "&7(From &b%name%&7) &b%msg%"  
+    Sound:
+      Enabled: true
+      Sound: "BLOCK_NOTE_BLOCK_PLING"     
+  Gamemode:
+    Enabled: true
+    Permissions:
+      Creative: essentials.gamemode.creative
+      Survival: essentials.gamemode.survival
+      Spectator: essentials.gamemode.spectator
+      Adventure: essentials.gamemode.Adventure
+  Heal: # heal, feed, healall
+    Enabled: true
+    Permissions:
+      Heal: essentials.heal
+      HealOthers: essentials.heal.others
+      Feed: essentials.feed
+  Teleport: # (tp/tpo, tphere)
+    Enabled: true
+    Permissions:
+      TP: essentials.tp
+      TPA: essentials.tpa  
+      TPHere: essentials.tphere  
+  Spawn: # /spawn & setspawn ( spawn.admin )
+    Enabled: true
+    Permission: spawn.other
+    onJoinInstantly: false # spawn on every join
+    spawnFirstUniqueJoinOnly: true
+    teleportWhenInVoid: 
+      enabled: true
+      disabledWorlds:
+      - world_nether
+      message: '&4&l[!] &4OOPS! &cYou fell into the void. Sent to spawn.'
+
+Commands:
+  Countdown: # /countdown
+    Enabled: true 
+  AltTP:
+    Enabled: true    
+  ChangeSlots:
+    Enabled: true
+    Permission: changeslots.use
+    AnnounceFullToPermissionedUsers: true     
+  ChatPoll: # /poll
+    Enabled: true  
+  GiveAll: # /giveall (Essentials required)
+    Enabled: true     
+  ChatNumberGuess: # /guess
+    Enabled: true
+    command: guess
+    AdminPerm: "guess.admin"    
+  DailyRewards: # /reward
+    Enabled: false
+    rewards:
+    - crate give P Rare 1 %player%    
+  reclaim:
+    Enabled: true
+    BeginAtIndex: 6 # User display output from permission
+    permissions:
+      'group_dragon': # _ is translated to a . before checking
+      - 'bundle give %player% DragonReclaim 1'
+      'group_king': 
+      - 'bundle give %player% KingReclaim 1'  
+      'group_wizard':
+      - 'bundle give %player% WizardReclaim 1'
+      'group_goblin':
+      - 'bundle give %player% GoblinReclaim 1'  
+ 
+  Speed:
+    Enabled: true
+    FlyPermission: tools.speed.fly
+    WalkPermission: tools.speed.walk
+ 
+  StaffList: # - requires luckperms - ESS and SV Vanish support
+    Enabled: true
+    groups:
+      owner: ' &8&l<&d&lOWNER&8&l> &f» &d'
+      manager: ' &8&l<&6&lMANAGER&8&l> &f» &6'
+      developer: ' &8&l<&b&lDEVELOPER&8&l> &f» &b'
+      admin: ' &8&l<&c&lADMIN&8&l> &f» &c'
+      srmoderator: ' &8&l<&9&lSRMOD&8&l> &f» &9'
+      moderator: ' &8&l<&e&lMOD&8&l> &f» &e'
+      helper: ' &8&l<&a&lHELPER&8&l> &f» &a'
+      builder: ' &8&l<&3&lBUILDER&8&l> &f» &3'
+      staffafk: ' &8&l<&7&lAFK&8&l> &f» &7'
+        
+ 
+Chat:      
+  CustomDeathMessages: 
+    Enabled: true
+    message: "&7&o[-] %message%"
+    #Enable in game with /toggledeath
+      
+  ChatCooldown:
+    Enabled: true
+    BypassCooldown: chatcooldown.bypass
+    CommandPermission: chatcooldown.admin
+    SecondsCooldown: 5
+    Message: "&6&l[!] &eYou must wait &6&n%timeleft%s&e before you may chat again."    
+    
+  ChatFormat: 
+    Enabled: true # EssentialsXChat alternative.
+    EnabledPAPIinMessages: true # chat.placeholder.message
+    ChatColorPerm: "chatcolor.codes" # To use things like &c in chat
+    PrefixOffset: 0 # amount of chars to go backwars. Sometimes prefix has 2 spaces on 1.8 servers
+    format: "{prefix}{name}{suffix} &7» &f{message}" # just use {name} on 1.8 servers
+   
+  Tags: # file Tags.yml
+    Enabled: true
+    CustomTagPerm: ctag.use
+    CustomMaxLength: 20
+    CustomTagFormat: "&8&l<%tag%&8&l>"
+    selected: "&e&l[!] &eYou have selected &r%tag% &eas your new tag!"  
+    removed: "&c&l[!] &cYou have removed your &4current&c tag!"    
+    giveTagCmd: "lp user %name% permission set tags.%tag% true server=skyblock_emc"    
+    
+  ChatColor: # Chatcolor.*
+    Enabled: true
+    RainbowColors:
+    - "&f"
+    - "&e"
+    - "&6"
+    - "&b"
+    - "&2"
+    - "&4"
+    - "&7"
+  NameColor: # Namecolor.*
+    Enabled: true
+    
+  ChatEmoji:
+    Enabled: true
+    permission: ""
+    Emojis:
+      '<3': '♡'
+      ':flip:': '(╯°□°)╯︵ ┻━┻'
+      ':serious:': '(ಠ_ಠ)'   
+   
+Events:
+  AntiCraft: # AntiItemCraft.yml
+    Enabled: true
+    AdminPerm: "anticraft.admin"
+    Bypass: "anticraft.bypass" #EX. anticraft.bypass.ITEM or anticraft.bypass.*
+    MSG: '&c&l[!] &cYou do not have permission to craft &e%item%&c.'
+    
+  StackUnstackables:
+    Enabled: true # Stacks items up to 64 which normally do not stack
+    items:
+    - SADDLE
+    - SHEARS
+    - EGG
+    - IRON_BARDING # horse armour
+    - GOLD_BARDING
+    - DIAMOND_BARDING  
+    
+  WorldEffects:
+    Enabled: true
+    # https://helpch.at/docs/1.12.2/index.html?org/bukkit/potion/PotionEffectType.html
+    worlds:
+    - Warzone:NIGHT_VISION  
+    
+  ChatJoinMOTD: 
+    Enabled: true
+    MOTD:
+    - ""
+    - "&8&l>&7&m-------------&r %SERVERNAME% &7&m------------&8&l<"
+    - ""
+    - "&3&l▎ &b&lSERVER &f%SERVER%"
+    - ""
+    - "&3&l▎ &b&lSTORE &f%STORE%"
+    - "&3&l▎ &b&lDISCORD &f%DISCORD%"
+    - ""
+    - "&7&o(( Currently &b&o%server_online% &7&oplayer(s) are playing ))"
+    - ""
+    - "&8&l>&7&m----------------------------------------&8&l<"
+    
+  NoBedExplosionInNether:
+    Enabled: true
+    
+  # https://helpch.at/docs/1.12.2/org/bukkit/Material.html  
+  Launchpads:
+    Enabled: false
+    BlockType: EMERALD_BLOCK
+    PlateType: STONE_PLATE
+    LaunchPower: 3
+    RunnableTicksperCheck: 7
+
+Moderation:
+  MuteChat:
+    Enabled: true
+    Permission:
+      Use: mutechat.use
+      Bypass: mutechat.bypass
+    Messages:
+      Enabled: '&a&l[!] &2&n%player%&a has unmuted the chat!'
+      Disable: '&c&l[!] &4&n%player%&c has muted the chat!'   
+    
+  CommandSpy:
+    Enabled: true
+    permission: commandspy.use
+    ignored_commands:
+    - msg
+    
+  CommandProtect:
+    Enabled: true
+    
+  ClearChat:
+    Enabled: true
+    Permission: clearchat.use
+    Messages:
+      lines: 100
+      msg: '&e&l[!] &6&n%player%&e has cleared the chat!'
+      
+  NoColonInCommands:
+    Enabled: true
+    BypassPerm: "colon.use"
+    
+  Freeze:
+    Enabled: true
+    Permission: Freeze.use
+    Message: 
+    - "&6&l[!]&e You have been frozen. &7&o(( Do not log out ))"
+    - "&dYou have &f2 &dminutes to join the discord:"
+    - "&f - &d%SUPPORT%"
+    
+  WhitelistBypass: 
+    Enabled: true
+    DisableWhitelistCMDInGame: true
+    Permission: whitelist.bypass
+    Message: '&c&n%player%&c, you are not whitelisted on this server!'
+
+  TPAll:
+    Enabled: true 
+ 
+  Report:
+    Enabled: true
+    Cooldown: 30
+    CooldownMSG: "&4[!] &cYou can not make another report for %timeleft% seconds!"
+    ReportSuccess: "&c%reporter%&f reported &c%offender% &ffor &c%reason%"
+ 
+  StaffAFK:
+    Enabled: true
+    StaffAFKGroup: "staffafk"
+    Permission: "staffafk.use"
+    StaffGroups: # Make sure the groups are in order from highest to lowest staff
+    - owner
+    - admin
+    - srmod
+    - mod
+    - helper
+    GiveAFK: # Change these to list arrays
+    - "lp user %player% parent add %StaffAFKGroupName% server=global"
+    - "lp user %player% parent remove %UsersPrimaryGroup% server=global"
+    RemoveAFK:
+    - "lp user %player% parent add %PlayerConfigPrimarygroup% server=global"
+    - "lp user %player% parent remove %StaffAFKGroupName% server=global"
+    
+
+Cooldowns:
+  EnderPearlCooldown:
+    Enabled: true
+    Seconds: 15
+    Message: "&6&l[!] &eYou must wait &6&n%timeleft%s&e before you may throw this again."
+  GoldenAppleCooldown:
+    Enabled: true
+    Seconds: 15
+    Message: "&6&l[!] &eYou must wait &6&n%timeleft%s&e before you may eat another."
+    StartCooldownMSG: "&7&o(( GOLDEN APPLE EATEN! %seconds% second cooldown initiated ))"
+  GodAppleCooldown:
+    Enabled: true
+    Seconds: 45
+    Message: "&6&l[!] &eYou must wait &6&n%timeleft%s&e before you may eat another."
+    StartCooldownMSG: "&7&o(( GOD APPLE EATEN! %seconds% second cooldown initiated ))"
+    
+
+
+Misc:
+  Tools:
+    Permission: toolscmd.admin    
+    
+  Withdraw: # /xpbottle & /withdraw
+    # Console: "/withdraw AMOUNT player"
+    Enabled: true
+    
+  Rename: 
+    Enabled : true
+    permission: "tools.rename"
+    lorePermission: "tools.rename.lore"
+    disabledRename: # includes anvil
+    - AIR
+    - EXP_BOTTLE
+    - BEACON
+
+  ClearLag:
+    Enabled : true
+    AutoClearItems:
+      Enabled: true
+      ClearMobs: true
+      ClearDelay: 900 # Seconds (Make sure this number is divisible by 5)
+      ClearSoonMSG: "&f&l[LAG] &cClearing all entities in %seconds% seconds"
+      ClearedMSG: "&f&l[LAG] &cAll entities have been cleared..."
+
+  ServerAges: # %age_EPOCHTIME%
+    Enabled: true
+
+  ThreeHitGlitch: # Fixes attacking with Air damage
+    Enabled: true
+
+  OnJoinCommands: 
+    Enabled: false    
+    FirstUniqueJoin: # Runs only on first ever join
+      Enabled: false
+      CMDS:
+      - skyhoes give 1 %player%    
+    PlayerRunCommands: # Commands the player runs on every Join
+      Enabled: false
+      CMDS:    
+      - pg join
+
+  Visibility:
+    Enabled: true
+    bypassPerm: "visibility.bypass"
+    
+  BucketStacker:
+    Enabled: true
+    worldguard: false
+    superiorskyblock: false
+    
+  Holograms:
+    Enabled: true
+    
+  ScheduledTask:
+    Enabled: true
+    Debug: false
+    Permission: "tools.scheduledtask.admin"
+  
+  CMDAliases:
+    Enabled: true
+    Permission: "cmdalias.bypass"
+    cmds:
+      colors: essentials:info colors
+      menu: ultracosmetics menu main
+      warzone: warp pvp
+      cane: tokens
+      croptop: croptop cane
+      votetop: superbvote top
+      v: essentials:vanish
+      ce: enchanter
+      cactus: cactusshop
+      mutechat: servertools:mutechat
+      clearchat: servertools:clearchat
+      vote: vote sites
+    disabled:
+    - pl
+    - plugins
+    - '?'
+    - version
+    - debug
+    - about
+    - ver
+    - esell
+    - essentials:sell
+    - essentials:esell
+    - bukkit:help
+    - bukkit:pl
+    - bukkit:?
+    - bukkit:about
+    - bukkit:plugins
+    - bukkit:timings
+    - bukkit:ver
+    - bukkit:version
+    - minecraft:me
+    
+    # command%timeToWaitTillExectute
+    preCooldownCommands:
+      stopIfMoved: true
+      warzone:
+      - 'spawn%5'
+      - 'tpyes%5'
+      - 'tpaccept%5'
+      - 'tpa%5'
+      - 'warp pvp%5'
+    
+    disabledWorlds:
+      spawn:
+      - 'top'
+      - 'etop'
+      - 'sethome'
+      - 'esethome'
+      Warzone:
+      - 'top'
+      - 'etop'
+      - 'sethome'
+      - 'esethome'
+      - 'pv'
+      - 'playervaults'
+      - 'playervault'
+      - 'is accept'
+      - 'is join'
+      - 'printer'
+      - 'kit'
+      - 'ekit'
+      - 'ekits'
+      - 'skit'
+      - 'ah'
+      - 'pv'
+      - 'ec'
+      - 'vault'
+      - 'enderchest'
+      - 'eec'
+      - 'eechest'
+      - 'eendersee'
+      - 'endersee'
+      - 'reclaim'
+      - 'skits'
+
+Bungee:
+  BungeeServerCMD:
+    Enabled: true
+    command: "join"  # /join oskyblock -> send user to skyblock_emc server on proxy
+    Aliases:
+      ogskyblock: "skyblock_emc"
+
+AutoBroadcast:
+  Enabled: true
+  centerall: false
+  use_this_to_override: "<center>"
+  use_this_for_commands: "<command=/bc test2/> &dCLICK"
+  Header: 
+    - ''
+    - '&8&l&m------------------------------------&7'
+    - '<center>&d&l%SERVERNAME%'
+    - ''
+  Footer: 
+    - ''
+    - '&8&l&m------------------------------------&7'
+    - ''
+  Interval: 180
+  Messages:
+    rules:
+      - '<center>&f%RULES%'
+    discord:
+      - '<center>&f%DISCORD%'
+    store:
+      - '<center>&f%STORE%'
+    islandfly:
+      - '<command=/vote/><center>&d/Vote &ffor 3 hours of &d/is fly&f!'
+      - '<center>&7&o(Click to run the vote command)'
+    warzone:
+      - '<command=/warzone/><center>&fBattle in pvp with &c/warzone'
+      - '<center>&7&o(Click to run the warzone command)'
+   
+Donation:
+  Enabled: true
+  Permission: "donation.use"
+  Message: 
+  - ''
+  - '&d✧&f✧&5✧ &d&lNEW DONATION &5✧&f✧&d✧'
+  - '&7&o"We currently have a &f&o50% OFF SALE&7&o."'
+  - ''
+  - '&5* &f%player% &djust purchased the'
+  - '&f%package% &dpackage! &a&nGG!'
+  - ''
+  - '&7&o(( %STORE% &7&o))'
+  - ''
+  
+FancyAnnounce:
+  # You can use the %player% variable on any line
+  Enabled: true
+  Permission: "announce.use"
+  Groups: # Move to its own config file?
+    bosses:
+      ArgumentsSyntax: "<BossName> <Location>"
+      CenterMessage: true
+      Message:
+      - '&d&m-----------------------------------------------------'
+      - ''
+      - '&d✧&f✧&5✧ &d&lBoss Spawn &5✧&f✧&d✧'
+      - ''
+      - '&5* &dA &f%arg-1% &djust Spawned at'
+      - '&f%arg-2%'
+      - ''
+      - '&d&m-----------------------------------------------------'
+
+
+ServerInfoCMDS:
+  Enabled: true
+  Commands:
+    discord:
+      enabled: true
+      message:
+      - ''
+      - '&d&lServer Discord'
+      - '&7(If you are having any issues please join the discords so we can help resolve them)'
+      - ''
+      - '&d&lDiscord'
+      - '&f&l%DISCORD%'     
+    help:
+      enabled: true
+      message:
+      - '&8&l&m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+      - '         &b&lIsland Help &f(Basic Commands)'
+      - '  &7&o(( List of all comands regarding Skyblock. ))'
+      - ''
+      - '&b/island &f- Main command to show GUI.'
+      - '&b/island create &f- Creates an island.'
+      - '&b/island invite <player> &f- Invite a player to your island.'
+      - '&b/island kick <player> &f- Kick a player from your island.'
+      - '&b/island home &f- Teleports you to your Island home.'
+      - '&b/island leave &f- Leave your current island.'
+      - '&b/island top &f- Show the list of top ten islands.'
+      - ''
+      - '&bIf you have suggestions or concerns please visit our'
+      - '&bdisord &f%DISCORD% &bor contact one of the &fowners.'
+      - '&8&l&m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+    buy:
+      enabled: true
+      message:
+      - ''
+      - '&f&l[!] &d&lCLICK TO VISIT OUR STORE!'
+      - ''
+      - '  &d&l• &f&n%STORE%'
+      - ''
+      - ''
+    flytime:
+      enabled: true
+      message:
+      - ''
+      - '&f&lFLGIHT TIME LEFT'
+      - '&f&l%luckperms_expiry_time_superior.island.fly%'
+      - ''
+      - '&7&oIf the above is blank, &f/vote'
+      - ''
+      
+ShopWorkAround:
+  # This patch gets the name of the SHOP plugin you use (( ex. ShopGUIPlus ))
+  # It then gets the shopmenu name, and items in the shop's names (( ex. "&4&lSpawners" ))
+  # then on click of this item in this inv, it will cancel the event and instead make the player
+  #    run what ever command you want
+  #
+  # MenuNameInConfig = the location in YAML format of the shop menu name. It might be "Shop.InvName", where
+  # the "." = a new line with 2 spaces.
+  Enabled: false
+  DEBUG: false
+  plugin: "ShopGUIPlus"
+  MenuNameInConfig: "shopMenuName"
+  KeysofItemsInConfig: "shopMenuItems"
+  NameOfItem: "shopMenuItems.%key%.item.name" # ex. &2&lFarming
+  RemappedClicks:
+    1:
+      name: "&c&lSpawners"
+      CloseInvBeforeCommand: true
+      MakePlayerSayCommand: true # makes player sendmessage with /<command> so it will run for events. Keep false unless it does not work
+      command: "spawnershop"
+      
+Vouchers:
+  Enabled: true
+  Options:
+    RedeemMessage: '&a&l[+]&a You redeemed the %voucher% &7(%voucherid%)'
+    Glowing: true

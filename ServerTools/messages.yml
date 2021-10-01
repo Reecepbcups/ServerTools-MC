@@ -1,0 +1,136 @@
+VOUCHER_GUI_NAME: "&lViewing Vouchers & Bundles"
+NO_COLONS_IN_COMMANDS: "&7[ServerTools] &fColons are not allowed in commands!"
+
+TP_ALL: "&f&n[!]&f TP-All initiated by %player% &7&o((5 Sec Delay))"
+TP_ALL_SUCCESS: "&c&l(!) Teleported to %player%"
+
+REPORT_SELF: "&4[!] &cYou can not report yourself!"
+REPORT_SUCCESS: "&fThanks for the report on %target%! Staff have been notified."
+REPORT_OFFLINE: "&c[!] Player &4%target% &cdoes not seem to be online!"
+
+MUTECHAT_ISMUTED: "&cChat is currently muted by a staff member!"
+
+FREEZE_UNFROZEN: "&a&l[!]&a You have been unfrozen."
+FREEZE_DENYCHAT: "&cYou can not chat while frozen, use /msg & /r to message staff"
+FREEZE_DENYTP: "&cNo teleporting while frozen!"
+
+COMMAND_PROTECT_DENY: "&cYou are not authorized to use &c&n%cmd%"
+
+TAGS_AVAILABLE: "&a&lAVAILABLE"
+TAGS_CLICK_TO_EQUIP: "&7&o(( &f&oClick &7to equip this tag. ))"
+TAGS_LOCKED: "&c&lLOCKED"
+TAGS_NO_ACCESS: "&7&o(( &c&oYou do not have access to this tag! &7&o))"
+TAG_GUI_FORMAT: "&f&l[!] &f&n%tag%"
+TAG_CLEAR: "&c&lCLEAR TAG"
+TAG_RECEIVED: "&a&l[!]&a Recieved the \"%tag%\" tag!"
+TAG_DENY_CUSTOM: "&cYou do not have permission to use custom tags"
+
+NAMECOLOR_GUI: "&lName Color"
+NAMECOLOR_INFO: "Information"
+NAMECOLOR_COLOR: "&l▎ &7Name Color: &f"
+NAMECOLOR_ACCESS: "&l▎ &7Access: &fLeft-Click"
+NAMECOLOR_SELECT: "&7&o(( Click me to select this as your name color! ))"
+NAMECOLOR_SET: "&a&l[!] &aSet your name to &f\" %color% &f\"&a color!"
+
+CHATCOLOR_GUI: "&lChat Color"
+CHATCOLOR_INFO: "Information"
+CHATCOLOR_COLOR: "&l▎ &7Color: &f"
+CHATCOLOR_ACCESS: "&l▎ &7Access: &fLeft-Click"
+CHATCOLOR_SELECT: "&7&o(( Click me to select this as your chat color! ))"
+CHATCOLOR_RAINBOW: "&fR&ea&6i&bn&2b&4o&7w"
+CHATCOLOR_SET: "&a&l[!] &aSet you to &f\" %color% &f\"&a color!"
+
+
+CMDALIAS_DENYWORLD: "&cYou can not not use the &f%cmd%&c command in this world!"
+CMDALIAS_DISABLED: "&cThe &f%cmd%&c command is disabled!"
+CMDALIAS_DELAYED: "&7&oExecuting command &f&n%cmd%&7&o in %time% seconds... Do not move!"
+CMDALIAS_DELAYED_MOVED: "&4[!] &cYou moved after running the command... "
+
+NOBEDEXPLOSION: "&cYou can not use a bed in the Nether!"
+
+
+WITHDRAW_MONEY: "&a&lYOU REDEEMED: &2&l+&a&l&n$"
+WITHDRAW_NOTENOUGH: "&cYou do not have enough money to withdraw $"
+WITHDRAW_POSITIVE_NUMBER: "&cEnter a number > $0"
+WITHDRAW_SUCCESSFUL: "&c&lWITHDREW: &4&l-&c&l&n$"
+WITHDRAW_ONLY_WHOLE: "&cPlease only enter whole numbers"
+WITHDRAW_NOTE_LORE1: "&eValue:&f $%value%"
+WITHDRAW_NOTE_LORE2: "&eSigner:&f %player%"
+WITHDRAW_BALANCE: "&7You have &a$%bal%&7!"
+
+XPBOTTLE_BOTTLE_LORE1: "&aExperience:&f %value%"
+XPBOTTLE_BOTTLE_LORE2: "&aSigner:&f %player%"
+XPBOTTLE_REDEEEMED: "&a&lREDEEMED: &2&l+&a&l&n%exp%&a EXP"
+XPBOTTLE_XPCMD: "&7You have &a%exp%&7 xp!"
+XPBOTTLE_WITHDREW: "&c&lWITHDREW: &4&l-&c&l&n%xp%&c EXP"
+XPBOTTLE_ONLY_WHOLE: "&cPlease only enter whole numbers"
+
+DISABLED_BOOKWRITING: "%prefix% &cBook Writing Is Disabled"
+DISABLED_CANE_ON_CANE: "%prefix% &cYou cant place cane on cane!"
+DISABLED_DRAGON_EGG_TP: "%prefix% &cDragon Egg TP Disabled"
+DISABLED_STACKED_POTIONS: "%prefix% &c[!] You can not throw stacked potions, please unstack before throwing!"
+DISABLED_THROWING_ITEMS: "%prefix% &cYou can not throw this item"
+
+
+ADMINCHAT: "&7(&c&lADMIN&7) &e%player%&f> &e%msg%"
+BROADCAST: "&8&l[&c&lALERT&8&l]&r %msg%"
+COMPASS: "&fYou are facing &n%dir%&7 (( &f%bearing%&7 ))"
+FLY_ENABLED: "&f[&a!&f] &aEnabled Flight for %player%" 
+FLY_DISABLED: "&f[&c!&f] &cDisabled Flight for %player%"
+
+GAMEMODE_CHANGED: "&f&lYour gamemode is now &r%gamemode%"
+GAMEMODE_SURVIVAL: "&a&lSURVIVAL"
+GAMEMODE_CREATIVE: "&e&lCREATIVE"
+GAMEMODE_ADVENTURE: "&6&lADVENTURE"
+GAMEMODE_SPECTATOR: "&f&lSPECTATOR"
+
+HEAL_FED: "&7[&f!&7] &aYou have been fed!"
+HEAL_HEALED: "&7[&f!&7] &aYou have been healed!"
+
+MESSAGING_DISABLED: "&cMessaging is disabled at this time!"
+MESSAGING_OFFLINE: "&c&n%target%&c is not online!"
+MESSAGING_IS_TOGGLED: "&c&n%target%&c has their messages toggled!"
+MESSAGING_NOREPLY: "&cYou do not have anyone to reply too!"
+
+PING: "&a[!] &fYour ping is: &a%ping%&fms"
+
+SPAWN_SET: "&7&l[&c&l!&7&l] &fSet spawn location to your position!"
+SPAWN_NONE: "&cNo spawn location set! Use /setspawn to set."
+SPAWN_TP: "&7&l[&c&l!&7&l] &fTeleporting to spawn..."
+SPAWN_SENT_TO_SPAWN: "&7&l[&c&l!&7&l] &f%sender% has sent you to spawn..."
+
+
+SPEED_RESET: "&a[!] &fReset %TYPE% speed to default."
+SPEED_FLY: "&a[!] &fSet Flying speed to: &a%speed%&f."
+SPEED_WALK: "&a[!] &fSet Walking speed to: &a%speed%&f."
+
+
+TOP_TELEPORT: "&f[&a!&f] &aTeleported to the the highest block %block%" 
+
+
+TELEPORT_HASACCEPTED: "&a[!] &f%player% has &aaccepted&f your TP request."
+TELEPORT_ACCEPTED: "&a[!] &fAccepted &a%player%&f request."
+TELEPORT_NOREQUEST: "&c[!] &fYou do not have any outstanding teleport request..."
+TELEPORT_HASDENIED: "&c[!] %player% has denied your TP request."
+TELEPORT_DENIED: "&f[!] &cDenied &f%player%&c request."
+TELEPORT_SELF: "&cYou can not teleport yourself."
+TELEPORT_TO: "&aTeleported to &f%player%" 
+TELEPORT_SENT_REQUEST: "&fTeleport request sent to &a%player%"
+TELEPORT_GOT_REQUEST1: "\n&n%player%&f has sent you a teleport request"
+TELEPORT_GOT_REQUEST2: "         &fType &a/tpaccept&f or&c /tpdeny\n"
+TELEPORT_TIMEOUT: "Your teleport request timed out."
+
+
+RECLAIM_ALREADY_CLAIMED: "&4&l[!] &cYou have already redeemed your package!"
+RECLAIM_NOTHING: "&4&l[!] &cYou do not have a rank to reclaim anything for this realm!"
+RECLAIM_RECLAIMED: "&2&l[!] &aRECLAIMED &a&n%permission%&a ITEMS!"
+
+
+RENAME_DENYITEM: "%prefix% &cYou can not rename %item%!"
+RENAME_SUCCESS: "&a[+] Successful rename!&r"
+RENAME_NOT_ENOUGH_LORE: "&cYou can not remove line %line% as the lore only contains %size%"
+
+
+VISIBILITY_DISABLED: "&4✖ &cVisibility is currently disabled!"
+VISIBILITY_STAFF_ONLY: "&a✓ &fOnly showing staff"
+VISIBILITY_EVERYONE: "&a✓ &fShowing all players"
