@@ -1,6 +1,8 @@
 ### ServerTools-MC
 A MC Plugin for modular server management (100+ task, easy to config, replaces many repetitive plugins)
 
+https://www.spigotmc.org/resources/servertoolscore.95853/
+
 # Plugins this replaces
  - Hographic Displays (Global PAPI Support ONLY such as %server_time%)
  - EssentialsSpawn + AntiVoid TP
