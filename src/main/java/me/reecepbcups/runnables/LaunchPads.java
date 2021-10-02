@@ -1,0 +1,105 @@
+package me.reecepbcups.runnables;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.util.Vector;
+
+import me.reecepbcups.tools.Main;
+import me.reecepbcups.utiltools.Util;
+
+public class LaunchPads implements Listener, CommandExecutor {
+
+	private static Main plugin;
+	private FileConfiguration config;
+	private String Section;
+	private Material BlockType, PlateType;
+	private Integer LaunchPower, RunnableTicksperCheck;
+	private static boolean isEnabled;
+	
+	public LaunchPads(Main instance) {
+        plugin = instance;
+        
+        Section = "Events.Launchpads";                
+        if(plugin.enabledInConfig(Section+".Enabled")) {
+        	isEnabled = true;
+        	
+        	//config = plugin.getConfig();
+        	config = Main.MAINCONFIG;
+        	BlockType = Material.valueOf(config.getString(Section+".BlockType").toUpperCase());
+        	PlateType = Material.valueOf(config.getString(Section+".PlateType").toUpperCase());
+        	//SoundEffect = config.getString(Section+".SoundEffect");
+        	LaunchPower = config.getInt(Section+".LaunchPower");
+        	RunnableTicksperCheck = config.getInt(Section+".RunnableSecondsCheck");
+        	
+        	plugin.getCommand("launchpad").setExecutor(this);
+    		
+        	runLaunchPadChecker();
+    	}
+	}
+	
+	static Location loc;
+	static int launchpadRunnable;
+	public void runLaunchPadChecker() {
+		
+		launchpadRunnable = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+			public void run() {
+				for(Player p : Bukkit.getOnlinePlayers()) {
+					loc = p.getLocation();
+					if(loc.getBlock().getType() == PlateType) {
+						if(loc.subtract(0, 1, 0).getBlock().getType() == BlockType) {
+							p.setVelocity(loc.getDirection().multiply(LaunchPower));
+							p.setVelocity(new Vector(p.getVelocity().getX(), 1.0D, p.getVelocity().getZ()));
+							//p.getWorld().playSound(loc, Sound.valueOf(SoundEffect), 10.0F, 1.0F);
+						}
+					}					
+				}
+			}
+		}, 0, RunnableTicksperCheck);
+	}
+	public static void stopLaunchpadChecking() {
+		if(isEnabled) {
+			Bukkit.getServer().getScheduler().cancelTask(launchpadRunnable);
+		}		
+	}
+
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {		
+		if (!(sender.hasPermission("some.permission"))) {		
+			sender.sendMessage(Util.color("&cNo Permission to use "+label+" :("));
+			return true;			
+		}
+		
+		Player p = (Player) sender;
+
+		if (args.length == 0) {
+			sendHelpMenu(p);
+			return true;
+		}	
+		
+		switch(args[0]){
+			// /command clear
+			case "create":				
+				p.getLocation().getWorld().getBlockAt(p.getLocation()).getRelative(0, -1, 0).setType(BlockType);
+				p.getLocation().getWorld().getBlockAt(p.getLocation()).setType(PlateType);
+				return true;
+			default:
+				sendHelpMenu(p);
+				return true;		
+		}		
+	}
+	
+	public void sendHelpMenu(Player p) {
+		Util.coloredMessage(p, "&f/launchpad &7create");
+	}
+	
+	
+	
+}
