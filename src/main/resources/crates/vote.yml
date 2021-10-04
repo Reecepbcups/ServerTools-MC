@@ -1,0 +1,34 @@
+Name: '&b&lVote Crate Chest'
+RotateSpeed: 5
+Key:
+  Material: TRIPWIRE_HOOK
+  Name: '&7Vote Crate Key'
+  Lore:
+  - '&7Use this key at /warp crates!'
+CrateLocations:
+- world, 5.0, 63.0, 20.0
+rewards:
+  rare1:
+    Material: Chest
+    Name: '&7Some Reward'
+    Lore:
+    - Example
+    Comamands:
+    - say Rare 1 reward Chest 1.0%/4.0 running %player%
+    Chance: 1.0
+  rare2:
+    Material: Diamond
+    Name: '&7Diamond Reward'
+    Lore:
+    - '&fExample'
+    Comamands:
+    - say Rare 2 reward Diamond 1.0%/4.0 running %player%
+    Chance: 1.0
+  rare3:
+    Material: Diamond_block
+    Name: '&bSome Reward'
+    Lore:
+    - '&cExample'
+    Comamands:
+    - say Rare 3 reward Diamond 2.0%/4.0 running %player%
+    Chance: 2.0

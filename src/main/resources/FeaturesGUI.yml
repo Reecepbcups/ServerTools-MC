@@ -1,0 +1,258 @@
+Name: "&lServer Features"
+Rows: 3
+Permission: ""
+Command: "features"
+
+# Set to "" to disable
+DefaultItemNameColor: "&d&l"
+DefaultLoreColor: "&7"
+
+# applies if the "Item: Dirt" is missing
+DefaultItemIfNotSet: "Nether_star" 
+
+# set item names to _&# if you want to start off with another color
+Items:
+  Cobble Generators:
+    Item: COBBLESTONE
+    Lore:
+    - ''
+    - '&f Cobble generator spawn differnt ores'
+    - '&f depending on their level.'
+    - '&f Upgrade with &d/is upgrades'
+    - ''
+  Mobcoins:
+    Item: DOUBLE_PLANT
+    Lore:
+    - ''
+    - '&f Mobcoins are obtained by killing'
+    - '&f a variety of mobs. Find these mobs'
+    - '&f within the &d/transfer &fmenu'
+    - ''
+    - '&f This is also where you can spend your'
+    - '&f Mobcoins for in game items!'
+    - ''
+  Cactus Collectors:
+    Item: BEACON
+    Lore:
+    - ''
+    - '&f CactusCollectors are used to '
+    - '&f gain cactus tokens!'
+    - '&f'
+    - '&f When placed the chest will link in'
+    - '&f 30 seconds or less to the chunk.'
+    - '&f '
+    - '&f All cactus which grows will then be'
+    - '&f auto transfered straight to your teams'
+    - '&f balance when you are online!'
+    - ''
+    - '&7&o(( &d/cactus&f, &d/team &7&o))' 
+  Cactus Team:
+    Item: CACTUS
+    Lore:
+    - ''
+    - '&f Cactus Teams allow for you and your island'
+    - '&f to work together when having different'
+    - '&f collectors!'
+    - '&f '
+    - '&f Just &d/team create &fthen invite your'
+    - '&f island! All cactus tokens will be'
+    - '&f a shared balance. Spend in &d/cactus'
+    - ''
+    - '&7&o(( All players are in a team by default )) '    
+  Axes:
+    Item: DIAMOND_AXE
+    Lore:
+    - ''
+    - '&f You get yourself 1 axe on first join!'
+    - '&f '
+    - '&f These are used to mine farming '
+    - '&f related blocks such as &dpumpkins'
+    - '&f '
+    - '&7&o((To upgrade, &dright click on your axe'
+    - '&7&o or use &f/axeupgrade&7&o))'
+    - ''    
+  Tags:
+    Item: NAME_TAG
+    Lore:
+    - ''
+    - '&f Use the &d/tags command to choose '
+    - '&f yourself a cool <tag> after your name'
+    - ''
+  Withdraw:
+    Item: PAPER
+    Lore:
+    - ''
+    - '&f You can take out your money and XP'
+    - '&f with the commands /withdraw, and /xpbottle'
+    - ''   
+    - '&7&o (( To view, use &f/bal &7&oor &f/xp &7&o))'   
+    - ''   
+  Koth:
+    Item: DIAMOND_SWORD
+    Lore:
+    - ''
+    - '&f Koth is a PvP Event where you need to stay'
+    - '&f on the platform for 5 minutes to Capture'
+    - ''
+    - '&f This will grant you some random prizes'
+    - '&f that are located inside of /koth loot'
+    - ''  
+  Squid Levels:
+    Item: INK_SACK
+    Lore:
+    - ''
+    - '&f Squids spawn in the range of'
+    - '&f Y Levels &d20 &fto &d70'
+    - ''            
+  Island Top:
+    Item: DIAMOND
+    Lore:
+    - ''
+    - '&fIsland Top Prizes are awarded out '
+    - '&fto the top 3 Island on /is top'
+    - ''
+    - '&fValue blocks are found in &d/shop IslandWorth'
+    - '&4&lNO &fother blocks count towards value!'
+    - ''
+    - '&7&o((  Alternate account islands  '
+    - '&7&o    &cDO NOT count towards this&7&o )) '    
+  Voting:
+    Item: PISTON_BASE
+    Lore:
+    - ''
+    - '&fDo not forget to /vote'
+    - '&f for rewards + a vote party'
+    - '&f every 100 votes!'
+    - '&f'
+    - '&fYou also get free /is fly time!'
+    - ''
+    - '&7&o(( &f&o/votetop & /voteparty &7&o)) '
+  Help Commands:
+    Lore:
+    - ''
+    - '&f - Get island help with &d/help'
+    - '&f - Join our discord with &d/discord'
+    - '&f - View our store via &d/buy'
+    - ''    
+  Fly:
+    Item: FEATHER
+    Lore:    
+    - ''
+    - '&f All Wizard+ ranks get &d/fly &fon their island!'
+    - '&f'
+    - '&f Dragon rank can use &d/speed 0-10'
+    - '&f  to fly even faster!'
+    - '&f'
+    - '&f If you /vote, you get 3 hours of'
+    - '&f  free flight time!'
+    - ''
+    - '&7&o(( Only applies on islands ))'    
+  # MineSpawners: # Not sure if this still applies or not
+  #   Lore:  
+  #   - ''
+  #   - '&f King+ can mine spawners'
+  #   - '&f You just need a silk touch pickaxe'
+  #   - ''
+  #   - '&f Shift mine to obtain the entire stack!'
+  #   - ''
+  #   - '&7&o(( You or you can /buy the perk seperately )) '    
+  Reclaim:
+    Item: GOLD_INGOT
+    Lore: 
+    - ''
+    - '&f Buy a rank and want the upgraded'
+    - '&f  island size?'
+    - '&f'
+    - '&f Make sure you &d/reclaim&f!'
+    - ''    
+  Cosmetic Colors:
+    Item: STAINED_GLASS_PANE
+    Lore:  
+    - ''
+    - '&f Use &d/ChatColor &fto change your'
+    - '&f in game chatcolor without having to'
+    - '&f to use the & symbol every time!'
+    - ''  
+  Warzone:
+    Item: REDSTONE_BLOCK
+    Lore:  
+    - ''
+    - '&f You can battle in the warzone'
+    - '&f  with the &d/warzone &fcommand'
+    - ''
+    - '&7&o (( &cPvP Is Enabled! &7&o)) '    
+  # Bosses:
+  #   Lore:  
+  #   - ''
+  #   - '&fUse our MobWarps to fight'
+  #   - '&f bosses when they spawn!'
+  #   - '&f'
+  #   - '&fThese bosses drop exclusive &'
+  #   - '&f High valued items daily!'
+  #   - ''
+  #   - '&7&o(( /warp mb1 - 3 )) '    
+  Enchanter:
+    Item: ENCHANTED_BOOK
+    Lore:  
+    - ''
+    - '&f Use the &d/enchanter &fto apply'       
+    - '&f  custom enchants to your items!'         
+    - ''         
+    - '&7&o(( For trash books, place in &dtinker&7&o))' 
+    - '&7&o(( View all enchants via &f/enchants&7&o))' 
+  Auction House:
+    Item: BOOK_AND_QUILL
+    Lore:  
+    - ''
+    - '&f Looking to sell old items you no long need?'       
+    - '&f   Sell with our &d/auctionhouse &fsystem!'         
+    - ''         
+    - '&7&o(( &d/ah sell <amount> &7&o))' 
+  Kits:
+    Item: IRON_HELMET
+    Lore:  
+    - ''
+    - '&f Make sure to take advantage of'       
+    - '&f  our free &d/kits &fsection'         
+    - '&fto help aid your skyblock journey'         
+    - ''         
+  Skits:
+    Item: GOLD_HOE
+    Lore:  
+    - ''    
+    - '&fDid you purchase or win a SKIT?'       
+    - '&f   access these via &d/skit &fCommand'         
+    - ''          
+
+  PV EC:
+    Item: CHEST
+    Lore:  
+    - ''
+    - '&fNeed extra storage? Check out your'       
+    - '&f &d/pv &fand &d/ec'         
+    - ''         
+    - '&7&o(( Provided correct rank access ))'  
+  Crates:
+    Item: TRIPWIRE_HOOK
+    Lore:  
+    - ''
+    - '&f After you &d/vote &for &d/reclaim&f,'       
+    - '&f you can spend your crate keys via'         
+    - '&d /crates &fcommand, or &d/warp crates'         
+    - ''  
+  Outpost:
+    Item: GOLD_BLOCK
+    Lore:  
+    - ''
+    - '&fOutpost are capturable and controllable areas'
+    - '     &fwhere your &disland &fas a team can fight against'
+    - '     &fother &dislands &ffor great rewards!'         
+    - ''       
+
+#   DEFAULT:
+#     Lore:  
+#     - ''
+#     - '&f'       
+#     - '&f'         
+#     - ''         
+#     - '&7&o(( ))'        

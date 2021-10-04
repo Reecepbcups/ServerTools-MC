@@ -1,0 +1,43 @@
+# TaskName:
+#  Repeat: 10 (in seconds)
+#  Delay: 10 (in seconds)
+#  Command: broadcast &cSome String
+# OR
+# TaskName:
+#  Time: 01:04:30 (hour, minute, second)
+#  Command: broadcast &cSome String
+
+RepeatingTask:
+    Repeat: 60
+    Delay: 15
+    Command: 
+    - broadcast &c[ServerTools] Repeating every 60 seconds ScheduledTask.yml
+
+Reboot1:
+    Time: 01:00:00
+    Command: 
+    - broadcast &c[!] DAILY REBOOT in 5 minutes
+Reboot2:
+    Time: 01:04:00
+    Command: 
+    - broadcast &c[!] DAILY REBOOT in 1 minute
+Reboot3:
+    Time: 01:04:30
+    Command: 
+    - broadcast &c[!] DAILY REBOOT in 30 seconds
+Reboot4:
+    Time: 01:04:45
+    Command: 
+    - broadcast &c[!] DAILY REBOOT in 15 seconds
+Reboot5:
+    Time: 01:04:55
+    Command: 
+    - broadcast &c[!] DAILY REBOOT in 5 seconds
+Reboot6:
+    Time: 01:05:00
+    Command: 
+    - broadcast &c[!] Rebooting Server...
+Reboot7:
+    Time: 01:05:05
+    Command: 
+    - stop

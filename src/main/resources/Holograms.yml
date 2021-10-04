@@ -1,0 +1,13 @@
+# Follows convention from holographic displays to make it simple
+# To move over too. Does not support items or animations
+#
+# This does however support PAPI global placeholders (ex. %server_online%)
+# Trying to use a placeholder such as %player_killstats% would not work.
+# If you need support for that, please continue to use holo displays
+# and disable in ServerTools config.yml for Holograms: false.
+
+skyblock:
+  location: world, 32.500, 127.500, -568.500
+  lines:
+  - '&7&k||&r &f&lSKYBLOCK &7&k||'
+  - '&fClick to connect'
