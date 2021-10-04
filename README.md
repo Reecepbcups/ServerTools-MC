@@ -3,8 +3,8 @@
 
 
 # Contributers:
- - Reecepbcups (Reece#3370)
- - Frost (frost#0723)
+ - Reecepbcups  (Reece#3370)   Lead
+ - Frost        (frost#0723)   Formating
  
  
 # Replaces the following plugins
@@ -29,4 +29,4 @@
  - Tags
  - Chat/NameColor
  - Any plugin to disable features
- - + More
+ - More
