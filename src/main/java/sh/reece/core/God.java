@@ -47,7 +47,7 @@ public class God implements CommandExecutor, Listener {//,TabCompleter,Listener 
 		
 		Player p = (Player) sender;
 		
-		boolean b = (GODS.contains(p) ? GODS.remove(p) : GODS.add(p));
+		//boolean b = (GODS.contains(p) ? GODS.remove(p) : GODS.add(p));
 		Util.coloredMessage(p, "&f[!] &fGod mode " + (GODS.contains(p) ? "&aenabled" : "&cdisabled") + "&f.");		
 		return true;
 	}

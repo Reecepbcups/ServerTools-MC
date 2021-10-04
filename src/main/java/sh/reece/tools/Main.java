@@ -50,7 +50,6 @@ public class Main extends JavaPlugin implements Listener {
 	
 	public static Chat chat = null; // used for Tags
 	
-	
 	public void onEnable() {
 		loadConfig();			
 		MAINCONFIG = getConfigFile("config.yml");
@@ -333,6 +332,9 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 
+	public static boolean serverAgeEnabled(){
+		return isServerAgeEnabled;
+	}
 
 	public Boolean enabledInConfig(final String path) {
 		String module = "";

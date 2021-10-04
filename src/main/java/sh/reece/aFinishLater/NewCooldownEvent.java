@@ -99,6 +99,7 @@ public class NewCooldownEvent implements Listener {
 	
 	
 	@EventHandler
+	@SuppressWarnings( "deprecation" )
 	public void Gapple_Cooldown(PlayerItemConsumeEvent e) {
 		Player p = e.getPlayer();
 		ItemStack TYPE = e.getItem();

@@ -31,7 +31,7 @@ public class Withdraw implements Listener, CommandExecutor {
 	private final String Section;
 	public String noteName = Util.color("&a&lCash-Note &7(Right-Click)");
 	public List<String> lore = new ArrayList<>();
-	private static boolean Vault;	  
+	//private static boolean Vault;	  
 	private static Economy econ = null;
 	private boolean debug;
 	
@@ -42,7 +42,8 @@ public class Withdraw implements Listener, CommandExecutor {
 		
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 
-			Vault = setupEco();
+			//Vault = setupEco();
+			setupEco();
 			
 			lore.add(Main.lang("WITHDRAW_NOTE_LORE1"));
 			lore.add(Main.lang("WITHDRAW_NOTE_LORE2"));

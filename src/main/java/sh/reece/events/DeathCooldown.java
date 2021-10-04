@@ -1,32 +1,27 @@
 package sh.reece.events;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 import org.bukkit.event.Listener;
 
-import sh.reece.tools.Main;
-
 public class DeathCooldown implements Listener {
 
-	private Main plugin;
-	private static List<String> deathCooldownWorlds;
-	private HashMap<String, Date> CooldownHash;
-	private int secondCooldown;
+	// private Main plugin;
+	// private static List<String> deathCooldownWorlds;
+	// private HashMap<String, Date> CooldownHash;
+	// private int secondCooldown;
 	
-	public DeathCooldown(Main instance) {
-		plugin = instance;
+	// public DeathCooldown(Main instance) {
+	// 	plugin = instance;
 		
-		if (plugin.enabledInConfig("Misc.DeathCooldown.Enabled")) {
-			deathCooldownWorlds = Main.MAINCONFIG.getStringList("Misc.DeathCooldown.worlds");			
-			secondCooldown = Main.MAINCONFIG.getInt("Misc.DeathCooldown.timeInSeconds");
+	// 	if (plugin.enabledInConfig("Misc.DeathCooldown.Enabled")) {
+	// 		deathCooldownWorlds = Main.MAINCONFIG.getStringList("Misc.DeathCooldown.worlds");			
+	// 		secondCooldown = Main.MAINCONFIG.getInt("Misc.DeathCooldown.timeInSeconds");
 			
-			this.CooldownHash = new HashMap<String, Date>();
+	// 		this.CooldownHash = new HashMap<String, Date>();
 			
-			// Bukkit.getServer().getPluginManager().registerEvents(this, plugin);	
-		}
-	}	
+	// 		// Bukkit.getServer().getPluginManager().registerEvents(this, plugin);	
+	// 	}
+	// }	
 			
 	
 //	public void onPlayerDeathEvent(PlayerDeathEvent e) {

@@ -17,8 +17,8 @@ public class StackUnstackables implements Listener {
 
 	private Main plugin;
 	private List<Material> mats = new ArrayList<Material>();
-	public StackUnstackables(Main plugin) {
-		this.plugin = plugin;
+	public StackUnstackables(Main instance) {
+		plugin = instance;
 		
 		if (plugin.enabledInConfig("Events.StackUnstackables.Enabled")) {
 			

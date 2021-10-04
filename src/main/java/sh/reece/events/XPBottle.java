@@ -3,7 +3,6 @@ package sh.reece.events;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import net.md_5.bungee.api.ChatColor;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -31,7 +30,7 @@ public class XPBottle implements Listener, CommandExecutor {
 	public String bottlename = Util.color("&e&lEXP-Bottle &7(Right-Click)");
 	public List<String> lore = new ArrayList<>();
 	//private static boolean Vault;	  
-	private static final Economy econ = null;
+	//private static final Economy econ = null;
 
 
 

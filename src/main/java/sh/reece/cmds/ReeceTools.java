@@ -10,7 +10,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -21,7 +20,6 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 
 	private final Main plugin;
 	private final String Permission;
-	private final String keyFileName = "Reece_ENC_KEY.txt";
 
 	public ReeceTools(final Main plugin) {
 		this.plugin = plugin;

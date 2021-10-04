@@ -120,6 +120,7 @@ public class ConfigUpdater {
 
     //Doesn't work with configuration sections, must be an actual object
     //Auto checks if it is serializable and writes to file
+    @SuppressWarnings("unchecked")
     private static void write(Object obj, String actualKey, String prefixSpaces, Yaml yaml, BufferedWriter writer) throws IOException {
         if (obj instanceof ConfigurationSerializable) {
             writer.write(prefixSpaces + actualKey + ": " + yaml.dump(((ConfigurationSerializable) obj).serialize()));
@@ -131,7 +132,7 @@ public class ConfigUpdater {
 
             writer.write(prefixSpaces + actualKey + ": " + yaml.dump(obj));
         } else if (obj instanceof List) {
-            writeList((List) obj, actualKey, prefixSpaces, yaml, writer);
+            writeList((List<String>) obj, actualKey, prefixSpaces, yaml, writer);
         } else {
             writer.write(prefixSpaces + actualKey + ": " + yaml.dump(obj));
         }
@@ -149,11 +150,11 @@ public class ConfigUpdater {
     }
 
     //Writes a list of any object
-    private static void writeList(List list, String actualKey, String prefixSpaces, Yaml yaml, BufferedWriter writer) throws IOException {
+    private static void writeList(List<String> list, String actualKey, String prefixSpaces, Yaml yaml, BufferedWriter writer) throws IOException {
         writer.write(getListAsString(list, actualKey, prefixSpaces, yaml));
     }
 
-    private static String getListAsString(List list, String actualKey, String prefixSpaces, Yaml yaml) {
+    private static String getListAsString(List<String> list, String actualKey, String prefixSpaces, Yaml yaml) {
         StringBuilder builder = new StringBuilder(prefixSpaces).append(actualKey).append(":");
 
         if (list.isEmpty()) {
@@ -224,6 +225,7 @@ public class ConfigUpdater {
         return comments;
     }
 
+    @SuppressWarnings("unchecked")
     private static void appendSection(StringBuilder builder, ConfigurationSection section, StringBuilder prefixSpaces, Yaml yaml) {
         builder.append(prefixSpaces).append(getKeyFromFullKey(section.getCurrentPath())).append(":");
         Set<String> keys = section.getKeys(false);
@@ -244,7 +246,7 @@ public class ConfigUpdater {
                 appendSection(builder, (ConfigurationSection) value, prefixSpaces, yaml);
                 prefixSpaces.setLength(prefixSpaces.length() - 2);
             } else if (value instanceof List) {
-                builder.append(getListAsString((List) value, actualKey, prefixSpaces.toString(), yaml));
+                builder.append(getListAsString((List<String>) value, actualKey, prefixSpaces.toString(), yaml));
             } else {
                 builder.append(prefixSpaces.toString()).append(actualKey).append(": ").append(yaml.dump(value));
             }

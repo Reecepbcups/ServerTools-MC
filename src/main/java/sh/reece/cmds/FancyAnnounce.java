@@ -20,8 +20,8 @@ public class FancyAnnounce implements CommandExecutor, TabCompleter {
 	private Main plugin;
 	private String Permission;
 	private FileConfiguration config;
-	public FancyAnnounce(Main plugin) {
-	    this.plugin = plugin;
+	public FancyAnnounce(Main instance) {
+	    plugin = instance;
 	    
 	    this.Permission = plugin.getConfig().getString("FancyAnnounce.Permission");
 	    

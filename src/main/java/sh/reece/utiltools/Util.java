@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.*;
-import java.util.regex.Pattern;
 
 
 public class Util {
@@ -233,15 +232,15 @@ public class Util {
 		return Integer.toString(value);
 	}
 
-	private static final Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
+	//private static final Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
 	public static String color(final String message) {
 		// doesnt work bc of 1.8 backwars compatibility and having to be loaded in first
-//		Matcher matcher = HEX_PATTERN.matcher(ChatColor.translateAlternateColorCodes('&', message));
-//		StringBuffer buffer = new StringBuffer();
-//		while (matcher.find()) {
-//	        matcher.appendReplacement(buffer, net.md_5.bungee.api.ChatColor.of(matcher.group(1)).toString());	        
-//	    }
-//		return matcher.appendTail(buffer).toString();	
+		// Matcher matcher = HEX_PATTERN.matcher(ChatColor.translateAlternateColorCodes('&', message));
+		// StringBuffer buffer = new StringBuffer();
+		// while (matcher.find()) {
+	    //     matcher.appendReplacement(buffer, net.md_5.bungee.api.ChatColor.of(matcher.group(1)).toString());	        
+	    // }
+		// return matcher.appendTail(buffer).toString();	
 		
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}

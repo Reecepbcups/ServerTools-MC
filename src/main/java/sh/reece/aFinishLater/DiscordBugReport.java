@@ -16,13 +16,13 @@ import sh.reece.utiltools.Util;
 
 public class DiscordBugReport implements Listener {
 
-	private static Main plugin;
+	//private static Main plugin;
 	private String command, WebhookURL,BotName,BotDesc,BotTitle, BotPicture, CooldownMSG, ReportSuccess;
 	private Integer cooldownSeconds;
 	private HashMap<String, Date> CooldownHash;
 	 
 	public DiscordBugReport(Main instance) {
-	        plugin = instance;
+	        //plugin = instance;
 	        
 	        // Currently Removed bc - not really needed.
 	        

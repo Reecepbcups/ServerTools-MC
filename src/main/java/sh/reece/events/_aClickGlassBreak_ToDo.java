@@ -1,19 +1,5 @@
 package sh.reece.events;
 
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
-import net.md_5.bungee.api.ChatColor;
-
 public class _aClickGlassBreak_ToDo {
 
 	// Configuration File Functions

@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,7 +16,7 @@ import sh.reece.utiltools.Util;
 public class GiveAll implements Listener, CommandExecutor {
 
 	private static Main plugin;
-	private FileConfiguration config;
+	//private FileConfiguration config;
 	private String Section;
 	private Random rand;
 	
@@ -27,7 +26,7 @@ public class GiveAll implements Listener, CommandExecutor {
         Section = "Commands.GiveAll";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
         	
-        	config = plugin.getConfig();	
+        	//config = plugin.getConfig();	
 
         	plugin.getCommand("giveall").setExecutor(this);	
         	rand = new Random();

@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +14,7 @@ import sh.reece.tools.Main;
 public class TEMPLATE implements Listener, CommandExecutor {
 
 	private static Main plugin;
-	private FileConfiguration config;
+	//private FileConfiguration config;
 	private String Section;
 	
 	public TEMPLATE(Main instance) {
@@ -24,7 +23,7 @@ public class TEMPLATE implements Listener, CommandExecutor {
         Section = "Chat.TEMPLATE_OPTION";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
         	
-        	config = plugin.getConfig();
+        	//config = plugin.getConfig();
         	//Permission = MAINCONFIG.getString(Section+".permission");
         	
 //        	// plugins/ServerTools/DATA
@@ -40,8 +39,8 @@ public class TEMPLATE implements Listener, CommandExecutor {
 	
 	@EventHandler
 	public void playerColoredChatEvent(AsyncPlayerChatEvent e) {	
-		Player p = e.getPlayer();
-		String uuid = p.getUniqueId().toString();			
+		//Player p = e.getPlayer();
+		//String uuid = p.getUniqueId().toString();			
 	}
 	
 	@Override
