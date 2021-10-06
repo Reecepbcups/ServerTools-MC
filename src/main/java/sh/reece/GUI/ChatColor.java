@@ -158,7 +158,8 @@ public class ChatColor implements Listener, CommandExecutor {
 		Util.coloredMessage(p, Main.lang("CHATCOLOR_SET").replace("%color%", colorFormat));
 
 	}
-
+	
+	//Rainbow
 	public String rainbowFormat(String msg) {
 		String _final = "";
 
@@ -173,7 +174,8 @@ public class ChatColor implements Listener, CommandExecutor {
 		return _final;
 
 	}
-
+	
+	//loads Data to memory
 	public void loadToMemory() {		
 		if(config.getConfigurationSection("Data") != null) {
 			for(String uuid : config.getConfigurationSection("Data").getKeys(false)) {
@@ -181,7 +183,8 @@ public class ChatColor implements Listener, CommandExecutor {
 			}
 		}
 	}
-
+	
+	//Saves Chat Color To File
 	public static void saveChatColorToFile() {		
 		if(isEnabled) {			
 			if(ChatColorHash.keySet().size() > 0) {
@@ -210,6 +213,7 @@ public class ChatColor implements Listener, CommandExecutor {
 		} 
 	}
 	
+	//Checks for Clicks
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
 		Boolean InvNameMatch = false;
@@ -249,7 +253,8 @@ public class ChatColor implements Listener, CommandExecutor {
 			event.setCancelled(true);
 		}
 	}
-
+	
+	//Creates Display
 	public static void createDisplay(Inventory inv, ItemStack itemStack, int Slot, String name, List<String> list) { //
 
 		ItemStack item = itemStack;
