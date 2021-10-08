@@ -260,6 +260,11 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 			return true;
 		}	
 		
+		if(!p.hasPermission("voucher.admin")){
+			Util.coloredMessage(p, "&cNo permissions to alter vouchers! &7&0[voucher.admin]");
+			return true;
+		}
+		
 		switch(args[0]){
 			case "give":		
 				// /voucher give Reecepbcups <voucher> [amount]
@@ -277,8 +282,6 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 				}	
 				
 				givePlayerVoucher(args[1], args[2], amount);
-				
-				
 				return true;	
 				
 			case "giveall":
