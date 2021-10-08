@@ -3,8 +3,9 @@
 
 [Spigot Page](https://www.spigotmc.org/resources/servertoolscore.95853/)
 
-[Documentation / Design WIP](https://reece.bit.ai/docs/view/hdI3blcYqn0MUOBO)
+[Design WIP](https://reece.bit.ai/docs/view/hdI3blcYqn0MUOBO)
 
+[Wiki WIP](https://servertools.reece.sh/)
  
  
 # Replaces the following plugins
