@@ -1,11 +1,9 @@
 # ServerTools-MC
 100+ Modular commands &amp; methods replacing many critical plugins in 1
 
-https://www.spigotmc.org/resources/servertoolscore.95853/
+[Spigot Page](https://www.spigotmc.org/resources/servertoolscore.95853/)
+[Documentation / Design WIP](https://reece.bit.ai/docs/view/hdI3blcYqn0MUOBO)
 
-# Contributers:
- - Reecepbcups  (Reece#3370)   Lead
- - Frost        (frost#0723)   Formating
  
  
 # Replaces the following plugins
