@@ -72,7 +72,7 @@ public class LaunchPads implements Listener, CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {		
-		if (!(sender.hasPermission("some.permission"))) {		
+		if (!(sender.hasPermission("launchpad.admin"))) {		
 			sender.sendMessage(Util.color("&cNo Permission to use "+label+" :("));
 			return true;			
 		}
