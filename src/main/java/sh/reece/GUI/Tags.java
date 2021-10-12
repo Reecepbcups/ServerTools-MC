@@ -163,7 +163,8 @@ public class Tags implements CommandExecutor, Listener { //
 					return true;
 				}
 				
-				if(Bukkit.getOfflinePlayer(args[1]).hasPlayedBefore()) {
+				// if player is online now OR they have been on in the past.
+				if(Bukkit.getPlayer(args[1]) != null || Bukkit.getOfflinePlayer(args[1]).hasPlayedBefore()) {
 					String name = Bukkit.getOfflinePlayer(args[1]).getName();
 
 					giveTagCMD = giveTagCMD.replace("%name%", name);
@@ -216,6 +217,14 @@ public class Tags implements CommandExecutor, Listener { //
 				removeTagFromUser((Player) sender);
 				return true;
 				
+			case "list":
+				String tagList = "";
+				for(String tagname : tagsconfig.getConfigurationSection("Tags").getKeys(false)){
+					tagList += "&f" + tagname + "&7,  ";
+				}
+				Util.coloredMessage(sender, tagList);
+				return true;
+
 			case "create":	
 				if(args.length < 3) {
 					helpMenu(sender);
@@ -297,7 +306,8 @@ public class Tags implements CommandExecutor, Listener { //
 		
 		sender.sendMessage(Util.color("&8- &f/tags &7clear"));
 		
-		sender.sendMessage(Util.color("\n&8- &f/tags &7give <player> <tag> &c(admin)"));
+		sender.sendMessage(Util.color("\n&8- &f/tags &7list"));
+		sender.sendMessage(Util.color("&8- &f/tags &7give <player> <tag> &c(admin)"));
 		sender.sendMessage(Util.color("&8- &f/tags &7create <name> <tag> &c(admin)"));
 		sender.sendMessage(Util.color("&7&m"+"----------------------------"));
 	}

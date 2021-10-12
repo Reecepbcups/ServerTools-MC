@@ -25,17 +25,13 @@ public class Spawn implements Listener, CommandExecutor {
 
 	private static Main plugin;
 	private final String Section;
-	private String Permission;
+	private String Permission, CommandPermission;
 
 	private static FileConfiguration Config;
 	private static String spawnLoc;
 
 	private static List<String> voidDisabledWorlds = new ArrayList<String>();
 	private String voidmsg, voidTPEnabled, spawnOnInitJoin, spawnFirstUniqueJoinOnly;
-
-    // TODO:
-    // add a spawn area option maybe? where you get 2 points to spawn between
-    // helps with larger player counts
 
 	public Spawn(Main instance) {
 		plugin = instance;
@@ -47,7 +43,8 @@ public class Spawn implements Listener, CommandExecutor {
 			spawnLoc = Config.getString("spawn.location");
 
 			Permission = plugin.getConfig().getString(Section+".Permission"); // to send others to spawn
-			
+			CommandPermission = plugin.getConfig().getString(Section+".CommandPermission");
+
 			spawnOnInitJoin = plugin.getConfig().getString(Section+".onJoinInstantly");
 			spawnFirstUniqueJoinOnly = plugin.getConfig().getString(Section+".spawnFirstUniqueJoinOnly");
 			
@@ -67,7 +64,7 @@ public class Spawn implements Listener, CommandExecutor {
 
 		if (command.getLabel().equalsIgnoreCase("setspawn")) {
 
-			if (!player.hasPermission("spawn.admin")) {
+			if (!player.hasPermission(Permission)) {
 				Util.coloredMessage(sender, "&cYou can not use the setspawn command! :(");
 				return true;
 			} 
@@ -84,6 +81,11 @@ public class Spawn implements Listener, CommandExecutor {
 
 		if (command.getLabel().equalsIgnoreCase("spawn")) {
 			
+			if (!sender.hasPermission(CommandPermission)) {
+				Util.coloredMessage(sender, "&cYou do not have access to &n/spawn&c.");
+				return true;
+			} 
+
 			String output = "";
 			if (spawnLoc == "" || spawnLoc == null) {
 				output = Main.lang("SPAWN_NONE");
@@ -110,11 +112,6 @@ public class Spawn implements Listener, CommandExecutor {
 			}
 			
 			Util.coloredMessage(sender, output);
-			
-			
-			
-			
-			
 			return true;
 		}
 		return true;

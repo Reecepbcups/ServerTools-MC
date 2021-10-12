@@ -33,7 +33,7 @@ public class Fly implements CommandExecutor{//,TabCompleter,Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if (!sender.hasPermission(Permission)) {
-			sender.sendMessage("&cYou do not have access to &n/" +cmd.getName()+"&c.");
+			Util.coloredMessage(sender, "&cYou do not have access to &n/" +cmd.getName()+"&c.");
 			return true;
 		} 
 

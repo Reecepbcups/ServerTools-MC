@@ -1,5 +1,5 @@
 name: ServerTools
-version: 4.0.0
+version: 4.0.1
 author: [Reecepbcups, frosxt]
 main: sh.reece.tools.Main
 description: A lot of little tools which make management easier

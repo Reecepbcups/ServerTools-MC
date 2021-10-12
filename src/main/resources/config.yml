@@ -205,9 +205,10 @@ Core:
       TP: essentials.tp
       TPA: essentials.tpa  
       TPHere: essentials.tphere  
-  Spawn: # /spawn & setspawn ( spawn.admin )
+  Spawn: # /spawn & setspawn
     Enabled: true
-    Permission: spawn.other
+    CommandPermission: spawn.use
+    Permission: spawn.admin    
     onJoinInstantly: false # spawn on every join
     spawnFirstUniqueJoinOnly: true
     teleportWhenInVoid: 
