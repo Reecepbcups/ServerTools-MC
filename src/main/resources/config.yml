@@ -180,6 +180,7 @@ Core:
       SocialSpy: essentials.socialspy
       ToggleMSG: essentials.togglemsg
       DisableMessaging: chat.disablemessaging
+      StaffBypass: staff.bypassdisabledmsg
     Formats:
       Send: "&7(To &b%name%&7) &b%msg%"
       From: "&7(From &b%name%&7) &b%msg%"  

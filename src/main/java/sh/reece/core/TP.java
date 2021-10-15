@@ -110,7 +110,7 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 					}
 					break;
 
-//  TPA TPACCEPT TPDENY
+				//  TPA TPACCEPT TPDENY
 				case "tpa":					
 					// check cooldown here, "You must wait a " + cooldown + " second cooldown in between teleport requests!"					
 					if(checkPerm(p, label, TPA)) {

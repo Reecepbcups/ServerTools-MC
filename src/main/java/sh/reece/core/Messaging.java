@@ -30,6 +30,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 	private String socialSpyPerm;
 	private String ToggleMSGPerm;
 	private String DisableMessagingPerm;
+	private String staffBypassPerm;
 	private String FORMAT_SEND, FORMAT_FROM;
 	private final Main plugin;
 	
@@ -57,6 +58,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 			socialSpyPerm = plugin.getConfig().getString(Section+".Permissions.SocialSpy");
 			ToggleMSGPerm = plugin.getConfig().getString(Section+".Permissions.ToggleMSG"); 
 			DisableMessagingPerm = plugin.getConfig().getString(Section+".Permissions.DisableMessaging");
+			staffBypassPerm = plugin.getConfig().getString(Section+".Permissions.StaffBypass");
 			
 			FORMAT_SEND = plugin.getConfig().getString(Section+".Formats.Send");
 			FORMAT_FROM = plugin.getConfig().getString(Section+".Formats.From");	
@@ -158,11 +160,15 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 			}					
 		}
 		
-		
-		
+		// staff bypass for disabled messages
 		if(toggledMessages.contains(target.getUniqueId())) {
-			Util.coloredMessage(sender, Main.lang("MESSAGING_IS_TOGGLED").replace("%target%", target.getName()));
-			return;
+
+			if(!sender.hasPermission(staffBypassPerm)){
+
+				Util.coloredMessage(sender, Main.lang("MESSAGING_IS_TOGGLED").replace("%target%", target.getName()));
+				return;
+
+			}
 		}
 			
 		
