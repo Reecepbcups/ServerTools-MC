@@ -31,7 +31,7 @@ public class AdminChat implements CommandExecutor{//,TabCompleter,Listener {
 		//Player p = (Player) sender;
 		
 		if (!sender.hasPermission(Permission)) {
-			sender.sendMessage("&cYou do not have access to &n/" +cmd.getName()+"&c.");
+			Util.coloredMessage(sender, "&cYou do not have access to &n/" +cmd.getName()+"&c.");
 			return true;
 		} 
 				

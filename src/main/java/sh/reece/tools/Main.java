@@ -113,6 +113,7 @@ public class Main extends JavaPlugin implements Listener {
 		new Messaging(this);
 		reeceEnder = new Enderchest(this);
 		reeceInvSee = new InvSee(this);
+		new Nickname(this);
 
 		// test / add to config
 		new Trash(this);

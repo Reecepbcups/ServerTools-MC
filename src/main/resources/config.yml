@@ -147,6 +147,9 @@ Core:
     Permission: essentials.god
   Trash:
     Enabled: true
+  Nickname:
+    Enabled: true
+    Permission: nickname.use
   Top:
     Enabled: true
     Permission: essentials.top

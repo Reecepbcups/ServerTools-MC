@@ -1,6 +1,6 @@
 name: ServerTools
-version: 4.1.0
-author: [Reecepbcups, frosxt]
+version: 4.1.1
+author: Reecepbcups
 main: sh.reece.tools.Main
 description: A lot of little tools which make management easier
 softdepend: [LuckPerms, Vault, PlaceHolderAPI, TAB, WorldGuard]
@@ -22,6 +22,10 @@ commands:
     description: Donation Buycraft Command
     permission: donation.use
     usage: Syntax error!  
+  nick:
+    description: Set/unset a nickname
+    usage: Syntax error!
+    aliases: [nickname, nickn]
   announce:
     description: Announce preset messages
     usage: Syntax error!   
@@ -162,7 +166,7 @@ commands:
     description: Tells you your direction
   enderchest:
     usage: /enderchest [player]
-    aliases: [ec]
+    aliases: [ec, echest]
     description: Opens an enderchest inv
   top:
     usage: /top 
