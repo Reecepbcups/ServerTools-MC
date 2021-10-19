@@ -107,8 +107,9 @@ public class Main extends JavaPlugin implements Listener {
 		new AdminChat(this);
 		new Workbench(this);
 		new Compass(this);
-
 		new Messaging(this);
+		new Enderchest(this);
+		new InvSee(this);
 
 		// test / add to config
 		new Trash(this);

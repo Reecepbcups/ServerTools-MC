@@ -10,120 +10,140 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
-public class InvSee implements CommandExecutor, Listener {//,TabCompleter,Listener {
+public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Listener {
 
-	String Section, Permission, ModifyOthers;
+	private String Section, Permission, ModifyOthers;
+	private List<UUID> openInvsee = new ArrayList<UUID>();
 	private Main plugin;
+
 	public InvSee(Main instance) {
 		this.plugin = instance;
-		
-		
-		Section = "Core.InvSee";        
+
+		Section = "Core.InvSee";
 
 		// https://essinfo.xeya.me/permissions.html
-		if(plugin.enabledInConfig(Section+".Enabled")) {
+		if (plugin.enabledInConfig(Section + ".Enabled")) {
 			plugin.getCommand("invsee").setExecutor(this);
-			Permission = plugin.getConfig().getString(Section+".Permission");			
-			ModifyOthers = plugin.getConfig().getString(Section+".ModifyOthers");
-			
+			Permission = plugin.getConfig().getString(Section + ".Permission");
+			ModifyOthers = plugin.getConfig().getString(Section + ".ModifyOthers");
+
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		}
-		
+
 	}
-	
-	List<UUID> allowModify = new ArrayList<UUID>();
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {		
-	
-		Player p = (Player) sender;
-		Player target = p;
-		
-		if (!sender.hasPermission(Permission)) {
-			sender.sendMessage(Util.color("&cYou do not have access to &n/" +label+"&c."));
+
+	private boolean isInvsee(Player player) {
+		if (openInvsee.contains(player.getUniqueId())) {
 			return true;
-		} 
-
-		boolean viewArmour = false;
-		if(args.length >= 1) {			
-			target = Bukkit.getPlayer(args[0]);	
-			
-			if(args.length >= 2) {
-				if(args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("armour")) {
-					viewArmour = true;
-				}
-			}
-			
 		}
-		
-		// if player can modify enderchest OR it is their own
-		if (target == p || p.hasPermission(ModifyOthers)) {
-			allowModify.add(p.getUniqueId());
-		}	
-		
-		p.closeInventory();
-		
-		if(viewArmour) {
-			Inventory armourInv = Bukkit.getServer().createInventory(p, 9, Util.color("&l"+args[0] + " &lArmour"));
-			List<ItemStack> armours = Arrays.asList(target.getInventory().getArmorContents());
-			Collections.reverse(armours);
-			armourInv.setContents(armours.<ItemStack>toArray(new ItemStack[0]));
-			p.openInventory(armourInv);
+		return false;
+	}
 
+	private void setInvSee(Player player, boolean value) {
+		UUID uuid = player.getUniqueId();
+		if (value) {
+			openInvsee.add(uuid);
 		} else {
-			p.openInventory(target.getInventory());
+			openInvsee.remove(uuid);
 		}
-		
-		
-		if(target != p) {
-			Util.coloredMessage(p, "&f[!] &aOpening " + args[0] + " inventory");
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+		// can do /invsee
+		if (!sender.hasPermission(Permission)) {
+			sender.sendMessage(Util.color("&cYou do not have access to &n/" + label + "&c."));
+			return true;
 		}
-		
-		
+		if (args.length < 1) {
+			sender.sendMessage(Util.color("&cYou need to specify someone -> /invsee <player>"));
+			return true;
+		}
+
+		Player target = Bukkit.getPlayer(args[0]);
+
+		final Inventory inv;
+
+		if (args.length > 1) {
+			inv = Bukkit.getServer().createInventory(target, 9, "Equipped");
+			inv.setContents(target.getInventory().getArmorContents());
+			// if(!Util.isVersion1_8()){
+			// inv.setItem(4, target.getInventory().getItemInHand());
+			// }
+		} else {
+			inv = target.getInventory();
+		}
+
+		Player opener = (Player) sender;
+		opener.closeInventory();
+		opener.openInventory(inv);
+		setInvSee(opener, true);
 		return true;
 	}
-	
+
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onInventoryClickEvent(final InventoryClickEvent event){	
-		
-		if(event.getInventory().getSize() == 9) {
-			if(event.getInventory().getViewers().contains(event.getWhoClicked())) {
-				event.setCancelled(true);
-				Util.coloredMessage(event.getWhoClicked(), "&f[Invsee] &cYou can not edit inventory while invseeing them!!");
-			}				
-		}
-		
-		if (event.getView().getTopInventory().getType() == InventoryType.PLAYER) {
-			Player p = (Player) event.getWhoClicked();
-	
-			if(!allowModify.contains(p.getUniqueId())) {
-				event.setCancelled(true);
-				Util.coloredMessage(p, "&f[!] &cYou can not modify others inventory!");
+	public void onInventoryClickEvent(final InventoryClickEvent event) {
+
+		Player refreshPlayer = null;
+		final Inventory top = event.getView().getTopInventory();
+		final InventoryType type = top.getType();
+		final Player player = (Player) event.getWhoClicked();
+
+		if (type == InventoryType.CHEST) {
+			final InventoryHolder invHolder = top.getHolder();
+			if (invHolder instanceof HumanEntity && isInvsee(player) && event.getClick() != ClickType.MIDDLE) {
+				if(!player.hasPermission(ModifyOthers)){
+					event.setCancelled(true);
+				}				
+				refreshPlayer = player;
 			}
 		}
-
+		if (refreshPlayer != null) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, refreshPlayer::updateInventory, 1);
+        }
 	}
-	
+
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void onInvClose(final InventoryCloseEvent e){	
-		if(e.getInventory().getType() == InventoryType.PLAYER) {
-			allowModify.remove(e.getPlayer().getUniqueId());
+	public void onInvClose(final InventoryCloseEvent e) {
+
+		final Inventory top = e.getView().getTopInventory();
+		final InventoryType type = top.getType();
+		final Player player = (Player) e.getPlayer();
+
+		if (type == InventoryType.CHEST && top.getSize() == 9) {
+			if (top.getHolder() instanceof HumanEntity) {
+				setInvSee(player, false);
+				// refreshPlayer = player;
+			}
+
 		}
-		
+
 	}
 
-	
+	public void closeAllViewedInvsee() {
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			if(openInvsee.contains(p.getUniqueId())){
+				p.getOpenInventory().close();
+			}						
+		}
+		openInvsee.clear();
+	}
+
 }

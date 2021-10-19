@@ -15,25 +15,30 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
 public class Enderchest implements CommandExecutor, Listener {//,TabCompleter,Listener {
 
-	String Section, Permission, ViewOthers, ModifyOthers;
+	private String Section, Permission, ViewOthers, ModifyOthers;
+	private List<UUID> openEnderChest = new ArrayList<UUID>();
+
 	private Main plugin;
 	public Enderchest(Main instance) {
 		this.plugin = instance;
-		
-		
 		Section = "Core.Enderchest";        
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 			plugin.getCommand("enderchest").setExecutor(this);
-			Permission = plugin.getConfig().getString(Section+".Permission");			
-			ViewOthers = plugin.getConfig().getString(Section+".ViewOthers");
+			
+			// command only
+			Permission = plugin.getConfig().getString(Section+".Permission"); // base command	
+			ViewOthers = plugin.getConfig().getString(Section+".ViewOthers"); // allows argument
+
+			// event only
 			ModifyOthers = plugin.getConfig().getString(Section+".ModifyOthers");
 			
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
@@ -41,69 +46,89 @@ public class Enderchest implements CommandExecutor, Listener {//,TabCompleter,Li
 		
 	}
 	
-	List<UUID> allowModify = new ArrayList<UUID>();
-	// add event to stop editing other enderchest unless it is their own
+	private boolean isEnderSee(Player player){
+		if(openEnderChest.contains(player.getUniqueId())) {
+			return true;
+		}
+		return false;
+	}
+	private void setEnderSee(Player player, boolean value){
+		UUID uuid = player.getUniqueId();
+		if(value){
+			openEnderChest.add(uuid);
+		} else {
+			openEnderChest.remove(uuid);
+		}
+	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {		
 	
-		Player p = (Player) sender;
-		Player target = p;
+		Player target = (Player) sender;
 		
+		// deny /echest access command
 		if (!sender.hasPermission(Permission)) {
 			sender.sendMessage(Util.color("&cYou do not have access to &n/" +label+"&c."));
 			return true;
 		} 
 
-
+		// if argument & they can view others, allow
 		if(args.length >= 1) {
+			if(sender.hasPermission(ViewOthers)){
+				target = Bukkit.getPlayer(args[0]);	
+			} else {
+				Util.coloredMessage(sender, "&f[!] &cYou can not view &f" + args[0] + "'s&c enderchest");
+			}								
+		} 
 			
-			if(!sender.hasPermission(ViewOthers)) {
-				Util.coloredMessage(p, "&f[!] &cYou can not view &f" + args[0] + "'s&c enderchest");
-				return true;
-			} 
-			
-			target = Bukkit.getPlayer(args[0]);						
-		}
-		
-		// if player can modify enderchest OR it is their own
-		if (target == p || p.hasPermission(ModifyOthers)) {
-			allowModify.add(p.getUniqueId());
-		}	
-		
-		p.closeInventory();
-		p.openInventory(target.getEnderChest());
-		
-		if(target != p) {
-			Util.coloredMessage(p, "&f[!] &aOpening " + args[0] + " ender chest");
-		}
-		
-		
+		Player opener = (Player) sender;
+		opener.closeInventory();
+		// set viewing enderchest for user if they are not themself.
+		setEnderSee(opener, !(target.equals(opener)));
+		opener.openInventory(target.getEnderChest());		
 		return true;
 	}
 	
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler
 	public void onInventoryClickEvent(final InventoryClickEvent event){		
-		if (event.getView().getTopInventory().getType() == InventoryType.ENDER_CHEST) {
+
+		//Player refreshPlayer = null;
+		final Inventory top = event.getView().getTopInventory();
+		final InventoryType type = top.getType();
+
+		if(type == InventoryType.ENDER_CHEST){
 			Player p = (Player) event.getWhoClicked();
-			
-			Util.consoleMSG("clicked");
-			
-			if(!allowModify.contains(p.getUniqueId())) {
+			if(isEnderSee(p) && !(p.hasPermission(ModifyOthers))){
 				event.setCancelled(true);
-				Util.coloredMessage(p, "&f[!] &cYou can not modify others ender chest");
+				//refreshPlayer = p;
 			}
 		}
-
 	}
 	
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler
 	public void onInvClose(final InventoryCloseEvent e){	
-		
-		if(e.getInventory().getType() == InventoryType.ENDER_CHEST) {
-			allowModify.remove(e.getPlayer().getUniqueId());
+		Player refreshPlayer = null;
+		final Inventory top = e.getView().getTopInventory();
+        final InventoryType type = top.getType();
+
+		if (type == InventoryType.ENDER_CHEST) {
+			Player p = ((Player) e.getPlayer());
+			setEnderSee(p, false);
+            refreshPlayer = p;
 		}
-		
+		if (refreshPlayer != null) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, refreshPlayer::updateInventory, 1);
+        }
+	}
+
+	// run this on disable?
+	public void closeAllViewedEnderchest() {
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			if(openEnderChest.contains(p.getUniqueId())){
+				p.getOpenInventory().close();
+			}						
+		}
+		openEnderChest.clear();
 	}
 
 	
