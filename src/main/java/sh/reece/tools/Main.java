@@ -47,6 +47,9 @@ public class Main extends JavaPlugin implements Listener {
 	
 	public static Chat chat = null; // used for Tags
 	
+	private Enderchest reeceEnder;
+	private InvSee reeceInvSee;
+
 	public void onEnable() {
 		loadConfig();			
 		MAINCONFIG = getConfigFile("config.yml");
@@ -108,8 +111,8 @@ public class Main extends JavaPlugin implements Listener {
 		new Workbench(this);
 		new Compass(this);
 		new Messaging(this);
-		new Enderchest(this);
-		new InvSee(this);
+		reeceEnder = new Enderchest(this);
+		reeceInvSee = new InvSee(this);
 
 		// test / add to config
 		new Trash(this);
@@ -222,7 +225,8 @@ public class Main extends JavaPlugin implements Listener {
 		ChatColor.saveChatColorToFile();
 		Holograms.removeAllStands();
 		LaunchPads.stopLaunchpadChecking();
-
+		reeceEnder.closeAllViewedEnderchest();
+		reeceInvSee.closeAllViewedInvsee();
 	}	
 
 
