@@ -10,7 +10,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -100,6 +99,7 @@ public class Enderchest implements CommandExecutor, Listener {//,TabCompleter,Li
 			Player p = (Player) event.getWhoClicked();
 			if(isEnderSee(p) && !(p.hasPermission(ModifyOthers))){
 				event.setCancelled(true);
+				Util.coloredMessage(p, "&f[!] &cYou can not edit their enderchest&f!");
 				//refreshPlayer = p;
 			}
 		}

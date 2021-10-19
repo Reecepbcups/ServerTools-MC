@@ -141,6 +141,7 @@ Core:
     Enabled: true
     Permission: essentials.invsee
     ModifyOthers: essentials.invsee.modify
+    StaffNoModify: essentials.invsee.preventmodification
   God:
     Enabled: true
     Permission: essentials.god

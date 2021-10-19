@@ -1,8 +1,6 @@
 package sh.reece.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,14 +19,13 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
 
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
 public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Listener {
 
-	private String Section, Permission, ModifyOthers;
+	private String Section, Permission, ModifyOthers, preventModify;
 	private List<UUID> openInvsee = new ArrayList<UUID>();
 	private Main plugin;
 
@@ -42,6 +39,7 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
 			plugin.getCommand("invsee").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section + ".Permission");
 			ModifyOthers = plugin.getConfig().getString(Section + ".ModifyOthers");
+			preventModify = plugin.getConfig().getString(Section + ".StaffNoModify");
 
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		}
@@ -82,7 +80,7 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
 		final Inventory inv;
 
 		if (args.length > 1) {
-			inv = Bukkit.getServer().createInventory(target, 9, "Equipped");
+			inv = Bukkit.getServer().createInventory(target, 9, args[0] + " Armour");
 			inv.setContents(target.getInventory().getArmorContents());
 			// if(!Util.isVersion1_8()){
 			// inv.setItem(4, target.getInventory().getItemInHand());
@@ -94,7 +92,7 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
 		Player opener = (Player) sender;
 		opener.closeInventory();
 		opener.openInventory(inv);
-		setInvSee(opener, true);
+		setInvSee(opener, !target.equals(opener));
 		return true;
 	}
 
@@ -106,10 +104,31 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
 		final InventoryType type = top.getType();
 		final Player player = (Player) event.getWhoClicked();
 
-		if (type == InventoryType.CHEST) {
+		//System.out.println("Invsee run invclickevent - before CHEST type");
+
+		// player view of invsee
+		if (type == InventoryType.PLAYER) {
+            final InventoryHolder invHolder = top.getHolder();
+            if (invHolder instanceof HumanEntity) {
+                final Player invOwner = (Player) invHolder;
+
+                if (isInvsee(player) 
+				 	&& (!player.hasPermission(ModifyOthers) 
+					|| invOwner.hasPermission(preventModify) 
+					|| !invOwner.isOnline())) {
+
+                    event.setCancelled(true);
+                    refreshPlayer = player;
+                }
+            }
+        } else if (type == InventoryType.CHEST) { // amour view of Invsee
 			final InventoryHolder invHolder = top.getHolder();
+			//System.out.println("Event run with type chest for Invsee");
+
 			if (invHolder instanceof HumanEntity && isInvsee(player) && event.getClick() != ClickType.MIDDLE) {
+				//System.out.println("checking modify other");
 				if(!player.hasPermission(ModifyOthers)){
+					//System.out.println("canceled event correctly");
 					event.setCancelled(true);
 				}				
 				refreshPlayer = player;
