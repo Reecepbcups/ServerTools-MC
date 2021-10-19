@@ -1,4 +1,4 @@
-package sh.reece.tools;
+package sh.reece.core;
 
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import sh.reece.tools.Main;
 
 public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 

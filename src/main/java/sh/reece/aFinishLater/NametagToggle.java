@@ -1,4 +1,4 @@
-package sh.reece.tools;
+package sh.reece.aFinishLater;
 
 
 public class NametagToggle { //implements CommandExecutor, TabExecutor {

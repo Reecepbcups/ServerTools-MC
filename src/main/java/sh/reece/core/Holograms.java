@@ -1,4 +1,4 @@
-package sh.reece.tools;
+package sh.reece.core;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import sh.reece.utiltools.Util;
+import sh.reece.tools.Main;
 
 public class Holograms implements CommandExecutor, Listener, TabCompleter {
 
