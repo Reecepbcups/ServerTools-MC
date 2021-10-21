@@ -150,6 +150,8 @@ Core:
   Nickname:
     Enabled: true
     Permission: nickname.use
+    prefix: "~"
+    prefixBypass: nickname.prefixbypass
   Top:
     Enabled: true
     Permission: essentials.top

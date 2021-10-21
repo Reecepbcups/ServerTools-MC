@@ -20,7 +20,7 @@ public class Nickname implements CommandExecutor, Listener {// ,TabCompleter,Lis
 
 	private HashMap<UUID, String> nicks = new HashMap<UUID, String>();
 
-	private String Section, Permission;
+	private String Section, Permission, PREFIX, BypassPrefixPerm;
 	private final Main plugin;
 
 	public Nickname(Main instance) {
@@ -33,6 +33,8 @@ public class Nickname implements CommandExecutor, Listener {// ,TabCompleter,Lis
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 
 			Permission = plugin.getConfig().getString(Section+".Permission");
+			PREFIX = plugin.getConfig().getString(Section+".prefix");
+			BypassPrefixPerm = plugin.getConfig().getString(Section+".prefixBypass");
 		}
 
 	}
@@ -43,8 +45,16 @@ public class Nickname implements CommandExecutor, Listener {// ,TabCompleter,Lis
 		// {prefix}%1$s{suffix}%2$s
 		// 
 		UUID uuid = e.getPlayer().getUniqueId();
+
 		if (nicks.containsKey(uuid)) {
-			String updatedFormat = e.getFormat().replace("%1$s", nicks.get(uuid));
+
+			// No prefix for staff members
+			String output = PREFIX+nicks.get(uuid);
+			if(e.getPlayer().hasPermission(BypassPrefixPerm)){
+				output = nicks.get(uuid);
+			}
+
+			String updatedFormat = e.getFormat().replace("%1$s", output);
 			e.setFormat(updatedFormat);
 		}
 
@@ -103,10 +113,10 @@ public class Nickname implements CommandExecutor, Listener {// ,TabCompleter,Lis
 	private boolean doesPlayerHaveSameName(String nick){
 		boolean value = false;
 
-		// if other nicknamer
-		if(nicks.keySet().contains(nick)){
-			value = true;
-		}
+		// if another nickname
+		// if(nicks.keySet().contains(nick)){
+		// 	value = true;
+		// }
 
 		// if online player
 		for(Player online : Bukkit.getOnlinePlayers()){
