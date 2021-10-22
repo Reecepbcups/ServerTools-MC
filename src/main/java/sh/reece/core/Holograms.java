@@ -18,6 +18,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -269,28 +270,32 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	}
 	
 	public static void spawnHolo(String key) {		
-		Location loc = getLocFromConfig(key).subtract(0, 2, 0);
+		Location loc = getLocFromConfig(key).clone().subtract(0, 2, 0);
 		World world = loc.getWorld();
 		//Util.consoleMSG("Loading in hologram: " + key);
+		ArmorStand as;
 		
 		for(String line : getLinesFromConfig(key)) {
-			loc = loc.subtract(0, 0.25, 0);	
+			loc = loc.clone().subtract(0, 0.25, 0);	
 			
 			String msg = Util.color(Main.replaceVariable(line));
-			if(papiSupport && randomPlayer != null) { // sets a random online to be the msg.
-				// so this adds support for none player specific Placeholders
+			if(papiSupport && randomPlayer != null) { 
+				// sets a random online to be the msg.
+				// so this adds support for none player specific Placeholders like %server_uptime%
 				msg = PlaceholderAPI.setPlaceholders(randomPlayer, msg);
 			}						
 			
 			
-			if(msg.length() != 0) {
-				ArmorStand as = world.spawn(loc, ArmorStand.class);
+			if(msg.length() > 0) {
+				//ArmorStand as = world.spawn(loc, ArmorStand.class); // <- slower by 36%
+				as = (ArmorStand) world.spawnEntity(loc, EntityType.ARMOR_STAND);
 				EntitiyIDs.put(loc, as.getEntityId());
 				as.setCustomName(msg);
 				as.setGravity(false);
 				as.setCanPickupItems(false);
 				as.setCustomNameVisible(true);
-				as.setVisible(false);							
+				as.setVisible(false);		
+				as.setMarker(true);	// very small collision box				
 			}				
 		}
 		
@@ -329,7 +334,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	public static void removeAllStands(){
 		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();		
 		for(Location locs : EntitiyIDs.keySet()) {
-			for(Entity e : locs.getWorld().getNearbyEntities(locs, 3, 10, 3)) {
+			for(Entity e : locs.getWorld().getNearbyEntities(locs, 3, 5, 3)) {
 				if(e instanceof ArmorStand) {
 					if (e.isCustomNameVisible()) {							
 						//Util.consoleMSG("Removed " + e.getCustomName() + " ID:" + e.getEntityId());
@@ -365,7 +370,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 			try {
 				spawnHolo(key);
 			} catch (Exception e) {
-				Util.consoleMSG("&c[!] Could not load Hologram " + key);
+				 Util.consoleMSG("&c[!] Could not load Hologram " + key);
 			}
     		
     	}
@@ -375,7 +380,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 		// spawn new armour stand at location, but bring back some
 		// and try to center more
 		
-		l = l.subtract(0, 2, 0);
+		l = l.clone().subtract(0, 2, 0);
 //		ArmorStand as = l.getWorld().spawn(l, ArmorStand.class);
 //		EntitiyIDs.put(l, as.getEntityId());
 //		as.setGravity(false);
@@ -385,7 +390,6 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 //		as.setItemInHand(item);
 //		as.setRightArmPose(new EulerAngle(-3.25, -0, -2.5));
 //		EntitiyIDs.put(l, as.getEntityId());
-		
 		ArmorStand as = l.getWorld().spawn(l, ArmorStand.class);
 		EntitiyIDs.put(l, as.getEntityId());
 		as.setGravity(false);

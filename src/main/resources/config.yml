@@ -21,6 +21,8 @@
 # -----------------------------------------------------------------
 # worlds are case sensitive
 
+LoadWithTimings: true
+
 # Can be used within servertools with %NAME%.
 PluginVariables:
   STORE: "store.WEBSITE.co"

@@ -57,7 +57,8 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 				return true;
 			}
 			playSound((Player) sender, args[1]);
-			return true;	
+			return true;
+				
 		case "getsounds":
 		case "getsound":				
 			String sounds = "";

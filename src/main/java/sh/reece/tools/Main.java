@@ -46,18 +46,23 @@ public class Main extends JavaPlugin implements Listener {
 	private static final HashMap<String, String> LANG = new HashMap<>();
 	
 	public static Chat chat = null; // used for Tags
+
+	private Timings executionTimer;
 	
 	private Enderchest reeceEnder;
 	private InvSee reeceInvSee;
 
 	public void onEnable() {
+
+		executionTimer = new Timings();
+		executionTimer.start();
+
 		loadConfig();			
 		MAINCONFIG = getConfigFile("config.yml");
+		executionTimer.info("Config");
 
 		isServerAgeEnabled = false;
-
 		loadLocalServerVariableKeys();
-
 		if (isPAPIEnabled) {	// done in load config
 			final String Section = "Misc.ServerAges";
 			if (enabledInConfig(Section+".Enabled")) {
@@ -65,21 +70,16 @@ public class Main extends JavaPlugin implements Listener {
 				isServerAgeEnabled = true;
 			}						
 		}
+		executionTimer.info("Placeholders");
 
-		new DisableJLMsg(this); 
-		new ReeceTools(this);			
-
+		
+		// debugging module
+		new ReeceTools(this);	
+		executionTimer.info("Debug/ReeceTools");
 
 		// Bungee
 		new BungeeServerConnector(this);
-
-		new ScheduledTask(this);
-
-		new DisableStackablePotions(this);
-
-		new Speed(this);
-
-		new Vouchers(this);
+		executionTimer.info("Bungee");
 
 		// COMMANDS
 		new AltTP(this);
@@ -97,7 +97,9 @@ public class Main extends JavaPlugin implements Listener {
 		new Reclaim(this);		
 		new ClearLag(this);
 		new GiveAll(this);
-		new StaffList(this);		
+		new StaffList(this);
+		new Speed(this);
+		executionTimer.info("Commands");		
 
 		// Core (Essentials Clone)
 		// https://github.com/EssentialsX/Essentials/tree/2.x/Essentials/src/main/java/com/earth2me/essentials/commands
@@ -114,12 +116,11 @@ public class Main extends JavaPlugin implements Listener {
 		reeceEnder = new Enderchest(this);
 		reeceInvSee = new InvSee(this);
 		new Nickname(this);
-
-		// test / add to config
 		new Trash(this);
 		new Top(this);
 		new God(this);		
 		new Ping(this);
+		executionTimer.info("Core Features");
 
 		// EVENTS
 		new AntiCraft(this);
@@ -143,22 +144,28 @@ public class Main extends JavaPlugin implements Listener {
 		new DisableGolemPoppies(this);		
 		new LaunchPads(this);
 		new ThreeHitGlitch(this);
+		new DisableJLMsg(this); 
+		new DisableStackablePotions(this);
+		executionTimer.info("Events");
 
 		// If vault is installed these will be allowed
 		if (Util.isPluginInstalledOnServer("vault", "Withdraw")) {
 			new Tags(this);
 			new Withdraw(this);
 			new XPBottle(this);
+			executionTimer.info("Vault Required");
 		} else {
 			Util.consoleMSG("&eVault not installed. Tags, Withdraw, and XPBottle can not be enabled.");
-		}				
+		}	
+					
 
-		//Cooldown
+		//Cooldowns
 		new EnderPearlCooldown(this);
 		new GodAppleCooldown(this);
 		new GoldenAppleCooldown(this);
+		executionTimer.info("Cooldowns");
 
-		// Disabled
+		// Disabled Features
 		new DisableBlazeDrowning(this);
 		new DisableBookWriting(this);
 		new DisableCactusDamage(this);
@@ -181,6 +188,7 @@ public class Main extends JavaPlugin implements Listener {
 		new DisableWitherBreak(this);
 		new DisableWorldGuardGlitchBuilding(this);
 		new DisablePhantomSpawn(this);
+		executionTimer.info("Disabled");
 
 		// Moderation
 		new ClearChat(this);
@@ -189,25 +197,33 @@ public class Main extends JavaPlugin implements Listener {
 		new MuteChat(this);
 		new StaffAFK(this);
 		new Report(this);
+		executionTimer.info("Moderation");
 
 
 		// GUI's
 		new FeaturesGUI(this);
 		new ShopClickWorkAround(this);
 		new NameColor(this);
-
+		new Vouchers(this);
+		executionTimer.info("GUIs");
 
 		// Runnable Task Timers
 		new AutoBroadcast(this);
 		new TimeChange(this);
-
-
-		// this fixes issue with variables not showing up
+		new ScheduledTask(this);
+		executionTimer.info("Task Timers");
+		
 		new Holograms(this);
-
-
+		executionTimer.info("Holograms");
+		
 		Collections.sort(modulesList);
-		fancyStartup();
+		startupMSG();
+
+		final String initTimerOutput = executionTimer.end();
+		if(getConfig().getBoolean("LoadWithTimings")) {
+			System.out.println(initTimerOutput);
+		}
+		
 	}
 
 
@@ -246,10 +262,7 @@ public class Main extends JavaPlugin implements Listener {
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
-		// done above
 		isPAPIEnabled = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
 	}
 	
@@ -273,15 +286,9 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 
-	public void fancyStartup() {
-		final String S = "&a   _____                            _______          _     \r\n" +
-				"&a  / ____|                          |__   __|        | |    \r\n" + 
-				"&a | (___   ___ _ ____   _____ _ __     | | ___   ___ | |___ \r\n" + 
-				"&a  \\___ \\ / _ \\ '__\\ \\ / / _ \\ '__|    | |/ _ \\ / _ \\| / __|\r\n" + 
-				"&a  ____) |  __/ |   \\ V /  __/ |       | | (_) | (_) | \\__ \\\r\n" + 
-				"&a |_____/ \\___|_|    \\_/ \\___|_|       |_|\\___/ \\___/|_|___/\r\n" + 
-				"&b by Reecepbups. Version: " + getDescription().getVersion();	
-		Util.consoleMSG(S);
+	public void startupMSG() {
+		Util.consoleMSG(
+			"\n&b&l[!] ServerTools &b by Reecepbups. Version: " + getDescription().getVersion());
 	}
 
 	// Configuration File Functions
