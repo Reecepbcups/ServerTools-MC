@@ -135,6 +135,7 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			possibleArugments.add("sound");
 			possibleArugments.add("getsounds");
 			possibleArugments.add("time");
+			possibleArugments.add("language");
 		}
 
 		result.clear();

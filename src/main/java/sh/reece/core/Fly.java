@@ -76,7 +76,7 @@ public class Fly implements CommandExecutor{//,TabCompleter,Listener {
 		} else {
 			p.setAllowFlight(true);
 			//p.setFlying(true);
-			Util.coloredMessage(p, Main.lang("FLY_DISABLED").replace("%player%", p.getDisplayName()));
+			Util.coloredMessage(p, Main.lang("FLY_ENABLED").replace("%player%", p.getDisplayName()));
 		}
 	}
 	
