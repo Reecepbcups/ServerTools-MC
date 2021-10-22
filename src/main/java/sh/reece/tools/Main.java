@@ -255,7 +255,7 @@ public class Main extends JavaPlugin implements Listener {
 		createConfig("config.yml");			
 		getConfig().options().copyDefaults(true);	
 
-		reloadLanguage();
+		reloadLanguage(getConfig().getString("Language"));
 
 		try {
 			ConfigUpdater.update(this, "config.yml", new File(getDataFolder(), "config.yml"), new ArrayList<String>());
@@ -266,10 +266,11 @@ public class Main extends JavaPlugin implements Listener {
 		isPAPIEnabled = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
 	}
 	
-	public void reloadLanguage() {
+	public void reloadLanguage(String lang) {
 		LANG.clear();
-		createConfig("messages.yml");				
-		final FileConfiguration language = getConfigFile("messages.yml");
+		createDirectory("translations");
+		createConfig("translations/"+lang+".yml");				
+		final FileConfiguration language = getConfigFile("translations/"+lang+".yml");
 		for(final String key : language.getKeys(false)) {
 			LANG.put(key, language.getString(key));
 		}

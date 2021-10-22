@@ -51,6 +51,11 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			version(sender);
 			return true;
 
+		case "lang":
+		case "language":
+			Util.coloredMessage(sender, "Language: " + plugin.getConfig().getString("Language"));
+			return true;
+
 		case "sound":
 			if(args.length!=2) {
 				sender.sendMessage("Usage: /tools sound SOUND");

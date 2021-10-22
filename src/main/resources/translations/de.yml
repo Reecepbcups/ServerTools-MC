@@ -1,0 +1,138 @@
+# Thanks to https://github.com/toohard2explain
+
+VOUCHER_GUI_NAME: "&lGutscheine & Bundles ansehen"
+NO_COLONS_IN_COMMANDS: "&7[ServerTools] &fDoppelpunkte sind in Commands nicht erlaubt!"
+
+TP_ALL: "&f&n[!]&f TP-All wurde von %player% ausgeführt &7&o((5 Sekunden Verzögerung))"
+TP_ALL_SUCCESS: "&c&l(!) Zu %player% teleportiert"
+
+REPORT_SELF: "&4[!] &cDu kannst dich nicht selber melden!"
+REPORT_SUCCESS: "&fDanke für die Meldung von %target%! Das Team wurde informiert."
+REPORT_OFFLINE: "&c[!] Der Spieler &4%target% &cist nicht auf dem Server!"
+
+MUTECHAT_ISMUTED: "&cDer Chat wurde von einem Teammitglied deaktiviert!"
+
+FREEZE_UNFROZEN: "&a&l[!]&a Du wurdest aufgetaut."
+FREEZE_DENYCHAT: "&cDu kannst nicht schreiben, während du eingefroren bist, benutze /msg & /r um das Team zu informieren"
+FREEZE_DENYTP: "&cKeine Teleportationen, wenn du eingefroren bist!"
+
+COMMAND_PROTECT_DENY: "&cDu bist nicht befugt &c&n%cmd% &czu nutzen"
+
+TAGS_AVAILABLE: "&a&lVERFÜGBAR"
+TAGS_CLICK_TO_EQUIP: "&7&o(( &f&oClicke &7um diesen Tag auszuwählen. ))"
+TAGS_LOCKED: "&c&lGESCHLOSSEN"
+TAGS_NO_ACCESS: "&7&o(( &c&oDu hast keinen Zugang zu diesem Tag! &7&o))"
+TAG_GUI_FORMAT: "&f&l[!] &f&n%tag%"
+TAG_CLEAR: "&c&lTAG LEEREN"
+TAG_RECEIVED: "&a&l[!]&a \"%tag%\" Tag wurde erhalten!"
+TAG_DENY_CUSTOM: "&cDu bist nicht befugt eigene Tags zu nutzen!"
+
+NAMECOLOR_GUI: "&lFarbiger Name"
+NAMECOLOR_INFO: "Informationen"
+NAMECOLOR_COLOR: "&l▎ &7Namensfarbe: &f"
+NAMECOLOR_ACCESS: "&l▎ &7Zugang: &fLeft-Click"
+NAMECOLOR_SELECT: "&7&o(( Klicke mich, um mich als Namensfarbe auszuwählen! ))"
+NAMECOLOR_SET: "&a&l[!] &aSetze deine Namensfarbe zu &f\" %color% &f\"&a!"
+
+CHATCOLOR_GUI: "&lChatfarbe"
+CHATCOLOR_INFO: "Informationen"
+CHATCOLOR_COLOR: "&l▎ &7Farbe: &f"
+CHATCOLOR_ACCESS: "&l▎ &7Zugang: &fLeft-Click"
+CHATCOLOR_SELECT: "&7&o(( Klicke mich, um mich als Chatfarbe auszuwählen! ))"
+CHATCOLOR_RAINBOW: "&fR&ea&6i&bn&2b&4o&7w"
+CHATCOLOR_SET: "&a&l[!] &aSetze deine Chatfarbe zu &f\" %color% &f\"&a!"
+
+
+CMDALIAS_DENYWORLD: "&cDu hast keine Befugnis &f%cmd%&c in dieser Welt auszuführen!"
+CMDALIAS_DISABLED: "&cDer &f%cmd%&c Command ist deaktiviert!"
+CMDALIAS_DELAYED: "&7&oFühre Command &f&n%cmd%&7&o in %time% Sekunden aus... Nicht bewegen!"
+CMDALIAS_DELAYED_MOVED: "&4[!] &cDu hast dich nach Ausführung bewegt... "
+
+NOBEDEXPLOSION: "&cDu kannst das Bett im Nether nicht benutzen!"
+
+
+WITHDRAW_MONEY: "&a&lDu hast eingelöst: &2&l+&a&l&n$"
+WITHDRAW_NOTENOUGH: "&cDu hast nicht genug Geld um zu widerrufen $"
+WITHDRAW_POSITIVE_NUMBER: "&cGib eine Nummer ein > $0"
+WITHDRAW_SUCCESSFUL: "&c&lWIDERRUFEN: &4&l-&c&l&n$"
+WITHDRAW_ONLY_WHOLE: "&cBitte gib ganze Nummern an"
+WITHDRAW_NOTE_LORE1: "&eWert:&f $%value%"
+WITHDRAW_NOTE_LORE2: "&eUnterzeicher:&f %player%"
+WITHDRAW_BALANCE: "&7Du hast &a$%bal%&7!"
+
+XPBOTTLE_BOTTLE_LORE1: "&aErfahrung:&f %value%"
+XPBOTTLE_BOTTLE_LORE2: "&aUnterzeicher:&f %player%"
+XPBOTTLE_REDEEEMED: "&a&lEINGELÖST: &2&l+&a&l&n%exp%&a EXP"
+XPBOTTLE_XPCMD: "&7Du hast &a%exp%&7 xp!"
+XPBOTTLE_WITHDREW: "&c&lWIDERRUFEN: &4&l-&c&l&n%xp%&c EXP"
+XPBOTTLE_ONLY_WHOLE: "&cBitte gib ganze Nummern an"
+
+DISABLED_BOOKWRITING: "%prefix% &cDas beschreiben von Büchern ist deakitiviert"
+DISABLED_CANE_ON_CANE: "%prefix% &cDu kannst nicht Rohr auf Rohr platzieren"
+DISABLED_DRAGON_EGG_TP: "%prefix% &cDragonEgg Teleportation ist deaktiviert"
+DISABLED_STACKED_POTIONS: "%prefix% &c[!] Du kannst gestapelte Tränke nicht werfen, entstapel sie vorher!"
+DISABLED_THROWING_ITEMS: "%prefix% &cDu kannst dieses Item nicht werfen"
+
+
+ADMINCHAT: "&7(&c&lADMIN&7) &e%player%&f> &e%msg%"
+BROADCAST: "&8&l[&c&lALARM&8&l]&r %msg%"
+COMPASS: "&fDu stehst vor &n%dir%&7 (( &f%bearing%&7 ))"
+FLY_ENABLED: "&f[&a!&f] &aFlugmodus aktiviert für %player%" 
+FLY_DISABLED: "&f[&c!&f] &cFlugmodus deaktiviert für %player%"
+
+GAMEMODE_CHANGED: "&f&lDein Gamemmode ist nun &r%gamemode%"
+GAMEMODE_SURVIVAL: "&a&lÜberleben"
+GAMEMODE_CREATIVE: "&e&lKreativ"
+GAMEMODE_ADVENTURE: "&6&lAbendteuer"
+GAMEMODE_SPECTATOR: "&f&lZuschauer"
+
+HEAL_FED: "&7[&f!&7] &aDu wurdest gefüttert!"
+HEAL_HEALED: "&7[&f!&7] &aDu wurdest geheilt!"
+
+MESSAGING_DISABLED: "&cNachrichten sind zurzeit deaktiviert!"
+MESSAGING_OFFLINE: "&c&n%target%&c ist nicht online!"
+MESSAGING_IS_TOGGLED: "&c&n%target%&c hat seine Nachrichten deaktiviert!"
+MESSAGING_NOREPLY: "&cDu hast keine Konversation, auf die du antworten könntest!"
+
+PING: "&a[!] &fDein Ping ist: &a%ping%&fms"
+
+SPAWN_SET: "&7&l[&c&l!&7&l] &fDer Spawn wurde an deiner Position gesetzt!"
+SPAWN_NONE: "&cKeine Spawn Position gesetzt! Benutze /setspawn um sie zu setzen."
+SPAWN_TP: "&7&l[&c&l!&7&l] &fTeleportiere zum Spawn..."
+SPAWN_SENT_TO_SPAWN: "&7&l[&c&l!&7&l] &f%sender% hat dich zum Spawn gesendet..."
+
+
+SPEED_RESET: "&a[!] &fSetze %TYPE% Geschwindigkeit zurück auf Standart."
+SPEED_FLY: "&a[!] &fSetze Fluggeschwindigkeit zu: &a%speed%&f."
+SPEED_WALK: "&a[!] &fSetze Laufgeschwindigkeit zu: &a%speed%&f."
+
+
+TOP_TELEPORT: "&f[&a!&f] &aDu wurdest an den höchten Block teleportiert: %block%" 
+
+
+TELEPORT_HASACCEPTED: "&a[!] &f%player% hat deine Teleportationsanfrage &aakzeptiert&f."
+TELEPORT_ACCEPTED: "&a[!] &fAkzeptiere die Teleportationsanfrage von &a%player%&f."
+TELEPORT_NOREQUEST: "&c[!] &fDu hast keine ausstehende Teleportationsanfrage..."
+TELEPORT_HASDENIED: "&c[!] %player% hat deine Teleportationsanfrage abgelehnt."
+TELEPORT_DENIED: "&f[!] &cLehne die Teleportationsanfrage von &f%player%&c ab."
+TELEPORT_SELF: "&cDu kannst dich nicht, zu dir selbst teleportieren."
+TELEPORT_TO: "&aTeleportiere zu &f%player%" 
+TELEPORT_SENT_REQUEST: "&fTeleportationsanfrage an &a%player% &fgesendet"
+TELEPORT_GOT_REQUEST1: "\n&n%player%&f hat dir eine Teleportationsanfrage geschickt"
+TELEPORT_GOT_REQUEST2: "         &fSchreibe &a/tpaccept&f oder&c /tpdeny\n"
+TELEPORT_TIMEOUT: "Deine Teleportationsanfrage ist abgelaufen."
+
+
+RECLAIM_ALREADY_CLAIMED: "&4&l[!] &cDu hast bereits dein Paket eingelöst!"
+RECLAIM_NOTHING: "&4&l[!] &cDu hast keinen Rang, um etwas für dieses Realm zurückzufordern!"
+RECLAIM_RECLAIMED: "&2&l[!] &aFORDERE &a&n%permission%&a ITEMS ZURÜCK!"
+
+
+RENAME_DENYITEM: "%prefix% &cDu kannst %item% nicht umbenennen!"
+RENAME_SUCCESS: "&a[+] Erfolreich umgenannt!&r"
+RENAME_NOT_ENOUGH_LORE: "&cDu kannst Zeile %line% nicht entfernen weil die Beschreibung nur %size% Zeilen hat"
+
+
+VISIBILITY_DISABLED: "&4✖ &cSichtbarkeit ist zurzeit deaktiviert!"
+VISIBILITY_STAFF_ONLY: "&a✓ &fZeige nur Teammitglieder"
+VISIBILITY_EVERYONE: "&a✓ &fZeige alle Spieler"

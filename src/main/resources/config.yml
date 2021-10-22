@@ -4,9 +4,9 @@
 # hunger.bypass         nofalldamage.use        anticraft.bypass
 # chatcooldown.bypass   ctag.use                Chatcolor.COLOR (.*)
 #                                               Chatcolor.codes ((& color codes)
-
-# 
-
+#
+# LANGUAGES: "en and "de"
+#
 # Staff Related
 # mutechat.use              mutechat.bypass         anticraft.admin
 # clearchat.use             chatcooldown.admin      announce.use
@@ -22,6 +22,7 @@
 # worlds are case sensitive
 
 LoadWithTimings: true
+Language: "en" 
 
 # Can be used within servertools with %NAME%.
 PluginVariables:
