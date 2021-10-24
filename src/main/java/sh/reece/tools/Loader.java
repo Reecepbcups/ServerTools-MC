@@ -73,6 +73,7 @@ public class Loader {
 		new Top(plugin);
 		new God(plugin);
 		new Ping(plugin);
+		// new Repair(plugin); // NOT FINISHED
 		reeceEnder = new Enderchest(plugin);
 		reeceInvSee = new InvSee(plugin);
 		executionTimer.info("Core Features");

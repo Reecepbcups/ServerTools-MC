@@ -14,6 +14,10 @@ commands:
     description: used for custom tag through luckperms
     usage: "Usage: /<command> <set/clear> <TAG>"
     aliases: [customtag]
+  repair:
+    description: Repair tools back to full durability!
+    usage: "Usage: /<command> [all]"
+    aliases: [fix]
   staffafk:
     description: Allow Staff to AFK
     permission: staffafk.use

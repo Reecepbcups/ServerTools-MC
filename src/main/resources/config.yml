@@ -167,10 +167,12 @@ Core:
     ModifyOthers: essentials.enderchest.modify
   Repair:
     Enabled: true
-    singlerepaircost: 5000
-    repairall:
-      permission: essentials.repairall
-      cost: 15000
+    Single:
+      Permission: essentials.repair
+      Cost: 1500.0
+    All:
+      Permission: essentials.repair.all
+      Cost: 15000.0
   Compass:
     Enabled: true
     Permission: essentials.compass
