@@ -1,33 +1,20 @@
 package sh.reece.tools;
 
-import sh.reece.GUI.*;
-import sh.reece.bungee.BungeeServerConnector;
-import sh.reece.chat.*;
-import sh.reece.cmds.*;
-import sh.reece.cooldowns.EnderPearlCooldown;
-import sh.reece.cooldowns.GodAppleCooldown;
-import sh.reece.cooldowns.GoldenAppleCooldown;
-import sh.reece.core.*;
-import sh.reece.disabled.*;
-import sh.reece.events.*;
-import sh.reece.moderation.*;
-import sh.reece.runnables.*;
-import sh.reece.utiltools.ConfigUpdater;
-import sh.reece.utiltools.Metrics;
 import sh.reece.utiltools.Util;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.chat.Chat;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
 
 
 public class Main extends JavaPlugin implements Listener {	
@@ -38,312 +25,58 @@ public class Main extends JavaPlugin implements Listener {
 	public static final List<String> SERVER_VARIABLE_KEYS = new ArrayList<>();
 
 	public final List<String> modulesList = new ArrayList<>();
-	public Integer enabledModulesNumber = 0;
 
-	public static FileConfiguration MAINCONFIG; // used in files data is only needed to be read from
-
-	private static boolean isPAPIEnabled, isServerAgeEnabled;
-	private static final HashMap<String, String> LANG = new HashMap<>();
+	private static boolean isPAPIEnabled;
+	private static boolean isServerAgeEnabled = false;
 	
+
 	public static Chat chat = null; // used for Tags
-
-	private Timings executionTimer;
-	
-	private Enderchest reeceEnder;
-	private InvSee reeceInvSee;
+	private Loader loader;
+	private ConfigUtils configUtils;
 
 	public void onEnable() {
 
-		executionTimer = new Timings();
-		executionTimer.start();
+		loader = new Loader(this);
 
-		loadConfig();			
-		MAINCONFIG = getConfigFile("config.yml");
-		executionTimer.info("Config");
+		configUtils = new ConfigUtils(this);
+		configUtils.loadConfig();			
+		loader.setMarking("Configurations");	
 
-		isServerAgeEnabled = false;
-		loadLocalServerVariableKeys();
-		if (isPAPIEnabled) {	// done in load config
-			final String Section = "Misc.ServerAges";
-			if (enabledInConfig(Section+".Enabled")) {
-				(new UptimePlaceholder()).register();
-				isServerAgeEnabled = true;
-			}						
+		if (isPAPIEnabled && enabledInConfig("Misc.ServerAges.Enabled")) {
+			(new UptimePlaceholder()).register();
+			isServerAgeEnabled = true;				
+			loader.setMarking("Placeholders");				
 		}
-		executionTimer.info("Placeholders");
-
 		
-		// debugging module
-		new ReeceTools(this);	
-		executionTimer.info("Debug/ReeceTools");
-
-		// Bungee
-		new BungeeServerConnector(this);
-		executionTimer.info("Bungee");
-
-		// COMMANDS
-		new AltTP(this);
-		new ChangeSlots(this);
-		new ChatPoll(this);
-		new CommandSpy(this);
-		new DailyRewards(this);
-		new Donation(this);
-		new FancyAnnounce(this);
-		new Rename(this);
-		new ServerInfoCMDS(this);
-		new TPAll(this);
-		new Visibility(this);
-		new Countdown(this);
-		new Reclaim(this);		
-		new ClearLag(this);
-		new GiveAll(this);
-		new StaffList(this);
-		new Speed(this);
-		executionTimer.info("Commands");		
-
-		// Core (Essentials Clone)
-		// https://github.com/EssentialsX/Essentials/tree/2.x/Essentials/src/main/java/com/earth2me/essentials/commands
-		new Fly(this);
-		new TP(this);
-		new Heal(this);
-		new Gamemode(this);
-		new ClearInv(this);
-		new Broadcast(this);
-		new AdminChat(this);
-		new Workbench(this);
-		new Compass(this);
-		new Messaging(this);
-		reeceEnder = new Enderchest(this);
-		reeceInvSee = new InvSee(this);
-		new Nickname(this);
-		new Trash(this);
-		new Top(this);
-		new God(this);		
-		new Ping(this);
-		executionTimer.info("Core Features");
-
-		// EVENTS
-		new AntiCraft(this);
-		new BucketStacker(this);
-		new CMDAlias(this);
-		new ChatColor(this);
-		new ChatCooldown(this);
-		new ChatEmotes(this);
-		new ChatFormat(this);
-		new ChatNumberGuesser(this);
-		new ColonInCommands(this);
-		new CustomDeathMessages(this);
-		new OnJoinCommands(this);
-		new JoinMOTD(this);
-		new NoBedExplosion(this);
-		new ShopClickWorkAround(this);
-		new Spawn(this);
-		new StackUnstackables(this);
-		new WhitelistBypass(this);
-		new WorldEffects(this);
-		new DisableGolemPoppies(this);		
-		new LaunchPads(this);
-		new ThreeHitGlitch(this);
-		new DisableJLMsg(this); 
-		new DisableStackablePotions(this);
-		executionTimer.info("Events");
-
-		// If vault is installed these will be allowed
-		if (Util.isPluginInstalledOnServer("vault", "Withdraw")) {
-			new Tags(this);
-			new Withdraw(this);
-			new XPBottle(this);
-			executionTimer.info("Vault Required");
-		} else {
-			Util.consoleMSG("&eVault not installed. Tags, Withdraw, and XPBottle can not be enabled.");
-		}	
-					
-
-		//Cooldowns
-		new EnderPearlCooldown(this);
-		new GodAppleCooldown(this);
-		new GoldenAppleCooldown(this);
-		executionTimer.info("Cooldowns");
-
-		// Disabled Features
-		new DisableBlazeDrowning(this);
-		new DisableBookWriting(this);
-		new DisableCactusDamage(this);
-		new DisableCaneOnCane(this);
-		new DisableCropTrample(this);
-		new DisableDisconnectSpam(this);
-		new DisableDragonEggTP(this);
-		new DisableEndermanTP(this);
-		new DisableFallDamage(this);
-		new DisableGrassDecay(this);
-		new DisableHunger(this);
-		new DisableItemBurn(this);		
-		new DisableJockeys(this);
-		new DisableLeaveDecay(this);
-		new DisableMobAI(this);
-		new DisableThowingItems(this);
-		new DisableVillagerTrading(this);
-		new DisableWaterBreakingRedstone(this);
-		new DisableWeather(this);
-		new DisableWitherBreak(this);
-		new DisableWorldGuardGlitchBuilding(this);
-		new DisablePhantomSpawn(this);
-		executionTimer.info("Disabled");
-
-		// Moderation
-		new ClearChat(this);
-		new CommandProtection(this);
-		new Freeze(this);
-		new MuteChat(this);
-		new StaffAFK(this);
-		new Report(this);
-		executionTimer.info("Moderation");
-
-
-		// GUI's
-		new FeaturesGUI(this);
-		new ShopClickWorkAround(this);
-		new NameColor(this);
-		new Vouchers(this);
-		executionTimer.info("GUIs");
-
-		// Runnable Task Timers
-		new AutoBroadcast(this);
-		new TimeChange(this);
-		new ScheduledTask(this);
-		executionTimer.info("Task Timers");
-		
-		new Holograms(this);
-		executionTimer.info("Holograms");
+		loader.loadCommands();
+		loader.loadCore();
+		loader.loadEvents();
+		loader.loadVaultDependentPlugins();
+		loader.loadCooldowns();
+		loader.loadToggleableFeatures();
+		loader.loadModeration();
+		loader.loadGUIs();
+		loader.loadRunnableTask();
 		
 		Collections.sort(modulesList);
-		startupMSG();
-
-		final String initTimerOutput = executionTimer.end();
-		if(getConfig().getBoolean("LoadWithTimings")) {
-			System.out.println(initTimerOutput);
-		}
-		
+		loader.output();
 	}
-
-
-
-
 
 	public void onDisable() {
-		saveDefaultConfig();
-		modulesList.clear();
-
-		// discord webhook thing
-		getServer().getScheduler().cancelTasks(this);
-
-		ChangeSlots.saveNewChangeSlotsPlayers();
-		DailyRewards.saveCooldownsToFile();	
-		ChatColor.saveChatColorToFile();
-		Holograms.removeAllStands();
-		LaunchPads.stopLaunchpadChecking();
-		reeceEnder.closeAllViewedEnderchest();
-		reeceInvSee.closeAllViewedInvsee();
+		loader.unloadAll();
 	}	
 
-
-	public void loadConfig() {
-
-		// BStats Metrics
-		new Metrics(this, 11289);
-
-		createConfig("config.yml");			
-		getConfig().options().copyDefaults(true);	
-
-		reloadLanguage(getConfig().getString("Language"));
-
-		try {
-			ConfigUpdater.update(this, "config.yml", new File(getDataFolder(), "config.yml"), new ArrayList<String>());
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-
-		isPAPIEnabled = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
-	}
-	
-	public void reloadLanguage(String lang) {
-		LANG.clear();
-		createDirectory("translations");
-		createConfig("translations/"+lang+".yml");				
-		final FileConfiguration language = getConfigFile("translations/"+lang+".yml");
-		for(final String key : language.getKeys(false)) {
-			LANG.put(key, language.getString(key));
-		}
-	}
-
-	public static Boolean isPAPIEnabled() {
+	public Boolean isPAPIEnabled() {
 		return isPAPIEnabled;
 	}
-
-	public void loadLocalServerVariableKeys() {
-		for(String key : MAINCONFIG.getConfigurationSection("PluginVariables").getKeys(false)){
-			Main.SERVER_VARIABLES.put(key, getConfig().getString("PluginVariables."+key));
-			Main.SERVER_VARIABLE_KEYS.add(key);
-		}
+	public void setPAPIStatus(boolean state){
+		isPAPIEnabled = true;
 	}
 
-	public void startupMSG() {
-		Util.consoleMSG(
-			"\n&b&l[!] ServerTools &b by Reecepbups. Version: " + getDescription().getVersion());
+	public ConfigUtils getConfigUtils(){
+		return configUtils;
 	}
-
-	// Configuration File Functions
-	public FileConfiguration getConfigFile(final String name) {
-		return YamlConfiguration.loadConfiguration(new File(getDataFolder(), name));
-	}
-
-	public void createDirectory(final String DirName) {
-		final File newDir = new File(getDataFolder(), DirName.replace("/", File.separator));
-		if (!newDir.exists()){
-			newDir.mkdirs();
-		}
-	}
-
-	public void createConfig(final String name) {
-		final File file = new File(getDataFolder(), name);
-
-		if (!new File(getDataFolder(), name).exists()) {
-
-			saveResource(name, false);
-		}
-
-		@SuppressWarnings("static-access") final FileConfiguration configuration = new YamlConfiguration().loadConfiguration(file);
-		if (!file.exists()) {
-			try {
-				configuration.save(file);
-			}			
-			catch (final IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void createFile(final String name) {
-		final File file = new File(getDataFolder(), name);
-
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch(final Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void saveConfig(final FileConfiguration config, final String name) {
-		try {
-			config.save(new File(getDataFolder(), name));
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static boolean serverAgeEnabled(){
+	public static boolean isServerAgeEnabled(){
 		return isServerAgeEnabled;
 	}
 
@@ -358,11 +91,10 @@ public class Main extends JavaPlugin implements Listener {
 			final String pathInfo = replaceUnNeededInfo(path);
 			boolean isEnabled = false;
 
-			if (MAINCONFIG.getString(path).equalsIgnoreCase("true")) {
+			if (getConfig().getString(path).equalsIgnoreCase("true")) {
 
 				//if(!path.contains("Core.")) {} // does not show /fly, /workbench, etc					
 				module = "&a"+pathInfo;
-				enabledModulesNumber +=1;
 
 				isEnabled = true;
 			} else {
@@ -431,9 +163,7 @@ public class Main extends JavaPlugin implements Listener {
 
 	}
 	
-	public static String lang(final String key) {
-		return Util.color(LANG.get(key).replace("%prefix%", "&7[&eServerTools&7]&r"));
-	}
+	
 
 
 }

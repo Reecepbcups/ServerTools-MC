@@ -48,11 +48,11 @@
 				
 // 				// removes the string location from the file
 // 				String file = "crates"+File.separator+crateName+".yml";
-// 				FileConfiguration f = plugin.getConfigFile(file);
+// 				FileConfiguration f = configUtils.getConfigFile(file);
 // 				List<String> locations = f.getStringList("CrateLocations");
 // 				locations.remove(locFormat);
 // 				f.set("CrateLocations", locations);
-// 				plugin.saveConfig(f, file);
+// 				configUtils.saveConfig(f, file);
 				
 // 				// them removes it from memory
 // 				Crate.removeCrateAtLocation(l);

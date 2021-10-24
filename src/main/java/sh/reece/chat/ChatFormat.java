@@ -39,7 +39,7 @@ public class ChatFormat implements Listener {
 			ColorCodePerm = plugin.getConfig().getString("Chat.ChatFormat.ChatColorPerm");
 			
 			
-			if(Main.isPAPIEnabled()) {
+			if(plugin.isPAPIEnabled()) {
 				EnabledPAPIinMessages = plugin.getConfig().getBoolean("Chat.ChatFormat.EnabledPAPIinMessages");
 			}
 			

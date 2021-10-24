@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.command.Command;
@@ -25,7 +26,8 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 	private String Permission;
 	private String lorePermisssion;
 	private List<String> disabledRenameItems;
-
+	private ConfigUtils configUtils;
+	
 	public Rename(Main instance) {
 		plugin = instance;
 
@@ -55,7 +57,7 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 			return;
 		}
 		if (disabledRenameItems.contains(event.getCurrentItem().getType().toString())) {
-			event.getWhoClicked().sendMessage(Main.lang("RENAME_DENYITEM")
+			event.getWhoClicked().sendMessage(configUtils.lang("RENAME_DENYITEM")
 					.replace("%item%", event.getCurrentItem().getType().toString()));
 			event.setCancelled(true);
 		}
@@ -97,7 +99,7 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 		
 		String itemType = item.getType().toString().replace("LEGACY_", "");
 		if(disabledRenameItems.contains(itemType)) {
-			Util.coloredMessage(p, Main.lang("RENAME_DENYITEM").replace("%item%", itemType));
+			Util.coloredMessage(p, configUtils.lang("RENAME_DENYITEM").replace("%item%", itemType));
 			return true;
 		}
 
@@ -118,7 +120,7 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 			im.setDisplayName(Util.color(newName));
 			item.setItemMeta(im);	
 
-			Util.coloredMessage(p, Main.lang("RENAME_SUCCESS"));
+			Util.coloredMessage(p, configUtils.lang("RENAME_SUCCESS"));
 			break;
 		
 		case "lore":	
@@ -148,7 +150,7 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 					int loreSize = im.getLore().size();
 
 					if(loreSize <= lineToChange) {
-						Util.coloredMessage(p, Main.lang("RENAME_NOT_ENOUGH_LORE")
+						Util.coloredMessage(p, configUtils.lang("RENAME_NOT_ENOUGH_LORE")
 								.replace("%line%", args[2]).replace("%size%", loreSize+""));
 						return true;
 					}

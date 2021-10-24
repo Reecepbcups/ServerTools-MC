@@ -265,35 +265,29 @@ public class Metrics {
       appendPlatformDataConsumer.accept(baseJsonBuilder);
       final JsonObjectBuilder serviceJsonBuilder = new JsonObjectBuilder();
       appendServiceDataConsumer.accept(serviceJsonBuilder);
-      try {
-    	  JsonObjectBuilder.JsonObject[] chartData =
-    	          customCharts.stream()
-    	              .map(customChart -> customChart.getRequestJsonObject(errorLogger, logErrors))
-    	              .filter(Objects::nonNull)
-    	              .toArray(JsonObjectBuilder.JsonObject[]::new);
-    	      serviceJsonBuilder.appendField("id", serviceId);
-    	      serviceJsonBuilder.appendField("customCharts", chartData);
-    	      baseJsonBuilder.appendField("service", serviceJsonBuilder.build());
-    	      baseJsonBuilder.appendField("serverUUID", serverUuid);
-    	      baseJsonBuilder.appendField("metricsVersion", METRICS_VERSION);
-    	      JsonObjectBuilder.JsonObject data = baseJsonBuilder.build();
-    	      scheduler.execute(
-    	          () -> {
-    	            try {
-    	              // Send the data
-    	              sendData(data);
-    	            } catch (Exception e) {
-    	              // Something went wrong! :(
-    	              if (logErrors) {
-    	                errorLogger.accept("Could not submit bStats metrics data", e);
-    	              }
-    	            }
-    	          });
-	} catch (Exception e2) {
-		// this just fixes it erroring
-		// java.lang.NoClassDefFoundError: me/reecepbcups/utiltools/Metrics$CustomChart
-	}
-      
+      JsonObjectBuilder.JsonObject[] chartData =
+          customCharts.stream()
+              .map(customChart -> customChart.getRequestJsonObject(errorLogger, logErrors))
+              .filter(Objects::nonNull)
+              .toArray(JsonObjectBuilder.JsonObject[]::new);
+      serviceJsonBuilder.appendField("id", serviceId);
+      serviceJsonBuilder.appendField("customCharts", chartData);
+      baseJsonBuilder.appendField("service", serviceJsonBuilder.build());
+      baseJsonBuilder.appendField("serverUUID", serverUuid);
+      baseJsonBuilder.appendField("metricsVersion", METRICS_VERSION);
+      JsonObjectBuilder.JsonObject data = baseJsonBuilder.build();
+      scheduler.execute(
+          () -> {
+            try {
+              // Send the data
+              sendData(data);
+            } catch (Exception e) {
+              // Something went wrong! :(
+              if (logErrors) {
+                errorLogger.accept("Could not submit bStats metrics data", e);
+              }
+            }
+          });
     }
 
     private void sendData(JsonObjectBuilder.JsonObject data) throws Exception {

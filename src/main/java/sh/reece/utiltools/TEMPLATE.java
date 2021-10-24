@@ -27,10 +27,10 @@ public class TEMPLATE implements Listener, CommandExecutor {
         	//Permission = MAINCONFIG.getString(Section+".permission");
         	
 //        	// plugins/ServerTools/DATA
-//        	plugin.createDirectory("DATA");
+//        	configUtils.createDirectory("DATA");
 //        	FILENAME = File.separator + "DATA" + File.separator + "ChatColor.yml";
-//        	plugin.createFile(FILENAME);
-//        	config = plugin.getConfigFile(FILENAME);	
+//        	configUtils.createFile(FILENAME);
+//        	config = configUtils.getConfigFile(FILENAME);	
 
         	plugin.getCommand("COMMAND_NAME").setExecutor(this);
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    		

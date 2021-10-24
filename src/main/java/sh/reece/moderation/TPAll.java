@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -17,11 +18,14 @@ public class TPAll implements CommandExecutor {//,  {
 
 	private static Main plugin;
 	private Random rand;
+	private ConfigUtils ConfigUtils;
 
 	public TPAll(Main instance) {
 		plugin = instance;
 		
 		if (plugin.enabledInConfig("Moderation.TPAll.Enabled")) {
+			ConfigUtils = plugin.getConfigUtils();
+
 			plugin.getCommand("tpall").setExecutor(this);
 			rand = new Random();
 		}
@@ -38,14 +42,14 @@ public class TPAll implements CommandExecutor {//,  {
 		Player player = (Player) sender;
 		Location loc = player.getLocation();
 		
-		Util.coloredBroadcast(Main.lang("TP_ALL").replace("%player%", player.getName()));
+		Util.coloredBroadcast(ConfigUtils.lang("TP_ALL").replace("%player%", player.getName()));
 		
 		for(Player target : Bukkit.getOnlinePlayers()) {
 			new BukkitRunnable(){
 				public void run() {	
 					if(target != player) {
 						target.teleport(loc);
-						target.sendMessage(Main.lang("TP_ALL_SUCCESS").replace("%player%", player.getName()));
+						target.sendMessage(ConfigUtils.lang("TP_ALL_SUCCESS").replace("%player%", player.getName()));
 					}										
 				}
 			}.runTaskLater(plugin, rand.nextInt(100)); // 5 second delay

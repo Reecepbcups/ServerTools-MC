@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -19,12 +20,15 @@ public class Report implements CommandExecutor {
 	private Integer CooldownSeconds;
 	private String perm, CooldownMSG, ReportSuccess;	
 			
+	private ConfigUtils ConfigUtils;
 	
 	public Report(Main instance) {
         plugin = instance;
         
         Section = "Moderation.Report";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
+
+			ConfigUtils = plugin.getConfigUtils();
 
         	perm = "report.notify";
         	
@@ -58,7 +62,7 @@ public class Report implements CommandExecutor {
     		if(target != null) {
     			
     			if(args[0].equalsIgnoreCase(p.getName())) {
-    				Util.coloredMessage(p, Main.lang("REPORT_SELF"));
+    				Util.coloredMessage(p, ConfigUtils.lang("REPORT_SELF"));
     				return true;
     			}
     			
@@ -68,9 +72,9 @@ public class Report implements CommandExecutor {
     					.replace("%reason%", Util.argsToSingleString(1, args));
     			
     			Bukkit.broadcast(Util.color(ReportSuccess), perm);
-    			Util.coloredMessage(p, Main.lang("REPORT_SUCCESS").replace("%target%", args[0]));
+    			Util.coloredMessage(p, ConfigUtils.lang("REPORT_SUCCESS").replace("%target%", args[0]));
     		} else {
-    			Util.coloredMessage(p, Main.lang("REPORT_OFFLINE").replace("%target%", args[0]));
+    			Util.coloredMessage(p, ConfigUtils.lang("REPORT_OFFLINE").replace("%target%", args[0]));
     		}
     		
     	}

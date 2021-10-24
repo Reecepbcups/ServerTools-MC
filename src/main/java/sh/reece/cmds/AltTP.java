@@ -13,6 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -23,16 +24,19 @@ public class AltTP implements CommandExecutor, TabCompleter {
 	private String Section, FILENAME;
 	private List<Player> queue = new ArrayList<Player>();
 
+	private ConfigUtils configUtils;
+	
 	public AltTP(Main instance) {
 		plugin = instance;
 
 		Section = "Commands.AltTP";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
 
-			plugin.createDirectory("DATA");
+			configUtils.createDirectory("DATA");
 			FILENAME = File.separator + "DATA" + File.separator + "AltTP.yml";
-			plugin.createFile(FILENAME);
-			alttpconfig = plugin.getConfigFile(FILENAME);	
+			configUtils.createFile(FILENAME);
+			alttpconfig = configUtils.getConfigFile(FILENAME);	
 
 			plugin.getCommand("alt").setExecutor(this);
 			plugin.getCommand("alt").setTabCompleter(this);   		
@@ -133,7 +137,7 @@ public class AltTP implements CommandExecutor, TabCompleter {
 			List<String> slaves = alttpconfig.getStringList(masteruuid+".accounts");
 			slaves.add(p.getUniqueId().toString());
 			alttpconfig.set(masteruuid+".accounts", slaves);
-			plugin.saveConfig(alttpconfig, FILENAME);
+			configUtils.saveConfig(alttpconfig, FILENAME);
 
 			Util.coloredMessage(other, "&a[!] " + p.getName() + " has linked to you!");
 			Util.coloredMessage(p, "&a[!] Linked as an alt to " + other.getName());		
@@ -153,7 +157,7 @@ public class AltTP implements CommandExecutor, TabCompleter {
 				List<String> accounts = alttpconfig.getStringList(p.getUniqueId()+".accounts");
 				accounts.remove(other.getUniqueId().toString());						
 				alttpconfig.set(p.getUniqueId()+".accounts", accounts);
-				plugin.saveConfig(alttpconfig, FILENAME);
+				configUtils.saveConfig(alttpconfig, FILENAME);
 			} else {
 				Util.coloredMessage(p, "You do not seem you own the alt " + other.getName()+". Can not remove");
 			}

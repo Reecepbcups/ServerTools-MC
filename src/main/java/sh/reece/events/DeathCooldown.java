@@ -14,8 +14,8 @@ public class DeathCooldown implements Listener {
 	// 	plugin = instance;
 		
 	// 	if (plugin.enabledInConfig("Misc.DeathCooldown.Enabled")) {
-	// 		deathCooldownWorlds = Main.MAINCONFIG.getStringList("Misc.DeathCooldown.worlds");			
-	// 		secondCooldown = Main.MAINCONFIG.getInt("Misc.DeathCooldown.timeInSeconds");
+	// 		deathCooldownWorlds = plugin.getConfig().getStringList("Misc.DeathCooldown.worlds");			
+	// 		secondCooldown = plugin.getConfig().getInt("Misc.DeathCooldown.timeInSeconds");
 			
 	// 		this.CooldownHash = new HashMap<String, Date>();
 			

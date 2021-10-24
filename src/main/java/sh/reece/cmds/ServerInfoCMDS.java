@@ -49,7 +49,7 @@ public class ServerInfoCMDS implements Listener {//, CommandExecutor {
         	if(config.getString(Section+".Commands."+cmd+".enabled").equalsIgnoreCase("true")) {
         		for(String s : config.getStringList("ServerInfoCMDS.Commands."+cmd+".message")){
         			
-        			if(Main.isPAPIEnabled()) {
+        			if(plugin.isPAPIEnabled()) {
 						s = PlaceholderAPI.setPlaceholders(p, s);
 					}
         			

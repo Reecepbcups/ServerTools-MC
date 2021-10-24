@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -22,6 +23,7 @@ public class ChatCooldown implements Listener, CommandExecutor {
 	public Integer CooldownSeconds;
 	public Boolean Enabled;
 	private HashMap<String, Date> ChatCooldown;
+	//private ConfigUtils configUtils;
 	
 	public ChatCooldown(Main instance) {
         plugin = instance;
@@ -29,6 +31,8 @@ public class ChatCooldown implements Listener, CommandExecutor {
     	
     	    	
         if (plugin.enabledInConfig("Chat.ChatCooldown.Enabled")) {
+			//configUtils = plugin.getConfigUtils();
+
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);	
 			plugin.getCommand("chatcooldown").setExecutor(this);
 			

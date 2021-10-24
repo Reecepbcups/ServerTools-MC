@@ -13,36 +13,41 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
 public class DailyRewards implements CommandExecutor {
 	
 	// UUID, UNIXTIMESTAMP
-	public static Map<String,Long> PlayerCooldown = new HashMap<String, Long>();
+	public Map<String,Long> PlayerCooldown = new HashMap<String, Long>();
 	private List<String> rewards;
 	private long COOLDOWN_SECONDS;
 	private String msg = "";
-	private static String FILENAME;
-	public static FileConfiguration CooldownData;
+	private String FILENAME;
+	public FileConfiguration CooldownData;
 	
 	private static Boolean wasPluginEnabled;
 	
-	private static Main plugin;
+	private Main plugin;
+	private ConfigUtils configUtils;
+	
 	public DailyRewards(Main instance) {
 	    plugin = instance;
 	    wasPluginEnabled = false;
 	    
 	    final String section = "Commands.DailyRewards";
 	    if (plugin.enabledInConfig(section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
 	    	wasPluginEnabled = true;
 	    	
 			plugin.getCommand("reward").setExecutor(this);
 
-			plugin.createDirectory("DATA");			
+			configUtils.createDirectory("DATA");			
 			FILENAME = File.separator + "DATA" + File.separator + "DailyRewardCooldown.yml";
-			plugin.createFile(FILENAME);
-			CooldownData = plugin.getConfigFile(FILENAME);
+			configUtils.createFile(FILENAME);
+			CooldownData = configUtils.getConfigFile(FILENAME);
 											
 			loadCooldownsToMemory();
 			
@@ -150,19 +155,19 @@ public class DailyRewards implements CommandExecutor {
     	}
     }
     
-    public static void saveCooldownsToFile() {
+    public void saveCooldownsToFile() {
     	
     	if(wasPluginEnabled) {
     		for (Map.Entry<String,Long> entry : PlayerCooldown.entrySet()) {
         	    CooldownData.set("cooldowns." + entry.getKey(), entry.getValue().toString());
         	}
-        	plugin.saveConfig(CooldownData, FILENAME);
+        	configUtils.saveConfig(CooldownData, FILENAME);
     	}
     	
     	
     }
     
-    public static void loadCooldownsToMemory() {
+    public void loadCooldownsToMemory() {
     	
     	if(!CooldownData.contains("cooldowns")) {
     		return;

@@ -1,5 +1,6 @@
 package sh.reece.events;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -20,7 +21,7 @@ public class CMDAlias implements Listener {
 
 	public ConfigurationSection Alises;
 
-	private static final List<String> Disabled = Main.MAINCONFIG.getStringList("Misc.CMDAliases.disabled");
+	private static List<String> Disabled;
 	private static HashMap<String, List<String>> worlddisabled;
 
 	// world: [cmd, 5]
@@ -32,16 +33,19 @@ public class CMDAlias implements Listener {
 	private String aliasResult, userArguments, permission;
 
 	public Main plugin;
+	private ConfigUtils configUtils;
 	public CMDAlias(Main instance) {
 		plugin = instance;
 
 
 		if (plugin.enabledInConfig("Misc.CMDAliases.Enabled")) {
+			configUtils = plugin.getConfigUtils();
+			Disabled = plugin.getConfig().getStringList("Misc.CMDAliases.disabled");
 
-			//config = plugin.getConfigFile("config.yml");
-			permission = Main.MAINCONFIG.getString("Misc.CMDAliases.Permission");			 		
-			Alises = Main.MAINCONFIG.getConfigurationSection("Misc.CMDAliases.cmds");
-			//Disabled = Main.MAINCONFIG.getStringList("Misc.CMDAliases.disabled");
+			//config = configUtils.getConfigFile("config.yml");
+			permission = plugin.getConfig().getString("Misc.CMDAliases.Permission");			 		
+			Alises = plugin.getConfig().getConfigurationSection("Misc.CMDAliases.cmds");
+			//Disabled = plugin.getConfig().getStringList("Misc.CMDAliases.disabled");
 
 			// every 15 mins it refreshes this
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
@@ -52,15 +56,15 @@ public class CMDAlias implements Listener {
 			
 
 			// on command run, get player location, wait X seconds, if they have not moved allowed command to be run.
-			if(Main.MAINCONFIG.contains("Misc.CMDAliases.preCooldownCommands")) {
-				stopIfMoved = Main.MAINCONFIG.getBoolean("Misc.CMDAliases.preCooldownCommands.stopIfMoved");
+			if(plugin.getConfig().contains("Misc.CMDAliases.preCooldownCommands")) {
+				stopIfMoved = plugin.getConfig().getBoolean("Misc.CMDAliases.preCooldownCommands.stopIfMoved");
 				//Util.consoleMSG("&aloaded preCooldownCommands stopifMoved");
 				
-				for(String world : Main.MAINCONFIG.getConfigurationSection("Misc.CMDAliases.preCooldownCommands").getKeys(false)) {
+				for(String world : plugin.getConfig().getConfigurationSection("Misc.CMDAliases.preCooldownCommands").getKeys(false)) {
 					HashMap<String, Integer> tempHoldCommands = new HashMap<String, Integer>();
 					
 					if(!world.equalsIgnoreCase("stopIfMoved")) {								
-						for(String cmd : Main.MAINCONFIG.getStringList("Misc.CMDAliases.preCooldownCommands."+world)) {
+						for(String cmd : plugin.getConfig().getStringList("Misc.CMDAliases.preCooldownCommands."+world)) {
 							String command = cmd.split("%")[0];
 							Integer timeWait = Integer.valueOf(cmd.split("%")[1]);
 							
@@ -90,16 +94,16 @@ public class CMDAlias implements Listener {
 		Util.consoleMSG("&aServerTools - Refreshed DisabledCommands to hash");
 		// new init here so it clears previous
 		worlddisabled = new HashMap<String, List<String>>();
-		if(Main.MAINCONFIG.contains("Misc.CMDAliases.disabledWorlds")) {
+		if(plugin.getConfig().contains("Misc.CMDAliases.disabledWorlds")) {
 			// gets worlds to disable specific cmds (Grabs exact copy bc sometimes is weird with this)
-			for(String world : Main.MAINCONFIG.getConfigurationSection("Misc.CMDAliases.disabledWorlds").getKeys(false)) {
+			for(String world : plugin.getConfig().getConfigurationSection("Misc.CMDAliases.disabledWorlds").getKeys(false)) {
 
 				if(Bukkit.getWorld(world) != null) {
 					//Util.consoleMSG("World " + world + " Found for CMDAlias Disable");
 					List<String> l = new ArrayList<String>();
 
 					// if world is real, block all commands
-					for(String blockCMD : Main.MAINCONFIG.getStringList("Misc.CMDAliases.disabledWorlds."+world)) {
+					for(String blockCMD : plugin.getConfig().getStringList("Misc.CMDAliases.disabledWorlds."+world)) {
 						l.add(blockCMD.toLowerCase());
 					}
 					worlddisabled.put(world, l);
@@ -138,7 +142,7 @@ public class CMDAlias implements Listener {
 					// cancel if no bypass perm
 					if(!e.getPlayer().hasPermission(permission)) {
 						e.setCancelled(true);
-						Util.coloredMessage(e.getPlayer(), Main.lang("CMDALIAS_DENYWORLD").replace("%cmd%", command));
+						Util.coloredMessage(e.getPlayer(), configUtils.lang("CMDALIAS_DENYWORLD").replace("%cmd%", command));
 						return;
 					} else {
 						Util.coloredMessage(e.getPlayer(), "&7&oBypassing command for disable world due to perm");
@@ -152,7 +156,7 @@ public class CMDAlias implements Listener {
 		if(Disabled.contains(command)) {
 			if(!e.getPlayer().hasPermission(permission)) {
 				e.setCancelled(true);
-				Util.coloredMessage(e.getPlayer(), Main.lang("CMDALIAS_DISABLED").replace("%cmd%", command));
+				Util.coloredMessage(e.getPlayer(), configUtils.lang("CMDALIAS_DISABLED").replace("%cmd%", command));
 				return;
 			}
 		}
@@ -184,13 +188,13 @@ public class CMDAlias implements Listener {
 				int sec = preWorldCooldown.get(world).get(command);
 				
 				if(!p.hasPermission(permission)) {
-					Util.coloredMessage(p, Main.lang("CMDALIAS_DELAYED").replace("%cmd%", command).replace("%time%", sec+""));
+					Util.coloredMessage(p, configUtils.lang("CMDALIAS_DELAYED").replace("%cmd%", command).replace("%time%", sec+""));
 					new BukkitRunnable() {					
 						@Override
 						public void run() {
 							if(stopIfMoved) {
 								if(loc.getBlockX() != p.getLocation().getBlockX() || loc.getBlockZ() != p.getLocation().getBlockZ()) {								
-									Util.coloredMessage(p, Main.lang("CMDALIAS_DELAYED_MOVED"));
+									Util.coloredMessage(p, configUtils.lang("CMDALIAS_DELAYED_MOVED"));
 									return;
 								} 
 							} 
@@ -206,7 +210,7 @@ public class CMDAlias implements Listener {
 		
 
 		if(Alises.contains(command)) {
-			aliasResult = Main.MAINCONFIG.getString("Misc.CMDAliases.cmds."+command);
+			aliasResult = plugin.getConfig().getString("Misc.CMDAliases.cmds."+command);
 
 			userArguments = e.getMessage().substring(command.length() + 1)
 					.replaceAll("%player%", e.getPlayer().getName());

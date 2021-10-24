@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -39,6 +40,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 	private final Map<String, String> lastMessage = new HashMap<>();
 	
 	private boolean isMessagingDisabled;
+	private ConfigUtils configUtils;
 	
 	public Messaging(Main instance) {
 		plugin = instance;
@@ -48,6 +50,8 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 		
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+
+			configUtils = plugin.getConfigUtils();
 			
 			plugin.getCommand("reply").setExecutor(this);
 			plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -84,7 +88,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 		case "message":
 			
 			if(isMessagingDisabled == true) {
-				Util.coloredMessage(p, Main.lang("MESSAGING_DISABLED"));
+				Util.coloredMessage(p, configUtils.lang("MESSAGING_DISABLED"));
 				return true;
 			}
 			
@@ -155,7 +159,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 			if(lastMessage.containsKey(sender.getName())) {
 				target = Bukkit.getPlayer(lastMessage.get(sender.getName()));
 			} else {
-				Util.coloredMessage(sender, Main.lang("MESSAGING_OFFLINE").replace("%target%", targetStr));
+				Util.coloredMessage(sender, configUtils.lang("MESSAGING_OFFLINE").replace("%target%", targetStr));
 				return;
 			}					
 		}
@@ -165,7 +169,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 
 			if(!sender.hasPermission(staffBypassPerm)){
 
-				Util.coloredMessage(sender, Main.lang("MESSAGING_IS_TOGGLED").replace("%target%", target.getName()));
+				Util.coloredMessage(sender, configUtils.lang("MESSAGING_IS_TOGGLED").replace("%target%", target.getName()));
 				return;
 
 			}
@@ -262,7 +266,7 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 			
 			// sendMessage(p, lastMessage.get(p.getName()), Util.argsToSingleString(1, args));
 		} else {
-			Util.coloredMessage(p, Main.lang("MESSAGING_NOREPLY"));
+			Util.coloredMessage(p, configUtils.lang("MESSAGING_NOREPLY"));
 		}
 	}
 	

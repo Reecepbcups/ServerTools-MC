@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.block.Block;
@@ -12,6 +13,8 @@ public class Top implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Permission;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+	
 	public Top(Main instance) {
 		plugin = instance;
 		
@@ -20,6 +23,8 @@ public class Top implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
 			plugin.getCommand("top").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
 		}
@@ -38,7 +43,7 @@ public class Top implements CommandExecutor{//,TabCompleter,Listener {
 		Player p = (Player)sender;
 		Block block = p.getWorld().getHighestBlockAt(p.getLocation());
 	    p.teleport(block.getLocation().add(0, 1, 0));
-		Util.coloredMessage(p, Main.lang("TOP_TELEPORT").replace("%block%", block.getY()+""));
+		Util.coloredMessage(p, configUtils.lang("TOP_TELEPORT").replace("%block%", block.getY()+""));
 		
 		return true;
 	}

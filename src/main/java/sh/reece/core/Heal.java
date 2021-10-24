@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -13,6 +14,8 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Heal, HealOthers, Feed;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+
 	public Heal(Main instance) {
 		plugin = instance;
 		
@@ -21,6 +24,9 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
+			
 			plugin.getCommand("heal").setExecutor(this);
 			plugin.getCommand("feed").setExecutor(this);
 			
@@ -67,7 +73,7 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 		
 		if(label.equalsIgnoreCase("feed")) {
 			if(checkPerm(sender, cmd.getName(), Feed)) {
-				Util.coloredMessage(p, Main.lang("HEAL_FED"));
+				Util.coloredMessage(p, configUtils.lang("HEAL_FED"));
 			}
 				p.setFoodLevel(20);
 			
@@ -88,7 +94,7 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 	public void heal(Player p) {
 		p.setHealth(20.0D);
 		p.setFoodLevel(20);
-		Util.coloredMessage(p, Main.lang("HEAL_HEALED"));
+		Util.coloredMessage(p, configUtils.lang("HEAL_HEALED"));
 	}
 	
 	public boolean checkPerm(CommandSender p, String CMD, String perm) {

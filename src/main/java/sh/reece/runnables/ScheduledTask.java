@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -25,28 +26,31 @@ public class ScheduledTask implements CommandExecutor{
 	private Boolean debug = false;
 	
 	private static List<Integer> runnableIDs = new ArrayList<Integer>();
-	
+	private ConfigUtils ConfigUtils;
+
 	public ScheduledTask(Main instance) {
         plugin = instance;
         
         Section = "Misc.ScheduledTask";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
+
+			ConfigUtils = plugin.getConfigUtils();
+
         	plugin.getCommand("scheduledtask").setExecutor(this);
-        	
         	loadAllTimingRunnables();
     		//Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    		
     	}
 	}
 	
 	public void loadAllTimingRunnables() {
-		if(plugin.getConfigFile("config.yml").getBoolean(Section+".Debug")) {
+		if(ConfigUtils.getConfigFile("config.yml").getBoolean(Section+".Debug")) {
     		debug = true;
     	}
     	
 		permision = plugin.getConfig().getString(Section+".Permission");
 		
-    	plugin.createConfig("ScheduledTask.yml");
-    	config = plugin.getConfigFile("ScheduledTask.yml");
+    	ConfigUtils.createConfig("ScheduledTask.yml");
+    	config = ConfigUtils.getConfigFile("ScheduledTask.yml");
     	Set<String> taskKeys = config.getKeys(false);
     	
     	if(taskKeys.size() > 0) {

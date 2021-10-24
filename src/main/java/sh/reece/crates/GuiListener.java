@@ -476,7 +476,7 @@ public class GuiListener implements Listener {
 //
 //	// runs the reward commands 
 //	public void runCommands(Player player, String CrateID, String key) {
-//		FileConfiguration crate = plugin.getConfigFile("crates"+File.separator+CrateID+".yml");		
+//		FileConfiguration crate = configUtils.getConfigFile("crates"+File.separator+CrateID+".yml");		
 //		for(String cmd : crate.getStringList("rewards."+key+".Comamands")) {
 //			Util.console(cmd.replace("%player%", player.getName()));
 //		}
@@ -502,7 +502,7 @@ public class GuiListener implements Listener {
 //
 //	// gets the ItemStack with all values from a Cratename & Config Key value
 //	public ItemStack getItemStack(String CrateID, String Key) {		
-//		FileConfiguration CRATECONFIG = plugin.getConfigFile("crates"+File.separator+CrateID+".yml");		
+//		FileConfiguration CRATECONFIG = configUtils.getConfigFile("crates"+File.separator+CrateID+".yml");		
 //		Material mat = Material.valueOf(CRATECONFIG.getString("rewards."+Key+".Material").toUpperCase());
 //		String name = CRATECONFIG.getString("rewards."+Key+".Name");
 //		List<String> lore = CRATECONFIG.getStringList("rewards."+Key+".Lore");		

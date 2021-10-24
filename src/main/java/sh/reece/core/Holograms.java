@@ -28,6 +28,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import sh.reece.utiltools.Util;
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 
 public class Holograms implements CommandExecutor, Listener, TabCompleter {
@@ -36,15 +37,16 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	// /minecraft:kill @e[type=armor_stand,r=3] remove those armour stands within that location
 	
 	private static Main plugin;
-	private static FileConfiguration HoloConfig;
+	private FileConfiguration HoloConfig;
 	private String Section;
-	private static Boolean papiSupport;
+	private Boolean papiSupport;
 	
-	private static Set<String> holoKeys;
-	public static HashMap<Location, Integer> EntitiyIDs = new HashMap<Location, Integer>();
-	public static DecimalFormat df = new DecimalFormat("#.###");	
+	private Set<String> holoKeys;
+	public HashMap<Location, Integer> EntitiyIDs = new HashMap<Location, Integer>();
+	public DecimalFormat df = new DecimalFormat("#.###");	
 	private String permission;
-	private static Player randomPlayer;
+	private Player randomPlayer;
+	private ConfigUtils configUtils;
 	
 	public Holograms(Main instance) {
         plugin = instance;
@@ -53,9 +55,12 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
         randomPlayer = null;
         
         if(plugin.enabledInConfig(Section+".Enabled")) {
-        	papiSupport = Main.isPAPIEnabled();       	
+
+			configUtils = plugin.getConfigUtils();
+
+        	papiSupport = plugin.isPAPIEnabled();       	
         	
-        	plugin.createConfig("Holograms.yml");
+        	configUtils.createConfig("Holograms.yml");
         	loadInit();
         	permission = "hologram.admin";
         	plugin.getCommand("holograms").setExecutor(this);	
@@ -82,8 +87,8 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	}
 
 	
-	public static void loadInit() {
-		HoloConfig = plugin.getConfigFile("Holograms.yml");
+	public void loadInit() {
+		HoloConfig = configUtils.getConfigFile("Holograms.yml");
 		// load in all keys here for stands on startup
     	// on disable delete all armour stands at locations given in config        	
     	holoKeys = HoloConfig.getKeys(false); // [skyblock]
@@ -269,7 +274,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 		Util.coloredMessage(p, "&f/hologram &7reload");
 	}
 	
-	public static void spawnHolo(String key) {		
+	public void spawnHolo(String key) {		
 		Location loc = getLocFromConfig(key).clone().subtract(0, 2, 0);
 		World world = loc.getWorld();
 		//Util.consoleMSG("Loading in hologram: " + key);
@@ -303,19 +308,19 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 
 	
 	
-	public static void createNewHolo(Location l, String newKey) {
+	public void createNewHolo(Location l, String newKey) {
 		HoloConfig.set(newKey+".location", locationToStringFormat(l));
 		HoloConfig.set(newKey+".lines", Arrays.asList("&fEdit this line in", "&bthe Holograms.yml"));
-		plugin.saveConfig(HoloConfig, "Holograms.yml");
+		configUtils.saveConfig(HoloConfig, "Holograms.yml");
 		spawnHolo(newKey);
 		holoKeys.add(newKey);
 	}
 	
-	public static String locationToStringFormat(Location l) {					
+	public String locationToStringFormat(Location l) {					
 		return l.getWorld().getName()+", "+df.format(l.getX())+", "+df.format(l.getY())+", "+df.format(l.getZ());
 	}
 	
-	public static Location getLocFromConfig(String key) {
+	public Location getLocFromConfig(String key) {
 		String[] loc = HoloConfig.getString(key+".location").split(", ");
 		World w = Bukkit.getWorld(loc[0]);
 		if(w != null) {
@@ -326,12 +331,12 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 		}			
 		return null;
 	}
-	public static List<String> getLinesFromConfig(String key) {	
+	public List<String> getLinesFromConfig(String key) {	
 		return HoloConfig.getStringList(key+".lines");
 	}
 	
 	
-	public static void removeAllStands(){
+	public void removeAllStands(){
 		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();		
 		for(Location locs : EntitiyIDs.keySet()) {
 			for(Entity e : locs.getWorld().getNearbyEntities(locs, 3, 5, 3)) {
@@ -345,14 +350,13 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 		}
 	}
 	
-	public static void removeSingleKey(String key) {
+	public void removeSingleKey(String key) {
 		hideHolo(key);
 		HoloConfig.set(key, null);
-		plugin.saveConfig(HoloConfig, "Holograms.yml");
-		
+		configUtils.saveConfig(HoloConfig, "Holograms.yml");		
 	}
 	
-	public static void hideHolo(String key) {
+	public void hideHolo(String key) {
 		// removes armour stand from view in the server
 		Location l = getLocFromConfig(key);		
 		for(Entity e : l.getWorld().getNearbyEntities(l, 0, 7, 0)) {
@@ -365,7 +369,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	}
 	
 	
-	public static void spawnAllHolos() {
+	public void spawnAllHolos() {
 		for(String key : holoKeys) {
 			try {
 				spawnHolo(key);
@@ -376,7 +380,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
     	}
 	}
 	
-	public static void spawnHoloItem(Location l, ItemStack item) {
+	public void spawnHoloItem(Location l, ItemStack item) {
 		// spawn new armour stand at location, but bring back some
 		// and try to center more
 		

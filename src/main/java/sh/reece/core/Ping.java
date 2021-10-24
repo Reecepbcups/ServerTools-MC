@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.command.Command;
@@ -13,6 +14,8 @@ public class Ping implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+	
 	public Ping(Main instance) {
 		plugin = instance;
 		
@@ -21,6 +24,9 @@ public class Ping implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
+
 			plugin.getCommand("ping").setExecutor(this);
 		}
 		
@@ -42,7 +48,7 @@ public class Ping implements CommandExecutor{//,TabCompleter,Listener {
 			return true;
 		}
 		
-		Util.coloredMessage(p, Main.lang("PING").replace("%ping%", ping+""));
+		Util.coloredMessage(p, configUtils.lang("PING").replace("%ping%", ping+""));
 		return true;
 		
 	}

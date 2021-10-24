@@ -31,7 +31,7 @@ public class LaunchPads implements Listener, CommandExecutor {
         	isEnabled = true;
         	
         	//config = plugin.getConfig();
-        	config = Main.MAINCONFIG;
+        	config = plugin.getConfig();
         	BlockType = Material.valueOf(config.getString(Section+".BlockType").toUpperCase());
         	PlateType = Material.valueOf(config.getString(Section+".PlateType").toUpperCase());
         	//SoundEffect = config.getString(Section+".SoundEffect");

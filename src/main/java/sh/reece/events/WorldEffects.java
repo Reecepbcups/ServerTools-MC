@@ -28,7 +28,7 @@ public class WorldEffects implements Listener {// CommandExecutor
         if(plugin.enabledInConfig(Section+".Enabled")) {
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);   
     		
-    		for(String wEff : Main.MAINCONFIG.getStringList(Section+".worlds")) {
+    		for(String wEff : plugin.getConfig().getStringList(Section+".worlds")) {
     			world_effect.put(wEff.split(":")[0], wEff.split(":")[1]);
     		}
     	}

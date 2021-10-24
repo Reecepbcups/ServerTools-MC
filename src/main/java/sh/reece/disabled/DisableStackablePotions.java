@@ -1,6 +1,7 @@
 package sh.reece.disabled;
 
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -15,12 +16,14 @@ public class DisableStackablePotions implements Listener {
 
 	private static Main plugin;
 	private final String Section;
+	private ConfigUtils configUtils;
 	
 	public DisableStackablePotions(Main instance) {
         plugin = instance;
         
        Section = "Disabled.DisableStackablePotions";                
        if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    		
     	}
 	}
@@ -32,7 +35,7 @@ public class DisableStackablePotions implements Listener {
 			Player shooter = (Player) e.getPotion().getShooter();
 
 			if(shooter.getInventory().getItemInHand().getAmount() > 1){
-				Util.coloredMessage(shooter, Main.lang("DISABLED_STACKED_POTIONS"));
+				Util.coloredMessage(shooter, configUtils.lang("DISABLED_STACKED_POTIONS"));
 				e.setCancelled(true);
 				
 				// gives player their potion back

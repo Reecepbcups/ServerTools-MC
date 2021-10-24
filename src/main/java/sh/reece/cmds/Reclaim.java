@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.command.Command;
@@ -23,19 +24,23 @@ public class Reclaim implements Listener, CommandExecutor {
 	private List<String> usedMemberReclaims;
 	private int srtIDXforUsrOut; // used in showcasing msg in chat
 
+	private ConfigUtils configUtils;
+	
 	public Reclaim(Main instance) {
 		plugin = instance;
 
 		Section = "Commands.reclaim";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
 
 			config = plugin.getConfig();
 
 			//        	// plugins/ServerTools/DATA
-			plugin.createDirectory("DATA");
+			configUtils.createDirectory("DATA");
 			FILENAME = File.separator + "DATA" + File.separator + "Reclaim.yml";
-			plugin.createFile(FILENAME);
-			reclaimcnfg = plugin.getConfigFile(FILENAME);	
+			configUtils.createFile(FILENAME);
+			reclaimcnfg = configUtils.getConfigFile(FILENAME);	
 
 			RECLAIM_PERMISSIONS = config.getConfigurationSection(Section+".permissions").getKeys(false); 
 			srtIDXforUsrOut = config.getInt(Section+".BeginAtIndex");
@@ -81,13 +86,13 @@ public class Reclaim implements Listener, CommandExecutor {
 			// provided then they would get so many items.
 			
 			
-			Util.coloredMessage(p, Main.lang("RECLAIM_ALREADY_CLAIMED"));
+			Util.coloredMessage(p, configUtils.lang("RECLAIM_ALREADY_CLAIMED"));
 			return true;
 		} 
 
 		String permission = getPlayersGroupIfAny(p);
 		if(permission == null) {
-			Util.coloredMessage(p, Main.lang("RECLAIM_NOTHING"));
+			Util.coloredMessage(p, configUtils.lang("RECLAIM_NOTHING"));
 			return true;
 		}
 		
@@ -101,13 +106,13 @@ public class Reclaim implements Listener, CommandExecutor {
 			//Util.consoleMSG("CMD: " + command);
 			Util.console(command.replace("%player%", p.getName()));
 		}
-		Util.coloredMessage(p, Main.lang("RECLAIM_RECLAIMED")
+		Util.coloredMessage(p, configUtils.lang("RECLAIM_RECLAIMED")
 				.replace("%permission%", permission.substring(srtIDXforUsrOut).toUpperCase()));
 
 		usedMemberReclaims = reclaimcnfg.getStringList("USED");
 		usedMemberReclaims.add(p.getUniqueId().toString());
 		reclaimcnfg.set("USED", usedMemberReclaims);
-		plugin.saveConfig(reclaimcnfg, FILENAME);
+		configUtils.saveConfig(reclaimcnfg, FILENAME);
 	}
 
 }

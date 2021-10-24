@@ -99,7 +99,7 @@
 // 		// creates the keys and itemstacks used for them
 // 		for (File crate : this.getDirectoryFiles("crates")) {
 			
-// 			FileConfiguration _crate = plugin.getConfigFile("crates/"+crate.getName());			
+// 			FileConfiguration _crate = configUtils.getConfigFile("crates/"+crate.getName());			
 // 			Material mat = Material.valueOf(_crate.getString("Key.Material"));
 // 			if(mat == null) {
 // 				mat = Material.NETHER_STAR;
@@ -154,7 +154,7 @@
 // //		    System.out.println(somehash.get("test").getRandom());
 // //		}		
 // 		WeightedRandom<String> itemDropRewards = new WeightedRandom<>();			
-// 		FileConfiguration crateConfig = plugin.getConfigFile("crates"+File.separator+CrateName+".yml");		
+// 		FileConfiguration crateConfig = configUtils.getConfigFile("crates"+File.separator+CrateName+".yml");		
 // 		for(String key : crateConfig.getConfigurationSection("rewards").getKeys(false)) {
 // 			// 'rare1', 'rare2', etc
 // 			//Util.consoleMSG("Added key '"+key+"' to crate " + CrateName);

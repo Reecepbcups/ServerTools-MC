@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.command.Command;
@@ -14,11 +15,15 @@ public class Speed implements CommandExecutor {
 	private String FlyPerm;
 	private String WalkPerm;
 
+	private ConfigUtils configUtils;
+	
 	public Speed(Main instance) {
 		plugin = instance;
 
 		Section = "Commands.Speed";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+
+			configUtils = plugin.getConfigUtils();
 			
 			plugin.getCommand("speed").setExecutor(this);
 			FlyPerm = plugin.getConfig().getString(Section+".FlyPermission");
@@ -85,7 +90,7 @@ public class Speed implements CommandExecutor {
 	}
 	
 	public void resetSpeed(Player p, String SPEED_TYPES) {
-		String FinalMSG = Main.lang("SPEED_RESET");
+		String FinalMSG = configUtils.lang("SPEED_RESET");
 		
 		switch (SPEED_TYPES.toLowerCase()) {
 		case "walk":
@@ -108,7 +113,7 @@ public class Speed implements CommandExecutor {
 			return;			
 		}		
 		p.setFlySpeed(speed);
-		Util.coloredMessage(p, Main.lang("SPEED_FLY").replace("%speed%", (speed*10)+""));
+		Util.coloredMessage(p, configUtils.lang("SPEED_FLY").replace("%speed%", (speed*10)+""));
 	}
 	public void setWalkSpeed(Player p, Float speed) {
 		if (!(p.hasPermission(WalkPerm))) {		
@@ -116,7 +121,7 @@ public class Speed implements CommandExecutor {
 			return;			
 		}	
 		p.setWalkSpeed(speed);
-		Util.coloredMessage(p, Main.lang("SPEED_WALK").replace("%speed%", (speed*10)+""));
+		Util.coloredMessage(p, configUtils.lang("SPEED_WALK").replace("%speed%", (speed*10)+""));
 	}
 	
 	public float getMoveSpeed(Player player, String MoveSpeed) {

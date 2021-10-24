@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -11,6 +12,8 @@ public class AdminChat implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Permission;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+	
 	public AdminChat(Main instance) {
 		plugin = instance;
 		
@@ -19,6 +22,7 @@ public class AdminChat implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
 			plugin.getCommand("adminchat").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
 		}
@@ -40,7 +44,7 @@ public class AdminChat implements CommandExecutor{//,TabCompleter,Listener {
 		} else if(args.length >= 1) {
 			
 
-			String adminChatMSG = Main.lang("ADMINCHAT")
+			String adminChatMSG = configUtils.lang("ADMINCHAT")
 					.replace("%player%", sender.getName())
 					.replace("%msg%", Util.argsToSingleString(0, args));
 			

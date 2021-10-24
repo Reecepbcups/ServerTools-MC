@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReeceTools implements CommandExecutor, TabCompleter {
@@ -156,16 +157,26 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 
 
 	private void showAllModules(final CommandSender sender) {
-		sender.sendMessage("");
-		sender.sendMessage(Util.color("&eServerTools Enabled Modules: &7&o((&f " + plugin.enabledModulesNumber + " &7&o))"));
 
+		int numOfEnabled = 0;
+		int numOfDisabled = 0;
+		for(String element : plugin.modulesList){
+
+			if(element.startsWith("&a")){
+				numOfEnabled++;
+			} else {
+				numOfDisabled++;
+			}
+		}
+
+		Util.coloredMessage(sender, 
+			"&e&lServerTools &7&o((&f &aEnabled: "+numOfEnabled + " &f&l| &cDisabled: "+numOfDisabled + " &7&o))");
 
 		String moduleOuput = "";
 		for(final String module : plugin.modulesList) {
 			moduleOuput += module;
 		}
-
-		sender.sendMessage(Util.color(moduleOuput.replace("null", "")));
+		Util.coloredMessage(sender, moduleOuput.replace("null", ""));
 	}
 
 

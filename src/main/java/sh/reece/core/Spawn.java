@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -32,14 +33,17 @@ public class Spawn implements Listener, CommandExecutor {
 
 	private static List<String> voidDisabledWorlds = new ArrayList<String>();
 	private String voidmsg, voidTPEnabled, spawnOnInitJoin, spawnFirstUniqueJoinOnly;
-
+	private ConfigUtils configUtils;
+	
 	public Spawn(Main instance) {
 		plugin = instance;
 
 		Section="Core.Spawn"; // change to Core.
 		if (plugin.enabledInConfig(Section+".Enabled")) {
-			plugin.createConfig("spawn.yml");
-			Config = plugin.getConfigFile("spawn.yml");
+			configUtils = plugin.getConfigUtils();
+
+			configUtils.createConfig("spawn.yml");
+			Config = configUtils.getConfigFile("spawn.yml");
 			spawnLoc = Config.getString("spawn.location");
 
 			Permission = plugin.getConfig().getString(Section+".Permission"); // to send others to spawn
@@ -73,8 +77,8 @@ public class Spawn implements Listener, CommandExecutor {
 			spawnLoc = l.getWorld().getName()+";"+l.getX()+";"+l.getY()+";"+l.getZ()+";"+l.getYaw()+";"+l.getPitch();
 
 			Config.set("spawn.location", spawnLoc);
-			plugin.saveConfig(Config, "spawn.yml");
-			Util.coloredMessage(sender, Main.lang("SPAWN_SET"));
+			configUtils.saveConfig(Config, "spawn.yml");
+			Util.coloredMessage(sender, configUtils.lang("SPAWN_SET"));
 			return true;			
 		}
 
@@ -88,11 +92,11 @@ public class Spawn implements Listener, CommandExecutor {
 
 			String output = "";
 			if (spawnLoc == "" || spawnLoc == null) {
-				output = Main.lang("SPAWN_NONE");
+				output = configUtils.lang("SPAWN_NONE");
 				
 			} else {
 				if(args.length == 0) {
-					output = Main.lang("SPAWN_TP");
+					output = configUtils.lang("SPAWN_TP");
 					player.teleport(getSpawnLocation());
 
 				} else {	
@@ -103,7 +107,7 @@ public class Spawn implements Listener, CommandExecutor {
 						if(target != null) {
 							output = "&7&l[&c&l!&7&l] &fSent " + args[0] + " to spawn!";
 							target.teleport(getSpawnLocation());
-							Util.coloredMessage(target, Main.lang("SPAWN_SENT_TO_SPAWN").replace("%sender%", sender.getName()));
+							Util.coloredMessage(target, configUtils.lang("SPAWN_SENT_TO_SPAWN").replace("%sender%", sender.getName()));
 						}	
 					} else {
 						output = "&7&l[&c&l!&7&l] &cYou dont have permission for that... &7("+Permission+")";

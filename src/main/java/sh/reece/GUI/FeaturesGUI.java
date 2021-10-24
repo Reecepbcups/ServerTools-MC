@@ -17,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -28,14 +29,18 @@ public class FeaturesGUI implements Listener {
 	private String command, InvName, DefaultItemNameColor, DefaultItemIfNotSet;
 	private int rows;
 	 
+	private ConfigUtils configUtils;
+
 	public FeaturesGUI(Main instance) {
 		plugin = instance;
 
 		if (plugin.enabledInConfig("FeaturesGUI.Enabled")) {
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);	
 			
-			plugin.createConfig("FeaturesGUI.yml");
-			config = plugin.getConfigFile("FeaturesGUI.yml");		
+			configUtils = plugin.getConfigUtils();
+
+			configUtils.createConfig("FeaturesGUI.yml");
+			config = configUtils.getConfigFile("FeaturesGUI.yml");		
 			command = "/"+config.getString("Command");
 			
 			InvName = Util.color(config.getString("Name"));
@@ -58,7 +63,7 @@ public class FeaturesGUI implements Listener {
         }
         
         // This auto updates it on every open
-      	config = plugin.getConfigFile("FeaturesGUI.yml");
+      	config = configUtils.getConfigFile("FeaturesGUI.yml");
       		
  		Set<String> keys = config.getConfigurationSection("Items").getKeys(false);	
  		 		

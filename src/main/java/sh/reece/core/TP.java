@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -18,6 +19,7 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 	
 	// to, from
 	private final Map<Player, Player> currentRequest = new HashMap<>();
+	private ConfigUtils configUtils;
 	
 	public TP(Main instance) {
 		plugin = instance;
@@ -27,6 +29,8 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
 			plugin.getCommand("teleport").setExecutor(this);
 			
 			TP = plugin.getConfig().getString(Section+".Permissions.TP");
@@ -49,13 +53,13 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 			if(currentRequest.containsKey(p)) {
 				// accepted teleport request	
 				Player from = currentRequest.get(p);
-				Util.coloredMessage(from, Main.lang("TELEPORT_HASACCEPTED").replace("%player%", p.getName()));
-				Util.coloredMessage(p, Main.lang("TELEPORT_ACCEPTED").replace("%player%", from.getName()));
+				Util.coloredMessage(from, configUtils.lang("TELEPORT_HASACCEPTED").replace("%player%", p.getName()));
+				Util.coloredMessage(p, configUtils.lang("TELEPORT_ACCEPTED").replace("%player%", from.getName()));
 				from.teleport(p);
 				currentRequest.remove(p);
 				
 			} else {
-				Util.coloredMessage(p, Main.lang("TELEPORT_NOREQUEST"));
+				Util.coloredMessage(p, configUtils.lang("TELEPORT_NOREQUEST"));
 			}
 			return true;	
 			
@@ -65,11 +69,11 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 		case "tpno":
 			if(currentRequest.containsKey(p)) {
 				Player from = currentRequest.get(p);
-				Util.coloredMessage(from, Main.lang("TELEPORT_HASDENIED").replace("%player%", p.getName()));
-				Util.coloredMessage(p, Main.lang("TELEPORT_DENIED").replace("%player%", from.getName()));
+				Util.coloredMessage(from, configUtils.lang("TELEPORT_HASDENIED").replace("%player%", p.getName()));
+				Util.coloredMessage(p, configUtils.lang("TELEPORT_DENIED").replace("%player%", from.getName()));
 				currentRequest.remove(p);
 			} else {
-				Util.coloredMessage(p, Main.lang("TELEPORT_NOREQUEST"));
+				Util.coloredMessage(p, configUtils.lang("TELEPORT_NOREQUEST"));
 			}
 			return true;	
 			
@@ -85,7 +89,7 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 			String output = "&cPlayer "+args[0]+" is not online.";
 			
 			if(target == p) {
-				output = Main.lang("TELEPORT_SELF");
+				output = configUtils.lang("TELEPORT_SELF");
 			} else if(target != null) {			
 				// Util.consoleMSG(target.getName());
 				
@@ -93,7 +97,7 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 				case "tp":
 				case "tpo":	
 					if(checkPerm(p, label, TP)) {
-						output = Main.lang("TELEPORT_TO").replace("%player%", args[0]);
+						output = configUtils.lang("TELEPORT_TO").replace("%player%", args[0]);
 						p.teleport(target);
 					} else {
 						return true;
@@ -104,7 +108,7 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 					if(checkPerm(p, label, TPHere)) {
 						output = "&aTeleported &f" + args[0] + " &ato &fYou";					
 						target.teleport(p);
-						Util.coloredMessage(target,Main.lang("TELEPORT_TO").replace("%player%", p.getName()));
+						Util.coloredMessage(target,configUtils.lang("TELEPORT_TO").replace("%player%", p.getName()));
 					} else {
 						return true;
 					}
@@ -132,10 +136,10 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 	
 	
 	private void sendRequest(Player from, Player to) {
-		Util.coloredMessage(from, Main.lang("TELEPORT_SENT_REQUEST").replace("%player%", to.getName()));
+		Util.coloredMessage(from, configUtils.lang("TELEPORT_SENT_REQUEST").replace("%player%", to.getName()));
 		
-		Util.coloredMessage(to, Main.lang("TELEPORT_GOT_REQUEST1").replace("%player%", from.getName()));
-		Util.coloredMessage(to, Main.lang("TELEPORT_GOT_REQUEST2").replace("%player%", from.getName()));
+		Util.coloredMessage(to, configUtils.lang("TELEPORT_GOT_REQUEST1").replace("%player%", from.getName()));
+		Util.coloredMessage(to, configUtils.lang("TELEPORT_GOT_REQUEST2").replace("%player%", from.getName()));
 		currentRequest.put(to, from);
 		
 	}
@@ -144,7 +148,7 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 	    if (currentRequest.containsKey(p)) {
 	      Player loser = currentRequest.get(p);
 	      if (loser != null) {
-			  loser.sendMessage(Main.lang("TELEPORT_TIMEOUT"));
+			  loser.sendMessage(configUtils.lang("TELEPORT_TIMEOUT"));
 		  }
 	      currentRequest.remove(p);
 	      return true;

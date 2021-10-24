@@ -22,6 +22,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -33,24 +34,26 @@ public class AntiCraft implements CommandExecutor, Listener {
 	private String Message, bypass, AdminPerm;
 
 	private final Main plugin;
+	private ConfigUtils configUtils;
 	public AntiCraft(Main instance) {
 		plugin = instance;
-
+		configUtils = plugin.getConfigUtils();
+		
 		final String section = "Events.AntiCraft";
 		final String YMLFile = "AntiCraft.yml";
 		if (plugin.enabledInConfig(section+".Enabled")) {
 			plugin.getCommand("AntiCraft").setExecutor(this);
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 			
-			plugin.createConfig(YMLFile);
+			configUtils.createConfig(YMLFile);
 			//config = plugin.getConfig();
-			storage = plugin.getConfigFile(YMLFile);
+			storage = configUtils.getConfigFile(YMLFile);
 			
 			f = new File(plugin.getDataFolder().getAbsolutePath(), YMLFile);
 
 			Message = plugin.getConfig().getString(section+".MSG");
-			bypass = Main.MAINCONFIG.getString(section+".Bypass");
-			AdminPerm = Main.MAINCONFIG.getString(section+".AdminPerm");
+			bypass = plugin.getConfig().getString(section+".Bypass");
+			AdminPerm = plugin.getConfig().getString(section+".AdminPerm");
 		}
 
 	}

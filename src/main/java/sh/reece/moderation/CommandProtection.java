@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -29,14 +30,19 @@ public class CommandProtection implements Listener, CommandExecutor {
 
 	private HashMap<String, Long> FailedPassAttempts;
 
+	private ConfigUtils configUtils;
+	
+
 	public CommandProtection(Main instance) {
 		plugin = instance;
 
 		Section = "Moderation.CommandProtect";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
 			FILENAME = "CommandProtect.yml";
-			plugin.createConfig(FILENAME);	
-			config = plugin.getConfigFile(FILENAME);	
+			configUtils.createConfig(FILENAME);	
+			config = configUtils.getConfigFile(FILENAME);	
 
 			AllowedPlayers = config.getStringList("AllowedPlayers");
 			PasswordView = config.getStringList("AllowedPlayers");
@@ -70,7 +76,7 @@ public class CommandProtection implements Listener, CommandExecutor {
 				Util.coloredMessage(p, "&7&oSTools CMDBypass - Allowing use");	
 				return;
 			} else {
-				Util.coloredMessage(p, Main.lang("COMMAND_PROTECT_DENY").replace("%cmd%", command));
+				Util.coloredMessage(p, configUtils.lang("COMMAND_PROTECT_DENY").replace("%cmd%", command));
 				e.setCancelled(true);
 			}			
 		}

@@ -1,5 +1,6 @@
 package sh.reece.GUI;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -20,6 +21,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.io.File;
 import java.util.*;
 
+import com.zachsthings.libcomponents.config.ConfigUtil;
+
 public class ChatColor implements Listener, CommandExecutor {
 
 	public String command, perm;
@@ -38,7 +41,9 @@ public class ChatColor implements Listener, CommandExecutor {
 	public static List<String> EMPTY_LORE = new ArrayList<String>();
 	public static List<String> RainbowColors;
 
-	public static Main plugin;
+	private ConfigUtils configUtils;
+	private static Main plugin;
+
 	public ChatColor(Main instance) {
 		plugin = instance;
 
@@ -48,16 +53,18 @@ public class ChatColor implements Listener, CommandExecutor {
 		if (plugin.enabledInConfig("Chat.ChatColor.Enabled")) {
 			isEnabled = true;
 
+			configUtils = plugin.getConfigUtils();
+
 			// plugins/ServerTools/DATA
-			plugin.createDirectory("DATA");
+			configUtils.createDirectory("DATA");
 			FILENAME = File.separator + "DATA" + File.separator + "ChatColor.yml";
-			plugin.createFile(FILENAME);
-			config = plugin.getConfigFile(FILENAME);	
+			configUtils.createFile(FILENAME);
+			config = configUtils.getConfigFile(FILENAME);	
 
 			command = "/chatcolor";
 			perm = "Chatcolor.";	
 
-			InvName = Main.lang("CHATCOLOR_GUI");
+			InvName = configUtils.lang("CHATCOLOR_GUI");
 			RainbowColors = plugin.getConfig().getStringList("Chat.ChatColor.RainbowColors");
 			
 			// Creates
@@ -78,7 +85,7 @@ public class ChatColor implements Listener, CommandExecutor {
 		return true;
 	}
 
-	public static void initCreateInv() {
+	public void initCreateInv() {
 		ColorINV = Bukkit.createInventory(null, 2*9, InvName); 
 
 		int loop = 0;
@@ -89,18 +96,18 @@ public class ChatColor implements Listener, CommandExecutor {
 
 			List<String> lore = new ArrayList<String>();
 			lore.add("");
-			lore.add(color + Main.lang("CHATCOLOR_INFO"));
-			lore.add(color + Main.lang("CHATCOLOR_COLOR") + name.substring(2,name.length()));
-			lore.add(color + Main.lang("CHATCOLOR_ACCESS"));
+			lore.add(color + configUtils.lang("CHATCOLOR_INFO"));
+			lore.add(color + configUtils.lang("CHATCOLOR_COLOR") + name.substring(2,name.length()));
+			lore.add(color + configUtils.lang("CHATCOLOR_ACCESS"));
 			lore.add("");
-			lore.add(Main.lang("CHATCOLOR_SELECT"));
+			lore.add(configUtils.lang("CHATCOLOR_SELECT"));
 
 			createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)i ), 
 					loop, color+"&l[!] "+ name, lore);
 
 			loop+=1;
 		}
-		createDisplay(ColorINV, new ItemStack( Material.EXP_BOTTLE), loop, Main.lang("CHATCOLOR_RAINBOW"), EMPTY_LORE);
+		createDisplay(ColorINV, new ItemStack( Material.EXP_BOTTLE), loop, configUtils.lang("CHATCOLOR_RAINBOW"), EMPTY_LORE);
 		
 		// light gray - fixes from people putting in items
 		createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)8 ), 14, " ", EMPTY_LORE);
@@ -147,7 +154,7 @@ public class ChatColor implements Listener, CommandExecutor {
 			colorcode="Rainbow";
 			break;
 		}		
-		//config.set("Data." + uuid, colorcode) && plugin.saveConfig(config, FILENAME);
+		//config.set("Data." + uuid, colorcode) && configUtils.saveConfig(config, FILENAME);
 
 		ChatColorHash.put(uuid, colorcode);
 
@@ -155,7 +162,7 @@ public class ChatColor implements Listener, CommandExecutor {
 		if(colorcode.equalsIgnoreCase("Rainbow")) {
 			colorFormat = rainbowFormat(color);
 		}		
-		Util.coloredMessage(p, Main.lang("CHATCOLOR_SET").replace("%color%", colorFormat));
+		Util.coloredMessage(p, configUtils.lang("CHATCOLOR_SET").replace("%color%", colorFormat));
 
 	}
 	
@@ -185,13 +192,13 @@ public class ChatColor implements Listener, CommandExecutor {
 	}
 	
 	//Saves Chat Color To File
-	public static void saveChatColorToFile() {		
+	public void saveChatColorToFile() {		
 		if(isEnabled) {			
 			if(ChatColorHash.keySet().size() > 0) {
 				for(String uuid : ChatColorHash.keySet()) {
 					config.set("Data." + uuid, ChatColorHash.get(uuid));
 				}
-				plugin.saveConfig(config, FILENAME);
+				configUtils.saveConfig(config, FILENAME);
 			}					
 		}				
 	}

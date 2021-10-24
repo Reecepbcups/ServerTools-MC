@@ -5,7 +5,7 @@
 
   <groupId>sh.reece</groupId>
   <artifactId>servertools</artifactId>
-  <version>5.0.2</version>
+  <version>5.1.1</version>
 
   <name>servertools</name>
   <!-- FIXME change it to the project's website -->
@@ -60,7 +60,7 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-
+    
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>

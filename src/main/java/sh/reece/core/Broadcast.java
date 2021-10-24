@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.command.Command;
@@ -10,6 +11,8 @@ public class Broadcast implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Permission;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+
 	public Broadcast(Main instance) {
 		plugin = instance;
 		
@@ -18,6 +21,7 @@ public class Broadcast implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
 			plugin.getCommand("broadcast").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
 		}
@@ -38,7 +42,7 @@ public class Broadcast implements CommandExecutor{//,TabCompleter,Listener {
 			return true;
 		} 
 		
-		String broadcastMSG = Main.lang("BROADCAST").replace("%msg%", Util.argsToSingleString(0, args));
+		String broadcastMSG = configUtils.lang("BROADCAST").replace("%msg%", Util.argsToSingleString(0, args));
 		Util.coloredBroadcast(broadcastMSG);			
 
 		

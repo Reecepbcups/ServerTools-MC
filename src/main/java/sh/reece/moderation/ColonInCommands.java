@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -12,10 +13,12 @@ public class ColonInCommands implements Listener{
 	private String perm;
 	
 	private final Main plugin;
+	private ConfigUtils configUtils;
 	public ColonInCommands(Main instance) {
 		plugin = instance;
 		
 		if(plugin.enabledInConfig("Moderation.NoColonInCommands.Enabled")) {
+			configUtils = plugin.getConfigUtils();
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     		perm = plugin.getConfig().getString("Moderation.NoColonInCommands.BypassPerm");
     	}
@@ -33,7 +36,7 @@ public class ColonInCommands implements Listener{
 		//if (e.getMessage().split(" ")[0].contains(":")) {
 		if(e.getMessage().indexOf(":") != -1) {
 			if(!e.getPlayer().hasPermission(perm)) {
-				e.getPlayer().sendMessage(Main.lang("NO_COLONS_IN_COMMANDS"));
+				e.getPlayer().sendMessage(configUtils.lang("NO_COLONS_IN_COMMANDS"));
 				e.setCancelled(true);			
 			} 
 		}

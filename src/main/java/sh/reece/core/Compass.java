@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.command.Command;
@@ -11,6 +12,8 @@ public class Compass implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Permission;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+
 	public Compass(Main instance) {
 		plugin = instance;
 		
@@ -19,6 +22,7 @@ public class Compass implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
 			plugin.getCommand("compass").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
 		}
@@ -58,7 +62,7 @@ public class Compass implements CommandExecutor{//,TabCompleter,Listener {
             dir = "North";
         }
 
-		Util.coloredMessage(p, Main.lang("COMPASS").replace("%dir%", dir).replace("%bearing%", bearing+""));
+		Util.coloredMessage(p, configUtils.lang("COMPASS").replace("%dir%", dir).replace("%bearing%", bearing+""));
 		
 		return true;
 	}

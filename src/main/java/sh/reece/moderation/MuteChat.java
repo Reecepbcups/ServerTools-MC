@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -16,14 +17,16 @@ public class MuteChat implements Listener, CommandExecutor {
 	private static Main plugin;
 	public Boolean ChatEnabled;
 	public String MuteChatPerm, MuteChatBypassPerm, ENABLED, DISABLED;
-	
+	private ConfigUtils ConfigUtils;
+
 	public MuteChat(Main instance) {
         plugin = instance;
 
 		ChatEnabled = true;
     	
         if (plugin.enabledInConfig("Moderation.MuteChat.Enabled")) {
-
+			ConfigUtils = plugin.getConfigUtils();
+			
 			MuteChatPerm = plugin.getConfig().getString("Moderation.MuteChat.Permission.Use");
 			MuteChatBypassPerm = plugin.getConfig().getString("Moderation.MuteChat.Permission.Bypass");
 
@@ -39,7 +42,7 @@ public class MuteChat implements Listener, CommandExecutor {
 	public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
 		if(!ChatEnabled) {			
 			if(!(event.getPlayer().hasPermission(MuteChatBypassPerm))) {
-				event.getPlayer().sendMessage(Main.lang("MUTECHAT_ISMUTED"));
+				event.getPlayer().sendMessage(ConfigUtils.lang("MUTECHAT_ISMUTED"));
 				event.setCancelled(true);
 			}	
 		}

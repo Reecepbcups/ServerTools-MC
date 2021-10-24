@@ -233,7 +233,7 @@ public class Util {
 	}
 
 	//private static final Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
-	public static String color(final String message) {
+	public static String color(String message) {
 		// doesnt work bc of 1.8 backwars compatibility and having to be loaded in first
 		// Matcher matcher = HEX_PATTERN.matcher(ChatColor.translateAlternateColorCodes('&', message));
 		// StringBuffer buffer = new StringBuffer();
@@ -241,7 +241,10 @@ public class Util {
 	    //     matcher.appendReplacement(buffer, net.md_5.bungee.api.ChatColor.of(matcher.group(1)).toString());	        
 	    // }
 		// return matcher.appendTail(buffer).toString();	
-		
+		if(message == null){
+			message = "NULL_ISSUE";
+			consoleMSG("NULL ERROR: " + Thread.currentThread().getStackTrace()[2]);
+		}
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 	public static List<String> color(final List<String> list) {

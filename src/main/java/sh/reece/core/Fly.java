@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -12,6 +13,8 @@ public class Fly implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Permission;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+
 	public Fly(Main instance) {
 		plugin = instance;
 		
@@ -20,6 +23,8 @@ public class Fly implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+			
 			plugin.getCommand("fly").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
 			//plugin.getCommand("rename").setTabCompleter(this);
@@ -72,11 +77,11 @@ public class Fly implements CommandExecutor{//,TabCompleter,Listener {
 		if(p.getAllowFlight()) {
 			p.setAllowFlight(false); // makes sure if they are not flying and they toggle, that it saves
 			//p.setFlying(false);
-			Util.coloredMessage(p, Main.lang("FLY_DISABLED").replace("%player%", p.getDisplayName()));
+			Util.coloredMessage(p, configUtils.lang("FLY_DISABLED").replace("%player%", p.getDisplayName()));
 		} else {
 			p.setAllowFlight(true);
 			//p.setFlying(true);
-			Util.coloredMessage(p, Main.lang("FLY_ENABLED").replace("%player%", p.getDisplayName()));
+			Util.coloredMessage(p, configUtils.lang("FLY_ENABLED").replace("%player%", p.getDisplayName()));
 		}
 	}
 	

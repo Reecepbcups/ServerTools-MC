@@ -1,5 +1,6 @@
 package sh.reece.disabled;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,10 +15,13 @@ import org.bukkit.inventory.ItemStack;
 public class DisableDragonEggTP implements Listener {
 
 	private static Main plugin;
+	private ConfigUtils configUtils;
+	
 	public DisableDragonEggTP(Main instance) {
         plugin = instance;
         
         if (plugin.enabledInConfig("Disabled.DisableDragonEggTP.Enabled")) {
+			configUtils = plugin.getConfigUtils();
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		}
 	}
@@ -31,7 +35,7 @@ public class DisableDragonEggTP implements Listener {
 		}		
 	  
 		if(clickedBlock.getType() == Material.DRAGON_EGG && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			event.getPlayer().sendMessage(Main.lang("DISABLED_DRAGON_EGG_TP"));
+			event.getPlayer().sendMessage(configUtils.lang("DISABLED_DRAGON_EGG_TP"));
 			event.setCancelled(true);
 		}
 		

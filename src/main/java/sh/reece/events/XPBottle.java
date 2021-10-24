@@ -1,5 +1,6 @@
 package sh.reece.events;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import net.md_5.bungee.api.ChatColor;
@@ -32,15 +33,16 @@ public class XPBottle implements Listener, CommandExecutor {
 	//private static boolean Vault;	  
 	//private static final Economy econ = null;
 
-
+	private ConfigUtils configUtils;
 
 	public XPBottle(Main instance) {
 		plugin = instance;
 
 		Section = "Misc.Withdraw";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
-			lore.add(Main.lang("XPBOTTLE_BOTTLE_LORE1"));
-			lore.add(Main.lang("XPBOTTLE_BOTTLE_LORE2"));
+			configUtils = plugin.getConfigUtils();
+			lore.add(configUtils.lang("XPBOTTLE_BOTTLE_LORE1"));
+			lore.add(configUtils.lang("XPBOTTLE_BOTTLE_LORE2"));
 
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 			plugin.getCommand("xpbottle").setExecutor(this);
@@ -76,7 +78,7 @@ public class XPBottle implements Listener, CommandExecutor {
 				int currentEXP = Util.getTotalExperience(p);
 				int value = Integer.parseInt(ChatColor.stripColor(item.getItemMeta().getLore().get(0).split(" ")[1]));
 				int xpbottleAMT = item.getAmount();
-				String finalOutput = Main.lang("XPBOTTLE_REDEEEMED").replace("%exp%", Util.formatNumber(value));
+				String finalOutput = configUtils.lang("XPBOTTLE_REDEEEMED").replace("%exp%", Util.formatNumber(value));
 				
 				e.setUseItemInHand(Result.DENY);
 				
@@ -116,7 +118,7 @@ public class XPBottle implements Listener, CommandExecutor {
 		String EXP = ""+Util.getTotalExperience(p);
 
 		p.sendMessage("");        
-		Util.coloredMessage(p, Main.lang("XPBOTTLE_XPCMD").replace("%exp%", EXP));
+		Util.coloredMessage(p, configUtils.lang("XPBOTTLE_XPCMD").replace("%exp%", EXP));
 		p.sendMessage("");        
 	}
 
@@ -165,13 +167,13 @@ public class XPBottle implements Listener, CommandExecutor {
 						return true;
 					}
 
-					Util.coloredMessage(p, Main.lang("XPBOTTLE_WITHDREW").replace("%xp%", XPWithdraw+""));
+					Util.coloredMessage(p, configUtils.lang("XPBOTTLE_WITHDREW").replace("%xp%", XPWithdraw+""));
 					Util.setTotalExperience(p, currentEXP - XPWithdraw);
 					p.getInventory().addItem(makeBottle(XPWithdraw, p.getName()));
 
 
 				} catch (NumberFormatException e) {
-					Util.coloredMessage(p, Main.lang("XPBOTTLE_ONLY_WHOLE"));
+					Util.coloredMessage(p, configUtils.lang("XPBOTTLE_ONLY_WHOLE"));
 					return true;
 				}
 			}

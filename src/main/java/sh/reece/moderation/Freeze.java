@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -24,10 +25,12 @@ public class Freeze implements Listener, CommandExecutor {
 	public String FreezePerm;
 	public List<UUID> frozenPlayerList;
 	private final List<String> Messages;
-	
+	private ConfigUtils configUtils;
+
 	public Freeze(Main instance) {
         plugin = instance;
-
+		configUtils = plugin.getConfigUtils();
+		
 		FreezePerm = plugin.getConfig().getString("Moderation.Freeze.Permission");
 
 		frozenPlayerList = new ArrayList<UUID>();
@@ -72,7 +75,7 @@ public class Freeze implements Listener, CommandExecutor {
 	  		
 	  		if(Bukkit.getServer().getPlayer(p.getName()) != null) {
 	  			Player player = (Player) p;
-	  			Util.coloredMessage(player, Main.lang("FREEZE_UNFROZEN"));
+	  			Util.coloredMessage(player, configUtils.lang("FREEZE_UNFROZEN"));
 	  		}
 	  		
 		} else {
@@ -141,7 +144,7 @@ public class Freeze implements Listener, CommandExecutor {
 	@EventHandler
   	public void playerChat(AsyncPlayerChatEvent e) {
 		if(frozenPlayerList.contains(e.getPlayer().getUniqueId())) {
-	  		e.getPlayer().sendMessage(Main.lang("FREEZE_DENYCHAT"));
+	  		e.getPlayer().sendMessage(configUtils.lang("FREEZE_DENYCHAT"));
 	  		e.setCancelled(true);
 	  	}
 	}
@@ -150,7 +153,7 @@ public class Freeze implements Listener, CommandExecutor {
 	@EventHandler
 	public void onTeleport(PlayerTeleportEvent e) {
 		if(frozenPlayerList.contains(e.getPlayer().getUniqueId())) {
-			e.getPlayer().sendMessage(Main.lang("FREEZE_DENYTP"));
+			e.getPlayer().sendMessage(configUtils.lang("FREEZE_DENYTP"));
 			e.setCancelled(true);
 		}
 	}

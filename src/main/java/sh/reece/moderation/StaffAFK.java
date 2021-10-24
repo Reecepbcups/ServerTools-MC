@@ -13,7 +13,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
+import sh.reece.utiltools.ConfigUpdater;
 import sh.reece.utiltools.Util;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -27,13 +29,14 @@ public class StaffAFK implements CommandExecutor, Listener {
 	public static String FILE_NAME;
 	
 	public FileConfiguration config, MAINCONFIG;
-	
+	private ConfigUtils ConfigUtils;
+
 	public StaffAFK(Main plugin) {
 	    this.plugin = plugin;
 	    
 	    if (plugin.enabledInConfig("Moderation.StaffAFK.Enabled")) {
 	    	
-	    	
+	    	ConfigUtils = plugin.getConfigUtils();
 	    	
 	    	MAINCONFIG = plugin.getConfig();
 	    	this.StaffAFKGroup = MAINCONFIG.getString("Moderation.StaffAFK.StaffAFKGroup");
@@ -41,9 +44,9 @@ public class StaffAFK implements CommandExecutor, Listener {
 		    this.Permission = MAINCONFIG.getString("Moderation.StaffAFK.Permission");
 
 		    FILE_NAME = File.separator + "DATA" + File.separator + "StaffAFKDatabase.yml";
-		    plugin.createDirectory("DATA");			
-			plugin.createFile(FILE_NAME);
-			config = plugin.getConfigFile(FILE_NAME);					
+		    ConfigUtils.createDirectory("DATA");			
+			ConfigUtils.createFile(FILE_NAME);
+			config = ConfigUtils.getConfigFile(FILE_NAME);					
 		    
 			plugin.getCommand("staffafk").setExecutor(this);
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
@@ -64,7 +67,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 				Util.console(MAINCONFIG.getString("Moderation.StaffAFK.RemoveAFK.2").replace("%player%", p.getName()).replace("%StaffAFKGroupName%", StaffAFKGroup));
 				
 				config.set(p.getUniqueId().toString(), null);
-				plugin.saveConfig(config, FILE_NAME);
+				ConfigUtils.saveConfig(config, FILE_NAME);
 				
 			}
 		}
@@ -129,7 +132,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 			config.set(p.getUniqueId().toString(), null);
 		}
 		
-		plugin.saveConfig(config, FILE_NAME);
+		ConfigUtils.saveConfig(config, FILE_NAME);
 		
 		
 		return true;

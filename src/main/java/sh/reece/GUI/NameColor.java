@@ -1,5 +1,6 @@
 package sh.reece.GUI;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -34,7 +35,8 @@ public class NameColor implements Listener, CommandExecutor {
 	// 2, 12, 15 - REMOVED= pink1, brown, black
 	public static List<String> Values = Arrays.asList("&fWhite", "&6Orange", "&dPink", "&bAqua","&eYellow","&aLime", "&dPink","&8Dark Gray","&7Gray", "&3Cyan","&5Purple","&1Blue","&fBrown","&2Green","&cRed","&0Black");
 	public static List<String> EMPTY_LORE = new ArrayList<String>();
-
+	private ConfigUtils configUtils;
+	
 	public static Main plugin;
 	public NameColor(Main instance) {
 		plugin = instance;
@@ -45,16 +47,17 @@ public class NameColor implements Listener, CommandExecutor {
 		if (plugin.enabledInConfig("Chat.NameColor.Enabled")) {
 			isEnabled = true;
 
+			configUtils = plugin.getConfigUtils();
 			// plugins/ServerTools/DATA
-//			plugin.createDirectory("DATA");
+//			configUtils.createDirectory("DATA");
 //			FILENAME = File.separator + "DATA" + File.separator + "NameColor.yml";
-//			plugin.createFile(FILENAME);
-//			config = plugin.getConfigFile(FILENAME);	
+//			configUtils.createFile(FILENAME);
+//			config = configUtils.getConfigFile(FILENAME);	
 
 			command = "/namecolor";
 			perm = "Namecolor.";	
 
-			InvName = Main.lang("NAMECOLOR_GUI");
+			InvName = configUtils.lang("NAMECOLOR_GUI");
 
 			// Creates
 			initCreateInv();
@@ -72,7 +75,7 @@ public class NameColor implements Listener, CommandExecutor {
 		return true;
 	}
 
-	public static void initCreateInv() {
+	public void initCreateInv() {
 		ColorINV = Bukkit.createInventory(null, 2*9, InvName); 
 
 		int loop = 0;
@@ -83,11 +86,11 @@ public class NameColor implements Listener, CommandExecutor {
 
 			List<String> lore = new ArrayList<String>();
 			lore.add("");
-			lore.add(color + Main.lang("NAMECOLOR_INFO"));
-			lore.add(color + Main.lang("NAMECOLOR_COLOR") + name.substring(2,name.length()));
-			lore.add(color + Main.lang("NAMECOLOR_ACCESS"));
+			lore.add(color + configUtils.lang("NAMECOLOR_INFO"));
+			lore.add(color + configUtils.lang("NAMECOLOR_COLOR") + name.substring(2,name.length()));
+			lore.add(color + configUtils.lang("NAMECOLOR_ACCESS"));
 			lore.add("");
-			lore.add(Main.lang("NAMECOLOR_SELECT"));
+			lore.add(configUtils.lang("NAMECOLOR_SELECT"));
 
 			createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)i ), 
 					loop, color+"&l[!] "+ name, lore);
@@ -139,7 +142,7 @@ public class NameColor implements Listener, CommandExecutor {
 		}		
 		
 		NameColorHash.put(uuid, colorcode);
-		Util.coloredMessage(p, Main.lang("NAMECOLOR_SET").replace("%color%", colorcode+color));
+		Util.coloredMessage(p, configUtils.lang("NAMECOLOR_SET").replace("%color%", colorcode+color));
 	}
 
 	@EventHandler

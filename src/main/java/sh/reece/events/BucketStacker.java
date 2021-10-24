@@ -45,19 +45,19 @@ public class BucketStacker implements Listener{//, CommandExecutor {
 			worldguard = false;
 			superiorskyblock = false;
 
-			//config = plugin.getConfigFile("config.yml");
+			//config = configUtils.getConfigFile("config.yml");
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 
-			if(Main.MAINCONFIG.contains(Section+".worldguard") && 
-					Main.MAINCONFIG.getString(Section+".worldguard").equalsIgnoreCase("true")) {
+			if(plugin.getConfig().contains(Section+".worldguard") && 
+					plugin.getConfig().getString(Section+".worldguard").equalsIgnoreCase("true")) {
 				worldguard = true;
 				if(Util.isPluginInstalledOnServer("WorldGuard", "BucketStacker")) {
 					wg = (WorldGuardPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
 				}
 			} 
 
-			if(Main.MAINCONFIG.contains(Section+".superiorskyblock") && 
-					Main.MAINCONFIG.getString(Section+".superiorskyblock").equalsIgnoreCase("true")) {				
+			if(plugin.getConfig().contains(Section+".superiorskyblock") && 
+			plugin.getConfig().getString(Section+".superiorskyblock").equalsIgnoreCase("true")) {				
 				if(Util.isPluginInstalledOnServer("SuperiorSkyblock2", "BucketStacker")) {
 					superiorskyblock = true;
 					superior = (SuperiorSkyblock) Bukkit.getServer().getPluginManager().getPlugin("SuperiorSkyblock2");

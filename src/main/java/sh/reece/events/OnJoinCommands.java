@@ -25,12 +25,12 @@ public class OnJoinCommands implements Listener {
 		String section = "Misc.OnJoinCommands";
 		if (plugin.enabledInConfig(section+".Enabled")) {
 
-			//FileConfiguration config = Main.MAINCONFIG;
-			FirstJoinCMDS = Main.MAINCONFIG.getStringList(section+".FirstUniqueJoin.CMDS");
-			PlayerRunOnJoin = Main.MAINCONFIG.getStringList(section+".PlayerRunCommands.CMDS");
+			//FileConfiguration config = plugin.getConfig();
+			FirstJoinCMDS = plugin.getConfig().getStringList(section+".FirstUniqueJoin.CMDS");
+			PlayerRunOnJoin = plugin.getConfig().getStringList(section+".PlayerRunCommands.CMDS");
 
-			isFirstJoinEnabled = Main.MAINCONFIG.getString(section+".FirstUniqueJoin.Enabled").equalsIgnoreCase("true");
-			isPlayerRunEnabled = Main.MAINCONFIG.getString(section+".PlayerRunCommands.Enabled").equalsIgnoreCase("true");
+			isFirstJoinEnabled = plugin.getConfig().getString(section+".FirstUniqueJoin.Enabled").equalsIgnoreCase("true");
+			isPlayerRunEnabled = plugin.getConfig().getString(section+".PlayerRunCommands.Enabled").equalsIgnoreCase("true");
 
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		}

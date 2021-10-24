@@ -1,5 +1,6 @@
 package sh.reece.GUI;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import net.md_5.bungee.api.ChatColor;
@@ -37,13 +38,16 @@ public class Tags implements CommandExecutor, Listener { //
 
 	private String selectedmsg, removedmsg, giveTagCMD;
 	//public static LuckPerms luckPerms;
-
+	
+	private ConfigUtils ConfigUtils;
+	
 	public Tags(Main instance) {
 		plugin = instance;
 
 		Section = "Chat.Tags";        
 
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			ConfigUtils = plugin.getConfigUtils();
 
 			// vault not instead
 			if(!Util.isPluginInstalledOnServer("Vault", "TAGS")) {
@@ -54,8 +58,8 @@ public class Tags implements CommandExecutor, Listener { //
 			giveTagCMD  = plugin.getConfig().getString(Section+".giveTagCmd");
 			
 			FILENAME = "Tags.yml";
-			plugin.createFile(FILENAME);
-			tagsconfig = plugin.getConfigFile(FILENAME);	
+			ConfigUtils.createFile(FILENAME);
+			tagsconfig = ConfigUtils.getConfigFile(FILENAME);	
 			InvName = Util.color("&lTags");
 
 			selectedmsg = plugin.getConfig().getString(Section+".selected");
@@ -91,7 +95,7 @@ public class Tags implements CommandExecutor, Listener { //
 				tagsconfig.set("Tags.Captain", "&8&l<&b&lCaptain&8&l>");
 				tagsconfig.set("Tags.CactusGod", "&8&l<&2Cactus&aGod&8&l>");
 				tagsconfig.set("Tags.Tryhard", "&8&l<&4&lTryhard&8&l>");
-				plugin.saveConfig(tagsconfig, "Tags.yml");
+				ConfigUtils.saveConfig(tagsconfig, "Tags.yml");
 			}
 
 		}
@@ -124,20 +128,20 @@ public class Tags implements CommandExecutor, Listener { //
 			Material itemmat;
 			if(p.hasPermission(perm)) {
 				itemmat = Material.NAME_TAG;
-				lore.add(Main.lang("TAGS_AVAILABLE"));
-				lore.add(Main.lang("TAGS_CLICK_TO_EQUIP"));
+				lore.add(ConfigUtils.lang("TAGS_AVAILABLE"));
+				lore.add(ConfigUtils.lang("TAGS_CLICK_TO_EQUIP"));
 			} else {
 				itemmat = Material.BARRIER;
-				lore.add(Main.lang("TAGS_LOCKED"));
-				lore.add(Main.lang("TAGS_NO_ACCESS"));
+				lore.add(ConfigUtils.lang("TAGS_LOCKED"));
+				lore.add(ConfigUtils.lang("TAGS_NO_ACCESS"));
 			}	
 
 
-			createDisplay(tagsGUI, itemmat, i, Main.lang("TAG_GUI_FORMAT").replace("%tag%", tag), lore);
+			createDisplay(tagsGUI, itemmat, i, ConfigUtils.lang("TAG_GUI_FORMAT").replace("%tag%", tag), lore);
 			i+=1;
 		}
 		
-		createDisplay(tagsGUI, Material.ANVIL, 40, Main.lang("TAG_CLEAR"), new ArrayList<String>());
+		createDisplay(tagsGUI, Material.ANVIL, 40, ConfigUtils.lang("TAG_CLEAR"), new ArrayList<String>());
 		p.openInventory(tagsGUI);
 	}
 
@@ -172,7 +176,7 @@ public class Tags implements CommandExecutor, Listener { //
 					Util.console(giveTagCMD);
 					
 					if(Bukkit.getPlayer(args[1]).isOnline()) {
-						Util.coloredMessage(Bukkit.getPlayer(args[1]), Main.lang("TAG_RECEIVED").replace("%tag%", args[2]));
+						Util.coloredMessage(Bukkit.getPlayer(args[1]), ConfigUtils.lang("TAG_RECEIVED").replace("%tag%", args[2]));
 					}					
 					sender.sendMessage(Util.color("&a[!] Gave " + args[1] + " the " + args[2] + " tag!"));
 					Util.console("lp user "+args[1]+" permission set tags."+args[2]);
@@ -185,7 +189,7 @@ public class Tags implements CommandExecutor, Listener { //
 			case "set": // sender.sendMessage(Util.color(""));
 				
 				if(!sender.hasPermission(CustomTagPerm)) {
-					sender.sendMessage(Main.lang("TAG_DENY_CUSTOM"));
+					sender.sendMessage(ConfigUtils.lang("TAG_DENY_CUSTOM"));
 					return true;
 				}
 				
@@ -255,7 +259,7 @@ public class Tags implements CommandExecutor, Listener { //
 		}
 		
 		tagsconfig.set("Tags."+name, tag);
-		plugin.saveConfig(tagsconfig, "Tags.yml");
+		ConfigUtils.saveConfig(tagsconfig, "Tags.yml");
 		Util.coloredMessage(p, "&a[!] Created tag &r" + tag + "&a successfully!");
 		
 	}

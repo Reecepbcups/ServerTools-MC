@@ -58,7 +58,7 @@
 // 					//Util.consoleMSG("Player clicked with correct key!");				
 // 					Util.removeItemFromPlayer(p, handItem, 1);
 
-// 					FileConfiguration f = plugin.getConfigFile("crates"+File.separator+crate+".yml");				
+// 					FileConfiguration f = configUtils.getConfigFile("crates"+File.separator+crate+".yml");				
 // 					//GuiListener.openCrateInv(p, Util.color(f.getString("Name")));
 
 // 				} else {
@@ -84,7 +84,7 @@
 // 				//Util.consoleMSG("Open preview of crate at location");
 
 // 				String crate = Crate.getCrateAtLocation(cLoc);
-// 				//FileConfiguration f = plugin.getConfigFile("crates"+File.separator+crate+".yml");				
+// 				//FileConfiguration f = configUtils.getConfigFile("crates"+File.separator+crate+".yml");				
 // 				//GuiListener.openCrateInv(e.getPlayer(), Util.color(f.getString("Name")));
 
 // 				playerPageNumber.put(e.getPlayer().getName(), 1);
@@ -106,7 +106,7 @@
 
 
 // 	public void createPreviewGUI(Player p, String CrateName) {	
-// 		FileConfiguration f = plugin.getConfigFile("crates"+File.separator+CrateName+".yml");				
+// 		FileConfiguration f = configUtils.getConfigFile("crates"+File.separator+CrateName+".yml");				
 // 		Set<String> keys = f.getConfigurationSection("rewards").getKeys(false); // rare1, rare2, rare3 etc
 
 // 		/*
@@ -198,7 +198,7 @@
 
 
 // 	public List<Object> getRewardObject(String Cratename, String key) {
-// 		FileConfiguration f = plugin.getConfigFile("crates"+File.separator+Cratename+".yml");
+// 		FileConfiguration f = configUtils.getConfigFile("crates"+File.separator+Cratename+".yml");
 // 		Material mat = Material.valueOf(f.getString("rewards."+key+".Material").toUpperCase());
 // 		String name = Util.color(f.getString("rewards."+key+".Name"));
 // 		List<String> Lore = f.getStringList("rewards."+key+".Lore");

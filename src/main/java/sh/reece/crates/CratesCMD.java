@@ -121,13 +121,13 @@
 // 				Util.consoleMSG("set block to "+crateName + bl);
 // 				Util.coloredMessage(((Player) sender), "&aSet the crate: "+crateName+" to the "+targetBlock.getType());
 
-// 				f = plugin.getConfigFile("crates"+File.separator+Crate.getCrateAtLocation(bl)+".yml");	
+// 				f = configUtils.getConfigFile("crates"+File.separator+Crate.getCrateAtLocation(bl)+".yml");	
 // 				Util.consoleMSG(Crate.getCrateAtLocation(bl));
 				
 // 				List<String> locations = f.getStringList("CrateLocations");
 // 				locations.add(Crate.locationToStringFormat(bl));
 // 				f.set("CrateLocations", locations);
-// 				plugin.saveConfig(f, "crates"+File.separator+Crate.getCrateAtLocation(bl)+".yml");				
+// 				configUtils.saveConfig(f, "crates"+File.separator+Crate.getCrateAtLocation(bl)+".yml");				
 // 				break;
 				
 // 			case "open":	
@@ -138,7 +138,7 @@
 // 					return true;
 // 				}
 			
-// 				//GuiListener.openCrateInv(((Player) sender), Util.color(plugin.getConfigFile("crates"+File.separator+cName+".yml").getString("Name")));
+// 				//GuiListener.openCrateInv(((Player) sender), Util.color(configUtils.getConfigFile("crates"+File.separator+cName+".yml").getString("Name")));
 				
 // 			default:
 // 				break;

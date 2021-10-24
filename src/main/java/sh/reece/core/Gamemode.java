@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -14,6 +15,8 @@ public class Gamemode implements CommandExecutor{//,TabCompleter,Listener {
 
 	String Section, Creative, Survival, Spectator, Adventure;
 	private final Main plugin;
+	private ConfigUtils configUtils;
+	
 	public Gamemode(Main instance) {
 		plugin = instance;
 
@@ -22,6 +25,8 @@ public class Gamemode implements CommandExecutor{//,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
+
 			plugin.getCommand("gamemode").setExecutor(this);
 			
 			Creative = plugin.getConfig().getString(Section+".Permissions.Creative");
@@ -120,28 +125,28 @@ public class Gamemode implements CommandExecutor{//,TabCompleter,Listener {
 	
 
 	public boolean survival(Player target) {
-		if(checkPerm(target, Survival, Main.lang("GAMEMODE_SURVIVAL"))) {
+		if(checkPerm(target, Survival, configUtils.lang("GAMEMODE_SURVIVAL"))) {
 			target.setGameMode(GameMode.SURVIVAL);
 			return true;
 		} 
 		return false;
 	}
 	public boolean creative(Player target) {
-		if(checkPerm(target, Creative, Main.lang("GAMEMODE_CREATIVE"))) {
+		if(checkPerm(target, Creative, configUtils.lang("GAMEMODE_CREATIVE"))) {
 			target.setGameMode(GameMode.CREATIVE);
 			return true;
 		} 
 		return false;
 	}
 	public boolean adventure(Player target) {
-		if(checkPerm(target, Adventure, Main.lang("GAMEMODE_ADVENTURE"))) {
+		if(checkPerm(target, Adventure, configUtils.lang("GAMEMODE_ADVENTURE"))) {
 			target.setGameMode(GameMode.ADVENTURE);
 			return true;
 		}  
 		return false;
 	}
 	public boolean spectator(Player target) {
-		if(checkPerm(target, Spectator, Main.lang("GAMEMODE_SPECTATOR"))) {
+		if(checkPerm(target, Spectator, configUtils.lang("GAMEMODE_SPECTATOR"))) {
 			target.setGameMode(GameMode.SPECTATOR);
 			return true;
 		} 
@@ -154,7 +159,7 @@ public class Gamemode implements CommandExecutor{//,TabCompleter,Listener {
 	public boolean checkPerm(Player p, String Perm, String PermFormat) {
 		// if fromConspole, then it lets console change the GM no matter their perm level
 		if(fromConsole || p.hasPermission(Perm)) {	
-			Util.coloredMessage(p, Main.lang("GAMEMODE_CHANGED").replace("%gamemode%", PermFormat));
+			Util.coloredMessage(p, configUtils.lang("GAMEMODE_CHANGED").replace("%gamemode%", PermFormat));
 			Util.consoleMSG("&e&l[ServerTools]&f Changed " + p.getName() +"'s gamemode to "+ PermFormat);
 			return true;
 		} 

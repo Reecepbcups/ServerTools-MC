@@ -28,7 +28,7 @@ public class JoinMOTD implements Listener {
         	MOTDMsg = plugin.getConfig().getStringList(Section+".MOTD");
         	
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);   
-    		papiSupport = Main.isPAPIEnabled();
+    		papiSupport = plugin.isPAPIEnabled();
     	}
 	}
 	

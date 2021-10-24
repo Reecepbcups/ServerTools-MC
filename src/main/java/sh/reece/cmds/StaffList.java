@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffectType;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -25,6 +26,7 @@ public class StaffList implements CommandExecutor {
 	private FileConfiguration config;
 	private String Section;
 	private Set<String> groups;	
+	private ConfigUtils configUtils;
 	
 	// owner: "&8&l<&d&lOWNER&8&l> &f» &d"
 	private HashMap<String, String> groupFormating = new HashMap<String, String>();
@@ -34,6 +36,7 @@ public class StaffList implements CommandExecutor {
         
         Section = "Commands.StaffList";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
         	
         	config = plugin.getConfig();
 
@@ -42,8 +45,8 @@ public class StaffList implements CommandExecutor {
         	
         	// grabs non cached copy of config file to not post MemorySection errors in chat.
         	
-        	if(plugin.getConfigFile("config.yml").contains(Section+".groups")) {
-        		groups = plugin.getConfigFile("config.yml").getConfigurationSection(Section+".groups").getKeys(false);
+        	if(configUtils.getConfigFile("config.yml").contains(Section+".groups")) {
+        		groups = configUtils.getConfigFile("config.yml").getConfigurationSection(Section+".groups").getKeys(false);
         	} else {
         		Util.consoleMSG("&c[!] &4NO GROUPS DEFINED AT " + Section+".groups");
         		return;

@@ -1,5 +1,6 @@
 package sh.reece.events;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import net.md_5.bungee.api.ChatColor;
@@ -35,18 +36,20 @@ public class Withdraw implements Listener, CommandExecutor {
 	private static Economy econ = null;
 	private boolean debug;
 	
+	private ConfigUtils configUtils;
+
 	public Withdraw(Main instance) {
 		plugin = instance;
 
 		Section = "Misc.Withdraw";     
 		
 		if(plugin.enabledInConfig(Section+".Enabled")) {
-
+			configUtils = plugin.getConfigUtils();
 			//Vault = setupEco();
 			setupEco();
 			
-			lore.add(Main.lang("WITHDRAW_NOTE_LORE1"));
-			lore.add(Main.lang("WITHDRAW_NOTE_LORE2"));
+			lore.add(configUtils.lang("WITHDRAW_NOTE_LORE1"));
+			lore.add(configUtils.lang("WITHDRAW_NOTE_LORE2"));
 
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 			plugin.getCommand("withdraw").setExecutor(this);
@@ -99,7 +102,7 @@ public class Withdraw implements Listener, CommandExecutor {
 			Long amount = Long.parseLong(value.split("__d__")[1]);
 			//Util.consoleMSG(value);			
 	
-			String finalOutput = Main.lang("WITHDRAW_MONEY") + Util.formatNumber(amount);
+			String finalOutput = configUtils.lang("WITHDRAW_MONEY") + Util.formatNumber(amount);
 			int noteAMT = note.getAmount();
 			
 			if(p.isSneaking()) {	// if player sneaks, let them open more notes							
@@ -141,7 +144,7 @@ public class Withdraw implements Listener, CommandExecutor {
 		String string_bal = Util.formatNumber(econ.getBalance((OfflinePlayer)p));
 
 		p.sendMessage("");        
-		Util.coloredMessage(p, Main.lang("WITHDRAW_BALANCE").replace("%bal%", string_bal));
+		Util.coloredMessage(p, configUtils.lang("WITHDRAW_BALANCE").replace("%bal%", string_bal));
 		p.sendMessage("");        
 	}
 
@@ -188,12 +191,12 @@ public class Withdraw implements Listener, CommandExecutor {
 					// if player does not have enough money, dont allow withdraw
 					if(!(currentbal >= Amount)) {
 						debugStatement("&c"+p.getName()+" You do not have enough money to withdraw $"+Amount);
-						Util.coloredMessage(p, Main.lang("WITHDRAW_NOTENOUGH") + Util.formatNumber(Amount));
+						Util.coloredMessage(p, configUtils.lang("WITHDRAW_NOTENOUGH") + Util.formatNumber(Amount));
 						return true;
 					}
 
 					if(Amount <= 0) {
-						Util.coloredMessage(p, Main.lang("WITHDRAW_POSITIVE_NUMBER"));
+						Util.coloredMessage(p, configUtils.lang("WITHDRAW_POSITIVE_NUMBER"));
 						debugStatement("&c"+p.getName()+" tried to withdraw <= 0. ("+Amount+")");
 						return true;
 					}
@@ -201,7 +204,7 @@ public class Withdraw implements Listener, CommandExecutor {
 					EconomyResponse response = econ.withdrawPlayer((OfflinePlayer)p, Amount);
 
 					if (response.type.equals(EconomyResponse.ResponseType.SUCCESS)) {
-						Util.coloredMessage(p, Main.lang("WITHDRAW_SUCCESSFUL") + Util.formatNumber(Amount));
+						Util.coloredMessage(p, configUtils.lang("WITHDRAW_SUCCESSFUL") + Util.formatNumber(Amount));
 						debugStatement("&a"+p.getName()+" withdrew "+Amount +" successfully");
 						p.getInventory().addItem(makeNote(Amount, p.getName()));
 					} else {
@@ -210,7 +213,7 @@ public class Withdraw implements Listener, CommandExecutor {
 					}
 				} catch (NumberFormatException e) {
 					debugStatement("&a"+p.getName()+" did not enter a whole number...");
-					Util.coloredMessage(p, Main.lang("WITHDRAW_ONLY_WHOLE"));
+					Util.coloredMessage(p, configUtils.lang("WITHDRAW_ONLY_WHOLE"));
 					return true;
 				}
 			}

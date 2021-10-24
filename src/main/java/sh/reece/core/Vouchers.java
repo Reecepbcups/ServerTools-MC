@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 
 public class Vouchers implements Listener, CommandExecutor, TabCompleter {
@@ -45,15 +46,17 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 	private static final HashMap<String, List<Object>> VOUCHERS = new HashMap<String, List<Object>>();
 	//private static List<Inventory> previewVouchersGUIs = new ArrayList<Inventory>();
 	//private static HashMap<String, Integer> playerPreviewPage = new HashMap<String, Integer>();
-	
+	private ConfigUtils configUtils;
+
 	public Vouchers(Main instance) {
         plugin = instance;
         
         Section = "Vouchers";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
         	
-        	plugin.createConfig("Vouchers.yml");
-        	config = plugin.getConfigFile("Vouchers.yml");	
+        	configUtils.createConfig("Vouchers.yml");
+        	config = configUtils.getConfigFile("Vouchers.yml");	
 
         	if(!(config.getKeys(false).size() > 0)) {
         		Util.consoleMSG("&c[ServerTool-Vouchers] No Vouchers found in the Vouchers.yml!");
@@ -61,8 +64,8 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
         	}        	
         	
         	voucherKeys = config.getKeys(false);
-        	Glowing = plugin.getConfigFile("config.yml").getBoolean(Section+".Options.Glowing");
-        	RedeemMessage = Util.color(plugin.getConfigFile("config.yml").getString(Section+".Options.RedeemMessage"));       
+        	Glowing = config.getBoolean(Section+".Options.Glowing");
+        	RedeemMessage = Util.color(config.getString(Section+".Options.RedeemMessage"));       
         	      
         	createPreviewGUI();
         	
@@ -74,7 +77,7 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 	
 	public void createPreviewGUI() {
 		
-		InvName = Main.lang("VOUCHER_GUI_NAME");
+		InvName = configUtils.lang("VOUCHER_GUI_NAME");
     	GUI = Bukkit.createInventory(null, 54, InvName);
     	
     	//int slot = 0;

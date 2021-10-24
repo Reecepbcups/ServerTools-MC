@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -20,7 +21,8 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 	private final String Section;
 	private String Permission;
 	private Boolean allowUsage;
-
+	private ConfigUtils configUtils;
+	
 	public Visibility(Main instance) {
 		plugin = instance;
 
@@ -110,7 +112,7 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 	
 	public void toggleView(Player p, Boolean hidePlayer) {
 		if(allowUsage == false) {
-			Util.coloredMessage(p, Main.lang("VISIBILITY_DISABLED"));
+			Util.coloredMessage(p, configUtils.lang("VISIBILITY_DISABLED"));
 			return;
 		}
 		
@@ -127,9 +129,9 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 		}	
 		
 		if(hidePlayer) {
-			Util.coloredMessage(p, Main.lang("VISIBILITY_STAFF_ONLY"));
+			Util.coloredMessage(p, configUtils.lang("VISIBILITY_STAFF_ONLY"));
 		} else {
-			Util.coloredMessage(p, Main.lang("VISIBILITY_EVERYONE"));
+			Util.coloredMessage(p, configUtils.lang("VISIBILITY_EVERYONE"));
 		}
 		
 		
