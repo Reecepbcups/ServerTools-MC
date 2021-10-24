@@ -80,7 +80,9 @@ Disabled:
     Enabled: true  
   DisablePhantomSpawn:
     Enabled: true   
-  
+  DisableIceMelt:
+    Enabled: true
+
   DisableItemBurn:
     Enabled: true
     reasons:
@@ -163,6 +165,12 @@ Core:
     Permission: essentials.enderchest
     ViewOthers: essentials.enderchest.others
     ModifyOthers: essentials.enderchest.modify
+  Repair:
+    Enabled: true
+    singlerepaircost: 5000
+    repairall:
+      permission: essentials.repairall
+      cost: 15000
   Compass:
     Enabled: true
     Permission: essentials.compass
