@@ -176,6 +176,13 @@ Core:
   Compass:
     Enabled: true
     Permission: essentials.compass
+  Extinguish:
+    Enabled: true
+    Permission: essentials.ext
+    StaffPermission: essentials.ext.others
+  Hat:
+    Enabled: true
+    Permission: essentials.hat
   Workbench:
     Enabled: true
     Permission: essentials.workbench

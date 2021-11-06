@@ -1,5 +1,5 @@
 name: ServerTools
-version: 5.1.1
+version: 5.2.0
 author: Reecepbcups
 main: sh.reece.tools.Main
 description: A lot of little tools which make management easier
@@ -18,6 +18,13 @@ commands:
     description: Repair tools back to full durability!
     usage: "Usage: /<command> [all]"
     aliases: [fix]
+  extinguish:
+    description: Remove fire from a player
+    usage: "Usage: /<command> [all]"
+    aliases: [ext]
+  hat:
+    description: Place the item in your hand on your head
+    usage: "Usage: /<command>"
   staffafk:
     description: Allow Staff to AFK
     permission: staffafk.use

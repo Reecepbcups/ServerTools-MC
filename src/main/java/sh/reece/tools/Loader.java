@@ -76,6 +76,9 @@ public class Loader {
 		new Repair(plugin);
 		reeceEnder = new Enderchest(plugin);
 		reeceInvSee = new InvSee(plugin);
+		new Hat(plugin);
+		new Extinguish(plugin);
+
 		executionTimer.info("Core Features");
 	}
 
