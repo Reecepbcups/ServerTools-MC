@@ -109,7 +109,10 @@ public class Util {
 		if (Bukkit.getServer().getPluginManager().getPlugin(pluginName)!= null) {
 			return true;
 		} else {
-			Util.consoleMSG("&cYou need &n'" + pluginName + "'&c installed to use &n" + moduleName + "&c with ServerTools!");
+			if(!moduleName.equalsIgnoreCase("N/A")){
+				String msg = "You need &n'" + pluginName + "'&c installed to use &n" + moduleName;
+				Util.consoleMSG("&c" + msg + "&c with ServerTools!");
+			}			
 			return false;
 		}
 	}
@@ -284,7 +287,7 @@ public class Util {
 	public static final long MIN = 60000L;
 	public static final long HOUR = 3600000L;
 	public static final long DAYS = 86400000L;
-	public static String onPlaceholderRequest(final String argument) {
+	public static String placeholderTimeRequest(final String argument) {
 		long timestamp;
 		try {
 			timestamp = Long.parseLong(argument) * 1000L;

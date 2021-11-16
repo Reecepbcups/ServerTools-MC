@@ -2,6 +2,9 @@ package sh.reece.moderation;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,7 +18,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
-import sh.reece.utiltools.ConfigUpdater;
 import sh.reece.utiltools.Util;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -23,7 +25,7 @@ import net.luckperms.api.model.user.User;
 public class StaffAFK implements CommandExecutor, Listener {
 		
 	//LuckPerms luckPerms = LuckPermsProvider.get();
-	private Main plugin;
+	// private Main plugin;
 	public String StaffAFKGroup, Permission;
 	public Collection<String> staffranks;
 	public static String FILE_NAME;
@@ -31,8 +33,15 @@ public class StaffAFK implements CommandExecutor, Listener {
 	public FileConfiguration config, MAINCONFIG;
 	private ConfigUtils ConfigUtils;
 
+	// used for PAPI
+	private static Set<UUID> staffWhoAreAFK = new HashSet<UUID>();
+	public static boolean isStaffAfk(UUID uuid) {
+		return staffWhoAreAFK.contains(uuid);
+	}
+
+
 	public StaffAFK(Main plugin) {
-	    this.plugin = plugin;
+	    // this.plugin = plugin;
 	    
 	    if (plugin.enabledInConfig("Moderation.StaffAFK.Enabled")) {
 	    	
@@ -68,6 +77,8 @@ public class StaffAFK implements CommandExecutor, Listener {
 				
 				config.set(p.getUniqueId().toString(), null);
 				ConfigUtils.saveConfig(config, FILE_NAME);
+
+				staffWhoAreAFK.remove(p.getUniqueId());
 				
 			}
 		}
@@ -117,6 +128,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 			}
 
 			p.sendMessage(Util.color("\n&eAdded you to StaffAFK\n"));
+			staffWhoAreAFK.add(p.getUniqueId());
 			
 			
 			
@@ -130,6 +142,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 				Util.console(removeCMD);
 			}
 			config.set(p.getUniqueId().toString(), null);
+			staffWhoAreAFK.remove(p.getUniqueId());
 		}
 		
 		ConfigUtils.saveConfig(config, FILE_NAME);

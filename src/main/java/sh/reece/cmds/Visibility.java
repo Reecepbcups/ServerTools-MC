@@ -12,7 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Visibility implements Listener, CommandExecutor, TabCompleter {
 
@@ -28,9 +30,11 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 
 		Section = "Misc.Visibility";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
+			configUtils = plugin.getConfigUtils();
 
 			//config = plugin.getConfig();
 			Permission = plugin.getConfig().getString(Section+".bypassPerm");
+			
 
 			plugin.getCommand("visibility").setExecutor(this);
 			plugin.getCommand("visibility").setTabCompleter(this);
@@ -109,6 +113,11 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 			return true;		
 		}		
 	}
+
+	private static Set<Player> hiddenPlayers = new HashSet<Player>();
+	public static boolean isPlayerHidden(Player player) {
+		return hiddenPlayers.contains(player);
+	}
 	
 	public void toggleView(Player p, Boolean hidePlayer) {
 		if(allowUsage == false) {
@@ -116,11 +125,13 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 			return;
 		}
 		
+		hiddenPlayers.clear();
 		for(Player online : Bukkit.getOnlinePlayers()) {
 			if(online != p) {				
 				if(hidePlayer) {
 					if(!online.hasPermission(Permission)) {
-						p.hidePlayer(online);
+						p.hidePlayer(online);	
+						hiddenPlayers.add(p);			
 					}
 				} else {
 					p.showPlayer(online);

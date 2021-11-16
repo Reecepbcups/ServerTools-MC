@@ -108,7 +108,7 @@ public class NameColor implements Listener, CommandExecutor {
 		
 	}
 
-	public String getColor(String uuid) {
+	public static String getColor(String uuid) {
 		if(NameColorHash.containsKey(uuid)) {
 			return NameColorHash.get(uuid);
 		} 		

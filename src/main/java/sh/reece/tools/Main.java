@@ -17,6 +17,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
+// TODO
+/*
+	Finish Warp.java
+	Finish  /enchant with unsafe enchants (add to loader)
+
+	warps - https://github.com/IzanamiNeko/LobbySystem2021
+	https://github.com/DownThePark/SetHome
+*/
+
 public class Main extends JavaPlugin implements Listener {	
 
 	public final String PREFIX = "&f&lSERVER &8»&r ";
@@ -27,7 +36,7 @@ public class Main extends JavaPlugin implements Listener {
 	public final List<String> modulesList = new ArrayList<>();
 
 	private static boolean isPAPIEnabled;
-	private static boolean isServerAgeEnabled = false;
+	// private static boolean isServerAgeEnabled = false;
 	
 
 	public static Chat chat = null; // used for Tags
@@ -35,19 +44,13 @@ public class Main extends JavaPlugin implements Listener {
 	private ConfigUtils configUtils;
 
 	public void onEnable() {
-
 		loader = new Loader(this);
 
 		configUtils = new ConfigUtils(this);
 		configUtils.loadConfig();			
 		loader.setMarking("Configurations");	
-
-		if (isPAPIEnabled && enabledInConfig("Misc.ServerAges.Enabled")) {
-			(new UptimePlaceholder()).register();
-			isServerAgeEnabled = true;				
-			loader.setMarking("Placeholders");				
-		}
 		
+		loader.loadPlaceholderAPI();
 		loader.loadCommands();
 		loader.loadCore();
 		loader.loadEvents();
@@ -75,9 +78,6 @@ public class Main extends JavaPlugin implements Listener {
 
 	public ConfigUtils getConfigUtils(){
 		return configUtils;
-	}
-	public static boolean isServerAgeEnabled(){
-		return isServerAgeEnabled;
 	}
 
 	public Boolean enabledInConfig(final String path) {

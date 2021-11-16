@@ -189,6 +189,9 @@ Core:
   Fly:
     Enabled: true
     Permission: essentials.fly
+  Enchant:
+    Enabled: true
+    Permission: essentials.enchant
   ClearInv:
     Enabled: true
     Permission: essentials.clearinventory
@@ -510,9 +513,6 @@ Misc:
       ClearDelay: 900 # Seconds (Make sure this number is divisible by 5)
       ClearSoonMSG: "&f&l[LAG] &cClearing all entities in %seconds% seconds"
       ClearedMSG: "&f&l[LAG] &cAll entities have been cleared..."
-
-  ServerAges: # %age_EPOCHTIME%
-    Enabled: true
 
   ThreeHitGlitch: # Fixes attacking with Air damage
     Enabled: true

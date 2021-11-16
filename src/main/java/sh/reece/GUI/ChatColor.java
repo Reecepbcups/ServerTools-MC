@@ -117,7 +117,7 @@ public class ChatColor implements Listener, CommandExecutor {
 		
 	}
 
-	public String getColor(String uuid) {
+	public static String getColor(String uuid) {
 		if(ChatColorHash.containsKey(uuid)) {
 			return ChatColorHash.get(uuid);
 		} 		

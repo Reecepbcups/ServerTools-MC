@@ -39,8 +39,6 @@ public class ConfigUtils {
 			e.printStackTrace();
 		}
 
-		plugin.setPAPIStatus(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"));
-
         _loadLocalServerVariableKeys();
 	}
 

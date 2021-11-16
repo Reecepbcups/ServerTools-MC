@@ -24,7 +24,8 @@ public class CommandSpy implements Listener, CommandExecutor {
 	private String Section, Permission;
 	private List<String> ignored;
 
-	private ArrayList<UUID> watching;
+	private static ArrayList<UUID> watching;
+	
 
 	public CommandSpy(Main instance) {
 		plugin = instance;
@@ -40,6 +41,11 @@ public class CommandSpy implements Listener, CommandExecutor {
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    
 			watching = new ArrayList<>();
 		}
+	}
+
+	public static boolean isWatching(UUID uuid) {
+		// used in PAPI
+		return watching.contains(uuid);
 	}
 
 	@EventHandler

@@ -1,8 +1,9 @@
-package sh.reece.tools;
+package sh.reece.core;
 
+import sh.reece.tools.ConfigUtils;
+import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

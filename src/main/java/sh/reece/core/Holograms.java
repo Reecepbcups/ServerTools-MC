@@ -98,8 +98,12 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
     		//Util.consoleMSG(randomPlayer+"");
     	} 
     	
-    	removeAllStands();        	
-    	spawnAllHolos();
+		// spawn holograms only if holokeys has more than 1
+		if(holoKeys.size() >= 1){
+			removeAllStands();        	
+    		spawnAllHolos();
+		}
+    	
 	}
 	
 	private List<String> possibleArugments = new ArrayList<String>();
@@ -264,14 +268,16 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	}
 	
 	public void sendHelpMenu(Player p) {
+		String[] MSG = new String[] {
+			"&7create <name>", "&7remove <name>", "&7show/hide <name>", "&7teleport <name>","&7list",
+			"&7removenear", "&7reload",
+		};
+
 		Util.coloredMessage(p, "&e&lServerTools Holograms");
-		Util.coloredMessage(p, "&f/hologram &7create <name>");
-		Util.coloredMessage(p, "&f/hologram &7remove <name>");
-		Util.coloredMessage(p, "&f/hologram &7show/hide <name>");
-		Util.coloredMessage(p, "&f/hologram &7teleport <name>");
-		Util.coloredMessage(p, "&f/hologram &7list");
-		Util.coloredMessage(p, "&f/hologram &7removenear");
-		Util.coloredMessage(p, "&f/hologram &7reload");
+		for (int i = 1; i < MSG.length; i++) {			
+			Util.coloredMessage(p, "&f/hologram " + MSG[i]);
+		}
+		
 	}
 	
 	public void spawnHolo(String key) {		
@@ -337,7 +343,10 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	
 	
 	public void removeAllStands(){
-		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();		
+		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();
+		
+		
+		
 		for(Location locs : EntitiyIDs.keySet()) {
 			for(Entity e : locs.getWorld().getNearbyEntities(locs, 3, 5, 3)) {
 				if(e instanceof ArmorStand) {
@@ -353,6 +362,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	public void removeSingleKey(String key) {
 		hideHolo(key);
 		HoloConfig.set(key, null);
+		holoKeys.remove(key);
 		configUtils.saveConfig(HoloConfig, "Holograms.yml");		
 	}
 	
@@ -370,6 +380,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	
 	
 	public void spawnAllHolos() {
+
 		for(String key : holoKeys) {
 			try {
 				spawnHolo(key);

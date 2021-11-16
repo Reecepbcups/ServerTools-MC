@@ -31,6 +31,14 @@ public class Loader {
 		executionTimer.start();
 	}
 
+	public void loadPlaceholderAPI() {
+		plugin.setPAPIStatus(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"));
+		if (plugin.isPAPIEnabled()) {
+			(new ServerToolsPlaceholders()).register();
+			executionTimer.info("PAPI");										
+		}		
+	}
+
 	public void loadCommands() {
 		// COMMANDS
 		new AltTP(plugin);
@@ -78,6 +86,7 @@ public class Loader {
 		reeceInvSee = new InvSee(plugin);
 		new Hat(plugin);
 		new Extinguish(plugin);
+		// new Enchant(plugin);
 
 		executionTimer.info("Core Features");
 	}
