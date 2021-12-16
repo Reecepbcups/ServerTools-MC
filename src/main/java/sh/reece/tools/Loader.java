@@ -114,7 +114,8 @@ public class Loader {
 		new LaunchPads(plugin);
 		new ThreeHitGlitch(plugin);
 		new DisableJLMsg(plugin);
-		new DisableStackablePotions(plugin);
+		new DisableStackablePotions(plugin);		
+
 		executionTimer.info("Events");
 	}
 

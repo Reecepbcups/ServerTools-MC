@@ -36,8 +36,9 @@ public class Main extends JavaPlugin implements Listener {
 	public final List<String> modulesList = new ArrayList<>();
 
 	private static boolean isPAPIEnabled;
-	// private static boolean isServerAgeEnabled = false;
 	
+	
+
 
 	public static Chat chat = null; // used for Tags
 	private Loader loader;
@@ -63,6 +64,12 @@ public class Main extends JavaPlugin implements Listener {
 		
 		Collections.sort(modulesList);
 		loader.output();
+
+		// Must be last, loads aliases for commands disabled in stools.
+		// Ex: If we disable Fly in Core.Fly.Enabled, this will make sure
+		// on the /fly command, other plugins will take hold such as Essentials.
+		// Fixes plugin.yml usage showing up only for disabled commands.
+		new AlternateCommandHandler(this);
 	}
 
 	public void onDisable() {
@@ -73,7 +80,7 @@ public class Main extends JavaPlugin implements Listener {
 		return isPAPIEnabled;
 	}
 	public void setPAPIStatus(boolean state){
-		isPAPIEnabled = true;
+		isPAPIEnabled = state;
 	}
 
 	public ConfigUtils getConfigUtils(){
