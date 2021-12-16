@@ -1,5 +1,6 @@
 package sh.reece.moderation;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import org.bukkit.Bukkit;
@@ -36,13 +37,17 @@ public class ColonInCommands implements Listener{
 		//if (e.getMessage().split(" ")[0].contains(":")) {
 		if(e.getMessage().indexOf(":") != -1) {
 			if(!e.getPlayer().hasPermission(perm)) {
+
+				// Essentials:fly -> [essentials, fly, args] -? [fly, args][0]
+				String CMD = e.getMessage().split(":")[1].split(" ")[0];
+				if(AlternateCommandHandler.containsDisabledCommand(CMD)){
+					System.out.println("[ColonInCommands] CMD Bypass due to being main alias: ");
+					return;
+				}
+
 				e.getPlayer().sendMessage(configUtils.lang("NO_COLONS_IN_COMMANDS"));
 				e.setCancelled(true);			
 			} 
 		}
 	}
-
-	
-	
-	
 }
