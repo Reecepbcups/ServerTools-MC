@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -33,6 +34,9 @@ public class Gamemode implements CommandExecutor{//,TabCompleter,Listener {
 			Survival = plugin.getConfig().getString(Section+".Permissions.Survival");
 			Spectator = plugin.getConfig().getString(Section+".Permissions.Spectator");
 			Adventure = plugin.getConfig().getString(Section+".Permissions.Adventure");
+		} else {
+			AlternateCommandHandler.addDisableCommand("gamemode");
+			AlternateCommandHandler.addDisableCommand("gm");
 		}
 		
 	}

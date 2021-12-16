@@ -20,6 +20,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -42,6 +43,8 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
 			preventModify = plugin.getConfig().getString(Section + ".StaffNoModify");
 
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+		} else {
+			AlternateCommandHandler.addDisableCommand("invsee");
 		}
 
 	}

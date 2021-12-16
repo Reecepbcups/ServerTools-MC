@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -37,6 +38,8 @@ public class ChatPoll implements Listener, CommandExecutor {
 			plugin.getCommand("poll").setExecutor(this);
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    	
 			pollRunning = false;
+		} else {
+			AlternateCommandHandler.addDisableCommand("poll");		
 		}
 	}
 

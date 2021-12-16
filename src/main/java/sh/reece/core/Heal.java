@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -34,6 +35,9 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 			Heal = plugin.getConfig().getString(Section+".Permissions.Heal");
 			HealOthers = plugin.getConfig().getString(Section+".Permissions.HealOthers");
 			Feed = plugin.getConfig().getString(Section+".Permissions.Feed");
+		} else {
+			AlternateCommandHandler.addDisableCommand("heal");			
+			AlternateCommandHandler.addDisableCommand("feed");			
 		}
 		
 	}

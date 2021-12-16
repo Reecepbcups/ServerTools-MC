@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -39,6 +40,8 @@ public class Visibility implements Listener, CommandExecutor, TabCompleter {
 			plugin.getCommand("visibility").setExecutor(this);
 			plugin.getCommand("visibility").setTabCompleter(this);
 			allowUsage = true;  		
+		} else {
+			AlternateCommandHandler.addDisableCommand("visibility");
 		}
 	}
 

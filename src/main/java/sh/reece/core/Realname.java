@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -30,6 +31,8 @@ public class Realname implements CommandExecutor {// ,TabCompleter,Listener {
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 			plugin.getCommand("realname").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
+		} else {
+			AlternateCommandHandler.addDisableCommand("realname");
 		}
 
 	}

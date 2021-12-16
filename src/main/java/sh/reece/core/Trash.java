@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -23,6 +24,8 @@ public class Trash implements CommandExecutor{//,TabCompleter,Listener {
 		// https://essinfo.xeya.me/permissions.html
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 			plugin.getCommand("trash").setExecutor(this);
+		} else {
+			AlternateCommandHandler.addDisableCommand("trash");
 		}
 		
 	}

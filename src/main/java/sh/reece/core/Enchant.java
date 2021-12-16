@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -28,11 +29,13 @@ public class Enchant implements CommandExecutor {// ,TabCompleter,Listener {
 		Section = "Core.Enchant";
 
 		// https://essinfo.xeya.me/permissions.html
-		if (plugin.enabledInConfig(Section + ".Enabled")) {
+		if(plugin.enabledInConfig(Section + ".Enabled")) {
 			// configUtils = plugin.getConfigUtils();
 
 			plugin.getCommand("enchant").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section + "Permission");
+		} else {
+			AlternateCommandHandler.addDisableCommand("enchant");
 		}
 
 	}

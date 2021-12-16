@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -31,6 +32,8 @@ public class Donation implements CommandExecutor {
 
 	    if (plugin.enabledInConfig("Donation.Enabled")) {
 			plugin.getCommand("donation").setExecutor(this);
+		} else {
+			AlternateCommandHandler.addDisableCommand("donation");
 		}
 	}
 	

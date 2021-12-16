@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -30,6 +31,8 @@ public class ChangeSlots implements CommandExecutor, Listener {
 			announce = plugin.getConfig().getString(section+".AnnounceFullToPermissionedUsers");
 			plugin.getCommand("changeslots").setExecutor(this);
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+		} else {
+			AlternateCommandHandler.addDisableCommand("changeslots");
 		}
 	}
 

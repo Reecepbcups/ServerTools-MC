@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -36,6 +37,11 @@ public class TP implements CommandExecutor{//,TabCompleter,Listener {
 			TP = plugin.getConfig().getString(Section+".Permissions.TP");
 			TPA = plugin.getConfig().getString(Section+".Permissions.TPA");
 			TPHere = plugin.getConfig().getString(Section+".Permissions.TPHere");
+		} else {
+			AlternateCommandHandler.addDisableCommand("tp");
+			AlternateCommandHandler.addDisableCommand("tpa");
+			AlternateCommandHandler.addDisableCommand("tphere");
+			AlternateCommandHandler.addDisableCommand("teleport");			
 		}
 
 	}

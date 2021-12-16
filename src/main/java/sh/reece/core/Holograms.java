@@ -28,6 +28,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import sh.reece.utiltools.Util;
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 
@@ -65,7 +66,11 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
         	permission = "hologram.admin";
         	plugin.getCommand("holograms").setExecutor(this);	
         	plugin.getCommand("holograms").setTabCompleter(this);
-    	}
+    	} else {
+			AlternateCommandHandler.addDisableCommand("holograms");
+			AlternateCommandHandler.addDisableCommand("hologram");
+			AlternateCommandHandler.addDisableCommand("holo");
+		}
         
         // on ChunkUnloadEvent, ChunkLoadEvent
         // kill or spawn armour stands in that area

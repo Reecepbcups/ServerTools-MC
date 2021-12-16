@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -33,6 +34,11 @@ public class Warp implements CommandExecutor{
 			Permission = plugin.getConfig().getString(Section+".Permission");
 
 			configUtils.createConfig("warps.yml");
+		} else {
+			AlternateCommandHandler.addDisableCommand("warp");
+			AlternateCommandHandler.addDisableCommand("setwarp");
+			AlternateCommandHandler.addDisableCommand("delwarp");
+			AlternateCommandHandler.addDisableCommand("warps");
 		}
 		
 	}

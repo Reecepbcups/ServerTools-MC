@@ -13,6 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -40,6 +41,8 @@ public class AltTP implements CommandExecutor, TabCompleter {
 
 			plugin.getCommand("alt").setExecutor(this);
 			plugin.getCommand("alt").setTabCompleter(this);   		
+		} else {
+			AlternateCommandHandler.addDisableCommand("alt");
 		}
 	}
 

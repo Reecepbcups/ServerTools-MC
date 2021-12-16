@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -28,6 +29,8 @@ public class Ping implements CommandExecutor{//,TabCompleter,Listener {
 
 
 			plugin.getCommand("ping").setExecutor(this);
+		} else {
+			AlternateCommandHandler.addDisableCommand("ping");
 		}
 		
 	}

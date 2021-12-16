@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -29,6 +30,8 @@ public class Speed implements CommandExecutor {
 			FlyPerm = plugin.getConfig().getString(Section+".FlyPermission");
 			WalkPerm = plugin.getConfig().getString(Section+".WalkPermission");
 			
+		} else {
+			AlternateCommandHandler.addDisableCommand("speed");
 		}
 	}
 

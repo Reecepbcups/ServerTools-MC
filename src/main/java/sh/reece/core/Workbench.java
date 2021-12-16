@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -22,6 +23,9 @@ public class Workbench implements CommandExecutor{//,TabCompleter,Listener {
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 			plugin.getCommand("workbench").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
+		} else {
+			AlternateCommandHandler.addDisableCommand("workbench");
+			AlternateCommandHandler.addDisableCommand("craft");
 		}
 		
 	}

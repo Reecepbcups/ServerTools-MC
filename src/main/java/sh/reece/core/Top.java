@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -27,6 +28,8 @@ public class Top implements CommandExecutor{//,TabCompleter,Listener {
 
 			plugin.getCommand("top").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
+		} else {
+			AlternateCommandHandler.addDisableCommand("top");
 		}
 		
 	}

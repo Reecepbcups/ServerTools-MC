@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -53,6 +54,8 @@ public class DailyRewards implements CommandExecutor {
 			
 			rewards = plugin.getConfig().getStringList(section+".rewards");
 			COOLDOWN_SECONDS= 86400;
+		} else {
+			AlternateCommandHandler.addDisableCommand("reward");			
 		}
 	}
 	

@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -32,6 +33,8 @@ public class God implements CommandExecutor, Listener {//,TabCompleter,Listener 
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 			
 			Permission = plugin.getConfig().getString(Section+".Permission");
+		} else {
+			AlternateCommandHandler.addDisableCommand("god");
 		}
 		
 	}

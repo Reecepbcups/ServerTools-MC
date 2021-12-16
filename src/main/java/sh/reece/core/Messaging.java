@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -66,6 +67,9 @@ public class Messaging implements CommandExecutor, Listener, TabCompleter { //,,
 			
 			FORMAT_SEND = plugin.getConfig().getString(Section+".Formats.Send");
 			FORMAT_FROM = plugin.getConfig().getString(Section+".Formats.From");	
+		} else {
+			AlternateCommandHandler.addDisableCommand("reply");
+			AlternateCommandHandler.addDisableCommand("message");
 		}
 		
 	}

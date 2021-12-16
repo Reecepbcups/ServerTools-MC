@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -27,6 +28,8 @@ public class Extinguish implements CommandExecutor{
 			plugin.getCommand("extinguish").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission"); // 
 			StaffPermission = plugin.getConfig().getString(Section+".StaffPermission"); //
+		} else {
+			AlternateCommandHandler.addDisableCommand("extinguish");
 		}
 		
 	}

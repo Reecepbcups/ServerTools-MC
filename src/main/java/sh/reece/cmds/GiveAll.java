@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -30,7 +31,9 @@ public class GiveAll implements Listener, CommandExecutor {
 
         	plugin.getCommand("giveall").setExecutor(this);	
         	rand = new Random();
-    	}
+    	} else {
+			AlternateCommandHandler.addDisableCommand("giveall");
+		}
 	}
 	
 	@Override

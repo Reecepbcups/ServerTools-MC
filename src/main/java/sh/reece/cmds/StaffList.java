@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffectType;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import net.luckperms.api.LuckPermsProvider;
@@ -59,7 +60,9 @@ public class StaffList implements CommandExecutor {
         	}        
         	
         	plugin.getCommand("stafflist").setExecutor(this);   		
-    	}
+    	} else {		
+			AlternateCommandHandler.addDisableCommand("stafflist");
+		}
 	}
 	
 	@Override

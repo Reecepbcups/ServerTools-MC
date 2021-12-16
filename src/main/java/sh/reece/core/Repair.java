@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -47,6 +48,9 @@ public class Repair implements CommandExecutor {// ,TabCompleter,Listener {
 				AllRepairCost = 0;
 			}
 
+		} else {
+			AlternateCommandHandler.addDisableCommand("reapair");
+			AlternateCommandHandler.addDisableCommand("fix");
 		}
 
 	}

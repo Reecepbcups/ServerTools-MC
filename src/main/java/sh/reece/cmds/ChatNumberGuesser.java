@@ -32,7 +32,7 @@ public class ChatNumberGuesser implements Listener{
 			command = "/"+plugin.getConfig().getString(section+".command");
 			AdminPerm = plugin.getConfig().getString(section+".AdminPerm");
 			Running = false;
-		}
+		} 
 	}
 
 

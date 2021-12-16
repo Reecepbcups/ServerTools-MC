@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -45,6 +46,8 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 			plugin.getCommand("rename").setTabCompleter(this);
 			plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
+		} else {
+			AlternateCommandHandler.addDisableCommand("rename");
 		}
 	}
 

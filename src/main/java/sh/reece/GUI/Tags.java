@@ -1,5 +1,6 @@
 package sh.reece.GUI;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -98,6 +99,8 @@ public class Tags implements CommandExecutor, Listener { //
 				ConfigUtils.saveConfig(tagsconfig, "Tags.yml");
 			}
 
+		} else {
+			AlternateCommandHandler.addDisableCommand("tags");
 		}
 	}
 

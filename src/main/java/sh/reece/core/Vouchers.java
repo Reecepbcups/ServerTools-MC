@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 
@@ -72,7 +73,9 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
         	plugin.getCommand("voucher").setExecutor(this);
         	plugin.getCommand("voucher").setTabCompleter(this);        	
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    		
-    	}
+    	} else {
+			AlternateCommandHandler.addDisableCommand("voucher");
+		}
 	}
 	
 	public void createPreviewGUI() {

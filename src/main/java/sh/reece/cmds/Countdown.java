@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -18,7 +19,9 @@ public class Countdown implements CommandExecutor {//,  {
         
         if(plugin.enabledInConfig("Commands.Countdown.Enabled")) {
         	plugin.getCommand("countdown").setExecutor(this);
-    	}
+    	} else {
+			AlternateCommandHandler.addDisableCommand("countdown");			
+		}
 	}
 
 	@Override

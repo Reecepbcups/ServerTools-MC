@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -25,6 +26,8 @@ public class ClearInv implements CommandExecutor{//,TabCompleter,Listener {
 			Permission = plugin.getConfig().getString(Section+".Permission");
 			//plugin.getCommand("rename").setTabCompleter(this);
 			//plugin.getServer().getPluginManager().registerEvents(this, plugin);
+		} else {
+			AlternateCommandHandler.addDisableCommand("clearinv");
 		}
 		
 	}

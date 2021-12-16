@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -59,6 +60,8 @@ public class Spawn implements Listener, CommandExecutor {
 			plugin.getCommand("spawn").setExecutor(this);
 			plugin.getCommand("setspawn").setExecutor(this);
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+		} else {
+			AlternateCommandHandler.addDisableCommand("spawn");
 		}
 	}
 

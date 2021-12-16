@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -9,7 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Fly implements CommandExecutor{//,TabCompleter,Listener {
+public class Fly implements CommandExecutor {
 
 	String Section, Permission;
 	private final Main plugin;
@@ -27,8 +28,8 @@ public class Fly implements CommandExecutor{//,TabCompleter,Listener {
 			
 			plugin.getCommand("fly").setExecutor(this);
 			Permission = plugin.getConfig().getString(Section+".Permission");
-			//plugin.getCommand("rename").setTabCompleter(this);
-			//plugin.getServer().getPluginManager().registerEvents(this, plugin);
+		} else {
+			AlternateCommandHandler.addDisableCommand("fly");
 		}
 		
 	}

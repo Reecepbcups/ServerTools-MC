@@ -12,6 +12,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -29,6 +30,8 @@ public class FancyAnnounce implements CommandExecutor, TabCompleter {
 	    	config = plugin.getConfig();
 			plugin.getCommand("announce").setExecutor(this);
 			plugin.getCommand("announce").setTabCompleter(this);
+		} else {
+			AlternateCommandHandler.addDisableCommand("announce");
 		}
 	}
 	

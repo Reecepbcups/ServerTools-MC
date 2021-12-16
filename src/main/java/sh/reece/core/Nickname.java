@@ -1,5 +1,6 @@
 package sh.reece.core;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -35,6 +36,9 @@ public class Nickname implements CommandExecutor, Listener {// ,TabCompleter,Lis
 			Permission = plugin.getConfig().getString(Section+".Permission");
 			PREFIX = plugin.getConfig().getString(Section+".prefix");
 			BypassPrefixPerm = plugin.getConfig().getString(Section+".prefixBypass");
+		} else {
+			AlternateCommandHandler.addDisableCommand("nickname");
+			AlternateCommandHandler.addDisableCommand("nick");
 		}
 
 	}

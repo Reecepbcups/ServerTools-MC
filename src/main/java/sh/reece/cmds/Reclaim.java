@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.AlternateCommandHandler;
 import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
@@ -45,6 +46,8 @@ public class Reclaim implements Listener, CommandExecutor {
 			RECLAIM_PERMISSIONS = config.getConfigurationSection(Section+".permissions").getKeys(false); 
 			srtIDXforUsrOut = config.getInt(Section+".BeginAtIndex");
 			plugin.getCommand("reclaim").setExecutor(this);    		    	
+		} else {
+			AlternateCommandHandler.addDisableCommand("reclaim");			
 		}
 	}
 
