@@ -31,6 +31,7 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 	
 	public Rename(Main instance) {
 		plugin = instance;
+		configUtils = plugin.getConfigUtils();
 
 		Section = "Misc.Rename";        
 
