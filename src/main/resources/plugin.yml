@@ -1,5 +1,5 @@
 name: ServerTools
-version: 6.1.1
+version: ${project.version}
 author: Reecepbcups
 main: sh.reece.tools.Main
 description: A lot of little tools which make management easier
