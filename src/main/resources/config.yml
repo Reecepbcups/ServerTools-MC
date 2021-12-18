@@ -640,32 +640,6 @@ Bungee:
 
 AutoBroadcast:
   Enabled: true
-  centerall: false
-  use_this_to_override: "<center>"
-  use_this_for_commands: "<command=/bc test2/> &dCLICK"
-  Header: 
-    - ''
-    - '&8&l&m------------------------------------&7'
-    - '<center>&d&l%SERVERNAME%'
-    - ''
-  Footer: 
-    - ''
-    - '&8&l&m------------------------------------&7'
-    - ''
-  Interval: 180
-  Messages:
-    rules:
-      - '<center>&f%RULES%'
-    discord:
-      - '<center>&f%DISCORD%'
-    store:
-      - '<center>&f%STORE%'
-    islandfly:
-      - '<command=/vote/><center>&d/Vote &ffor 3 hours of &d/is fly&f!'
-      - '<center>&7&o(Click to run the vote command)'
-    warzone:
-      - '<command=/warzone/><center>&fBattle in pvp with &c/warzone'
-      - '<center>&7&o(Click to run the warzone command)'
    
 Donation:
   Enabled: true

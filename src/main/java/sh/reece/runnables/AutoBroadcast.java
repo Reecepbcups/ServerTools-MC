@@ -3,18 +3,23 @@ package sh.reece.runnables;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 
 public class AutoBroadcast extends BukkitRunnable {
 
 	private static Main plugin;
-	//private FileConfiguration config;
+	private FileConfiguration config;
 	private String Section;
 	List<String> header, footer, groups; 
 	private Boolean center;
 	private int size, id;
+
+	private ConfigUtils configUtils;
 	
 	private List<List<String>> messages;
 	
@@ -23,23 +28,31 @@ public class AutoBroadcast extends BukkitRunnable {
         
         Section = "AutoBroadcast";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
-    		
-        	int intervalDelay = plugin.getConfig().getInt(Section+".Interval");
+
+			configUtils = plugin.getConfigUtils();
+    					
+			// Creates Announcements if not exist, then get that file
+			configUtils.createConfig("Announcements.yml");
+			config = configUtils.getConfigFile("Announcements.yml");
+      	
+        	header = config.getStringList("Header");
+        	footer = config.getStringList("Footer");
+
+        	groups = new ArrayList<String>(); 
+			for(String announcement : config.getConfigurationSection("Messages").getKeys(false)) {
+				groups.add(announcement);
+			}
         	
-        	header = plugin.getConfig().getStringList(Section+".Header");
-        	footer = plugin.getConfig().getStringList(Section+".Footer");
-        	groups = new ArrayList<String>(plugin.getConfig().getConfigurationSection(Section+".Messages").getKeys(false)); 
-        	
-//    		// 1,2,3,4,5,6		
-        	center = plugin.getConfig().getString(Section+".centerall").equalsIgnoreCase("true");
+    		// 1,2,3,4,5,6		
+        	center = config.getString("centerall").equalsIgnoreCase("true");
         	size = groups.size();
         	
         	// loads all messages into a list of a list in memory
         	messages = new ArrayList<List<String>>();        	
         	for(int i = 0; i < size; i++) {
-        		messages.add(plugin.getConfig().getStringList("AutoBroadcast.Messages."+groups.get(i)));
+        		messages.add(config.getStringList("Messages."+groups.get(i)));
         	}
-        	runTaskTimer(plugin, 0, intervalDelay*20);
+        	runTaskTimer(plugin, 0, config.getInt("Interval") * 20);
     	}
 	}		    		
 
@@ -48,17 +61,14 @@ public class AutoBroadcast extends BukkitRunnable {
 		if (size == id) {
 			id = 0;
 		} else {						
-			for(String line : header) {
+			header.forEach(line -> Main.announcement(center, line));
+
+			messages.get(id).forEach(line -> {
+				if(line.equalsIgnoreCase("") || line.equalsIgnoreCase(" ")) { line = "&r"; }	
 				Main.announcement(center, line);
-			}	
-			for(String line : messages.get(id)){//+groupsReal.get(id))) {					
-				if(line.equalsIgnoreCase("") || line.equalsIgnoreCase(" ")) {line = "&r";}						
-				Main.announcement(center, line);							
-			}
+			});
 			
-			for(String line : footer) {
-				Main.announcement(center, line);
-			}						
+			footer.forEach(line -> Main.announcement(center, line));			
 			id++;
 		}  
 	}

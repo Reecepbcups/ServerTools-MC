@@ -1,0 +1,31 @@
+# Disable: config.yml -> AutoBroadcast
+
+# Use <center> to center the line
+# To make a line a command, use <command=/bc test2/> TEXT HERE
+# %VARIABLES% - are usable, defined in main config.yml at top
+
+centerall: false
+Header:
+- ''
+- '&8&l&m------------------------------------&7'
+- '<center>&d&l%SERVERNAME%'
+- ''
+Footer:
+- ''
+- '&8&l&m------------------------------------&7'
+- ''
+Interval: 50
+Messages:
+  where_to_edit:
+  - '&7&o((Edit me in ServerTools/Announcements.yml))'
+  healcmdexample:
+  - ' &7- &f<command=/heal /> &fClick me to run the heal command'
+  rules:
+  - ' &7- &n%RULES%'
+  discord:
+  - ' &7- &f%DISCORD%'
+  store:
+  - ' &7- &f%STORE%'
+  vote_reward:
+    - '<command=/vote/><center>&d/Vote &ffor XX hours of &d/CMD&f!'
+    - '<center>&7&o(Click to run the vote command)'

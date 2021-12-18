@@ -5,6 +5,7 @@ main: sh.reece.tools.Main
 description: A lot of little tools which make management easier
 softdepend: [LuckPerms, Vault, PlaceHolderAPI, TAB, WorldGuard]
 website: https://reece.sh/
+api: ""
 
 commands:
   tools:
@@ -19,10 +20,10 @@ commands:
     description: Repair tools back to full durability!
     usage: "Usage: /<command> [all]"
     aliases: [fix]
-  # enchant:
-  #   description: Enchant items to values you wish!
-  #   usage: "Usage: /<command> <name> [level]"
-  #   aliases: [enchantment]
+  enchant:
+    description: Enchant items to values you wish!
+    usage: "Usage: /<command> <name> [level]"
+    aliases: [enchantment]
   extinguish:
     description: Remove fire from a player
     usage: "Usage: /<command> [all]"
