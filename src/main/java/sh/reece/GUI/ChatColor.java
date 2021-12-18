@@ -21,8 +21,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.io.File;
 import java.util.*;
 
-import com.zachsthings.libcomponents.config.ConfigUtil;
-
 public class ChatColor implements Listener, CommandExecutor {
 
 	public String command, perm;

@@ -1,7 +1,6 @@
 package sh.reece.core;
 
 import sh.reece.tools.AlternateCommandHandler;
-import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -21,7 +20,7 @@ public class Repair implements CommandExecutor {// ,TabCompleter,Listener {
 	private String Section, SingleRepairPerm, AllRepairPerm;
 	private double SingleRepairCost, AllRepairCost;
 	private final Main plugin;
-	private ConfigUtils configUtils;
+	// private ConfigUtils configUtils;
 	private static Economy econ = null;
 	// add cooldown
 
@@ -32,7 +31,7 @@ public class Repair implements CommandExecutor {// ,TabCompleter,Listener {
 
 		// https://essinfo.xeya.me/permissions.html
 		if (plugin.enabledInConfig(Section + ".Enabled")) {
-			configUtils = plugin.getConfigUtils();
+			// configUtils = plugin.getConfigUtils();
 
 			plugin.getCommand("repair").setExecutor(this); // /repair & /fix
 

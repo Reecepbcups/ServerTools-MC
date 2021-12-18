@@ -1,8 +1,5 @@
 package sh.reece.disabled;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,11 +1,9 @@
 package sh.reece.core;
 
 import sh.reece.tools.AlternateCommandHandler;
-import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,9 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.RegisteredServiceProvider;
-
-import net.milkbowl.vault.economy.Economy;
 
 public class Enchant implements CommandExecutor {// ,TabCompleter,Listener {
 

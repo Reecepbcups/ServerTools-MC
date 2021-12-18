@@ -11,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
