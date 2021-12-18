@@ -28,14 +28,9 @@ public class DisableJLMsg implements Listener {
 		e.setJoinMessage("");
 
 		if(e.getPlayer().getUniqueId().toString().equalsIgnoreCase("79da3753-1b9e-4340-8a0f-9ea975c17fe4")) {
-			e.getPlayer().sendMessage("This server uses your ServerTools Plugin!");
-			
-			try {
-				e.getPlayer().sendMessage(InetAddress.getLocalHost().toString());
-			} catch (UnknownHostException e1) {}
+			e.getPlayer().sendMessage("This server uses your ServerTools Plugin!");		
 		}
 	}
-
 
 
 	@EventHandler

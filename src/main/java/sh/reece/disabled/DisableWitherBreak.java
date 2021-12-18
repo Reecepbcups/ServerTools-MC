@@ -18,24 +18,11 @@ public class DisableWitherBreak implements Listener {
 	public DisableWitherBreak(Main instance) {
 		plugin = instance;
 
-		Section = "Disabled.WitherBlockBreak";                
+		Section = "Disabled.DisableWitherBlockBreak";                
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);    		
 		}
 	}
-
-	// IDEK what this does
-//	@EventHandler
-//	public void removeHangingEntity(HangingBreakByEntityEvent e) {	
-//		switch (e.getRemover().getType()) {
-//		case WITHER:
-//		case WITHER_SKULL:	        
-//			e.setCancelled(true); 
-//			break;
-//		default:
-//			break;
-//		}
-//	}
 
 	@EventHandler
 	public void onWitherskullExplode(EntityExplodeEvent e) {

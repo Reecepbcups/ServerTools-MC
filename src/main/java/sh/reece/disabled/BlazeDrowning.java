@@ -9,10 +9,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import sh.reece.tools.Main;
 
-public class DisableBlazeDrowning implements Listener {
+public class BlazeDrowning implements Listener {
 
 	private static Main plugin;
-	public DisableBlazeDrowning(Main instance) {
+	public BlazeDrowning(Main instance) {
         plugin = instance;
         
         if (plugin.enabledInConfig("Disabled.DisableBlazeDrowning.Enabled")) {

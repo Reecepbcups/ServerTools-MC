@@ -169,7 +169,7 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 		}
 
 		Util.coloredMessage(sender, 
-			"&e&lServerTools &7&o((&f &aEnabled: "+numOfEnabled + " &f&l| &cDisabled: "+numOfDisabled + " &7&o))");
+			"&e&lServerTools "+plugin.getDescription().getVersion()+" &7&o((&f &aEnabled: "+numOfEnabled + " &f&l| &cDisabled: "+numOfDisabled + " &7&o))");
 
 		String moduleOuput = "";
 		for(final String module : plugin.modulesList) {
@@ -183,7 +183,7 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 		sender.sendMessage(Util.color(""));
 		sender.sendMessage(Util.color("&eServer Tools was written by Reecepbcups"));
 		sender.sendMessage(Util.color("&eDiscord: Reece#3370"));
-		sender.sendMessage(Util.color("&bVersion: "+ plugin.getDescription().getVersion()));
+		sender.sendMessage(Util.color("&eVersion: "+ plugin.getDescription().getVersion()));
 		sender.sendMessage(Util.color(""));
 	}
 
@@ -200,6 +200,8 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 		if(Util.isPluginInstalledOnServer("Plugman", "ServerTools Reload")){
 			sender.sendMessage(Util.color("&a&lSERVER TOOLS RELOAD &7&o(Using Plugman)"));
 			Util.console("plugman reload ServerTools");
+		} else {
+			sender.sendMessage(Util.color("&c&lYou must install Plugman to use `/tools reload`"));
 		}
 
 	}
