@@ -14,7 +14,7 @@ import sh.reece.utiltools.Util;
 
 public class CustomDeathMessages implements Listener, CommandExecutor {
 	
-	private Boolean ToggleDeathMSG;
+	private Boolean ShowDeathMessages = false;
 	private String permission, deathFormat;
 	
 	private Main plugin;
@@ -24,30 +24,24 @@ public class CustomDeathMessages implements Listener, CommandExecutor {
 		if (plugin.enabledInConfig("Chat.CustomDeathMessages.Enabled")) {
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);			
 			
-			permission = "toggledeath.use";
-			
-			deathFormat = "&7&o[-] %message%";
+			permission = "toggledeath.use";			
+			deathFormat = plugin.getConfig().getString("Chat.CustomDeathMessages.message");
 			
 			plugin.getCommand("toggledeathmessages").setExecutor(this);
-			ToggleDeathMSG = true;
+			ShowDeathMessages = true;
 		}
 	}
 	
 	
 	@EventHandler
 	public void onKill(PlayerDeathEvent e) {
-//		Player killed = e.getEntity();
-//      Player killer = e.getEntity().getKiller();
+		String msg = "";		
+		if(ShowDeathMessages && deathFormat.length() > 0) {
+			msg = Util.color(deathFormat.replace("%message%", e.getDeathMessage()));
+		} 
+			
+		e.setDeathMessage(msg);
 		
-		if(deathFormat.length() == 0) {
-			e.setDeathMessage("");
-		}
-		
-		if(ToggleDeathMSG) {
-			e.setDeathMessage(Util.color(deathFormat.replace("%message%", e.getDeathMessage())));
-		} else {
-			e.setDeathMessage("");
-		}
 	}
 	
 	
@@ -61,8 +55,8 @@ public class CustomDeathMessages implements Listener, CommandExecutor {
 
 		if (args.length >= 0) {		
 			Player p = (Player) sender;
-			ToggleDeathMSG = !ToggleDeathMSG;
-			Util.coloredMessage(p, "&fShowing Death Messages: " + ToggleDeathMSG);
+			ShowDeathMessages = !ShowDeathMessages;
+			Util.coloredMessage(p, "&fShow Death Messages: " + ShowDeathMessages);
 		}
 		
 		return true; 

@@ -310,7 +310,7 @@ Chat:
   CustomDeathMessages: 
     Enabled: true
     message: "&7&o[-] %message%"
-    #Enable in game with /toggledeath
+    #Toggle in game with /toggledeath
       
   ChatCooldown:
     Enabled: true
