@@ -72,7 +72,7 @@ Disabled:
     Permission: "nofalldamage.use" 
   DisableEndermanTP:
     Enabled: true
-  WitherBlockBreak: # true means withers will not
+  DisableWitherBlockBreak: # true means withers will not
     Enabled: true
   DisableGolemPoppies:
     Enabled: true
@@ -82,6 +82,12 @@ Disabled:
     Enabled: true   
   DisableIceMelt:
     Enabled: true
+  DisableBlockBreaking:
+    Enabled: false
+    Permission: tools.breakblock.bypass
+  DisableBlockPlacement:
+    Enabled: false
+    Permission: tools.blockplace.bypass
 
   DisableItemBurn:
     Enabled: true

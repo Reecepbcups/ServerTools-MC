@@ -139,7 +139,10 @@ public class Loader {
 	}
 
 	public void loadToggleableFeatures() {
-		new DisableBlazeDrowning(plugin);
+		new BlockBreaking(plugin);
+		new BlockPlacement(plugin);
+		new BlazeDrowning(plugin);
+		
 		new DisableBookWriting(plugin);
 		new DisableCactusDamage(plugin);
 		new DisableCaneOnCane(plugin);
