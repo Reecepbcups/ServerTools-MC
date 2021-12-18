@@ -198,7 +198,7 @@ public class Loader {
 	public void output() {
 		Util.consoleMSG("\n&b&l[!] ServerTools &b by Reecepbups. Version: " + plugin.getDescription().getVersion());
 		if (plugin.getConfig().getBoolean("LoadWithTimings")) {
-			System.out.println(executionTimer.end());
+			Main.logging(executionTimer.end());
 		}
 	}
 

@@ -24,8 +24,14 @@ public class AlternateCommandHandler implements Listener {
 	private static final List<String> DISABLED_COMMANDS = new ArrayList<>();
 	private static final HashMap<String, String> COMMAND_ALIASES = new HashMap<String, String>(); // fly: essentials, 
 
-	public static void addDisableCommand(String command) {
-		System.out.println("[ServerTools] Adding disabled command: " + command);
+    
+    public AlternateCommandHandler(Main plugin) {
+        getCommands();
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
+
+    public static void addDisableCommand(String command) {
+        // Bukkit.getLogger().info("Adding disabled command: " + command);
 		DISABLED_COMMANDS.add(command);
 	}
 	public static boolean containsDisabledCommand(String command){
@@ -36,31 +42,25 @@ public class AlternateCommandHandler implements Listener {
 		return COMMAND_ALIASES.get(command)+":"+command;
 	}
 
-    
-    public AlternateCommandHandler(Main plugin) {
-        getCommands();
-        Bukkit.getPluginManager().registerEvents(this, plugin);
-    }
-
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
-        // System.out.println("ServerTools AltCommandListenr event: " + event.getMessage());
+        // Main.logging("ServerTools AltCommandListenr event: " + event.getMessage());
         // make sure its a cmd
         if(event.getMessage().startsWith("/")) {
-            // System.out.println("ServerTools AltCommandListenr event: is a command with '/'");
+            // Main.logging("ServerTools AltCommandListenr event: is a command with '/'");
 
             // make sure it is a command in there, such as "fly"
             String cmd = event.getMessage().substring(1).split(" ")[0];
 
             if(containsDisabledCommand(cmd)) {
-                // System.out.println("ServerTools AltCommandListenr event: this command is disabled");
+                // Main.logging("ServerTools AltCommandListenr event: this command is disabled");
                 PluginCommand newCMD = Bukkit.getServer().getPluginCommand(cmd);
             
                 // set the message to "/pluginname:command [args]" to start
                 String newCommandAlias = getCommandAlias(newCMD.getName());
                 String newMSG = event.getMessage().replace(cmd, newCommandAlias);
 
-                // System.out.println(newCommandAlias + " = " + newMSG);
+                // Main.logging(newCommandAlias + " = " + newMSG);
 
                 event.setMessage(newMSG);
             }            
@@ -80,7 +80,7 @@ public class AlternateCommandHandler implements Listener {
 			for(Command cmd : PluginCommandYamlParser.parse(plugin)){
 				if(DISABLED_COMMANDS.contains(cmd.getName())){
 					COMMAND_ALIASES.put(cmd.getName(), pName); // command, plugin_name
-					System.out.println("[ServerTools-CMDHandler] +Alias: " + cmd.getName() + " from " + pName);
+                    Main.logging("<CMDHandler> Using Alias: " + cmd.getName() + " from " + pName);
 				}
 			}
 		}

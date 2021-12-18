@@ -93,7 +93,7 @@ public class ScheduledTask implements CommandExecutor{
 		}
 		
 		if(debug) {
-			System.out.println("["+timeUntilRun+" sec] Scheduled: " + CMDS.toString());
+			Main.logging("["+timeUntilRun+" sec] Scheduled: " + CMDS.toString());
 		}
 				
 		int id = Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
@@ -105,7 +105,7 @@ public class ScheduledTask implements CommandExecutor{
 	
 	public void taskToRunEvery(Long SecondsToRunEvery, Long Delay,  List<String> CMDS) {	
 		if(debug) {
-			System.out.println("["+SecondsToRunEvery+" sec Repeating] Scheduled: " + CMDS.toString());
+			Main.logging("["+SecondsToRunEvery+" sec Repeating] Scheduled: " + CMDS.toString());
 		}
 
 		int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {

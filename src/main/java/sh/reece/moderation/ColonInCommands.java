@@ -41,7 +41,7 @@ public class ColonInCommands implements Listener{
 				// Essentials:fly -> [essentials, fly, args] -? [fly, args][0]
 				String CMD = e.getMessage().split(":")[1].split(" ")[0];
 				if(AlternateCommandHandler.containsDisabledCommand(CMD)){
-					System.out.println("[ColonInCommands] CMD Bypass due to being main alias: ");
+					Main.logging("[ColonInCommands] CMD Bypass due to being main alias: ");
 					return;
 				}
 

@@ -87,7 +87,7 @@ public class AntiCraft implements CommandExecutor, Listener {
 			return;
 		}
 		if (isBlocked(item) && perms(item, e.getClickedInventory().getViewers())) {
-			System.out.println("cancel");
+			Main.logging("cancel");
 			e.setCancelled(true);
 			e.getInventory().setItem(0, null);
 		} 
@@ -243,7 +243,7 @@ public class AntiCraft implements CommandExecutor, Listener {
 	}
 
 	public static void console(String arg0, Object... arg1) {
-		System.out.println("[AntiCraft] " + String.format(arg0.replace("\\n", "\n"), arg1));
+		Main.logging("[AntiCraft] " + String.format(arg0.replace("\\n", "\n"), arg1));
 	}
 
 

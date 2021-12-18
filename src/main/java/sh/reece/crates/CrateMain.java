@@ -116,7 +116,7 @@ public class CrateMain {
 ////			somehash.put("test", itemDrops);		
 ////			// drawing random entries from it
 ////			for (int i = 0; i < 20; i++) {
-////			    System.out.println(somehash.get("test").getRandom());
+////			    Main.logging(somehash.get("test").getRandom());
 ////			}		
 //			WeightedRandom<String> itemDropRewards = new WeightedRandom<>();			
 //			FileConfiguration crateConfig = this.getConfigFile("crates"+File.separator+CrateName+".yml");		

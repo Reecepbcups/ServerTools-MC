@@ -29,7 +29,7 @@ public class Timings {
 
     public String end() {
         final StringBuilder output = new StringBuilder();
-        output.append("ServerTools Execution time:\n");
+        output.append("Execution time:\n");
         String mark;
         long time0 = 0;
         long time1 = 0;

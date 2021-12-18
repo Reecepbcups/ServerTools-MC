@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -37,9 +38,6 @@ public class Main extends JavaPlugin implements Listener {
 
 	private static boolean isPAPIEnabled;
 	
-	
-
-
 	public static Chat chat = null; // used for Tags
 	private Loader loader;
 	private ConfigUtils configUtils;
@@ -171,6 +169,11 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
 	
+	// creqate new logger
+	public static Logger logger = Logger.getLogger("ServerTools");
+	public static void logging(final String message) {
+		logger.info(message);
+	}
 
 
 }

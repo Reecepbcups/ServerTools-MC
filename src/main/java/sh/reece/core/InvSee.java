@@ -107,7 +107,7 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
 		final InventoryType type = top.getType();
 		final Player player = (Player) event.getWhoClicked();
 
-		//System.out.println("Invsee run invclickevent - before CHEST type");
+		//Main.logging("Invsee run invclickevent - before CHEST type");
 
 		// player view of invsee
 		if (type == InventoryType.PLAYER) {
@@ -126,12 +126,12 @@ public class InvSee implements CommandExecutor, Listener {// ,TabCompleter,Liste
             }
         } else if (type == InventoryType.CHEST) { // amour view of Invsee
 			final InventoryHolder invHolder = top.getHolder();
-			//System.out.println("Event run with type chest for Invsee");
+			//Main.logging("Event run with type chest for Invsee");
 
 			if (invHolder instanceof HumanEntity && isInvsee(player) && event.getClick() != ClickType.MIDDLE) {
-				//System.out.println("checking modify other");
+				//Main.logging("checking modify other");
 				if(!player.hasPermission(ModifyOthers)){
-					//System.out.println("canceled event correctly");
+					//Main.logging("canceled event correctly");
 					event.setCancelled(true);
 				}				
 				refreshPlayer = player;
