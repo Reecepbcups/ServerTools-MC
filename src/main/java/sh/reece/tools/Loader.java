@@ -196,7 +196,8 @@ public class Loader {
 
 	// -= ACTIONS =-
 	public void output() {
-		Util.consoleMSG("\n&b&l[!] ServerTools &b by Reecepbups. Version: " + plugin.getDescription().getVersion());
+		String ver = plugin.getDescription().getVersion();
+		Util.consoleMSG("\n&b&l[!] ServerTools&b by Reece#3370. Version: " + ver);
 		if (plugin.getConfig().getBoolean("LoadWithTimings")) {
 			Main.logging(executionTimer.end());
 		}
