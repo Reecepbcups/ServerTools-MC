@@ -86,8 +86,12 @@ public class ConfigUtils {
 	}
 
 	
-	
-	public String createBackup(String FileName, String[] ignoreFolders) {
+	/**
+	 * @param FileName
+	 * @param ignoreFolders
+	 * @return String[filename, success_status]
+	 */
+	public String[] createBackup(String FileName, String[] ignoreFolders) {
 		if(FileName == null || FileName.length() == 0){
 			FileName = dateFormat.format(new Date());
 		}		
@@ -98,21 +102,23 @@ public class ConfigUtils {
 		String BACKUP_PATH = BACKUP_DIR + File.separator + FileName + ".zip";
 		Main.logging(STOOLS_DIR + "->\n" + BACKUP_PATH);		
 
-		Util.zipFolder(STOOLS_DIR, BACKUP_PATH, ignoreFolders);
+		boolean success_value = Util.zipFolder(STOOLS_DIR, BACKUP_PATH, ignoreFolders);
 							
-		Main.logging("Backup complete");
-		return FileName + ".zip";
+		// Main.logging("Backup complete");
+		return new String[] {FileName + ".zip", Boolean.toString(success_value)};
 	}
-	public String createBackup(String FileName) {
+
+	public String[] createBackup(String FileName) {
 		return createBackup(FileName, new String[] {BACKUP_FOLDER});
 	}
-	public String createBackup() {
+
+	public String[] createBackup() {
 		return createBackup(null, new String[] {BACKUP_FOLDER});
 	}
 
 	public String restoreBackup(String FileName){
 		String BACKUP_DIR = createDirectory(BACKUP_FOLDER).getAbsolutePath();
-		String BACKUP_PATH = BACKUP_DIR + File.separator + FileName;
+		String BACKUP_PATH = BACKUP_DIR + File.separator + FileName + ".zip";
 		Main.logging("restoreBackup " + BACKUP_PATH);
 				
 		File backupFile = new File(BACKUP_PATH);
@@ -123,7 +129,7 @@ public class ConfigUtils {
 
 		Util.unzipFile(BACKUP_PATH, plugin.getDataFolder().getAbsolutePath());
 		Main.logging("Restore complete");	
-		return "&e[!] Restore Complete! Apply changes with &f&n/stools reload";
+		return "&e[!] Restore Complete! Reloading configs...";
 	}
 	
 

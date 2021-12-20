@@ -10,7 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ReeceTools implements CommandExecutor, TabCompleter {
@@ -139,6 +141,19 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			}
 			return result;
 		}		
+
+		if(args.length == 2) {	
+			if(Arrays.asList("import", "restore").contains(args[0].toLowerCase())){	
+				String path = plugin.getDataFolder() + File.separator + ConfigUtils.getInstance().getBackupDir();			
+				for(File f : new File(path).listFiles()) {
+					if(f.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
+						result.add(f.getName());
+					}
+				}
+				return result;
+			}
+			
+		}
 		return null;
 	}
 
@@ -156,11 +171,20 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 		if(args.length > 1){
 			FileName = args[1];
 		}
-		// if file already exists in dir, inform user and return		
 
 		Util.coloredMessage(sender, "&aCreating backup...");
-		String filePath = ConfigUtils.getInstance().createBackup(FileName);
-		Util.coloredMessage(sender, "Backup saved: ../ServerTools/"+ConfigUtils.getInstance().getBackupDir()+"/"+filePath);
+		String[] info = ConfigUtils.getInstance().createBackup(FileName);
+
+		String filePath = info[0];
+		String success_value = info[1];
+
+		if(success_value.equalsIgnoreCase("true")){
+			Util.coloredMessage(sender, 
+				"Backup saved: ../ServerTools/"+ConfigUtils.getInstance().getBackupDir()+"/"+filePath);				
+		} else {
+			Util.coloredMessage(sender, 
+				filePath + " could not be saved.\nIt is possible this is already a backup.");
+		}		
 	}
 
 	private void restoreBackup(CommandSender sender, String args[]) {
@@ -174,14 +198,15 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			return;
 		}
 
-		String FileName = args[1];
-		if(!FileName.endsWith(".zip")){
-			FileName += ".zip";
-		}
+		String FileName = args[1].replace(".zip", "");
 
 		Util.coloredMessage(sender, "&aRestoring backup " + FileName + "...");
 		String return_value = ConfigUtils.getInstance().restoreBackup(FileName);
 		Util.coloredMessage(sender, return_value);
+
+		if(return_value.contains("Reloading configs")){
+			Util.console("plugman reload ServerTools");
+		}		
 	}
 
 	private void showAllModules(final CommandSender sender) {

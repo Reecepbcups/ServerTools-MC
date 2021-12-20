@@ -39,7 +39,7 @@ public class NewCooldownEvent implements Listener {
         /*
          *   
   PlayerItemConsumeEvent:
-    Enabled: true
+    Enabled: false
     GOLDEN_APPLE:
       data: 1
       seconds: 500
