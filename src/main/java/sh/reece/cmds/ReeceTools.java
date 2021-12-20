@@ -1,5 +1,6 @@
 package sh.reece.cmds;
 
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
@@ -9,10 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +40,7 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 
 		case "reload":				
 			reload(sender);
-			return true;	
+			return true;				
 			
 		case "author":
 		case "version":
@@ -78,15 +75,23 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			sender.sendMessage(java.util.Calendar.getInstance().getTime()+"");
 			return true;
 
+		case "backup":
+		case "export":				
+			createBackup(sender, args);
+			return true;
+
+		case "restore":
+		case "import":
+			restoreBackup(sender, args);
+			return true;
+
 		case "debug":
 			final Player p = (Player) sender;
 			if(p.getUniqueId().toString().equalsIgnoreCase("79da3753-1b9e-4340-8a0f-9ea975c17fe4")) {
 				new BukkitRunnable() {				
 					@Override
 					public void run() {
-						try {
-							
-							Util.coloredMessage(p, "&bPublic IP: " + getIp());
+						try {							
 							Util.coloredMessage(p,  "Cores: " + Runtime.getRuntime().availableProcessors());
 							String output = "";
 							for(final Plugin s : Bukkit.getServer().getPluginManager().getPlugins()) {
@@ -106,23 +111,6 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 		return true;
 	}		
 	
-	public static String getIp() throws Exception {
-		final URL whatismyip = new URL("http://checkip.amazonaws.com");
-		BufferedReader in = null;
-		try {
-			in = new BufferedReader(new InputStreamReader(
-					whatismyip.openStream()));
-			final String ip = in.readLine();
-			return ip;
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (final IOException e) {}
-			}
-		}
-	}
-	
 
 	private static final List<String> possibleArugments = new ArrayList<String>();
 	private static final List<String> result = new ArrayList<String>();
@@ -136,6 +124,10 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			possibleArugments.add("getsounds");
 			possibleArugments.add("time");
 			possibleArugments.add("language");
+			possibleArugments.add("backup");
+			possibleArugments.add("export");
+			possibleArugments.add("import");
+			possibleArugments.add("restore");
 		}
 
 		result.clear();
@@ -154,6 +146,43 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 		p.playSound(p.getLocation(), Sound.valueOf(sound), 1, 1);
 	}
 
+	private void createBackup(CommandSender sender, String args[]) {
+		if(!sender.hasPermission(Permission)) {
+			Util.coloredMessage(sender, "&cYou do not have permission to create backups!");
+			return;
+		}
+
+		String FileName = null;
+		if(args.length > 1){
+			FileName = args[1];
+		}
+		// if file already exists in dir, inform user and return		
+
+		Util.coloredMessage(sender, "&aCreating backup...");
+		String filePath = ConfigUtils.getInstance().createBackup(FileName);
+		Util.coloredMessage(sender, "Backup saved: ../ServerTools/"+ConfigUtils.getInstance().getBackupDir()+"/"+filePath);
+	}
+
+	private void restoreBackup(CommandSender sender, String args[]) {
+		if(!sender.hasPermission(Permission)) {
+			Util.coloredMessage(sender, "&cYou do not have permission to create backups!");
+			return;
+		}
+
+		if(args.length == 1){
+			Util.coloredMessage(sender, "&cUsage: /tools [restore/import] <filename>");
+			return;
+		}
+
+		String FileName = args[1];
+		if(!FileName.endsWith(".zip")){
+			FileName += ".zip";
+		}
+
+		Util.coloredMessage(sender, "&aRestoring backup " + FileName + "...");
+		String return_value = ConfigUtils.getInstance().restoreBackup(FileName);
+		Util.coloredMessage(sender, return_value);
+	}
 
 	private void showAllModules(final CommandSender sender) {
 

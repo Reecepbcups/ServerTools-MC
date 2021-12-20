@@ -10,9 +10,27 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
+import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 
 public class Util {
@@ -115,6 +133,98 @@ public class Util {
 			}			
 			return false;
 		}
+	}
+
+	public static void zipFolder(String sourceDirPath, String zipFilePath, String[] SkipDirectories) {
+		if (new File(zipFilePath).exists()) {
+			// Main.logging(zipFilePath + " already exists, skipping");
+			return;
+		}
+		Path p;
+		try {
+			p = Files.createFile(Paths.get(zipFilePath));		
+
+			try (ZipOutputStream zs = new ZipOutputStream(Files.newOutputStream(p))) {
+				Path pp = Paths.get(sourceDirPath); // $PluginFolder/plugins/ServerTools
+				// Main.logging("Path pp " + pp.toString());
+				Files.walk(pp)
+					.filter(path -> !Files.isDirectory(path))
+					.forEach(path -> {					
+						String relative = pp.relativize(path).toString();						
+
+						if(SkipDirectories.length > 0){
+							for(int i = 0; i < SkipDirectories.length; i++){
+								if(relative.startsWith(SkipDirectories[i])){
+									return;
+								}
+							}
+						}
+
+						// Main.logging("relative " + pp.relativize(path).toString());
+						ZipEntry zipEntry = new ZipEntry(pp.relativize(path).toString());
+						try {
+							zs.putNextEntry(zipEntry);
+							Files.copy(path, zs);
+							zs.closeEntry();
+						} catch (IOException e) {
+						System.err.println(e);
+						}
+					});
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public static void unzipFile(String zipFilePath, String destDir) {
+		// unzip the zipFilePath and overwrite the destination directory
+		//Open the file 
+        try(ZipFile file = new ZipFile(zipFilePath)) {
+            FileSystem fileSystem = FileSystems.getDefault();
+            //Get file entries
+            Enumeration<? extends ZipEntry> entries = file.entries();
+             
+            //We will unzip files in this folder
+            String uncompressedDirectory = destDir + File.separator;
+            // Files.createDirectory(fileSystem.getPath(uncompressedDirectory));
+             
+            //Iterate over entries
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
+
+				String uncompressedFileName = uncompressedDirectory + entry.getName();
+                Path uncompressedFilePath = fileSystem.getPath(uncompressedFileName);
+
+				Files.createDirectories(Paths.get(uncompressedFilePath.getParent().toString()));
+
+                //If directory then create a new directory in uncompressed folder
+                // if (entry.isDirectory())  { // never runs i dont think
+                //     System.out.println("Creating Directory:" + uncompressedDirectory + entry.getName());
+                //     Files.createDirectories(fileSystem.getPath(uncompressedDirectory + entry.getName()));
+                // } 
+                //Else create the file
+                // else {					
+                    InputStream is = file.getInputStream(entry);
+                    BufferedInputStream bis = new BufferedInputStream(is);
+					
+					// Files.copy(is, uncompressedFilePath, StandardCopyOption.REPLACE_EXISTING);
+                    // Files.write(uncompressedFilePath, bis.readAllBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+					// Files.createFile(uncompressedFilePath);
+
+                    FileOutputStream fileOutput = new FileOutputStream(uncompressedFileName);
+					// System.out.println("uncomFName " + uncompressedFileName);
+					// System.out.println("create uncomFPath " + uncompressedFilePath);
+                    // while (bis.available() > 0) { // always returened 0
+                        fileOutput.write(bis.readAllBytes());
+                    // }
+                    fileOutput.close();
+                    // System.out.println("Written: " + entry.getName());
+                // }
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 

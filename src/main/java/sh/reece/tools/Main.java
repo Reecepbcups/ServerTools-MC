@@ -44,8 +44,8 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		loader = new Loader(this);
-
 		configUtils = new ConfigUtils(this);
+		
 		configUtils.loadConfig();			
 		loader.setMarking("Configurations");	
 		
