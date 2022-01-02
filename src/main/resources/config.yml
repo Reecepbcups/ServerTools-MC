@@ -373,7 +373,7 @@ Events:
     Enabled: true
     # https://helpch.at/docs/1.12.2/index.html?org/bukkit/potion/PotionEffectType.html
     worlds:
-    - 'world:NIGHT_VISION'
+    - 'world:NIGHT_VISION:1'
     
   ChatJoinMOTD:
     Enabled: true

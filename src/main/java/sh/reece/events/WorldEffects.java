@@ -1,6 +1,9 @@
 package sh.reece.events;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,7 +21,9 @@ public class WorldEffects implements Listener {// CommandExecutor
 	private static Main plugin;
 	//private FileConfiguration config;
 	private String Section;
-	private HashMap<String, String> world_effect = new HashMap<String, String>();
+
+	// WorldName, <PotionEffect, LevelEffect>
+	private Map<String, List<Object>> world_effect = new HashMap<String, List<Object>>();
 	private HashMap<Player, PotionEffectType> affectedPlayers = new HashMap<Player, PotionEffectType>();;
 	
 	public WorldEffects(Main instance) {
@@ -29,9 +34,26 @@ public class WorldEffects implements Listener {// CommandExecutor
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);   
     		
     		for(String wEff : plugin.getConfig().getStringList(Section+".worlds")) {
-    			world_effect.put(wEff.split(":")[0], wEff.split(":")[1]);
-    		}
-    	}
+				String[] wEffSplit = wEff.split(":");
+
+				int value = 1;
+				if(wEffSplit.length > 2) {									
+					try { // effect value level	
+						value = Integer.valueOf(wEffSplit[2]);
+					} catch (Exception e) {
+						Main.logging(wEffSplit[2] + " is not a valid number");
+					}
+				}
+
+				List<Object> potionEffect = new ArrayList<Object>();
+				potionEffect.add(wEffSplit[1]); // NIGHT_VISION
+				potionEffect.add(value); // 1
+
+    			world_effect.put(wEffSplit[0], potionEffect);		
+				Main.logging("WorldEffect: " + wEffSplit[0] + " " + wEffSplit[1] + " " + value);
+			}
+		}
+    	
 	}
 	
 	@EventHandler
@@ -50,9 +72,14 @@ public class WorldEffects implements Listener {// CommandExecutor
 		
 		removeEffect(p);// removes precious effect from last world change, if any
 		
-		if(world_effect.containsKey(w)) {			
-			PotionEffectType potion = PotionEffectType.getByName(world_effect.get(w).toUpperCase());
-			p.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE, 1));
+		if(world_effect.containsKey(w)) {	
+			
+			List<Object> potionEffect = world_effect.get(w);
+			String worldname = (String) potionEffect.get(0);
+			int value = (int) potionEffect.get(1);
+
+			PotionEffectType potion = PotionEffectType.getByName(worldname.toUpperCase());
+			p.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE, value));
 			affectedPlayers.put(p, potion);
 		}
 	}
