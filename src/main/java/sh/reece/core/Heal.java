@@ -96,7 +96,7 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 	}
 	
 	public void heal(Player p) {
-		p.setHealth(20.0D);
+		p.setHealth(p.getMaxHealth());
 		p.setFoodLevel(20);
 		Util.coloredMessage(p, configUtils.lang("HEAL_HEALED"));
 	}
