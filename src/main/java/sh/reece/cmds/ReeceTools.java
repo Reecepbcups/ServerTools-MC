@@ -4,6 +4,7 @@ import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -75,6 +76,21 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 
 		case "time":
 			sender.sendMessage(java.util.Calendar.getInstance().getTime()+"");
+			return true;
+
+		// checks material is in the server
+		case "material":
+			if(args.length!=2) {
+				sender.sendMessage("Usage: /tools material MATERIAL");
+				return true;
+			}
+			boolean found = false;
+			try {
+				found = Material.valueOf(args[1].toUpperCase()) != null;
+			} catch (Exception e) {				
+			}
+			
+			Util.coloredMessage(sender, "Is Material: " + args[1] + "valid? " + found + ".");
 			return true;
 
 		case "backup":

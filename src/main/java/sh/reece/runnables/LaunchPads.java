@@ -32,8 +32,16 @@ public class LaunchPads implements Listener, CommandExecutor {
         	
         	//config = plugin.getConfig();
         	config = plugin.getConfig();
-        	BlockType = Material.valueOf(config.getString(Section+".BlockType").toUpperCase());
-        	PlateType = Material.valueOf(config.getString(Section+".PlateType").toUpperCase());
+
+			try {
+				BlockType = Material.valueOf(config.getString(Section+".BlockType").toUpperCase());
+        		PlateType = Material.valueOf(config.getString(Section+".PlateType").toUpperCase());
+			} catch (Exception e) {
+				BlockType = Material.EMERALD_BLOCK;
+				PlateType = Material.STONE_PLATE;
+				Main.logging("[LaunchPads] BlockType or PlateType not found in config / not supported. Using defaults.");
+			}        			
+
         	//SoundEffect = config.getString(Section+".SoundEffect");
         	LaunchPower = config.getInt(Section+".LaunchPower");
         	RunnableTicksperCheck = config.getInt(Section+".RunnableSecondsCheck");
