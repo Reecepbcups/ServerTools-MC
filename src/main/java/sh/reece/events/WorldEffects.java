@@ -1,6 +1,8 @@
 package sh.reece.events;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.Map.Entry;
@@ -29,14 +31,14 @@ public class WorldEffects implements Listener {// CommandExecutor
 	// private HashMap<Player, Map<String, Integer>> affectedPlayers = new HashMap<Player, Map<String, Integer>>();
 
 	// USER, World
-	private HashMap<UUID, String> affectedPlayers = new HashMap<UUID, String>();
+	private HashMap<UUID, List<String>> affectedPlayers = new HashMap<UUID, List<String>>();
 	
 	public WorldEffects(Main instance) {
         plugin = instance;
         
         Section = "Events.WorldEffects";                
         if(plugin.enabledInConfig(Section+".Enabled")) {
-    		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);   
+    		  
     		
     		for(String wEff : plugin.getConfig().getStringList(Section+".worlds")) {
 				String[] wEffSplit = wEff.split(":");
@@ -50,30 +52,26 @@ public class WorldEffects implements Listener {// CommandExecutor
 					}
 				}
 
-				// gets or creates a list of effects & values to add too
-				// List<List<Object>> eff = world_effect.get(wEffSplit[0]);
-				// if(eff == null) {
-				// 	eff = new ArrayList<List<Object>>();
-				// }
-
 				Map<String, Integer> eff = world_effect.get(wEffSplit[0]);
 				if(eff == null) {
 					eff = new HashMap<String, Integer>();
 				}
 
-				// creates a single effect & its strength value
-				// List<Object> potionEffect = new ArrayList<Object>();
-				// potionEffect.add(wEffSplit[1]); // NIGHT_VISION
-				// potionEffect.add(value); // 1
 				eff.put(wEffSplit[1], value);
 
 				// adds the potion to the eff list, which is a list of all effects for a given world
-				// eff.add(potionEffect);
 
 				// saves the new list to the world_effect map
 				world_effect.put(wEffSplit[0], eff);
 				Main.logging("WorldEffect: " + wEffSplit[0] + " " + wEffSplit[1] + " " + value);
 			}
+
+			if(world_effect == null) {
+				Main.logging("No world effects found!!");
+				return;
+			}
+
+			Bukkit.getServer().getPluginManager().registerEvents(this, plugin); 
 			
 		}
     	
@@ -123,23 +121,34 @@ public class WorldEffects implements Listener {// CommandExecutor
 			}
 
 			// adds all potion effects to memory so we can clear on change / kick
-			affectedPlayers.put(p.getUniqueId(), w);			
+
+			List<String> worldsEffects = affectedPlayers.get(p.getUniqueId());
+			if(worldsEffects == null) {
+				worldsEffects = new ArrayList<String>();
+			}
+			worldsEffects.add(w);
+
+			affectedPlayers.put(p.getUniqueId(), worldsEffects);			
 		}
 	}
 	
 	public void removeEffect(Player p) {
-		if(affectedPlayers.containsKey(p.getUniqueId())) {
-			// for(Entry<String, Integer> effects : affectedPlayers.get(p).entrySet()){
-			// 	PotionEffectType potion = PotionEffectType.getByName(effects.getKey().toUpperCase());
-			// 	p.removePotionEffect(potion);
-			// 	Main.logging("Removed: " + effects.getKey() + " from " + p.getName());
-			// }
+		List<String> worlds = affectedPlayers.get(p.getUniqueId());
+		
+		if(worlds != null) {
 
-			String worldName = p.getWorld().getName();
-			for(Entry<String, Integer> effects : world_effect.get(worldName).entrySet()) {
-				PotionEffectType potion = PotionEffectType.getByName(effects.getKey().toUpperCase());
-				p.removePotionEffect(potion);
-				Main.logging("Removed: " + effects.getKey() + " from " + p.getName());
+			for(String worldName : worlds) {
+
+				if(!world_effect.containsKey(worldName)) {
+					Main.logging("No effects found for world: " + worldName);
+					return;
+				}
+	
+				for(Entry<String, Integer> effects : world_effect.get(worldName).entrySet()) {
+					PotionEffectType potion = PotionEffectType.getByName(effects.getKey().toUpperCase());
+					p.removePotionEffect(potion);
+					Main.logging("Removed: " + effects.getKey() + " from " + p.getName());
+				}					
 			}
 
 			affectedPlayers.remove(p.getUniqueId());

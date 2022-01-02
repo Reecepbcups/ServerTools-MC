@@ -79,7 +79,9 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 			if(checkPerm(sender, cmd.getName(), Feed)) {
 				Util.coloredMessage(p, configUtils.lang("HEAL_FED"));
 			}
-				p.setFoodLevel(20);
+			
+			p.setFoodLevel(20);
+			p.setSaturation(2);
 			
 		} else if(label.equalsIgnoreCase("heal")) {			
 			if(checkPerm(sender, cmd.getName(), Heal)) {
