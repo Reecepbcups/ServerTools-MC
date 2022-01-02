@@ -1,6 +1,8 @@
 package sh.reece.utiltools;
 
 import com.google.common.base.Strings;
+import com.google.common.io.ByteStreams;
+
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -194,14 +196,7 @@ public class Util {
                 Path uncompressedFilePath = fileSystem.getPath(uncompressedFileName);
 
 				Files.createDirectories(Paths.get(uncompressedFilePath.getParent().toString()));
-
-                //If directory then create a new directory in uncompressed folder
-                // if (entry.isDirectory())  { // never runs i dont think
-                //     System.out.println("Creating Directory:" + uncompressedDirectory + entry.getName());
-                //     Files.createDirectories(fileSystem.getPath(uncompressedDirectory + entry.getName()));
-                // } 
-                //Else create the file
-                // else {					
+				
                     InputStream is = file.getInputStream(entry);
                     BufferedInputStream bis = new BufferedInputStream(is);
 					
@@ -213,7 +208,11 @@ public class Util {
 					// System.out.println("uncomFName " + uncompressedFileName);
 					// System.out.println("create uncomFPath " + uncompressedFilePath);
                     // while (bis.available() > 0) { // always returened 0
-                        fileOutput.write(bis.readAllBytes());
+                        
+						// fileOutput.write(bis.readAllBytes());
+
+						byte[] bytes = ByteStreams.toByteArray(bis);						
+						fileOutput.write(bytes);
                     // }
                     fileOutput.close();
                     // System.out.println("Written: " + entry.getName());

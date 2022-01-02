@@ -53,7 +53,11 @@ public class Spawn implements Listener, CommandExecutor {
 			spawnOnInitJoin = plugin.getConfig().getString(Section+".onJoinInstantly");
 			spawnFirstUniqueJoinOnly = plugin.getConfig().getString(Section+".spawnFirstUniqueJoinOnly");
 			
-			voidTPEnabled = plugin.getConfig().getString(Section+".teleportWhenInVoid.enabled");			
+			voidTPEnabled = plugin.getConfig().getString(Section+".teleportWhenInVoid.Enabled");
+			if(voidTPEnabled == null) {
+				voidTPEnabled = "false";
+			}			
+
 			voidmsg = plugin.getConfig().getString(Section+".teleportWhenInVoid.message");
 			voidDisabledWorlds = plugin.getConfig().getStringList(Section+".teleportWhenInVoid.disabledWorlds");
 
@@ -128,23 +132,24 @@ public class Spawn implements Listener, CommandExecutor {
 	public void onDamageFromVoid(EntityDamageEvent e) {
 		// when player takes damage in void, teleport them to spawn
 		// if they were hurt because of void & are a player
-		if(e.getCause() == DamageCause.VOID && e.getEntity() instanceof Player){
+		if(e.getEntity() instanceof Player && e.getCause() == DamageCause.VOID){
 
-			// if void TP is enabled
+			// if void TP is enabled (null means disabled)
 			if(voidTPEnabled.equalsIgnoreCase("true")) {
 				Player p = (Player) e.getEntity();
 
 				// if worlds is not null and player is not in the world which we did not enable
-				if (voidDisabledWorlds != null && 
-					voidDisabledWorlds.contains(p.getLocation().getWorld().getName())) {
+				if (voidDisabledWorlds != null && voidDisabledWorlds.contains(p.getLocation().getWorld().getName())) {
 					return;
 				} 
+
+				System.out.println("To spawn.");
 
 				// get spawn location and move them there
 				p.teleport(getSpawnLocation());
 				e.setCancelled(true);
 				Util.coloredMessage(p, voidmsg);
-			}
+			} 
 		}
 	}
 
