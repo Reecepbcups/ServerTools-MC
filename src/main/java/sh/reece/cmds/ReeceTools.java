@@ -91,7 +91,7 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			}
 			
 			Util.coloredMessage(sender, "Is Material: " + args[1] + "valid? " + found + ".");
-			return true;
+			return true;		
 
 		case "backup":
 		case "export":				
