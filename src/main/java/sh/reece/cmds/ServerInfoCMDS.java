@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import sh.reece.tools.ConfigUtils;
 import sh.reece.tools.Main;
 import sh.reece.utiltools.Util;
 
@@ -28,10 +29,10 @@ public class ServerInfoCMDS implements Listener {//, CommandExecutor {
         
         if(plugin.enabledInConfig(Section+".Enabled")) {
         	
-        	config = plugin.getConfig();
+        	config = ConfigUtils.getInstance().getConfigFile("ServerInfoCommands.yml");
         	
         	// ex. [discord, buy]
-        	commands = config.getConfigurationSection("ServerInfoCMDS.Commands").getKeys(false);
+        	commands = config.getKeys(false);
         	
     		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     		
@@ -46,8 +47,8 @@ public class ServerInfoCMDS implements Listener {//, CommandExecutor {
         String cmd = lowerMSG.split(" ")[0].replace("/", "");
         if(lowerMSG.startsWith("/") && commands.contains(cmd)) {
         	
-        	if(config.getString(Section+".Commands."+cmd+".enabled").equalsIgnoreCase("true")) {
-        		for(String s : config.getStringList("ServerInfoCMDS.Commands."+cmd+".message")){
+        	if(config.getString(cmd+".enabled").equalsIgnoreCase("true")) {
+        		for(String s : config.getStringList(cmd+".message")){
         			
         			if(plugin.isPAPIEnabled()) {
 						s = PlaceholderAPI.setPlaceholders(p, s);
