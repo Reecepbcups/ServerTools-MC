@@ -132,9 +132,15 @@ public class Spawn implements Listener, CommandExecutor {
 	public void onDamageFromVoid(EntityDamageEvent e) {
 		// when player takes damage in void, teleport them to spawn
 		// if they were hurt because of void & are a player
-		if(e.getEntity() instanceof Player && e.getCause() == DamageCause.VOID){
+		if(!(e.getCause() == DamageCause.VOID)) {
+			return;
+		}
 
-			// if void TP is enabled (null means disabled)
+		if(!(e.getEntity().getLocation().getY() < -50)) {
+			return;
+		}
+
+		if(e.getEntity() instanceof Player) {
 			if(voidTPEnabled.equalsIgnoreCase("true")) {
 				Player p = (Player) e.getEntity();
 
@@ -143,12 +149,13 @@ public class Spawn implements Listener, CommandExecutor {
 					return;
 				} 
 
-				System.out.println("To spawn.");
-
-				// get spawn location and move them there
-				p.teleport(getSpawnLocation());
-				e.setCancelled(true);
-				Util.coloredMessage(p, voidmsg);
+				if(getSpawnLocation() != null) {
+					System.out.println("To spawn.");
+					// move player to spawn
+					p.teleport(getSpawnLocation());
+					e.setCancelled(true);
+					Util.coloredMessage(p, voidmsg);
+				}				
 			} 
 		}
 	}
