@@ -23,7 +23,7 @@ public class WorldEffects implements Listener {// CommandExecutor
 	private String Section;
 
 	// WorldName, <PotionEffect, LevelEffect>
-	private Map<String, List<Object>> world_effect = new HashMap<String, List<Object>>();
+	private Map<String, List<List<Object>>> world_effect = new HashMap<String, List<List<Object>>>();
 	private HashMap<Player, PotionEffectType> affectedPlayers = new HashMap<Player, PotionEffectType>();;
 	
 	public WorldEffects(Main instance) {
@@ -45,13 +45,25 @@ public class WorldEffects implements Listener {// CommandExecutor
 					}
 				}
 
+				// gets or creates a list of effects & values to add too
+				List<List<Object>> eff = world_effect.get(wEffSplit[0]);
+				if(eff == null) {
+					eff = new ArrayList<List<Object>>();
+				}
+
+				// creates a single effect & its strength value
 				List<Object> potionEffect = new ArrayList<Object>();
 				potionEffect.add(wEffSplit[1]); // NIGHT_VISION
 				potionEffect.add(value); // 1
 
-    			world_effect.put(wEffSplit[0], potionEffect);		
+				// adds the potion to the eff list, which is a list of all effects for a given world
+				eff.add(potionEffect);
+
+				// saves the new list to the world_effect map
+				world_effect.put(wEffSplit[0], eff);
 				Main.logging("WorldEffect: " + wEffSplit[0] + " " + wEffSplit[1] + " " + value);
 			}
+			
 		}
     	
 	}
@@ -74,13 +86,19 @@ public class WorldEffects implements Listener {// CommandExecutor
 		
 		if(world_effect.containsKey(w)) {	
 			
-			List<Object> potionEffect = world_effect.get(w);
-			String worldname = (String) potionEffect.get(0);
-			int value = (int) potionEffect.get(1);
+			List<List<Object>> potionEffect = world_effect.get(w);
 
-			PotionEffectType potion = PotionEffectType.getByName(worldname.toUpperCase());
-			p.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE, value));
-			affectedPlayers.put(p, potion);
+			// iterates through all effects for a given world
+			for (List<Object> list : potionEffect) {
+				String worldname = (String) list.get(0);
+				int value = (int) list.get(1);
+
+				PotionEffectType potion = PotionEffectType.getByName(worldname.toUpperCase());
+				p.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE, value));
+				affectedPlayers.put(p, potion);
+			}
+
+			
 		}
 	}
 	
