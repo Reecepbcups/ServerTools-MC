@@ -1,0 +1,45 @@
+discord:
+  Enabled: false
+  message:
+  - ''
+  - '&d&lServer Discord'
+  - '&7(If you are having any issues please join the discords so we can help resolve them)'
+  - ''
+  - '&d&lDiscord'
+  - '&f&l%DISCORD%'     
+help:
+  Enabled: true
+  message:
+  - '&8&l&m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+  - '         &b&lIsland Help &f(Basic Commands)'
+  - '  &7&o(( List of all comands regarding Skyblock. ))'
+  - ''
+  - '&b/island &f- Main command to show GUI.'
+  - '&b/island create &f- Creates an island.'
+  - '&b/island invite <player> &f- Invite a player to your island.'
+  - '&b/island kick <player> &f- Kick a player from your island.'
+  - '&b/island home &f- Teleports you to your Island home.'
+  - '&b/island leave &f- Leave your current island.'
+  - '&b/island top &f- Show the list of top ten islands.'
+  - ''
+  - '&bIf you have suggestions or concerns please visit our'
+  - '&bdisord &f%DISCORD% &bor contact one of the &fowners.'
+  - '&8&l&m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+buy:
+  Enabled: true
+  message:
+  - ''
+  - '&f&l[!] &d&lCLICK TO VISIT OUR STORE!'
+  - ''
+  - '  &d&l• &f&n%STORE%'
+  - ''
+  - ''
+flytime:
+  Enabled: false
+  message:
+  - ''
+  - '&f&lFLGIHT TIME LEFT'
+  - '&f&l%luckperms_expiry_time_superior.island.fly%'
+  - ''
+  - '&7&oIf the above is blank, &f/vote'
+  - ''
