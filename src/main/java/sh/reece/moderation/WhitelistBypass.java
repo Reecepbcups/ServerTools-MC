@@ -19,7 +19,6 @@ public class WhitelistBypass implements Listener {
 	public WhitelistBypass(Main instance) {
 		plugin = instance;
 
-
 		if (plugin.enabledInConfig("Moderation.WhitelistBypass.Enabled")) {
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);	
 
@@ -31,9 +30,10 @@ public class WhitelistBypass implements Listener {
 		}
 	}
 
-	@EventHandler(priority = EventPriority.MONITOR)
-	public void onKick(PlayerLoginEvent e) {
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onLogin(PlayerLoginEvent e) {
 		if (e.getResult() == PlayerLoginEvent.Result.KICK_WHITELIST) {
+
 			if(e.getPlayer().hasPermission(Whitelistperm) || e.getPlayer().isWhitelisted()) {
 				e.setResult(PlayerLoginEvent.Result.ALLOWED);
 				return;
@@ -51,7 +51,6 @@ public class WhitelistBypass implements Listener {
 	
 	@EventHandler // does not affect console, for that ServerCommandEvent would be needed
 	public void playerCMD(PlayerCommandPreprocessEvent e) {
-		
 		if(DisableWhitelistCMDInGame && e.getMessage().startsWith("/whitelist add")) {
 			Util.coloredMessage(e.getPlayer(), "&e[ServerTools] &cRunning /whitelist add is disabled! &fPlease perform this in console if you need to use, or give user permission: &e" + Whitelistperm);
 			e.setCancelled(true);
