@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -27,12 +28,14 @@ public class JoinMOTD implements Listener {
         	
         	MOTDMsg = plugin.getConfig().getStringList(Section+".MOTD");
         	
-    		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);   
-    		papiSupport = plugin.isPAPIEnabled();
+			if(MOTDMsg != null && MOTDMsg.size() > 0) {
+				Bukkit.getServer().getPluginManager().registerEvents(this, plugin);   
+				papiSupport = plugin.isPAPIEnabled();
+			}
     	}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void playerJoinEvent(PlayerJoinEvent e) {	
 		Player p = e.getPlayer();
 		
