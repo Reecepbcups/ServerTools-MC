@@ -352,9 +352,11 @@ public class Util {
 	    // }
 		// return matcher.appendTail(buffer).toString();	
 		if(message == null){
-			message = "NULL_ISSUE";
-			consoleMSG("NULL ERROR: " + Thread.currentThread().getStackTrace()[2]);
+			message = "SERVERTOOLS_MESSAGE_NULL_ISSUE";
+			consoleMSG("NULL ERROR: ");
+			throw new NullPointerException("Null Message");
 		}
+		
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 	public static List<String> color(final List<String> list) {
