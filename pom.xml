@@ -10,7 +10,7 @@
   <name>servertools</name>
   <url>https://reece.sh</url>
 
-  <properties>
+  <properties></properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
