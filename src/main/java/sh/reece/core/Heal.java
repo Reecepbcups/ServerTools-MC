@@ -78,16 +78,13 @@ public class Heal implements CommandExecutor{//,TabCompleter,Listener {
 		if(label.equalsIgnoreCase("feed")) {
 			if(checkPerm(sender, cmd.getName(), Feed)) {
 				Util.coloredMessage(p, configUtils.lang("HEAL_FED"));
-			}
-			
-			p.setFoodLevel(20);
-			p.setSaturation(2);
-			
+				p.setFoodLevel(20);
+				p.setSaturation(2);
+			}			
 		} else if(label.equalsIgnoreCase("heal")) {			
 			if(checkPerm(sender, cmd.getName(), Heal)) {
 				heal(p);
-			}
-			
+			}			
 		} else if(label.equalsIgnoreCase("healall")) {
 			if(checkPerm(sender, cmd.getName(), HealOthers)) {
 				Bukkit.getOnlinePlayers().forEach(target -> heal(target));
