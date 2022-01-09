@@ -71,10 +71,6 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 			AlternateCommandHandler.addDisableCommand("hologram");
 			AlternateCommandHandler.addDisableCommand("holo");
 		}
-        
-        // on ChunkUnloadEvent, ChunkLoadEvent
-        // kill or spawn armour stands in that area
-        
 	}
 	
 	@EventHandler
@@ -150,6 +146,14 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 			}
 			return result;
 		}
+		if(args[0].equalsIgnoreCase("create") && args.length == 2) {
+			for(String a : new String[] {"MyHologram"}) {
+				if(a.toLowerCase().startsWith(args[1].toLowerCase())) {
+					result.add(a);			
+				}
+			}
+			return result;
+		}
 		return null;
 	}
 	
@@ -191,6 +195,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 						Util.coloredMessage(p, "&4[!] &cThe key " + args[1] + " already exist!");
 					} else {
 						createNewHolo(p.getLocation(), args[1]);
+						Util.coloredMessage(p, "&2[!] &aCreated new Hologram with key " + args[1] + " at your location!");
 					}
 				}
 				return true;	
@@ -279,7 +284,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 		};
 
 		Util.coloredMessage(p, "&e&lServerTools Holograms");
-		for (int i = 1; i < MSG.length; i++) {			
+		for (int i = 0; i < MSG.length; i++) {			
 			Util.coloredMessage(p, "&f/hologram " + MSG[i]);
 		}
 		
@@ -311,7 +316,8 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 				as.setCanPickupItems(false);
 				as.setCustomNameVisible(true);
 				as.setVisible(false);		
-				as.setMarker(true);	// very small collision box				
+				as.setMarker(true);	// very small collision box		
+				as.setRemoveWhenFarAway(false);
 			}				
 		}
 		
