@@ -31,7 +31,7 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 	private static Main plugin;
 	private FileConfiguration config;
 	private final String Section;
-	private String RedeemMessage;
+	private String RedeemMessage = null;
 	public static Set<String> voucherKeys;
 	private static Inventory GUI;
 	// Bundle / Vouchers plugin
@@ -66,8 +66,12 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
         	
         	voucherKeys = config.getKeys(false);
         	Glowing = config.getBoolean(Section+".Options.Glowing");
-        	RedeemMessage = Util.color(config.getString(Section+".Options.RedeemMessage"));       
-        	      
+
+        	RedeemMessage = Util.color(plugin.getConfig().getString(Section+".Options.RedeemMessage"));               	      
+			if(RedeemMessage == null) {
+				RedeemMessage = "&a&l[+]&a You redeemed the %voucher% &7(%voucherid%)";
+			}
+
         	createPreviewGUI();
         	
         	plugin.getCommand("voucher").setExecutor(this);
@@ -141,7 +145,10 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 		String newItem = config.getString(voucherID+".Item").split(":")[0];
 		if(Util.isInt(newItem)) {
 			material = Material.getMaterial(Integer.valueOf(newItem));
-		} else {
+		} else {			
+			
+			if(newItem.equalsIgnoreCase("sunflower")){ newItem = "DOUBLE_PLANT"; }
+
 			material = Material.getMaterial(newItem);
 		}
 		
