@@ -148,6 +148,7 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 		} else {			
 			
 			if(newItem.equalsIgnoreCase("sunflower")){ newItem = "DOUBLE_PLANT"; }
+			if(newItem.equalsIgnoreCase("experience_bottle")){ newItem = "EXP_BOTTLE"; }
 
 			material = Material.getMaterial(newItem);
 		}
