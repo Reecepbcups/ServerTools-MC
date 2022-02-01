@@ -38,7 +38,7 @@ flytime:
   Enabled: false
   message:
   - ''
-  - '&f&lFLGIHT TIME LEFT'
+  - '&f&lFLIGHT TIME LEFT'
   - '&f&l%luckperms_expiry_time_superior.island.fly%'
   - ''
   - '&7&oIf the above is blank, &f/vote'

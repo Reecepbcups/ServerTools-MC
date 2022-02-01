@@ -28,14 +28,15 @@ public class ServerInfoCMDS implements Listener {//, CommandExecutor {
         Section = "ServerInfoCMDS";        
         
         if(plugin.enabledInConfig(Section+".Enabled")) {
-        	
-        	config = ConfigUtils.getInstance().getConfigFile("ServerInfoCommands.yml");
+        				
+        	config = ConfigUtils.getInstance().createConfig("ServerInfoCommands.yml");
         	
         	// ex. [discord, buy]
         	commands = config.getKeys(false);
         	
-    		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
-    		
+			if(commands.size() > 0) {
+				Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+			}    		    		
     	}
 	}
 	
@@ -47,7 +48,7 @@ public class ServerInfoCMDS implements Listener {//, CommandExecutor {
         String cmd = lowerMSG.split(" ")[0].replace("/", "");
         if(lowerMSG.startsWith("/") && commands.contains(cmd)) {
         	
-        	if(config.getString(cmd+".enabled").equalsIgnoreCase("true")) {
+        	if(config.getString(cmd+".Enabled").equalsIgnoreCase("true")) {
         		for(String s : config.getStringList(cmd+".message")){
         			
         			if(plugin.isPAPIEnabled()) {
@@ -60,8 +61,4 @@ public class ServerInfoCMDS implements Listener {//, CommandExecutor {
         	e.setCancelled(true);
         }           
     }
-	
-	
-	
-	
 }
