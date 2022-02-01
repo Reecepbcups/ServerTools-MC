@@ -88,7 +88,7 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 		}
 
 
-		if(label.equalsIgnoreCase("setwarp")) {
+		if(label.equalsIgnoreCase("setwarp") || label.equalsIgnoreCase("addwarp")) {
 			if(!sender.hasPermission(setWarpPerm)) {
 				Util.coloredMessage(sender, "&cYou do not have permission to use this command.");
 				return true;
@@ -103,7 +103,7 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 			return true;			
 		}
 
-		if(label.equalsIgnoreCase("delwarp")) {
+		if(label.equalsIgnoreCase("delwarp") || label.equalsIgnoreCase("remwarp")) {
 			if(!sender.hasPermission(delWarpPerm)) {
 				Util.coloredMessage(sender, "&cYou do not have permission to use this command.");
 				return true;
