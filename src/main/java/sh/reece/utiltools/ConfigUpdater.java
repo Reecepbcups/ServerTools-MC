@@ -57,7 +57,7 @@ public class ConfigUpdater {
         ignoredSectionsArrayList.add("TaskAtTime.sections");
         ignoredSectionsArrayList.add("AutoBroadcast.Messages");
         ignoredSectionsArrayList.add("FancyAnnounce.Groups");
-        ignoredSectionsArrayList.add("ServerInfoCMDS.Commands");
+        // ignoredSectionsArrayList.add("ServerInfoCMDS.Commands");
         ignoredSectionsArrayList.add("ShopWorkAround.RemappedClicks");
         ignoredSectionsArrayList.add("ChatEmoji.Emojis");
         ignoredSectionsArrayList.add("reclaim.permissions");
