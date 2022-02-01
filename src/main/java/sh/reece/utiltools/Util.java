@@ -273,18 +273,22 @@ public class Util {
 		return decimalFormat.format(number);
 	}
 
-	public static String locationToString(final Player p) {
+	public static String locationToString(final Player p){
+		return locationToString(p.getLocation());
+	}
+
+	public static String locationToString(final Location loc) {
 		final int x;
 		final int y;
 		final int z;
-		final Location pL = p.getLocation();
+		final Location location = loc;
 
-		final World w = pL.getWorld();
-		x = (int) pL.getX();
-		y = (int) pL.getY();
-		z = (int) pL.getZ();
-		final float yaw = pL.getYaw();
-		final float pitch = pL.getPitch();
+		final World w = location.getWorld();
+		x = (int) location.getX();
+		y = (int) location.getY();
+		z = (int) location.getZ();
+		final float yaw = location.getYaw();
+		final float pitch = location.getPitch();
 
 		return w.getName()+";"+x+";"+y+";"+z+";"+yaw+";"+pitch;
 	}

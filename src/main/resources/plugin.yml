@@ -205,3 +205,8 @@ commands:
     usage: /<command> [player]
     aliases: [m, msg, r, message, socialspy, disablemessaging, disablemessage, disablemsg, tpm, togglepms, togglemsg, togglemessaging]
     description: Message or reply to a player 
+
+  warp:
+    usage: /<command> [player]
+    aliases: [warps, setwarp, delwarp, remwarp, addwarp, warpinfo]
+    description: Does warp stuff for warping

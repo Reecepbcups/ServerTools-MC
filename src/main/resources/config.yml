@@ -249,6 +249,12 @@ Core:
       - 'world_nether'
       message: '&4&l[!] &4OOPS! &cYou fell into the void. Sent to spawn.'
 
+  Warps:
+    Enabled: true
+    DeleteWarpPerm: tools.delwarp
+    SetWarpPerm: tools.setwarp
+    ViewWarpPerm: tools.viewwarp
+
 Commands:
   Countdown:
     Enabled: false

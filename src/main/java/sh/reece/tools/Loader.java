@@ -8,6 +8,7 @@ import sh.reece.chat.*;
 import sh.reece.cmds.*;
 import sh.reece.cooldowns.*;
 import sh.reece.core.*;
+import sh.reece.core.warp.WarpCMD;
 import sh.reece.disabled.*;
 import sh.reece.events.*;
 import sh.reece.moderation.*;
@@ -87,6 +88,7 @@ public class Loader {
 		new Hat(plugin);
 		new Extinguish(plugin);
 		// new Enchant(plugin);
+		new WarpCMD(plugin);
 
 		executionTimer.info("Core Features");
 	}

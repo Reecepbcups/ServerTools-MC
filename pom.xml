@@ -5,7 +5,7 @@
 
   <groupId>sh.reece</groupId>
   <artifactId>servertools</artifactId>
-  <version>6.3.8</version>
+  <version>6.3.9</version>
 
   <name>servertools</name>
   <url>https://reece.sh</url>
@@ -29,10 +29,10 @@
       <id>placeholderapi</id>
       <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
-    <repository>
+    <!-- <repository>
       <id>bg-repo</id>
       <url>https://repo.bg-software.com/repository/api/</url>
-    </repository>
+    </repository> -->
     <repository>
       <id>sk89q-repo</id>
       <url>https://maven.enginehub.org/repo/</url>
@@ -104,11 +104,11 @@
     </dependency>
     <!--   https://github.com/BG-Software-LLC/SuperiorSkyblock2  -->
     <!--  Only used for BucketStacking  -->
-    <dependency>
+    <!-- <dependency>
       <groupId>com.bgsoftware</groupId>
       <artifactId>SuperiorSkyblockAPI</artifactId>
       <version>latest</version>
-    </dependency>
+    </dependency> -->
   </dependencies>
 
   <build>
