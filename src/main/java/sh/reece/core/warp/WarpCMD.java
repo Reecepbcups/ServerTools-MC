@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +25,7 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 	String Section;
 	private final Main plugin;
 
-	String setWarpPerm, delWarpPerm, viewWarpPerm;
+	String setWarpPerm, delWarpPerm, viewWarpPerm, warpOtherPlayerPerm;
 
 	// name, warp_data
 	private static Map<String, Warp> warps = new HashMap<>();
@@ -47,6 +48,7 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 			setWarpPerm = plugin.getConfig().getString(Section + ".DeleteWarpPerm");
 			delWarpPerm = plugin.getConfig().getString(Section + ".SetWarpPerm");
 			viewWarpPerm = plugin.getConfig().getString(Section + ".ViewWarpPerm");
+			warpOtherPlayerPerm = plugin.getConfig().getString(Section + ".WarpOtherPlayToWarpPerm");
 
 			if(setWarpPerm == null) {
 				setWarpPerm = "tools.setwarp";
@@ -56,6 +58,9 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 			}
 			if(viewWarpPerm == null) {
 				viewWarpPerm = "tools.viewwarp";
+			}
+			if(warpOtherPlayerPerm == null) {
+				warpOtherPlayerPerm = "tools.warpother";
 			}
 
 		} else {
@@ -152,14 +157,40 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 		if(args.length == 0) {			
 			showWarps(sender, 0);
 
-		} else if(args.length == 1 ){
+		} else if(args.length >= 1 ){
 
 			if(Util.isInt(args[0])) {
 				showWarps(sender, Integer.parseInt(args[0]));
 
 			} else {
-				Player p = (Player) sender;
-				teleportPlayer(p, args[0]);
+				Player playerToTeleport = (Player) sender;
+				String fromWho = "";
+
+				if(args.length >= 2) {
+					if(!playerToTeleport.hasPermission(warpOtherPlayerPerm)){
+						Util.coloredMessage(sender, "&cYou do not have permission to teleport other players.");
+						return true;
+					}
+
+					playerToTeleport = Bukkit.getPlayer(args[1]);
+					if(playerToTeleport == null) {
+						Util.coloredMessage(sender, "&cPlayer '"+args[1]+"' not found online to warp to that location.");
+						return true;
+					}
+					fromWho = "&7&o(( from " + sender.getName() + " ))";
+				}
+
+				Warp warpingTo = warps.get(args[0]);
+				if(warpingTo == null) {
+					Util.coloredMessage(sender, "&cThis is not a warp location.");
+					return true;
+				}
+
+				if(playerToTeleport.getName() != sender.getName()) {
+					Util.coloredMessage(sender, "&aTeleporting &f"+playerToTeleport.getName()+" &ato warp &f"+args[0]+"&7.");
+				}
+
+				teleportPlayer(playerToTeleport, warpingTo, fromWho);
 			}
 		}
 		
@@ -233,26 +264,20 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 	}
 
 
-	private void teleportPlayer(Player player, String warp) {
-		
-		Warp warpingTo = warps.get(warp);
-
-		if(warpingTo == null) {
-			Util.coloredMessage(player, "&cThis is not a warp location.");
-			return;
-		}
+	private void teleportPlayer(Player player, Warp warpingTo, String fromWho) {			
 
 		Location warpLoc = warpingTo.getLocation();
 
-		if(warpingTo.getPermission() != null) {
+		// if no one sent them (admin), then check perms
+		if(warpingTo.getPermission() != null && fromWho.length() == 0) {
 			if(!player.hasPermission(warpingTo.getPermission())) {
-				Util.coloredMessage(player, "&cYou do not have access to '"+warp+"'. &o(" + warpingTo.getPermission() + ")");
+				Util.coloredMessage(player, "&cYou do not have access to '"+warpingTo.getName()+"'. &o(" + warpingTo.getPermission() + ")");
 				return;
 			}
 		}
 		
 		player.teleport(warpLoc);
-		Util.coloredMessage(player, "&2[!] &aTeleported to &n"+warp+"&2.");		
+		Util.coloredMessage(player, "&2[!] &aTeleported to &n"+warpingTo.getName()+"&2. " + fromWho);		
 	}
 
 	public static void loadWarpsFromConfig() {

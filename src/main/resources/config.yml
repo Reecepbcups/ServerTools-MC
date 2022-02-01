@@ -254,6 +254,7 @@ Core:
     DeleteWarpPerm: tools.delwarp
     SetWarpPerm: tools.setwarp
     ViewWarpPerm: tools.viewwarp
+    WarpOtherPlayToWarpPerm: tools.warpother
 
 Commands:
   Countdown:

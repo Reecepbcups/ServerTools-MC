@@ -34,6 +34,10 @@ public class Warp {
         this.setPermission(permission);
     }    
 
+    public String getName() {
+        return name;
+    }
+
     public void saveToConfig() {
         configSet(this.name, Util.locationToString(getLocation()), getPermission());
     }
