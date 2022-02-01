@@ -16,9 +16,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.bgsoftware.superiorskyblock.api.SuperiorSkyblock;
-import com.bgsoftware.superiorskyblock.api.island.Island;
-import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
+// import com.bgsoftware.superiorskyblock.api.SuperiorSkyblock;
+// import com.bgsoftware.superiorskyblock.api.island.Island;
+// import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import sh.reece.tools.Main;
@@ -32,8 +32,8 @@ public class BucketStacker implements Listener{//, CommandExecutor {
 
 	private List<Material> transMaterials;
 	private WorldGuardPlugin wg;
-	private SuperiorSkyblock superior;
-	private Boolean worldguard, superiorskyblock;
+	// private SuperiorSkyblock superior;
+	private Boolean worldguard;
 
 
 	public BucketStacker(Main instance) {
@@ -43,7 +43,7 @@ public class BucketStacker implements Listener{//, CommandExecutor {
 		if(plugin.enabledInConfig(Section+".Enabled")) {
 
 			worldguard = false;
-			superiorskyblock = false;
+			// superiorskyblock = false;
 
 			//config = configUtils.getConfigFile("config.yml");
 			Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
@@ -58,10 +58,10 @@ public class BucketStacker implements Listener{//, CommandExecutor {
 
 			if(plugin.getConfig().contains(Section+".superiorskyblock") && 
 			plugin.getConfig().getString(Section+".superiorskyblock").equalsIgnoreCase("true")) {				
-				if(Util.isPluginInstalledOnServer("SuperiorSkyblock2", "BucketStacker")) {
-					superiorskyblock = true;
-					superior = (SuperiorSkyblock) Bukkit.getServer().getPluginManager().getPlugin("SuperiorSkyblock2");
-				}
+				// if(Util.isPluginInstalledOnServer("SuperiorSkyblock2", "BucketStacker")) {
+				// 	superiorskyblock = true;
+				// 	superior = (SuperiorSkyblock) Bukkit.getServer().getPluginManager().getPlugin("SuperiorSkyblock2");
+				// }
 			}
 						
 			transMaterials = new ArrayList<>(
@@ -148,21 +148,21 @@ public class BucketStacker implements Listener{//, CommandExecutor {
 	}
 	
 	public Boolean canPlayerPlaceBucketAtBlock(Player player, Block block) {
-		if(superiorskyblock) {
-			// Island is = superior.getGrid().getIslandAt(block.getLocation());
-			SuperiorPlayer sp = superior.getPlayers().getSuperiorPlayer(player.getUniqueId());
-			Island is = superior.getGrid().getIslandAt(block.getLocation());
+		// if(superiorskyblock) {
+		// 	// Island is = superior.getGrid().getIslandAt(block.getLocation());
+		// 	SuperiorPlayer sp = superior.getPlayers().getSuperiorPlayer(player.getUniqueId());
+		// 	Island is = superior.getGrid().getIslandAt(block.getLocation());
 			
-			// player does not have bypass perm
-			if(!player.hasPermission("superior.admin")) {
-				if(is.isCoop(sp) || is.isMember(sp)) {
-					return true;
-				} else {
-					Util.coloredMessage(player, "&c[!] You can only place buckets on your own island!");
-					return false;
-				}
-			}			
-		}
+		// 	// player does not have bypass perm
+		// 	if(!player.hasPermission("superior.admin")) {
+		// 		if(is.isCoop(sp) || is.isMember(sp)) {
+		// 			return true;
+		// 		} else {
+		// 			Util.coloredMessage(player, "&c[!] You can only place buckets on your own island!");
+		// 			return false;
+		// 		}
+		// 	}			
+		// }
 		
 		if(worldguard) {
 			if(!wg.canBuild(player, block)) {
