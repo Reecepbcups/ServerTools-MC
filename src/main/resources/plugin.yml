@@ -147,6 +147,8 @@ commands:
     aliases: [walkspeed, flyspeed]    
   scheduledtask:
     description: reload task which run every X seconds
+  itemdb:
+    description: Show an items data you are holding
     
   fly:
     usage: /fly [player]

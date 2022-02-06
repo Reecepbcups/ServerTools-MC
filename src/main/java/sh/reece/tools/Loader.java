@@ -61,6 +61,7 @@ public class Loader {
 		new Speed(plugin);
 		new BungeeServerConnector(plugin);
 		new ReeceTools(plugin);
+		new ItemDB(plugin);
 		executionTimer.info("Commands");
 	}
 
