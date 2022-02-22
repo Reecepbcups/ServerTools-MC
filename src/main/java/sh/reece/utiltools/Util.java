@@ -371,15 +371,15 @@ public class Util {
 		// Lol you sure bruh
 		if(MinecraftVersion.getVersion().isAboveOrEqual(MinecraftVersion.V1_16_R1)){
 			Matcher matcher = HEX_PATTERN.matcher(message);
-			while (matcher.find()) {
-				String color = message.substring(matcher.start(), matcher.end());
-				try{
-					Method chatColorOf = COLOR_CLASS.getMethod("of", String.class);
+			try{
+				Method chatColorOf = COLOR_CLASS.getMethod("of", String.class);
+				while (matcher.find()) {
+					String color = message.substring(matcher.start(), matcher.end());
 					message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0)) + "");
 					matcher = HEX_PATTERN.matcher(message);
-				}catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
-					System.out.println("failed");
 				}
+			}catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+				// do nothing
 			}
 		}
 		if(message == null){
