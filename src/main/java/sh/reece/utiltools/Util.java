@@ -1,22 +1,12 @@
 package sh.reece.utiltools;
 
-import com.google.common.base.Strings;
-import com.google.common.io.ByteStreams;
-
-import org.bukkit.*;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -24,10 +14,33 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.Format;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+
+import com.google.common.base.Strings;
+import com.google.common.io.ByteStreams;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class Util {
@@ -346,21 +359,34 @@ public class Util {
 		return Integer.toString(value);
 	}
 
-	//private static final Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
+	private static final Pattern HEX_PATTERN = Pattern.compile("#[a-fA-f0-9]{6}");
+	private static final Class<net.md_5.bungee.api.ChatColor> COLOR_CLASS = net.md_5.bungee.api.ChatColor.class;
+	/**
+	 * @author Y2K_
+	 * 
+	 * Added Hex Support for versions >= 1.16
+	 */
 	public static String color(String message) {
 		// doesnt work bc of 1.8 backwars compatibility and having to be loaded in first
-		// Matcher matcher = HEX_PATTERN.matcher(ChatColor.translateAlternateColorCodes('&', message));
-		// StringBuffer buffer = new StringBuffer();
-		// while (matcher.find()) {
-	    //     matcher.appendReplacement(buffer, net.md_5.bungee.api.ChatColor.of(matcher.group(1)).toString());	        
-	    // }
-		// return matcher.appendTail(buffer).toString();	
+		// Lol you sure bruh
+		if(MinecraftVersion.getVersion().isAboveOrEqual(MinecraftVersion.V1_16_R1)){
+			Matcher matcher = HEX_PATTERN.matcher(message);
+			while (matcher.find()) {
+				String color = message.substring(matcher.start(), matcher.end());
+				try{
+					Method chatColorOf = COLOR_CLASS.getMethod("of", String.class);
+					message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0)) + "");
+					matcher = HEX_PATTERN.matcher(message);
+				}catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+					System.out.println("failed");
+				}
+			}
+		}
 		if(message == null){
 			message = "SERVERTOOLS_MESSAGE_NULL_ISSUE";
 			consoleMSG("NULL ERROR: ");
 			throw new NullPointerException("Null Message");
 		}
-		
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 	public static List<String> color(final List<String> list) {
@@ -603,7 +629,13 @@ public class Util {
 		return m.toString().contains(name);
 	}
 
-
+	public static boolean isCompatable(String version){
+		boolean compatable = false;
+		if(version.contains("1.16") || version.contains("1.17") || version.contains("1.18")){
+			compatable = true;
+		}
+		return compatable;
+	}
 
 
 
