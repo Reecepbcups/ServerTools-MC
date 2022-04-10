@@ -27,7 +27,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 	//LuckPerms luckPerms = LuckPermsProvider.get();
 	// private Main plugin;
 	public String StaffAFKGroup, Permission;
-	public Collection<String> staffranks;
+	public Collection<String> staffRanks;
 	public static String FILE_NAME;
 	
 	public FileConfiguration config, MAINCONFIG;
@@ -41,15 +41,14 @@ public class StaffAFK implements CommandExecutor, Listener {
 
 
 	public StaffAFK(Main plugin) {
-	    // this.plugin = plugin;
-	    
+	    // this.plugin = plugin;	    
 	    if (plugin.enabledInConfig("Moderation.StaffAFK.Enabled")) {
 	    	
 	    	ConfigUtils = plugin.getConfigUtils();
 	    	
 	    	MAINCONFIG = plugin.getConfig();
 	    	this.StaffAFKGroup = MAINCONFIG.getString("Moderation.StaffAFK.StaffAFKGroup");
-		    this.staffranks = MAINCONFIG.getStringList("Moderation.StaffAFK.StaffGroups");
+		    this.staffRanks = MAINCONFIG.getStringList("Moderation.StaffAFK.StaffGroups");
 		    this.Permission = MAINCONFIG.getString("Moderation.StaffAFK.Permission");
 
 		    FILE_NAME = File.separator + "DATA" + File.separator + "StaffAFKDatabase.yml";
@@ -68,8 +67,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 		Player p = e.getPlayer();
 		
 		if(e.getPlayer().hasPermission(Permission)) {
-			
-			
+						
 			if(config.getString(p.getUniqueId().toString()) != null) {
 				
 				Util.console(MAINCONFIG.getString("Moderation.StaffAFK.RemoveAFK.1").replace("%player%", p.getName()).replace("%PlayerConfigPrimarygroup%", config.getString(p.getUniqueId().toString()+".primarygroup")));
@@ -88,6 +86,7 @@ public class StaffAFK implements CommandExecutor, Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		Player p = (Player) sender;
+		UUID uuid = p.getUniqueId();
 		
 		if(!p.hasPermission(Permission)) {
 			p.sendMessage("NO permission to use staffafk: " + Permission);
@@ -98,20 +97,20 @@ public class StaffAFK implements CommandExecutor, Listener {
 			p.sendMessage(Util.color("&cYou do not have access to use StaffAFK!"));
 			return true;
 		}
+
+		User user = LuckPermsProvider.get().getUserManager().getUser(uuid);
 		
-		User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-		// luckPerms.getUserManager().getUser(p.getUniqueId());
-		
-		if(getPlayerGroup(p, staffranks) == null && !isPlayerInGroup(p, StaffAFKGroup)) {			
+		if(getPlayerGroup(p, staffRanks) == null && !isPlayerInGroup(p, StaffAFKGroup)) {			
 			p.sendMessage("You are not in the staff ranks group");
 			return true;
 		}
 		
 		// if user is not yet in the config file
-		if(config.getString(p.getUniqueId().toString()) == null) {
+		if(config.getString(uuid.toString()) == null) {
 
-			config.set(p.getUniqueId().toString()+".name", p.getName()); // only used for staff management behind the scenes
-			config.set(p.getUniqueId().toString()+".primarygroup", user.getPrimaryGroup().toString());
+			config.set(uuid.toString()+".name", p.getName()); // only used for staff management behind the scenes
+			config.set(uuid.toString()+".primarygroup", user.getPrimaryGroup().toString());
+			config.set(uuid.toString()+".isOp", p.isOp());
 			
 			for(String giveCMD : MAINCONFIG.getStringList("Moderation.StaffAFK.GiveAFK")) {
 				giveCMD = giveCMD.replace("%player%", p.getName());
@@ -122,34 +121,45 @@ public class StaffAFK implements CommandExecutor, Listener {
 				
 				if(giveCMD.contains("%UsersPrimaryGroup%")) {
 					giveCMD = giveCMD.replace("%UsersPrimaryGroup%", user.getPrimaryGroup().toString());
-				}
+				}				
 				
 				Util.console(giveCMD);								
 			}
 
-			p.sendMessage(Util.color("\n&eAdded you to StaffAFK\n"));
+			String output = "\n&eAdded you to StaffAFK\n";
+
+			if(p.isOp()) { // remove op from them for now, reapply on unafk
+				p.setOp(false);
+				output += "&7&o(Removed you from OP as well)\n";
+			}
+
 			staffWhoAreAFK.add(p.getUniqueId());
-			
-			
-			
+			Util.coloredMessage(sender, output);					
+
 		} else {
-			p.sendMessage(Util.color("\n&eSetting you back to your group: " + config.get(p.getUniqueId().toString()+".primarygroup")));
-			
+			String primaryGroup = config.getString(p.getUniqueId()+".primarygroup");
+
+			String output = "\n&eYou are back to your group: " + primaryGroup;
+						
 			for(String removeCMD : MAINCONFIG.getStringList("Moderation.StaffAFK.RemoveAFK")) {
 				removeCMD = removeCMD.replace("%player%", p.getName());				
-				removeCMD = removeCMD.replace("%PlayerConfigPrimarygroup%", config.getString(p.getUniqueId()+".primarygroup"));
+				removeCMD = removeCMD.replace("%PlayerConfigPrimarygroup%", primaryGroup);
 				removeCMD = removeCMD.replace("%StaffAFKGroupName%", StaffAFKGroup);
 				Util.console(removeCMD);
 			}
+
+			if(config.getBoolean(p.getUniqueId().toString()+".isOp")) {
+				p.setOp(true);
+				output += "\n&a&o(Reapplied OP status)\n";
+			}
+
 			config.set(p.getUniqueId().toString(), null);
 			staffWhoAreAFK.remove(p.getUniqueId());
+			Util.coloredMessage(sender, output);
 		}
 		
 		ConfigUtils.saveConfig(config, FILE_NAME);
-		
-		
 		return true;
-	
 	}
 	
 	public static boolean isPlayerInGroup(Player player, String group) {

@@ -91,7 +91,7 @@ public class CMDAlias implements Listener {
 	// saves all commands which should be disabled to the list.
 	// Every 15 mins this is refreshed to make sure it doesnt unload
 	public void saveDisabledCommands() {
-		Util.consoleMSG("&aServerTools - Refreshed DisabledCommands to hash");
+		// Util.consoleMSG("&aServerTools - Refreshed DisabledCommands to hash");
 		// new init here so it clears previous
 		worlddisabled = new HashMap<String, List<String>>();
 		if(plugin.getConfig().contains("Misc.CMDAliases.disabledWorlds")) {
@@ -108,7 +108,7 @@ public class CMDAlias implements Listener {
 					}
 					worlddisabled.put(world, l);
 				} else {
-					Util.consoleMSG("&cWORLD: " + world + " in CMDDisabler is not valid!");
+					// Util.consoleMSG("&cWORLD: " + world + " in CMDDisabler is not valid!");
 				}
 			}
 		} else {
