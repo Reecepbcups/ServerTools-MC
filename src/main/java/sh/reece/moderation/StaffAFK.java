@@ -62,22 +62,38 @@ public class StaffAFK implements CommandExecutor, Listener {
 	}
 	
 	@EventHandler
-  	public void StaffLeave(PlayerQuitEvent e) {		
-		
-		Player p = e.getPlayer();
-		
-		if(e.getPlayer().hasPermission(Permission)) {
-						
-			if(config.getString(p.getUniqueId().toString()) != null) {
+  	public void StaffQuit(PlayerQuitEvent e) {
+		removeStaffAFK(e.getPlayer());
+	}
+
+	private void removeStaffAFK(Player p) {
+		UUID uuid = p.getUniqueId();
+		if(staffWhoAreAFK.contains(uuid)) {
+			if(config.getString(uuid.toString()) != null) {
 				
-				Util.console(MAINCONFIG.getString("Moderation.StaffAFK.RemoveAFK.1").replace("%player%", p.getName()).replace("%PlayerConfigPrimarygroup%", config.getString(p.getUniqueId().toString()+".primarygroup")));
-				Util.console(MAINCONFIG.getString("Moderation.StaffAFK.RemoveAFK.2").replace("%player%", p.getName()).replace("%StaffAFKGroupName%", StaffAFKGroup));
+				// Util.console(MAINCONFIG.getString("Moderation.StaffAFK.RemoveAFK.1").replace("%player%", p.getName()).replace("%PlayerConfigPrimarygroup%", config.getString(uuid.toString()+".primarygroup")));
+				// Util.console(MAINCONFIG.getString("Moderation.StaffAFK.RemoveAFK.2").replace("%player%", p.getName()).replace("%StaffAFKGroupName%", StaffAFKGroup));
 				
-				config.set(p.getUniqueId().toString(), null);
+				// Remove staffafk commands
+				for(String removeCMD : MAINCONFIG.getStringList("Moderation.StaffAFK.RemoveAFK")) {
+					removeCMD = removeCMD.replace("%player%", p.getName());
+					removeCMD = removeCMD.replace("%PlayerConfigPrimarygroup%", config.getString(uuid.toString()+".primarygroup"));
+					removeCMD = removeCMD.replace("%StaffAFKGroupName%", StaffAFKGroup);
+					Util.console(removeCMD);
+				}
+
+				// reset op if they were before
+				Boolean wasOpped = config.getBoolean(uuid.toString()+".isOp");
+				if(wasOpped != null) {
+					if(wasOpped) {
+						p.setOp(true);
+					}
+				}
+
+				config.set(uuid.toString(), null);
 				ConfigUtils.saveConfig(config, FILE_NAME);
 
-				staffWhoAreAFK.remove(p.getUniqueId());
-				
+				staffWhoAreAFK.remove(uuid);				
 			}
 		}
 	}
@@ -113,16 +129,10 @@ public class StaffAFK implements CommandExecutor, Listener {
 			config.set(uuid.toString()+".isOp", p.isOp());
 			
 			for(String giveCMD : MAINCONFIG.getStringList("Moderation.StaffAFK.GiveAFK")) {
-				giveCMD = giveCMD.replace("%player%", p.getName());
-				
-				if(giveCMD.contains("%StaffAFKGroupName%")) {
-					giveCMD = giveCMD.replace("%StaffAFKGroupName%", StaffAFKGroup);
-				}
-				
-				if(giveCMD.contains("%UsersPrimaryGroup%")) {
-					giveCMD = giveCMD.replace("%UsersPrimaryGroup%", user.getPrimaryGroup().toString());
-				}				
-				
+				giveCMD = giveCMD.replace("%player%", p.getName());						
+				giveCMD = giveCMD.replace("%StaffAFKGroupName%", StaffAFKGroup);
+				giveCMD = giveCMD.replace("%UsersPrimaryGroup%", user.getPrimaryGroup().toString());
+											
 				Util.console(giveCMD);								
 			}
 
