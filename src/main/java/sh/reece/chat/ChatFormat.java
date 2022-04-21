@@ -122,7 +122,8 @@ public class ChatFormat implements Listener {
 	 
 	  
 	  private static String colorize(String s) {
-	    return (s == null) ? null : ChatColor.translateAlternateColorCodes('&', s);
+		// ChatColor.translateAlternateColorCodes('&', s)
+	    return (s == null) ? null : Util.color(s);
 	  }
 	
 	

@@ -141,7 +141,7 @@ public class Main extends JavaPlugin implements Listener {
 		String manipulatedLine = "";
 
 		line = replaceVariable(line).trim(); // puts in variables such as website
-
+		
 		if (line.contains("<command=")) {
 			final String cmd = StringUtils.substringBetween(line, "<command=", "/>");
 			String actualMessage = Util.color(line.split("/>")[1]);
@@ -152,6 +152,20 @@ public class Main extends JavaPlugin implements Listener {
 
 			final TextComponent message = new TextComponent(actualMessage);
 			message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, cmd));									
+			Bukkit.getServer().spigot().broadcast(message);			
+			return;
+		}
+
+		if (line.contains("<link=")) {
+			final String url = StringUtils.substringBetween(line, "<link=", "/>");
+			String actualMessage = Util.color(line.split("/>")[1]);
+
+			if(actualMessage.contains("<center>")) {
+				actualMessage = Util.centerMessage(actualMessage.replace("<center>", ""));
+			}
+
+			final TextComponent message = new TextComponent(actualMessage);
+			message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));									
 			Bukkit.getServer().spigot().broadcast(message);			
 			return;
 		}
