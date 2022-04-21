@@ -56,7 +56,7 @@ public class Util {
 		if(message == null || message.equals("")) {
 			//player.sendMessage("");
 		}
-		message = ChatColor.translateAlternateColorCodes('&', message);
+		message = Util.color(message);
 		int messagePxSize = 0;
 		boolean previousCode = false;
 		boolean isBold = false;
@@ -359,7 +359,7 @@ public class Util {
 		return Integer.toString(value);
 	}
 
-	private static final Pattern HEX_PATTERN = Pattern.compile("#[a-fA-f0-9]{6}");
+	private static final Pattern HEX_PATTERN = Pattern.compile("([&]?)?(#[a-fA-f0-9]{6})");
 	private static final Class<net.md_5.bungee.api.ChatColor> COLOR_CLASS = net.md_5.bungee.api.ChatColor.class;
 	/**
 	 * @author Y2K_
@@ -375,10 +375,13 @@ public class Util {
 				Method chatColorOf = COLOR_CLASS.getMethod("of", String.class);
 				while (matcher.find()) {
 					String color = message.substring(matcher.start(), matcher.end());
-					message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0)) + "");
+					
+					System.out.println(color);
+
+					message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0).replace("&#", "#")) + "");
 					matcher = HEX_PATTERN.matcher(message);
 				}
-			}catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+			} catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
 				// do nothing
 			}
 		}
