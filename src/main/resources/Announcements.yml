@@ -2,6 +2,7 @@
 
 # Use <center> to center the line
 # To make a line a command, use <command=/bc test2/> TEXT HERE
+# To make a line point to a website, use <link=https://www.google.com/>TEXT HERE
 # %VARIABLES% - are usable, defined in main config.yml at top
 
 centerall: false
@@ -18,6 +19,8 @@ Interval: 50
 Messages:
   where_to_edit:
   - '&7&o((Edit me in ServerTools/Announcements.yml))'
+  - '<link=https://www.google.com/><center>Here is centered google.com link to click'
+  - 'Hex codes >1.16: #f91700&lS#f72e01&le#f64501&lr#f45c02&lv#f27302&le#f18a03&lr#efa103&lT#edb804&lo#eccf04&lo#eae605&ll#e9fd06&ls'
   healcmdexample:
   - ' &7- &f<command=/heal /> &fClick me to run the heal command'
   rules:
