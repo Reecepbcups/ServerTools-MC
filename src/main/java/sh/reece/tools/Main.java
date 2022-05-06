@@ -109,7 +109,6 @@ public class Main extends JavaPlugin implements Listener {
 				return false;
 			}
 			
-			
 			boolean isEnabled = false;
 			
 			// String envVarStr = "SERVERTOOLS_" + path.replace(".", "_").toUpperCase(); // export SERVERTOOLS_DISABLED_DISABLEPHANTOMSPAWN_ENABLED=false
@@ -123,7 +122,7 @@ public class Main extends JavaPlugin implements Listener {
 
 			// env variable overrides config value
 			String myEnvVariable = resolveValue(path);
-			System.out.println(getPathENVKey(path));
+			// System.out.println(getPathENVKey(path));
 
 
 			if(myEnvVariable != null) {
