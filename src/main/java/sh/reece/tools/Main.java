@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
@@ -85,6 +86,21 @@ public class Main extends JavaPlugin implements Listener {
 		return configUtils;
 	}
 
+	public static String getPathENVKey(String path) {
+		return "SERVERTOOLS_" + path.toUpperCase(Locale.ROOT).replace('-', '_').replace('.', '_');
+	}
+
+	public static String resolveValue(String path) {
+		String key = getPathENVKey(path);
+		String value = System.getenv(key);
+		if(value != null) {
+			System.out.println("[ServerTools] Found value from environment variable " + key + ": " + value);
+		}
+		return value;
+	}
+
+	public static List<String> ENV_VARIABLE_PATHS = new ArrayList<>();
+
 	public Boolean enabledInConfig(final String path) {
 		String module = "";
 		try {
@@ -92,11 +108,31 @@ public class Main extends JavaPlugin implements Listener {
 				Util.consoleMSG(Util.color("&c[TOOLS] " + path + " does not exist!!!"));						
 				return false;
 			}
+			
+			
+			boolean isEnabled = false;
+			
+			// String envVarStr = "SERVERTOOLS_" + path.replace(".", "_").toUpperCase(); // export SERVERTOOLS_DISABLED_DISABLEPHANTOMSPAWN_ENABLED=false
+
+			// if there is an env var, use it. If not, the default is the config
+			String configValue = getConfig().getString(path);
+			ENV_VARIABLE_PATHS.add(path);
+			if(!configValue.equalsIgnoreCase("true")) {
+				configValue = "false"; // ensures they did not use another value instead of false if not true
+			}
+
+			// env variable overrides config value
+			String myEnvVariable = resolveValue(path);
+			System.out.println(getPathENVKey(path));
+
+
+			if(myEnvVariable != null) {
+				System.out.println(getPathENVKey(path) + " set too: " + myEnvVariable);
+				configValue = myEnvVariable;
+			}
 
 			final String pathInfo = replaceUnNeededInfo(path);
-			boolean isEnabled = false;
-
-			if (getConfig().getString(path).equalsIgnoreCase("true")) {
+			if (configValue.equalsIgnoreCase("true")) {
 
 				//if(!path.contains("Core.")) {} // does not show /fly, /workbench, etc					
 				module = "&a"+pathInfo;

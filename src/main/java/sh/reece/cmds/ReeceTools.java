@@ -1,21 +1,25 @@
 package sh.reece.cmds;
 
-import sh.reece.tools.ConfigUtils;
-import sh.reece.tools.Main;
-import sh.reece.utiltools.Util;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.command.*;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import sh.reece.tools.ConfigUtils;
+import sh.reece.tools.Main;
+import sh.reece.utiltools.Util;
 
 public class ReeceTools implements CommandExecutor, TabCompleter {
 
@@ -44,7 +48,20 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 
 		case "reload":				
 			reload(sender);
-			return true;				
+			return true;
+
+		case "env":				
+			// ensure they have op
+			if(sender.isOp()) {
+				sender.sendMessage("Posted all env variables to console");
+				System.out.println("============ServerTools Env Variables===============");
+				for(String key : Main.ENV_VARIABLE_PATHS) {
+					System.out.println(Main.getPathENVKey(key) + " = " + Main.resolveValue(key));
+				}
+				System.out.println("===============================");
+			}
+			
+			return true;
 			
 		case "author":
 		case "version":

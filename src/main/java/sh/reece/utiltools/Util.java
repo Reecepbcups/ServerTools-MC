@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.FileSystem;
@@ -15,6 +16,8 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -22,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -29,6 +33,7 @@ import java.util.zip.ZipOutputStream;
 import com.google.common.base.Strings;
 import com.google.common.io.ByteStreams;
 
+import org.apache.commons.lang.SystemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -376,7 +381,7 @@ public class Util {
 				while (matcher.find()) {
 					String color = message.substring(matcher.start(), matcher.end());
 					
-					System.out.println(color);
+					// System.out.println(color);
 
 					message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0).replace("&#", "#")) + "");
 					matcher = HEX_PATTERN.matcher(message);
@@ -640,8 +645,7 @@ public class Util {
 		return compatable;
 	}
 
-
-
+	
 //	public static String getName(EntityType e) {
 //		if (e.equals(EntityType.PIG_ZOMBIE))
 //			return "Zombie Pigman"; 

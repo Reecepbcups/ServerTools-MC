@@ -155,7 +155,12 @@ public class Spawn implements Listener, CommandExecutor {
 					p.teleport(getSpawnLocation());
 					e.setCancelled(true);
 					Util.coloredMessage(p, voidmsg);
-				}				
+					
+				} else {
+					// teleport them to the default spawn
+					p.teleport(p.getWorld().getSpawnLocation());
+					Util.coloredMessage(p, voidmsg);
+				}			
 			} 
 		}
 	}
