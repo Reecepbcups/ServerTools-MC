@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.FileSystem;
@@ -16,8 +15,6 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -25,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -33,7 +29,6 @@ import java.util.zip.ZipOutputStream;
 import com.google.common.base.Strings;
 import com.google.common.io.ByteStreams;
 
-import org.apache.commons.lang.SystemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -644,42 +639,5 @@ public class Util {
 		}
 		return compatable;
 	}
-
-	
-//	public static String getName(EntityType e) {
-//		if (e.equals(EntityType.PIG_ZOMBIE))
-//			return "Zombie Pigman"; 
-//		if (!e.toString().contains("_"))
-//			return String.valueOf(e.toString().substring(0, 1).toUpperCase()) + e.toString().substring(1).toLowerCase(); 
-//		String[] split = e.toString().split("_");
-//		String name = "";
-//		String[] arrayOfString1;
-//		int j = (arrayOfString1 = split).length;
-//		for (int i = 0; i < j; i++) {
-//			String s = arrayOfString1[i];
-//			name = String.valueOf(name) + s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ";
-//		} 
-//		return name.trim();
-//	}
-
-//	public static EntityType getEntity(String e) {
-//		if (e.equalsIgnoreCase("Zombie Pigman"))
-//			return EntityType.PIG_ZOMBIE; 
-//		e = e.replaceAll(" ", "_");
-//		if (!e.contains("_"))
-//			return EntityType.valueOf(e.toUpperCase()); 
-//		String[] split = e.toString().split(" ");
-//		String name = "";
-//		String[] arrayOfString1;
-//		int j = (arrayOfString1 = split).length;
-//		for (int i = 0; i < j; i++) {
-//			String s = arrayOfString1[i];
-//			name = String.valueOf(name) + s.toUpperCase() + "_";
-//		} 
-//		return EntityType.valueOf(name.substring(0, name.length() - 1));
-//	}
-
-
-
 }
 

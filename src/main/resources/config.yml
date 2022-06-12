@@ -330,7 +330,7 @@ Chat:
     format: '{prefix}{name}{suffix} &7» &f{message}'
    
   Tags:
-    Enabled: true
+    Enabled: false
     CustomTagPerm: ctag.use
     CustomMaxLength: 20
     CustomTagFormat: '&8&l<%tag%&8&l>'
