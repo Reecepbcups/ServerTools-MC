@@ -3,6 +3,7 @@ package sh.reece.cmds;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,26 +46,32 @@ public class GiveAll implements Listener, CommandExecutor {
 		
 		// Player p = (Player) sender;
 
-		if (args.length == 0) {
+		if (args.length < 2) {
 			sendHelpMenu(sender);
 			return true;
 		}	
+
 		
-		String essCMD = Util.argsToSingleString(0, args).toLowerCase();
+		// String essCMD = Util.argsToSingleString(0, args).toLowerCase();
+		// get the material of of arg 1
+		Material mat = Material.getMaterial(args[0].toUpperCase());
+		if(mat == null) {
+			sender.sendMessage(Util.color("&cInvalid Material " + args[0] + ". Try using /itemdb to get the item name"));
+			return true;
+		}
+
+		final Integer amount = Integer.parseInt(args[1]);
 		
-		for(Player onlineP : Bukkit.getOnlinePlayers()) {
-			new BukkitRunnable(){
-				public void run() {	
-					Util.console(String.format("essentials:give %s %s", onlineP.getName(), essCMD));
-					//Util.coloredMessage(onlineP, "&fGiven "+args[1]+" "+args[0]+" by " + sender.getName());
-				}
-			}.runTaskLater(plugin, rand.nextInt(20)); // 1 second delay			
-		}		
+		Util.coloredMessage(sender, "&aGiving &6" + amount + " &aof &6" + mat.name() + "&a to all players");
+		
+		String consoleCMD = String.format("minecraft:give @a %s %s", mat.toString().toLowerCase(), amount.toString());
+		Util.console(consoleCMD);
+		Util.log(consoleCMD);
 		return true;				
 	}
 	
 	public void sendHelpMenu(CommandSender s) {
-		s.sendMessage("/giveall <item:numeric> [amount [itemmeta...]]");
+		s.sendMessage("/giveall <item> <amount>");
 	}
 	
 	
