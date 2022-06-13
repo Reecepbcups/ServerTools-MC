@@ -13,6 +13,7 @@ import sh.reece.disabled.*;
 import sh.reece.events.*;
 import sh.reece.moderation.*;
 import sh.reece.runnables.*;
+import sh.reece.utiltools.MinecraftVersion;
 import sh.reece.utiltools.Util;
 
 public class Loader {
@@ -28,6 +29,24 @@ public class Loader {
 
 	public Loader(Main instance) {
 		plugin = instance;
+
+		
+		if(MinecraftVersion.getVersion() != MinecraftVersion.SUPPORTED) {
+			Util.log("\n\n\n[ServerTools] &cYou are running an unsupported version of Minecraft for this version of the plugin.");
+			Util.log("[ServerTools] &eYou can either update to 1.18.x &fOR &euse this version:");
+			Util.log("[ServerTools] &ehttps://www.spigotmc.org/resources/servertools-%E2%9E%9C-modular-server-management-1-8-1-18-2-open-source.95853/download?version=455997");
+			Util.log("[ServerTools] &cSource Here:");
+			Util.log("[ServerTools] &ehttps://github.com/Reecepbcups/ServerTools-MC/tree/ALL_1.8-%3E1.18");
+
+			Util.coloredBroadcast("[ServerTools] This version only supports 1.18+! To use for <=1.17, download here:");
+			Util.coloredBroadcast("[ServerTools] https://www.spigotmc.org/resources/servertools-%E2%9E%9C-modular-server-management-1-8-1-18-2-open-source.95853/download?version=455997");
+			Util.coloredBroadcast("[ServerTools] Source Here:");
+			Util.coloredBroadcast("[ServerTools] &ehttps://github.com/Reecepbcups/ServerTools-MC/tree/ALL_1.8-%3E1.18");
+
+			plugin.getServer().getPluginManager().disablePlugin(plugin);
+			return;
+		}
+
 		executionTimer = new Timings();
 		executionTimer.start();
 	}

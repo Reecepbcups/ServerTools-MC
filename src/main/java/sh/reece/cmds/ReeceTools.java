@@ -54,11 +54,11 @@ public class ReeceTools implements CommandExecutor, TabCompleter {
 			// ensure they have op
 			if(sender.isOp()) {
 				sender.sendMessage("Posted all env variables to console");
-				System.out.println("============ServerTools Env Variables===============");
+				Util.log("============ServerTools Env Variables===============");
 				for(String key : Main.ENV_VARIABLE_PATHS) {
-					System.out.println(Main.getPathENVKey(key) + " = " + Main.resolveValue(key));
+					Util.log(Main.getPathENVKey(key) + " = " + Main.resolveValue(key));
 				}
-				System.out.println("===============================");
+				Util.log("===============================");
 			}
 			
 			return true;

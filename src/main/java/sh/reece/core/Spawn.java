@@ -150,7 +150,7 @@ public class Spawn implements Listener, CommandExecutor {
 				} 
 
 				if(getSpawnLocation() != null) {
-					System.out.println("To spawn.");
+					Util.log("To spawn.");
 					// move player to spawn
 					p.teleport(getSpawnLocation());
 					e.setCancelled(true);

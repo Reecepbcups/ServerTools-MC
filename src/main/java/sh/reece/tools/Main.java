@@ -94,7 +94,7 @@ public class Main extends JavaPlugin implements Listener {
 		String key = getPathENVKey(path);
 		String value = System.getenv(key);
 		if(value != null) {
-			System.out.println("[ServerTools] Found value from environment variable " + key + ": " + value);
+			Util.log("[ServerTools] Found value from environment variable " + key + ": " + value);
 		}
 		return value;
 	}
@@ -122,11 +122,11 @@ public class Main extends JavaPlugin implements Listener {
 
 			// env variable overrides config value
 			String myEnvVariable = resolveValue(path);
-			// System.out.println(getPathENVKey(path));
+			// Util.log(getPathENVKey(path));
 
 
 			if(myEnvVariable != null) {
-				System.out.println(getPathENVKey(path) + " set too: " + myEnvVariable);
+				Util.log(getPathENVKey(path) + " set too: " + myEnvVariable);
 				configValue = myEnvVariable;
 			}
 

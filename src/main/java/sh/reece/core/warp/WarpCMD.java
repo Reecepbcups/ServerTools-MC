@@ -288,7 +288,7 @@ public class WarpCMD implements CommandExecutor, TabCompleter {
 		}
 
 		for(String wName : configWarps.getKeys(false)){
-			// System.out.println(wName);
+			// Util.log(wName);
 			String perm = configWarps.getString(wName + ".permission");
 			String loc = configWarps.getString(wName + ".location");
 

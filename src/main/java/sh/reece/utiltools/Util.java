@@ -90,6 +90,10 @@ public class Util {
 		return sb + message;
 	}
 
+	public static void log(String msg) {
+		Bukkit.getLogger().info(Util.color(msg));
+	}
+
 	//Util.color(" &8[&r" + getProgressBar(TokensBal, tokensForReward, 40, '|', "&d", "&7") + "&8]  " + "&7&o((" + TokensBal + " / " + tokensForReward + "&7&o))");
 	public static String getProgressBar(final int current, final int max, final int totalBars, final char symbol, final String string, final String string2) {
 		float percent = (float) current / max;
@@ -212,8 +216,8 @@ public class Util {
 					// Files.createFile(uncompressedFilePath);
 
                     FileOutputStream fileOutput = new FileOutputStream(uncompressedFileName);
-					// System.out.println("uncomFName " + uncompressedFileName);
-					// System.out.println("create uncomFPath " + uncompressedFilePath);
+					// Util.log("uncomFName " + uncompressedFileName);
+					// Util.log("create uncomFPath " + uncompressedFilePath);
                     // while (bis.available() > 0) { // always returened 0
                         
 						// fileOutput.write(bis.readAllBytes());
@@ -222,7 +226,7 @@ public class Util {
 						fileOutput.write(bytes);
                     // }
                     fileOutput.close();
-                    // System.out.println("Written: " + entry.getName());
+                    // Util.log("Written: " + entry.getName());
                 // }
             }
         }
@@ -357,28 +361,24 @@ public class Util {
 	private static final Class<net.md_5.bungee.api.ChatColor> COLOR_CLASS = net.md_5.bungee.api.ChatColor.class;
 	/**
 	 * @author Y2K_
-	 * 
-	 * Added Hex Support for versions >= 1.16
+	 * Added hex support
 	 */
-	public static String color(String message) {
-		// doesnt work bc of 1.8 backwars compatibility and having to be loaded in first
-		// Lol you sure bruh
-		if(MinecraftVersion.getVersion().isAboveOrEqual(MinecraftVersion.V1_16_R1)){
-			Matcher matcher = HEX_PATTERN.matcher(message);
-			try{
-				Method chatColorOf = COLOR_CLASS.getMethod("of", String.class);
-				while (matcher.find()) {
-					String color = message.substring(matcher.start(), matcher.end());
-					
-					// System.out.println(color);
+	public static String color(String message) {		
+		Matcher matcher = HEX_PATTERN.matcher(message);
+		try{
+			Method chatColorOf = COLOR_CLASS.getMethod("of", String.class);
+			while (matcher.find()) {
+				String color = message.substring(matcher.start(), matcher.end());
+				
+				// Util.log(color);
 
-					message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0).replace("&#", "#")) + "");
-					matcher = HEX_PATTERN.matcher(message);
-				}
-			} catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
-				// do nothing
+				message = message.replace(color, chatColorOf.invoke(COLOR_CLASS, matcher.group(0).replace("&#", "#")) + "");
+				matcher = HEX_PATTERN.matcher(message);
 			}
+		} catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+			// do nothing
 		}
+		
 		if(message == null){
 			message = "SERVERTOOLS_MESSAGE_NULL_ISSUE";
 			consoleMSG("NULL ERROR: ");

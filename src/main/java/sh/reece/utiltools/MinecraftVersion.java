@@ -2,8 +2,7 @@ package sh.reece.utiltools;
 
 import org.bukkit.Bukkit;
 
-public enum MinecraftVersion {
-         
+public enum MinecraftVersion {         
     V1_8_R1, 
     V1_8_R2, 
     V1_8_R3, 
@@ -19,9 +18,8 @@ public enum MinecraftVersion {
     V1_16_R1, 
     V1_16_R2, 
     V1_16_R3, 
-    V1_17_R1, 
-    V1_18_R1,
-    UNKNOWN;
+    V1_17_R1, // we don't have 1.18+ here, bc it throws UNKNOWN. This means it is 1.18+
+    SUPPORTED;
 
     public static MinecraftVersion getVersion() { // pretty? no but gets the job done
         MinecraftVersion mv = null;
@@ -29,8 +27,8 @@ public enum MinecraftVersion {
         try {
             mv = MinecraftVersion.valueOf(ver);
         } catch (Exception e) {
-            // System.out.println("Version: " + ver + " not found in enum constants" + e.getMessage());
-            mv = MinecraftVersion.UNKNOWN;
+            // Util.log("Version: " + ver + " not found in enum constants" + e.getMessage());
+            mv = MinecraftVersion.SUPPORTED;
         }
         return mv;
     }
