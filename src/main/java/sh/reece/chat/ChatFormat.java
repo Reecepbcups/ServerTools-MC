@@ -90,8 +90,8 @@ public class ChatFormat implements Listener {
 	    if (this.vaultChat != null && format.contains("{prefix}")) {
 	    	String prefix = this.vaultChat.getPlayerPrefix(p);
 
-	    	if(Util.isVersion1_8()) { // removes extra space on 1.8 	    			    		
-	    		prefix = prefix.substring(0, prefix.length()-PrefixOffset);
+	    	if(PrefixOffset != 0) { // removes extra space on 1.8, here now just in case			    		
+				prefix = prefix.substring(0, prefix.length()-PrefixOffset);
 	    	} 
 	    	
 	    	format = format.replace("{prefix}", colorize(prefix));

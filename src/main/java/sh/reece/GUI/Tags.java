@@ -274,20 +274,9 @@ public class Tags implements CommandExecutor, Listener { //
 
 		if (event.getInventory() == null || clicked == null || clicked.getType() == Material.AIR) {
 			return;
-		}
-
-		Boolean InvNameMatch = false;
-		if(Util.isVersion1_8()) {
-			if(event.getInventory().getName().equalsIgnoreCase(InvName)){
-				InvNameMatch = true;
-			}			
-		} else {
-			if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
-				InvNameMatch = true;
-			}			
 		}	
-
-		if(InvNameMatch) {
+		
+		if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
 			String itemName = ChatColor.stripColor(clicked.getItemMeta().getDisplayName());
 			String tag = itemName.substring(4);
 

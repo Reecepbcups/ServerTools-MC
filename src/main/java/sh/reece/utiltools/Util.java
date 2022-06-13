@@ -106,15 +106,9 @@ public class Util {
 			}
 		} 
 	}
-
-	public static boolean isVersion1_8() {
-		// 1.8 uses: e.getInventory().getName() && 1.9+ uses: e.getView().getTitle()
-		return Bukkit.getServer().getClass().getPackage().getName().contains("1_8");
-	}
-
 	
 	public static void removeItemFromPlayer(final Player player, final ItemStack item, final int amount) {
-		if(item.getAmount() == 1 && isVersion1_8()) {
+		if(item.getAmount() == 1) {
 			player.getInventory().setItem(player.getInventory().getHeldItemSlot(), null);
 			return;
 		}						
@@ -474,7 +468,7 @@ public class Util {
 		meta.setDisplayName(name);
 		//meta.setLore(lore); - List<String> lore
 		if (durability != 0) {
-			item.setDurability((short)durability);
+			// item.setDurability((short)durability);
 		}
 		item.setItemMeta(meta);
 		return item;
@@ -485,7 +479,7 @@ public class Util {
 		meta.setDisplayName(name);
 		meta.setLore(lore);
 		if (durability != 0) {
-			item.setDurability((short)durability);
+			// item.setDurability((short)durability);
 		}
 		item.setItemMeta(meta);
 		return item;

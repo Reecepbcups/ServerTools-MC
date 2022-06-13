@@ -5,7 +5,8 @@ main: sh.reece.tools.Main
 description: A lot of little tools which make management easier
 softdepend: [LuckPerms, Vault, PlaceHolderAPI, TAB, WorldGuard]
 website: https://reece.sh/
-api: ""
+api: "1.18"
+api-version: 1.18
 
 commands:
   tools:

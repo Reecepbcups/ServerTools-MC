@@ -38,7 +38,7 @@ public class LaunchPads implements Listener, CommandExecutor {
         		PlateType = Material.valueOf(config.getString(Section+".PlateType").toUpperCase());
 			} catch (Exception e) {
 				BlockType = Material.EMERALD_BLOCK;
-				PlateType = Material.STONE_PLATE;
+				PlateType = Material.STONE_PRESSURE_PLATE;
 				Main.logging("[LaunchPads] BlockType or PlateType not found in config / not supported. Using defaults.");
 			}        			
 

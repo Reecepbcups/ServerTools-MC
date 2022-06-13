@@ -99,32 +99,16 @@ public class FeaturesGUI implements Listener {
 	
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		// Player player = (Player) event.getWhoClicked(); 
 		ItemStack clicked = event.getCurrentItem(); 
-		//Inventory inventory = event.getInventory(); 
-		
-//		if (event.getInventory() == null || clicked == null || clicked.getType() == Material.AIR) {
-//			return;
-//		}
-		
-		Boolean InvNameMatch = false;
+				
 		String InvName = Util.color(config.getString("Name"));
 		
-		if(Util.isVersion1_8()) {
-			if(event.getInventory().getName().equalsIgnoreCase(InvName)){
-				InvNameMatch = true;
-			}			
-		} else {
-			if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
-				InvNameMatch = true;
-			}			
-		}	
+
 		
-		if(InvNameMatch) {
+		if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
 			if(clicked == null) {
 				return;
-			}
-			
+			}			
 			event.setCancelled(true);
 		}
 	}

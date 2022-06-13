@@ -96,7 +96,6 @@ public class Loader {
 
 	public void loadEvents() {
 		new AntiCraft(plugin);
-		new BucketStacker(plugin);
 		new CMDAlias(plugin);
 		chatcolor = new ChatColor(plugin);
 		new ChatCooldown(plugin);

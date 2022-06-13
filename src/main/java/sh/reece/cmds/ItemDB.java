@@ -31,14 +31,10 @@ public class ItemDB implements CommandExecutor {
 		// get item in players hand
 		final Player p = (Player) sender;
 		final org.bukkit.inventory.ItemStack item = p.getItemInHand();
-		final Material mat = item.getType();		
-		
-		final String itemName = item.toString();
+		final Material mat = item.getType();	
 
-		final String itemData = p.getItemInHand().getData().toString();
-
-		Util.coloredMessage(sender, "Item: " + itemName.toString() + ". Material Name: " + mat.name());
-		Util.coloredMessage(sender, "Data: " + itemData + ". Material ID: " + mat.getId());
+        // print the itemName & amount held
+        Util.coloredMessage(sender, "&aYou are holding &e" + item.getAmount() + " &aof &e" + mat);
 	}
     
 }

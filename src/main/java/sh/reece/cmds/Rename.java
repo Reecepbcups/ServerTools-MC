@@ -228,13 +228,7 @@ public class Rename implements CommandExecutor, Listener, TabCompleter {//,  {
 	
 
 	public ItemStack getItem(Player p) {
-		ItemStack item;
-		if(Util.isVersion1_8()) {
-			item = p.getItemInHand();
-		} else {
-			item = p.getInventory().getItemInHand();			
-		}		
-		return item;
+		return p.getInventory().getItemInMainHand();
 	}
 
 

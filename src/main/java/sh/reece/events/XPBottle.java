@@ -68,7 +68,7 @@ public class XPBottle implements Listener, CommandExecutor {
 			if(!item.getItemMeta().hasDisplayName()) {
 				return;
 			}
-			if(!(item.getType() == Material. EXP_BOTTLE)) {
+			if(!(item.getType() == Material. EXPERIENCE_BOTTLE)) {
 				// Util.consoleMSG("Not an EXP bottle for servertools");
 				return;
 			}
@@ -193,7 +193,7 @@ public class XPBottle implements Listener, CommandExecutor {
 			updatedLore.add(s);
 		}	
 
-		ItemStack is = new ItemStack(Material.EXP_BOTTLE, 1);
+		ItemStack is = new ItemStack(Material.EXPERIENCE_BOTTLE, 1);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(bottlename);
 		im.setLore(updatedLore);

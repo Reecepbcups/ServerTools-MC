@@ -26,11 +26,16 @@ public class DisableGolemPoppies implements Listener {
     	}
 	}
 	
+	// Get the 1.18 material red rose
+	private Material getRedRose() {
+		// TODO: idk if this works
+		return Material.getMaterial("RED_ROSE");
+	}
+
 	@EventHandler
-	public void removeRoses(EntityDeathEvent e) {
-		
+	public void removeRoses(EntityDeathEvent e) {		
 		if (e.getEntity().getType() == EntityType.IRON_GOLEM) {
-			e.getDrops().removeIf(itemstack -> (itemstack.getType() == Material.RED_ROSE));
+			e.getDrops().removeIf(itemstack -> (itemstack.getType() == getRedRose()));
 		}
 	     
 	}

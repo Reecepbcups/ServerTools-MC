@@ -61,20 +61,9 @@ public class ShopClickWorkAround implements Listener {
 //			return;
 //		}
 		
-		String inv_name = Util.color(e.getClickedInventory().getName());
+		String inv_name = Util.color(e.getView().getTitle());
 		
-//		Boolean InvNameMatch = false;
 		String InvName = ShopGUIMenuName;
-//		if(Util.isVersion1_8()) {
-//			if(e.getInventory().getName().equalsIgnoreCase(InvName)){
-//				InvNameMatch = true;
-//			}			
-//		} else {
-//			if(e.getView().getTitle().equalsIgnoreCase(InvName)) {
-//				InvNameMatch = true;
-//			}
-//			
-//		}
 		
 		
 		if(ShopGUIMenuName.equalsIgnoreCase(inv_name)) {

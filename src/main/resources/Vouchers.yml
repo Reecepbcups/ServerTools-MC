@@ -53,7 +53,7 @@ BoosterBundle:
   - 'eco give %player% 250000'
 
 DragonReclaim:
-  Item: 'INK_SACK:5'
+  Item: ''
   Name: "&5&lDragon Reclaim"
   Lore:
     - ''
@@ -75,7 +75,7 @@ DragonReclaim:
   - 'eco give %player% 250000'
   - 'voucher give %player% 300x300 1'
 KingReclaim:
-  Item: 'INK_SACK:14'
+  Item: 'WHITE_DYE'
   Name: "&6&lKing Reclaim"
   Lore:
     - ''
@@ -99,7 +99,7 @@ KingReclaim:
   - 'voucher give %player% 250x250 1'
   #- 'msg %player% &dIsland Size is now &f250x250'
 WizardReclaim:
-  Item: 'INK_SACK:12'
+  Item: 'WHITE_DYE'
   Name: "&b&lWizard Reclaim"
   Lore:
     - ''
@@ -123,7 +123,7 @@ WizardReclaim:
   - 'voucher give %player% 200x200 1'
   #- 'msg %player% &dIsland Size is now &f200x200'
 GoblinReclaim:
-  Item: 'INK_SACK:10'
+  Item: 'WHITE_DYE'
   Name: "&2&lGoblin Reclaim"
   Lore:
     - ''
@@ -147,7 +147,7 @@ GoblinReclaim:
   #- 'msg %player% &dIsland Size is now &f150x150'
   - 'voucher give %player% 150x150 1'
 PartnerReclaim:
-  Item: 'INK_SACK:11'
+  Item: 'WHITE_DYE'
   Name: "&d&lPartner Reclaim"
   Lore:
     - ''
@@ -171,7 +171,7 @@ PartnerReclaim:
 
 # RANKS --------------------------------------------------
 rankGoblin:
-  Item: '399'
+  Item: 'NETHER_STAR'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lGOBLIN &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -181,7 +181,7 @@ rankGoblin:
   Commands:
     - 'lp user %player% parent addtemp goblin 30d true server=skyblock'
 rankWizard:
-  Item: '399'
+  Item: 'NETHER_STAR'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lWIZARD &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -191,7 +191,7 @@ rankWizard:
   Commands:
     - 'lp user %player% parent addtemp wizard 30d true server=skyblock'
 rankKing:
-  Item: '399'
+  Item: 'NETHER_STAR'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lKING &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -201,7 +201,7 @@ rankKing:
   Commands:
     - 'lp user %player% parent addtemp king 30d true server=skyblock'
 rankDragon:
-  Item: '399'
+  Item: 'NETHER_STAR'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lDRAGON &f&lRANK &7&o((30 Days))&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -212,7 +212,7 @@ rankDragon:
     - 'lp user %player% parent addtemp dragon 30d true server=skyblock'
 # KITS --------------------------------------------------
 kitMember:
-  Item: '351:5'
+  Item: 'LIGHT_GRAY_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lMEMBER KIT&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -222,7 +222,7 @@ kitMember:
   Commands:
     - 'kit member %player%'
 kitGoblin:
-  Item: '351:5'
+  Item: 'LIGHT_GRAY_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lGOBLIN KIT&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -232,7 +232,7 @@ kitGoblin:
   Commands:
     - 'kit goblin %player%'
 kitWizard:
-  Item: '351:5'
+  Item: 'LIGHT_GRAY_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lWIZARD KIT&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -242,7 +242,7 @@ kitWizard:
   Commands:
     - 'kit wizard %player%'
 kitKing:
-  Item: '351:5'
+  Item: 'LIGHT_GRAY_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lKING KIT&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -252,7 +252,7 @@ kitKing:
   Commands:
     - 'kit king %player%'
 kitDragon:
-  Item: '351:5'
+  Item: 'LIGHT_GRAY_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lDRAGON KIT&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -263,7 +263,7 @@ kitDragon:
     - 'kit dragon %player%'
 # SKit One Time --------------------------------------------------
 skitCactus:
-  Item: '351:6'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lCACTUS SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -273,7 +273,7 @@ skitCactus:
   Commands:
     - 'ae givegkit %player% cactus'
 skitGrinder:
-  Item: '351:6'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lGRINDER SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -283,7 +283,7 @@ skitGrinder:
   Commands:
     - 'ae givegkit %player% grinder'
 skitCyborg:
-  Item: '351:6'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lCYBORG SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -293,7 +293,7 @@ skitCyborg:
   Commands:
     - 'ae givegkit %player% cyborg'
 skitMonthly:
-  Item: '351:6'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lMONTHLY SKIT &7(One Time)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -304,7 +304,7 @@ skitMonthly:
     - 'ae givegkit %player% monthly'
 # Skit_Perm --------------------------------------------------
 permSkitCactus:
-  Item: '351:14'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lCACTUS SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -314,7 +314,7 @@ permSkitCactus:
   Commands:
     - 'lp user %player% permission set cactus.skit server=skyblock'
 permSkitGrinder:
-  Item: '351:14'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lGRINDER SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -324,7 +324,7 @@ permSkitGrinder:
   Commands:
     - 'lp user %player% permission set grinder.skit server=skyblock'
 permSkitCyborg:
-  Item: '351:14'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lCYBORG SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -334,7 +334,7 @@ permSkitCyborg:
   Commands:
     - 'lp user %player% permission set cyborg.skit server=skyblock'
 permSkitMonthly:
-  Item: '351:14'
+  Item: 'LIME_DYE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lMONTHLY SKIT &7(Season)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -345,7 +345,7 @@ permSkitMonthly:
     - 'lp user %player% permission set monthly.skit server=skyblock'
 # Border --------------------------------------------------
 150x150:
-  Item: '166'
+  Item: 'BARRIER'
   Name: '&d&l✧&5&l✧&d&l✧ &f&l150x150 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -355,7 +355,7 @@ permSkitMonthly:
   Commands:
     - 'is admin setsize %player% 75'
 200x200:
-  Item: '166'
+  Item: 'BARRIER'
   Name: '&d&l✧&5&l✧&d&l✧ &f&l200x200 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -365,7 +365,7 @@ permSkitMonthly:
   Commands:
     - 'is admin setsize %player% 100'
 250x250:
-  Item: '166'
+  Item: 'BARRIER'
   Name: '&d&l✧&5&l✧&d&l✧ &f&l250x250 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -375,7 +375,7 @@ permSkitMonthly:
   Commands:
     - 'is admin setsize %player% 125'
 300x300:
-  Item: '166'
+  Item: 'BARRIER'
   Name: '&d&l✧&5&l✧&d&l✧ &f&l300x300 ISLAND SIZE &7(Owner Only)&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -386,7 +386,7 @@ permSkitMonthly:
     - 'is admin setsize %player% 150'
 # KOTH STARTER --------------------------------------------------
 kothKoth1:
-  Item: '276'
+  Item: 'DIAMOND_SWORD'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lKOTH1 &f&lSTARTER&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -396,7 +396,7 @@ kothKoth1:
   Commands:
     - 'koth start koth1 300 15m 2'
 kothKoth2:
-  Item: '276'
+  Item: 'DIAMOND_SWORD'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lKOTH2 &f&lSTARTER&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -407,7 +407,7 @@ kothKoth2:
     - 'koth start koth2 300 15m 2'
 # BOOSTERS --------------------------------------------------
 boosterExperience:
-  Item: '138'
+  Item: 'EXPERIENCE_BOTTLE'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lEXPERIENCE &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -417,7 +417,7 @@ boosterExperience:
   Commands:
     - 'booster give %player% Experience 1'
 boosterMobcoins:
-  Item: '138'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lMOBCOINS &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -426,18 +426,8 @@ boosterMobcoins:
     - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
   Commands:
     - 'booster give %player% Mobcoins 1'
-#  boosterMoney:
-#    Item: '138'
-#    Name: '&d&l✧&5&l✧&d&l✧ &f&lMONEY &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
-#    Lore:
-#      - ''
-#      - '&d&lUSAGE: &7Click to claim this Booster'
-#      - ''
-#      - '&7&o(( &f&nRight Click&r &7&oto redeem this voucher ))'
-#    Commands:
-#      - 'booster give %player% Money 1'
 boosterPersonalexperience:
-  Item: '138'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lPERSONALEXPERIENCE &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -447,7 +437,7 @@ boosterPersonalexperience:
   Commands:
     - 'booster give %player% PersonalExperience 1'
 boosterPersonalmobcoins:
-  Item: '138'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lPERSONALMOBCOINS &f&l BOOSTER&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -468,7 +458,7 @@ boosterPersonalmobcoins:
 #      - 'booster give %player% PersonalMoney 1'
 # Perks --------------------------------------------------
 perkFixAll:
-  Item: '145'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lFIX ALL PERK&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -478,7 +468,7 @@ perkFixAll:
   Commands:
     - 'lp user %player% permission set essentials.repair.all'
 perkFly:
-  Item: '288'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lFLY PERK&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -489,7 +479,7 @@ perkFly:
     - 'lp user %player% permission set superior.island.fly'
 # VOIDCHEST --------------------------------------------------
 voidChestdefault:
-  Item: '342'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d1.00x&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -499,7 +489,7 @@ voidChestdefault:
   Commands:
     - 'voidchest give default %player% 1'
 voidChestone:
-  Item: '342'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d1.25x&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -509,7 +499,7 @@ voidChestone:
   Commands:
     - 'voidchest give one %player% 1'
 voidChesttwo:
-  Item: '342'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d1.50x&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -519,7 +509,7 @@ voidChesttwo:
   Commands:
     - 'voidchest give two %player% 1'
 voidChestthree:
-  Item: '342'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d2.00x&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -529,7 +519,7 @@ voidChestthree:
   Commands:
     - 'voidchest give three %player% 1'
 voidChestfour:
-  Item: '342'
+  Item: 'BEACON'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lVOID CHEST &d2.50x&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -540,7 +530,7 @@ voidChestfour:
     - 'voidchest give four %player% 1'
 # Bundle --------------------------------------------------
 ScrollBundle:
-  Item: '341'
+  Item: 'PAPER'
   Name: '&d&l✧&5&l✧&d&l✧ &f&lSCROLL BUNDLE VOUCHER &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -561,7 +551,7 @@ ScrollBundle:
     - 'ae giveitem %player% transmog 1'
 # TAGS -----------------------------------------------------------------
 TagBoss:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6BOSSTAG&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -571,7 +561,7 @@ TagBoss:
   Commands:
     - 'lp user %player% permission set Tags.Boss'
 TagSpicy:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&C&LS&A&LP&C&LI&A&LC&C&LY&8> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -581,7 +571,7 @@ TagSpicy:
   Commands:
     - 'lp user %player% permission set Tags.Spicy'
 TagOg:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&B&LOG&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -591,7 +581,7 @@ TagOg:
   Commands:
     - 'lp user %player% permission set Tags.OG'
 TagSimp:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&D&LSIMP&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -601,7 +591,7 @@ TagSimp:
   Commands:
     - 'lp user %player% permission set Tags.Simp'
 TagPog:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6&LP&E&LO&6&LG&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -611,7 +601,7 @@ TagPog:
   Commands:
     - 'lp user %player% permission set Tags.Pog'
 TagTwitch:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&5&LT&D&LW&5&LI&D&LT&5&LC&D&LH&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -621,7 +611,7 @@ TagTwitch:
   Commands:
     - 'lp user %player% permission set Tags.Twitch'
 TagYoutube:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&C&LYOU&F&LTUBE&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -631,7 +621,7 @@ TagYoutube:
   Commands:
     - 'lp user %player% permission set Tags.YouTube'
 TagKing:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6&LKING&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -641,7 +631,7 @@ TagKing:
   Commands:
     - 'lp user %player% permission set Tags.King'
 TagAbuse:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&4&LABUSE&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -651,7 +641,7 @@ TagAbuse:
   Commands:
     - 'lp user %player% permission set Tags.Abuse'
 TagGrinder:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&6&LGRINDER&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -661,7 +651,7 @@ TagGrinder:
   Commands:
     - 'lp user %player% permission set Tags.Grinder'
 TagPay2Win:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&2&LPAY&A&L2&2&LWIN&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -671,7 +661,7 @@ TagPay2Win:
   Commands:
     - 'lp user %player% permission set Tags.Pay2Win'
 TagDumdum:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&7&ODUMDUM&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -681,7 +671,7 @@ TagDumdum:
   Commands:
     - 'lp user %player% permission set Tags.DumDum'
 TagBeta:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&B&OBETA&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -691,7 +681,7 @@ TagBeta:
   Commands:
     - 'lp user %player% permission set Tags.Beta'
 TagSalty:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&F&L&OSALTY&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -701,7 +691,7 @@ TagSalty:
   Commands:
     - 'lp user %player% permission set Tags.Salty'
 TagFantasy:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&D&LFANTASY&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -711,7 +701,7 @@ TagFantasy:
   Commands:
     - 'lp user %player% permission set Tags.Fantasy'
 TagEgirl:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&D&LE-GIRL&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -721,7 +711,7 @@ TagEgirl:
   Commands:
     - 'lp user %player% permission set Tags.EGirl'
 TagCaptain:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&B&LCAPTAIN&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -731,7 +721,7 @@ TagCaptain:
   Commands:
     - 'lp user %player% permission set Tags.Captain'
 TagCactusgod:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&2CACTUS&AGOD&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''
@@ -741,7 +731,7 @@ TagCactusgod:
   Commands:
     - 'lp user %player% permission set Tags.CactusGod'
 TagTryhard:
-  Item: '421'
+  Item: 'NAME_TAG'
   Name: '&d&l✧&5&l✧&d&l✧ &8&L<&4&LTRYHARD&8&L> &f&lTAG&r &d&l✧&5&l✧&d&l✧'
   Lore:
     - ''

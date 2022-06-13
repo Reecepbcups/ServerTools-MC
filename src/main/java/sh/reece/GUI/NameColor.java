@@ -36,6 +36,24 @@ public class NameColor implements Listener, CommandExecutor {
 	public static List<String> Values = Arrays.asList("&fWhite", "&6Orange", "&dPink", "&bAqua","&eYellow","&aLime", "&dPink","&8Dark Gray","&7Gray", "&3Cyan","&5Purple","&1Blue","&fBrown","&2Green","&cRed","&0Black");
 	public static List<String> EMPTY_LORE = new ArrayList<String>();
 	private ConfigUtils configUtils;
+
+	private static Map<String, Material> panelColorMap = new HashMap<String, Material>() {{
+		put("&f", Material.WHITE_STAINED_GLASS_PANE);
+		put("&6", Material.ORANGE_STAINED_GLASS_PANE);
+		put("&d", Material.PINK_STAINED_GLASS_PANE);
+		put("&b", Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+		put("&e", Material.YELLOW_STAINED_GLASS_PANE);
+		put("&a", Material.LIME_STAINED_GLASS_PANE);
+		put("&8", Material.GRAY_STAINED_GLASS_PANE);
+		put("&7", Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+		put("&3", Material.CYAN_STAINED_GLASS_PANE);
+		put("&5", Material.PURPLE_STAINED_GLASS_PANE);
+		put("&1", Material.BLUE_STAINED_GLASS_PANE);
+		put("&2", Material.GREEN_STAINED_GLASS_PANE);
+		put("&c", Material.RED_STAINED_GLASS_PANE);
+		put("&4", Material.RED_STAINED_GLASS_PANE);
+		put("&0", Material.BLACK_STAINED_GLASS_PANE);
+	}};
 	
 	public static Main plugin;
 	public NameColor(Main instance) {
@@ -92,7 +110,7 @@ public class NameColor implements Listener, CommandExecutor {
 			lore.add("");
 			lore.add(configUtils.lang("NAMECOLOR_SELECT"));
 
-			createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)i ), 
+			createDisplay(ColorINV, new ItemStack(panelColorMap.get(color), 1), 
 					loop, color+"&l[!] "+ name, lore);
 
 			loop+=1;
@@ -100,12 +118,10 @@ public class NameColor implements Listener, CommandExecutor {
 		//createDisplay(ColorINV, new ItemStack( Material.EXP_BOTTLE), loop, "&fR&ea&6i&bn&2b&4o&7w", EMPTY_LORE);
 		
 		// light gray - fixes from people putting in items
-		createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)8 ), 13, " ", EMPTY_LORE);
-		createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)8 ), 14, " ", EMPTY_LORE);
-		createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)8 ), 15, " ", EMPTY_LORE);
-		createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)8 ), 16, " ", EMPTY_LORE);
-		createDisplay(ColorINV, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte)8 ), 17, " ", EMPTY_LORE);
-		
+		// create a for loop from 13 to 17
+		for(int slot = 13; slot < 18; slot++) {
+			createDisplay(ColorINV, new ItemStack( Material.LIGHT_GRAY_STAINED_GLASS_PANE), slot, " ", EMPTY_LORE);
+		}		
 	}
 
 	public static String getColor(String uuid) {
@@ -162,20 +178,8 @@ public class NameColor implements Listener, CommandExecutor {
 	}
 	
 	@EventHandler
-	public void onInventoryClick(InventoryClickEvent event) {
-		Boolean InvNameMatch = false;
-		
-		if(Util.isVersion1_8()) {
-			if(event.getInventory().getName().equalsIgnoreCase(InvName)){
-				InvNameMatch = true;
-			}			
-		} else {
-			if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
-				InvNameMatch = true;
-			}			
-		}
-		
-		if(InvNameMatch) {
+	public void onInventoryClick(InventoryClickEvent event) {		
+		if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
 
 			ItemStack clicked = event.getCurrentItem();
 			if(clicked == null || !clicked.hasItemMeta()) {return;}

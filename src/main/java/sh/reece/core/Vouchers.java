@@ -141,17 +141,16 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 		
 		String displayName = Util.color(config.getString(voucherID+".Name"));
 		
-		Material material;
-		String newItem = config.getString(voucherID+".Item").split(":")[0];
-		if(Util.isInt(newItem)) {
-			material = Material.getMaterial(Integer.valueOf(newItem));
-		} else {			
-			
-			if(newItem.equalsIgnoreCase("sunflower")){ newItem = "DOUBLE_PLANT"; }
-			if(newItem.equalsIgnoreCase("experience_bottle")){ newItem = "EXP_BOTTLE"; }
+		String newItem = config.getString(voucherID+".Item").split(":")[0];							
+		if(newItem.equalsIgnoreCase("sunflower")){ newItem = "DOUBLE_PLANT"; }
+		if(newItem.equalsIgnoreCase("experience_bottle")){ newItem = "EXP_BOTTLE"; }
 
-			material = Material.getMaterial(newItem);
+		Material material = Material.getMaterial(newItem);
+		if(material == null) {
+			Util.consoleMSG("[vouchers] No material found for: " + newItem + ". Setting as anm amethest block");
+			material = Material.AMETHYST_BLOCK;
 		}
+		
 		
 		List<String> lore = config.getStringList(voucherID+".Lore");		
 		lore = Util.color(lore);
@@ -339,35 +338,12 @@ public class Vouchers implements Listener, CommandExecutor, TabCompleter {
 	public void onInventoryClick(InventoryClickEvent event) {
 		ItemStack clicked = event.getCurrentItem();
 		
-		Boolean InvNameMatch = false;		
-		if(Util.isVersion1_8()) {
-			if(event.getInventory().getName().equalsIgnoreCase(InvName)){
-				InvNameMatch = true;
-			}			
-		} else {
-			if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
-				InvNameMatch = true;
-			}			
-		}	
-		
-		if(InvNameMatch) {
+		if(event.getView().getTitle().equalsIgnoreCase(InvName)) {
 			if(clicked == null) {
 				return;
 			}	
-			event.setCancelled(true);
-			
-			
-//			if(clicked.isSimilar(nextPageFeather())) {
-//				// close in, and get player next page
-//				// if there is an index for that page
-//				
-//				//if(previewVouchersGUIs.size())
-//				event.getWhoClicked().openInventory(previewVouchersGUIs.get(1));
-//				return;
-//			}
-			
+			event.setCancelled(true);			
 			event.getWhoClicked().getInventory().addItem(clicked);			
-			
 		}
 	}
 	

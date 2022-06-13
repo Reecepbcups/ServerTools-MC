@@ -511,7 +511,7 @@ Misc:
     lorePermission: tools.rename.lore
     disabledRename:
     - 'AIR'
-    - 'EXP_BOTTLE'
+    - 'EXPERIENCE_BOTTLE'
     - 'BEACON'
 
   ClearLag:

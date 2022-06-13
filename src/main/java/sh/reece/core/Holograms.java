@@ -355,12 +355,10 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	
 	public void removeAllStands(){
 		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();
-		
-		
-		
+			
 		for(Location locs : EntitiyIDs.keySet()) {
 			for(Entity e : locs.getWorld().getNearbyEntities(locs, 3, 5, 3)) {
-				if(e instanceof ArmorStand) {
+				if(e != null && e instanceof ArmorStand) {
 					if (e.isCustomNameVisible()) {							
 						//Util.consoleMSG("Removed " + e.getCustomName() + " ID:" + e.getEntityId());
 						e.remove();							
