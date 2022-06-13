@@ -33,8 +33,23 @@ public class ItemDB implements CommandExecutor {
 		final org.bukkit.inventory.ItemStack item = p.getItemInHand();
 		final Material mat = item.getType();	
 
+        // get the item the player is looking at
+        final org.bukkit.util.RayTraceResult ray = p.rayTraceBlocks(10);
+        Material blockMat = null;
+        org.bukkit.block.Block block = null;
+        if (ray != null) {
+            block = ray.getHitBlock();        
+            blockMat = block.getType();  
+        }
+              
+
         // print the itemName & amount held
-        Util.coloredMessage(sender, "&aYou are holding &e" + item.getAmount() + " &aof &e" + mat);
+        Util.coloredMessage(sender, "\n&fYou are holding &c" + item.getAmount() + "&fx &c" + mat);
+        // print out what they are looking at
+        if(ray != null) {
+            Util.coloredMessage(sender, "&fYou are looking at &c" + blockMat);
+        }
+        
 	}
     
 }
