@@ -354,7 +354,7 @@ public class Holograms implements CommandExecutor, Listener, TabCompleter {
 	
 	
 	public void removeAllStands(){
-		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();
+		//Entity[] grabEntities = getLocFromConfig(key).getChunk().getEntities();		
 			
 		for(Location locs : EntitiyIDs.keySet()) {
 			for(Entity e : locs.getWorld().getNearbyEntities(locs, 3, 5, 3)) {

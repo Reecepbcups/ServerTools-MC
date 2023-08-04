@@ -235,7 +235,9 @@ public class Loader {
 		ChangeSlots.saveNewChangeSlotsPlayers();
 		dailyrewards.saveCooldownsToFile();
 		chatcolor.saveChatColorToFile();
-		holograms.removeAllStands();
+		if(holograms != null) {
+			holograms.removeAllStands();
+		}
 		LaunchPads.stopLaunchpadChecking();
 
 		reeceEnder.closeAllViewedEnderchest();
