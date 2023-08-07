@@ -234,7 +234,9 @@ public class Loader {
 		Bukkit.getServer().getScheduler().cancelTasks(plugin);
 		ChangeSlots.saveNewChangeSlotsPlayers();
 		dailyrewards.saveCooldownsToFile();
-		chatcolor.saveChatColorToFile();
+		if(chatcolor != null) {
+			chatcolor.saveChatColorToFile();
+		}
 		if(holograms != null) {
 			holograms.removeAllStands();
 		}
