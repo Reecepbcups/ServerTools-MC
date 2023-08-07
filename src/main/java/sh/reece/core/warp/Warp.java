@@ -43,7 +43,9 @@ public class Warp {
     }
 
     public void removeFromConfig() {
-        configSet(this.name, null, null);
+        FileConfiguration warps = ConfigUtils.getInstance().getConfigFile("Warps.yml");        
+        warps.set(this.name, null);
+        ConfigUtils.getInstance().saveConfig(warps, "Warps.yml");        
     }
 
     private void configSet(String name, String location, String permission) {

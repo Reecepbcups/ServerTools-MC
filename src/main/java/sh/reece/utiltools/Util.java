@@ -303,7 +303,11 @@ public class Util {
 
 		return w.getName()+";"+x+";"+y+";"+z+";"+yaw+";"+pitch;
 	}
-	public static Location stringToLocation(final String Location) {
+	public static Location stringToLocation(final String Location) {		
+		if (Location == null) {
+			return null;
+		}
+
 		final String[] loc = Location.split(";");
 		return new Location(Bukkit.getWorld(loc[0]), 
 				Double.parseDouble(loc[1]), 
