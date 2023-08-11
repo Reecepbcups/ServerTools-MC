@@ -135,6 +135,11 @@ Disabled:
     Enabled: true
     worldsToDisable:
     - 'world'
+    
+  DisableMobSpawning:
+    Enabled: true
+    worldsToDisable:
+    - 'world'
 
   DisableWorldGuardGlitchBuilding:
     # bypass perm: blockglitchplace.bypass

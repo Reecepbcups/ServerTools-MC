@@ -183,6 +183,7 @@ public class Loader {
 		new DisableWaterBreakingRedstone(plugin);
 		new DisableWeather(plugin);
 		new DisableWitherBreak(plugin);
+		new DisableMobSpawning(plugin);
 		new DisableWorldGuardGlitchBuilding(plugin);
 		new DisablePhantomSpawn(plugin);
 		new DisableIceMelt(plugin);
