@@ -27,7 +27,7 @@ public class DisableHunger implements Listener {
 	public void foodChangeEvent(FoodLevelChangeEvent event) {
 		if (event.getEntityType() == EntityType.PLAYER) {
 			Player player = (Player) event.getEntity();
-			if (player.hasPermission(HungerPerm)) {
+			if (HungerPerm.length() == 0 || player.hasPermission(HungerPerm)) {
 				if (player.getFoodLevel() < 19.0D)
 					player.setFoodLevel(20); 
 			} 

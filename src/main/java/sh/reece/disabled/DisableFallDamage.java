@@ -48,7 +48,7 @@ public class DisableFallDamage implements Listener {
 			Player p = (Player) e.getEntity();
 
 			if(e.getCause() == DamageCause.FALL) {
-				if(p.hasPermission(permission) || permission.equalsIgnoreCase("")) {
+				if(permission.length() == 0 || p.hasPermission(permission)) {
 					//if(worlds.contains(p.getWorld().getName())) {
 					e.setCancelled(true);
 					//}
